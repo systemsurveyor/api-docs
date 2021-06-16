@@ -8,6 +8,44 @@ security:
   - bearerAuth: []
 
 paths:
+  /v2/login:
+    post:
+      tags:
+        - Authentication
+      summary: Authenticate to API
+      description: Login to System Surveyor using JWT token authentication.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  refresh_token:
+                    type: string
+                  auth_token:
+                    type: string
+                  user_id:
+                    type: integer
+                  email:
+                    type: string
+                  ssv_session_id:
+                    type: string
+
   /v2/site:
     post:
       tags:
