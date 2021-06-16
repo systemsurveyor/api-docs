@@ -108,6 +108,8 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
         "403":
           $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
 
     put:
       tags:
@@ -128,6 +130,8 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
         "403":
           $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
 
     delete:
       tags:
@@ -141,6 +145,8 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
         "403":
           $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
 
 
 components:
@@ -155,6 +161,8 @@ components:
       description: Access token is missing or invalid
     ForbiddenError:
       description: Invalid permissions to perform operation
+    NotFoundError:
+      description: The specified resource was not found
 
   schemas:
     requestSite:
