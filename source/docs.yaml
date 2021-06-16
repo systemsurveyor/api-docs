@@ -32,6 +32,8 @@ paths:
                     type: string
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
 
   /v2/site/{id}:
     parameters:
@@ -104,6 +106,8 @@ paths:
                       type: string
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
 
     put:
       tags:
@@ -122,6 +126,8 @@ paths:
           description: "OK"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
 
     delete:
       tags:
@@ -133,6 +139,8 @@ paths:
           description: "OK"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
 
 
 components:
@@ -145,6 +153,8 @@ components:
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid
+    ForbiddenError:
+      description: Invalid permissions to perform operation
 
   schemas:
     requestSite:
