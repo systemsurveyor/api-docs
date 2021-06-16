@@ -11,6 +11,17 @@ jobs:
       ruby-version: 2.5
 
     steps:
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Widdershins
+      run: npm install -g widdershins
+
+    - name: Generate Markdown
+      run: node widdershins --search false --language_tabs 'python:Python' --summary source/docs.yaml -o source/index.html.md
+
     - uses: actions/checkout@v2
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
