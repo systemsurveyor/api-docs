@@ -10,8 +10,9 @@ security:
 paths:
   /v2/login:
     post:
+      security: []
       tags:
-        - Authentication
+        - Login
       summary: Authenticate to API
       description: Login to System Surveyor using JWT token authentication.
       requestBody:
@@ -23,8 +24,10 @@ paths:
               properties:
                 email:
                   type: string
+                  required: true
                 password:
                   type: string
+                  required: true
       responses:
         "200":
           description: "OK"
