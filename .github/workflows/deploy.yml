@@ -17,10 +17,7 @@ jobs:
         node-version: '14'
 
     - name: Install Widdershins
-      env:
-          NPM_CONFIG_PREFIX: "~/.npm-global"
-      run: |
-        npm install -g widdershins
+      run: sudo npm install -g widdershins
 
     - name: Generate Markdown
       run: node widdershins --search false --language_tabs 'python:Python' --summary source/docs.yaml -o source/index.html.md
