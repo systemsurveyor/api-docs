@@ -17,8 +17,9 @@ jobs:
         node-version: '14'
 
     - name: Install Widdershins
+      env:
+          NPM_CONFIG_PREFIX: "~/.npm-global"
       run: |
-        npm config set prefix /usr/local
         npm install -g widdershins
 
     - name: Generate Markdown
