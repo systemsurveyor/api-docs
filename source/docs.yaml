@@ -31,7 +31,7 @@ paths:
                   site_id:
                     type: string
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
 
   /v2/site/{id}:
     parameters:
@@ -103,7 +103,7 @@ paths:
                     items:
                       type: string
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
 
     put:
       tags:
@@ -121,7 +121,18 @@ paths:
         "200":
           description: "OK"
         "401":
-          $ref: '#/components/responses/UnauthorizedError'
+          $ref: "#/components/responses/UnauthorizedError"
+
+    delete:
+      tags:
+        - Sites
+      summary: Delete a site
+      operationId: deleteSite
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
 
 
 components:
