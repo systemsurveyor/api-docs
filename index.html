@@ -305,6 +305,9 @@
             <a href="#system-surveyor-public-api" class="toc-h1 toc-link" data-title="System Surveyor Public API v2.0.0">System Surveyor Public API v2.0.0</a>
           </li>
           <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
             <a href="#system-surveyor-public-api-sites" class="toc-h1 toc-link" data-title="Sites">Sites</a>
               <ul class="toc-list-h2">
                   <li>
@@ -340,6 +343,10 @@
 <blockquote>
 <p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
 </blockquote>
+<h1 id='authentication'>Authentication</h1>
+<ul>
+<li>HTTP Authentication, scheme: bearer </li>
+</ul>
 
 <h1 id="system-surveyor-public-api-sites">Sites</h1>
 <h2 id='create-a-new-site'>Create a new site</h2>
@@ -494,6 +501,12 @@
 <td>OK</td>
 <td>Inline</td>
 </tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
 </tbody></table>
 
 <h3 id="create-a-new-site-responseschema">Response Schema</h3>
@@ -518,8 +531,9 @@
 </tr>
 </tbody></table>
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+None
 </aside>
 <h2 id='get-site-information'>Get site information</h2>
 <p><a id="opIdgetSiteById"></a></p>
@@ -608,6 +622,12 @@ This operation does not require authentication
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td>Inline</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
 </tr>
 </tbody></table>
 
@@ -766,8 +786,9 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+None
 </aside>
 <h2 id='update-a-site'>Update a site</h2>
 <p><a id="opIdupdateSite"></a></p>
@@ -920,10 +941,17 @@ This operation does not require authentication
 <td>OK</td>
 <td>None</td>
 </tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
 </tbody></table>
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+None
 </aside>
 <h1 id='schemas'>Schemas</h1>
 <h2 id="tocS_requestSite">requestSite</h2>
