@@ -20,7 +20,7 @@ jobs:
       run: sudo npm install -g widdershins
 
     - name: Generate Markdown
-      run: node widdershins --search false --language_tabs 'python:Python' --summary source/docs.yaml -o source/index.html.md
+      run: widdershins --search false --language_tabs 'python:Python' --summary source/docs.yaml -o source/index.html.md
 
     - uses: actions/checkout@v2
     - name: Set up Ruby
