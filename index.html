@@ -319,6 +319,9 @@
                   <li>
                     <a href="#update-a-site" class="toc-h2 toc-link" data-title="Update a site">Update a site</a>
                   </li>
+                  <li>
+                    <a href="#delete-a-site" class="toc-h2 toc-link" data-title="Delete a site">Delete a site</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -507,6 +510,12 @@
 <td>Access token is missing or invalid</td>
 <td>None</td>
 </tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
 </tbody></table>
 
 <h3 id="create-a-new-site-responseschema">Response Schema</h3>
@@ -627,6 +636,12 @@ None
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
 <td>None</td>
 </tr>
 </tbody></table>
@@ -945,6 +960,81 @@ None
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+None
+</aside>
+<h2 id='delete-a-site'>Delete a site</h2>
+<p><a id="opIddeleteSite"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v2/site/{id}'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>DELETE /v2/site/{id}</code></p>
+
+<h3 id="delete-a-site-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>Site ID</td>
+</tr>
+</tbody></table>
+
+<h3 id="delete-a-site-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
 <td>None</td>
 </tr>
 </tbody></table>
