@@ -30,6 +30,8 @@ paths:
                 properties:
                   site_id:
                     type: string
+        "400":
+          $ref: "#/components/responses/BadRequestError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "403":
@@ -126,6 +128,8 @@ paths:
       responses:
         "200":
           description: "OK"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "403":
@@ -157,6 +161,8 @@ components:
       bearerFormat: JWT
 
   responses:
+    BadRequestError:
+      description: Invalid request sent to endpoint
     UnauthorizedError:
       description: Access token is missing or invalid
     ForbiddenError:
