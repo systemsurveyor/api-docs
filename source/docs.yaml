@@ -14,30 +14,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                team_id:
-                  type: integer
-                state:
-                  type: string
-                city:
-                  type: string
-                zip_code:
-                  type: string
-                street:
-                  type: string
-                label:
-                  type: string
-                version:
-                  type: integer
-                reference_id:
-                  type: string
-                tags:
-                  type: array
-                  items:
-                    type: string
+              $ref: "#/components/schemas/requestSite"
       responses:
         "201":
           description: "OK"
