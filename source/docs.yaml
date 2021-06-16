@@ -7,6 +7,8 @@ info:
 paths:
   /v2/site:
     post:
+      tags:
+        - Sites
       summary: Create a new site
       operationId: createSite
       requestBody:
@@ -36,6 +38,8 @@ paths:
           type: integer
 
     get:
+      tags:
+        - Sites
       summary: Get site information
       description: Response also includes available permissions for the current user of the site
       operationId: getSiteById
@@ -95,6 +99,8 @@ paths:
                       type: string
 
     put:
+      tags:
+        - Sites
       summary: Update a site
       description: Only team members, guests with edit permissions, site creators, account admins and team admins can update sites.
       operationId: updateSite
