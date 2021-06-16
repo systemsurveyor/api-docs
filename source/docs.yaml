@@ -50,18 +50,18 @@ paths:
                     type: string
 
   /v2/site/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Site ID
+        required: true
+        schema:
+          type: integer
+
     get:
       summary: Get site information
       description: Response also includes available permissions for the current user of the site
       operationId: getSiteById
-      parameters:
-        - name: id
-          in: path
-          description: Site ID
-          required: true
-          schema:
-            type: integer
-            format: int64
       responses:
         "200":
           description: "OK"
@@ -116,3 +116,46 @@ paths:
                     type: array
                     items:
                       type: string
+
+    put:
+      summary: Update a site
+      description: Only team members, guests with edit permissions, site creators, account admins and team admins can update sites.
+      operationId: updateSite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestSite"
+      responses:
+        "200":
+          description: "OK"
+
+
+components:
+  schemas:
+    requestSite:
+      type: object
+      properties:
+        name:
+          type: string
+        team_id:
+          type: integer
+        state:
+          type: string
+        city:
+          type: string
+        zip_code:
+          type: string
+        street:
+          type: string
+        label:
+          type: string
+        version:
+          type: integer
+        reference_id:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
