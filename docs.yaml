@@ -194,7 +194,7 @@ paths:
           $ref: "#/components/responses/NotFoundError"
 
 
-  /v2/survey/{external_id}/lock:
+  /v2/survey/{id}/lock:
     post:
       tags:
         - Surveys
@@ -204,6 +204,13 @@ paths:
         Places a lock on a survey so that other users cannot edit it. The user requesting edit will have the lock.
         If the survey already has an editor, the editor will receive an email notifying that a user would like access.
         Only team members or guests with write permissions can request survey edit.
+      parameters:
+        - name: id
+          in: path
+          description: Survey ID
+          required: true
+          schema:
+            type: integer
       responses:
         "200":
           desription: "OK"
