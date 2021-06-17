@@ -194,6 +194,21 @@ paths:
           $ref: "#/components/responses/NotFoundError"
 
 
+  /v2/survey/{external_id}/lock:
+    post:
+      tags:
+        - Surveys
+      operationId: requestSurveyEdit
+      summary: Request survey edit
+      description: >
+        Places a lock on a survey so that other users cannot edit it. The user requesting edit will have the lock.
+        If the survey already has an editor, the editor will receive an email notifying that a user would like access.
+        Only team members or guests with write permissions can request survey edit.
+      responses:
+        "200":
+          desription: "OK"
+
+
 components:
   securitySchemes:
     BearerAuth:

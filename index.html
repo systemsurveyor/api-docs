@@ -333,6 +333,14 @@
               </ul>
           </li>
           <li>
+            <a href="#system-surveyor-public-api-surveys" class="toc-h1 toc-link" data-title="Surveys">Surveys</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#request-survey-edit" class="toc-h2 toc-link" data-title="Request survey edit">Request survey edit</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#schemas" class="toc-h1 toc-link" data-title="Schemas">Schemas</a>
               <ul class="toc-list-h2">
                   <li>
@@ -1228,6 +1236,47 @@ None
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>The specified resource was not found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+None
+</aside>
+
+<h1 id="system-surveyor-public-api-surveys">Surveys</h1>
+<h2 id='request-survey-edit'>Request survey edit</h2>
+<p><a id="opIdrequestSurveyEdit"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/survey/{external_id}/lock'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>POST /v2/survey/{external_id}/lock</code></p>
+
+<p>Places a lock on a survey so that other users cannot edit it. The user requesting edit will have the lock. If the survey already has an editor, the editor will receive an email notifying that a user would like access. Only team members or guests with write permissions can request survey edit.</p>
+
+<h3 id="request-survey-edit-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>none</td>
 <td>None</td>
 </tr>
 </tbody></table>
