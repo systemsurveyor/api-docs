@@ -323,6 +323,49 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
 
+  /v2/site/{id}/access:
+    post:
+      tags: [Sites]
+      operationId: addSiteAccess
+      summary: Allows granting permission for a site to a user or team.
+      description: Requires having `SITE_ACCESS_PERMISSIONS` feature enabled in the account's plan.
+      parameters:
+        - name: id
+          description: Site ID
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "40759717-c239-4504-a0a5-7e7f57220995"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                team_id:
+                  type: integer
+                permission:
+                  type: integer
+                  required: true
+                  enum: [0, 1, 2]
+                expiration_date:
+                  type: integer
+                  description: Datetime in Unix timestamp format
+      responses:
+        "200":
+          description: "OK"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+
 components:
   securitySchemes:
     BearerAuth:
