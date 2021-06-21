@@ -215,6 +215,112 @@ paths:
         "200":
           description: "OK"
 
+  /v2/site/{site_id}/surveys:
+    get:
+      tags:
+        - Surveys
+      operationId: getSiteSurveys
+      summary: Returns all surveys and folders for a specific site
+      description: >
+        Surveys that belong to folders will not be included in the response, unless
+        a search is being made.
+
+        Results are ordered by `name` ascending by default if no sorting is specified.
+      parameters:
+        - name: siteId
+          in: path
+          description: Site ID
+          required: true
+          schema:
+            type: integer
+        - name: q
+          in: query
+          description: Search surveys and folders
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Return only surveys in a specific status (`0` for archived surveys or `1` for open surveys).
+          schema:
+            type: integer
+            enum: [0, 1]
+        - name: page
+          in: query
+          description: Page to retrieve from the entire result set.
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          description: Max amount of objects to return per page in the response. Defaults to 100.
+          schema:
+            type: integer
+        - name: sort_by
+          in: query
+          description: Sort by column names (comma separated). Use `-` prefix on column name to sort descending.
+          schema:
+            type: string
+        - name: external_folder_id
+          in: query
+          description: Filter surveys by folder using string of external_id (UUID).
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  systemsurveyor_api:
+                    type: string
+                    enum: [success, failed]
+                  count:
+                    type: integer
+                    description: Total count of surveys and folders in the result page
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        survey_id:
+                          type: string
+                        name:
+                          type: string
+                          description: Name of survey or folder
+                        preview_image:
+                          type: string
+                        comments_count:
+                          type: integer
+                          description: Number of comments for a survey
+                        elements_count:
+                          type: integer
+                        is_folder:
+                          type: boolean
+                        created_at:
+                          type: integer
+                        modified_at:
+                          type: integer
+                        is_archived:
+                          type: boolean
+                        editor:
+                          type: object
+                          properties:
+                            user_id:
+                              type: integer
+                            first_name:
+                              type: string
+                            last_name:
+                              type: string
+                        folder_id:
+                          type: string
+                        survey_count:
+                          type: integer
+                          description: Number of surveys in folder
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/ForbiddenError"
 
 components:
   securitySchemes:
