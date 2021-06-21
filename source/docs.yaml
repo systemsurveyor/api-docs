@@ -213,7 +213,7 @@ paths:
             type: integer
       responses:
         "200":
-          desription: "OK"
+          description: "OK"
 
 
 components:
