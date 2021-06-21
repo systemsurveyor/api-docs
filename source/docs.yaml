@@ -227,7 +227,7 @@ paths:
 
         Results are ordered by `name` ascending by default if no sorting is specified.
       parameters:
-        - name: siteId
+        - name: site_id
           in: path
           description: Site ID
           required: true
@@ -259,6 +259,7 @@ paths:
           description: Sort by column names (comma separated). Use `-` prefix on column name to sort descending.
           schema:
             type: string
+            example: -name
         - name: external_folder_id
           in: query
           description: Filter surveys by folder using string of external_id (UUID).
