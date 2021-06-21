@@ -325,7 +325,7 @@ paths:
 
   /v2/site/{id}/access:
     post:
-      tags: [Sites]
+      tags: [Site Access]
       operationId: addSiteAccess
       summary: Allows granting permission for a site to a user or team.
       description: Requires having `SITE_ACCESS_PERMISSIONS` feature enabled in the account's plan.
