@@ -1,411 +1,667 @@
-openapi: 3.1.0
-
-info:
-  title: System Surveyor API
-  version: 2.0.0
-
-security:
-  - bearerAuth: []
-
-paths:
-  /v2/login:
-    post:
-      security: []
-      tags:
-        - Login
-      summary: Authenticate to API
-      description: Login to System Surveyor using JWT token authentication.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  required: true
-                password:
-                  type: string
-                  required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                  refresh_token:
-                    type: string
-                  auth_token:
-                    type: string
-                  user_id:
-                    type: integer
-                  email:
-                    type: string
-                  ssv_session_id:
-                    type: string
-
-  /v2/site:
-    post:
-      tags:
-        - Sites
-      summary: Create a new site
-      operationId: createSite
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/requestSite"
-      responses:
-        "201":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  site_id:
-                    type: string
-        "400":
-          $ref: "#/components/responses/BadRequestError"
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-
-  /v2/site/{id}:
-    parameters:
-      - name: id
-        in: path
-        description: Site ID
-        required: true
-        schema:
-          type: integer
-
-    get:
-      tags:
-        - Sites
-      summary: Get site information
-      description: Response also includes available permissions for the current user of the site
-      operationId: getSiteById
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  site_id:
-                    type: string
-                  team_id:
-                    type: number
-                  name:
-                    type: string
-                  label:
-                    type: string
-                  city:
-                    type: string
-                  state:
-                    type: string
-                  street:
-                    type: string
-                  zip_code:
-                    type: string
-                  creator:
-                    type: object
-                    properties:
-                      user_id:
-                        type: number
-
-                      first_name:
-                        type: string
-
-                      last_name:
-                        type: string
-                  modifier:
-                    type: object
-                    properties:
-                      user_id:
-                        type: number
-                      first_name:
-                        type: string
-                      last_name:
-                        type: string
-                  is_archived:
-                    type: boolean
-                  version:
-                    type: number
-                  reference_id:
-                    type: string
-                  tags:
-                    type: array
-                    items:
-                      type: string
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-
-    put:
-      tags:
-        - Sites
-      summary: Update a site
-      description: Only team members, guests with edit permissions, site creators, account admins and team admins can update sites.
-      operationId: updateSite
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/requestSite"
-      responses:
-        "200":
-          description: "OK"
-        "400":
-          $ref: "#/components/responses/BadRequestError"
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-
-    delete:
-      tags:
-        - Sites
-      summary: Delete a site
-      operationId: deleteSite
-      responses:
-        "200":
-          description: "OK"
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-
-
-  /v2/survey/{id}/lock:
-    post:
-      tags:
-        - Surveys
-      operationId: requestSurveyEdit
-      summary: Request survey edit
-      description: >
-        Places a lock on a survey so that other users cannot edit it. The user requesting edit will have the lock.
-        If the survey already has an editor, the editor will receive an email notifying that a user would like access.
-        Only team members or guests with write permissions can request survey edit.
-      parameters:
-        - name: id
-          in: path
-          description: Survey ID
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: "OK"
-
-  /v2/site/{site_id}/surveys:
-    get:
-      tags:
-        - Surveys
-      operationId: getSiteSurveys
-      summary: Returns all surveys and folders for a specific site
-      description: >
-        Surveys that belong to folders will not be included in the response, unless
-        a search is being made.
-
-        Results are ordered by `name` ascending by default if no sorting is specified.
-      parameters:
-        - name: site_id
-          in: path
-          description: Site ID
-          required: true
-          schema:
-            type: integer
-        - name: q
-          in: query
-          description: Search surveys and folders
-          schema:
-            type: string
-        - name: status
-          in: query
-          description: Return only surveys in a specific status (`0` for archived surveys or `1` for open surveys).
-          schema:
-            type: integer
-            enum: [0, 1]
-        - name: page
-          in: query
-          description: Page to retrieve from the entire result set.
-          schema:
-            type: integer
-        - name: page_size
-          in: query
-          description: Max amount of objects to return per page in the response. Defaults to 100.
-          schema:
-            type: integer
-        - name: sort_by
-          in: query
-          description: Sort by column names (comma separated). Use `-` prefix on column name to sort descending.
-          schema:
-            type: string
-            example: -name
-        - name: external_folder_id
-          in: query
-          description: Filter surveys by folder using string of external_id (UUID).
-          schema:
-            type: string
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  systemsurveyor_api:
-                    type: string
-                    enum: [success, failed]
-                  count:
-                    type: integer
-                    description: Total count of surveys and folders in the result page
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        survey_id:
-                          type: string
-                        name:
-                          type: string
-                          description: Name of survey or folder
-                        preview_image:
-                          type: string
-                        comments_count:
-                          type: integer
-                          description: Number of comments for a survey
-                        elements_count:
-                          type: integer
-                        is_folder:
-                          type: boolean
-                        created_at:
-                          type: integer
-                        modified_at:
-                          type: integer
-                        is_archived:
-                          type: boolean
-                        editor:
-                          type: object
-                          properties:
-                            user_id:
-                              type: integer
-                            first_name:
-                              type: string
-                            last_name:
-                              type: string
-                        folder_id:
-                          type: string
-                        survey_count:
-                          type: integer
-                          description: Number of surveys in folder
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-
-  /v2/site/{id}/access:
-    post:
-      tags: [Site Access]
-      operationId: addSiteAccess
-      summary: Allows granting permission for a site to a user or team.
-      description: Requires having `SITE_ACCESS_PERMISSIONS` feature enabled in the account's plan.
-      parameters:
-        - name: id
-          description: Site ID
-          in: path
-          required: true
-          schema:
-            type: string
-            example: "40759717-c239-4504-a0a5-7e7f57220995"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user_id:
-                  type: integer
-                team_id:
-                  type: integer
-                permission:
-                  type: integer
-                  required: true
-                  enum: [0, 1, 2]
-                expiration_date:
-                  type: integer
-                  description: Datetime in Unix timestamp format
-      responses:
-        "200":
-          description: "OK"
-        "401":
-          $ref: "#/components/responses/UnauthorizedError"
-        "403":
-          $ref: "#/components/responses/ForbiddenError"
-        "404":
-          $ref: "#/components/responses/NotFoundError"
-
-
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
+  parameters:
+    page:
+      description: Page to retrieve from the entire result set
+      in: query
+      name: page
+      schema:
+        default: 1
+        minimum: 1
+        type: integer
+    page_size:
+      description: Max amount of objects to return per page in the response
+      in: query
+      name: page_size
+      schema:
+        default: 100
+        maximum: 100
+        type: integer
+    q:
+      description: Apply search to query
+      in: query
+      name: q
+      schema:
+        type: string
   responses:
     BadRequestError:
       description: Invalid request sent to endpoint
-    UnauthorizedError:
-      description: Access token is missing or invalid
     ForbiddenError:
       description: Invalid permissions to perform operation
     NotFoundError:
       description: The specified resource was not found
-
+    UnauthorizedError:
+      description: Access token is missing or invalid
   schemas:
-    requestSite:
-      type: object
+    ShareSiteOrSurveyRequestSchema:
       properties:
-        name:
+        created_at:
+          readOnly: true
+          type:
+          - '''null'''
+        emails:
+          items:
+            format: email
+            type: string
+          type: array
+        expiration_date: {}
+        message:
           type: string
-        team_id:
-          type: integer
-        state:
-          type: string
+        modified_at:
+          readOnly: true
+          type:
+          - '''null'''
+      required:
+      - emails
+      - expiration_date
+      type: object
+    SiteSchema:
+      properties:
         city:
+          maxLength: 250
           type: string
-        zip_code:
+        created_at:
+          readOnly: true
+          type:
+          - '''null'''
+        creator:
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+          readOnly: true
+        is_archived: {}
+        label:
+          maxLength: 255
+          type: string
+        legacy_site_id:
+          readOnly: true
+          type: integer
+        modified_at:
+          readOnly: true
+          type:
+          - '''null'''
+        modifier:
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+          readOnly: true
+        name:
+          maxLength: 250
+          type: string
+        reference_id:
+          maxLength: 255
+          type: string
+        site_id:
+          type: string
+        state:
+          maxLength: 250
           type: string
         street:
-          type: string
-        label:
-          type: string
-        version:
-          type: integer
-        reference_id:
+          maxLength: 250
           type: string
         tags:
-          type: array
           items:
             type: string
+          type: array
+        team_id:
+          type: integer
+        version:
+          readOnly: true
+          type: integer
+        zip_code:
+          maxLength: 250
+          type: string
+      required:
+      - name
+      - team_id
+      type: object
+    SurveyFields:
+      properties:
+        field_id:
+          type: string
+        value:
+          type: string
+      required:
+      - field_id
+      - value
+      type: object
+    SurveyOptions:
+      properties:
+        id:
+          type: string
+        inputs:
+          items:
+            $ref: '#/components/schemas/SurveyFields'
+          type: array
+        scope:
+          enum:
+          - template
+          - model
+          - content
+          type: string
+        template_name:
+          type: string
+        value:
+          type: boolean
+      required:
+      - id
+      - scope
+      - value
+      type: object
+    SurveyReportRequestSchema:
+      properties:
+        custom_data:
+          type: object
+        filters:
+          items:
+            type: object
+          type: array
+        ids:
+          items:
+            type: string
+          type: array
+        is_excel:
+          default: false
+          type: boolean
+        is_site_report:
+          default: false
+          type: boolean
+        name:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/SurveyOptions'
+          type: array
+        output:
+          enum:
+          - pdf
+          - html
+          - xls
+          type: string
+        paper_size:
+          type: string
+        report_id:
+          format: uuid
+          type: string
+        site_id:
+          type: string
+      required:
+      - name
+      - output
+      - report_id
+      - site_id
+      type: object
+    UserResponse:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        user_id:
+          type: integer
+      required:
+      - user_id
+      type: object
+  securitySchemes:
+    jwt:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+info:
+  title: System Surveyor API
+  version: 2.0.0
+openapi: 3.1.0
+paths:
+  /v2/refresh_token:
+    post:
+      operationId: get_refresh_token
+      parameters:
+      - in: header
+        name: CLIENT_INFO
+        schema:
+          properties:
+            platform:
+              description: '* `1` - Web
+
+                * `2` - iOS
+
+                * `3` - Android
+
+                '
+              enum:
+              - 1
+              - 2
+              - 3
+              type: integer
+          type: object
+      public: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                refresh_token:
+                  example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig
+                  required: true
+                  type: string
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  refresh_token:
+                    example: wqJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig
+                    type: string
+                  token:
+                    example: eyJ0eXNiOiJKV1QiXCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig
+                    type: string
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      summary: Returns a new valid access token given a valid refresh token
+      tags:
+      - Authentication
+  /v2/site:
+    post:
+      operationId: create_site
+      public: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SiteSchema'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                properties:
+                  site_id:
+                    example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                    type: string
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      summary: Create a new site
+      tags:
+      - Sites
+  /v2/site/{site_id}:
+    get:
+      description: Response also includes available permissions for the current user
+        for the site
+      operationId: get_site
+      parameters:
+      - in: path
+        name: site_id
+        required: true
+        schema:
+          example: 14875
+          type: integer
+      public: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      city:
+                        type: string
+                      creator:
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          user_id:
+                            type: integer
+                        type: object
+                      current_user_permissions:
+                        properties:
+                          is_site_guest:
+                            type: boolean
+                          user_can_change_site_access:
+                            type: boolean
+                          user_can_create_surveys:
+                            type: boolean
+                          user_can_delete_surveys:
+                            type: boolean
+                          user_can_edit_contacts:
+                            type: boolean
+                          user_can_edit_site:
+                            type: boolean
+                          user_can_invite_guests:
+                            type: boolean
+                          user_can_modify_surveys:
+                            type: boolean
+                          user_can_revoke_survey_edit:
+                            type: boolean
+                          user_can_view_site_access:
+                            description: If user can view team members list
+                            type: boolean
+                        type: object
+                      is_archived:
+                        type: boolean
+                      label:
+                        type: string
+                      modifier:
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          user_id:
+                            type: integer
+                        type: object
+                      name:
+                        type: string
+                      reference_id:
+                        type: string
+                      site_id:
+                        example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                        type: string
+                      state:
+                        type: string
+                      street:
+                        type: string
+                      tags:
+                        items:
+                          type: string
+                        type: array
+                      team_id:
+                        type: integer
+                      version:
+                        type: integer
+                      zip_code:
+                        type: string
+                    type: object
+                  systemsurveyor_api:
+                    enum:
+                    - success
+                    - failed
+                    type: string
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      summary: Get site information
+      tags:
+      - Sites
+  /v2/teams/{team_id}/sites:
+    get:
+      description: Results are sorted by `name` ascending by default if no sorting
+        is specified.
+      operationId: get_team_sites
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          example: 14875
+          type: integer
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/page_size'
+      public: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      properties:
+                        city:
+                          type: string
+                        modified_at:
+                          example: 1625170642
+                          type: integer
+                        name:
+                          type: string
+                        permission:
+                          description: Permission the current logged in user has for
+                            the site
+                          example: write
+                          type: string
+                        site_id:
+                          example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                          type: string
+                        surveys_count:
+                          type: integer
+                      type: object
+                    type: array
+                  systemsurveyor_api:
+                    enum:
+                    - success
+                    - failed
+                    type: string
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      summary: Get team sites the current user has access to
+      tags:
+      - Sites
+  /v2/site/{site_id}/lock:
+    delete:
+      description: Removes all the current edit locks for all surveys in a site where
+        the current user is the editor
+      operationId: remove_site_locks
+      parameters:
+      - description: Site ID
+        in: path
+        name: site_id
+        required: true
+        schema:
+          example: 40759717-c239-4504-a0a5-7e7f57220995
+          type: string
+      public: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      summary: Remove site locks
+      tags:
+      - Sites
+  /v2/site/{site_id}/share:
+    post:
+      description: An email will be sent to all emails listed in `emails` field with
+        instructions on how to access the site.
+      operationId: share_site
+      parameters:
+      - in: path
+        name: site_id
+        required: true
+        schema:
+          example: 2bf07f89-306d-4cfa-be60-660bfbf150f8
+          type: string
+      public: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareSiteOrSurveyRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      summary: Allows users to share a site for other users to see for a given amount
+        of time.
+      tags:
+      - Sites
+  /v2/site/{site_id}/surveys:
+    get:
+      description: 'Surveys that belong to folders will not be included in the response,
+        unless
+
+        a search is being made.
+
+
+        Results are ordered by `name` ascending by default if no sorting is specified.
+
+        '
+      operationId: get_site_surveys
+      parameters:
+      - description: Site ID
+        in: path
+        name: site_id
+        required: true
+        schema:
+          example: 86af1f1d-4f19-4c6c-afd6-e5ee041666ce
+          type: string
+      - description: Return only surveys in a specific status (`0` for archived surveys
+          or `1` for open surveys).
+        in: query
+        name: status
+        schema:
+          enum:
+          - 0
+          - 1
+          type: integer
+      - description: Filter surveys by folder using string of external_id (UUID)
+        in: query
+        name: external_folder_id
+        schema:
+          example: b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb
+          type: string
+      - description: Sort by column names (comma separated). Use `-` prefix on column
+          name to sort descending
+        in: query
+        name: sort_by
+        schema:
+          description: Sort by column names (comma separated). Use `-` prefix on column
+            name to sort descending.
+          enum:
+          - survey_id
+          - folder_id
+          - name
+          - document_image_url
+          - editor_id
+          - editor_first_name
+          - editor_last_name
+          - comments_count
+          - elements_count
+          - is_folder
+          - created_at
+          - modified_at
+          - status
+          - survey_count
+          example: sort_by=-is_folder,name,editor_first_name
+          type: string
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/page_size'
+      public: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    description: Total count of surveys and folders for the site
+                    type: integer
+                  data:
+                    items:
+                      properties:
+                        comments_count:
+                          type: integer
+                        editor:
+                          properties:
+                            first_name:
+                              type: string
+                            last_name:
+                              type: string
+                            user_id:
+                              type: integer
+                          type: object
+                        elements_count:
+                          type: integer
+                        folder_id:
+                          type: string
+                        is_archived:
+                          type: boolean
+                        is_folder:
+                          type: boolean
+                        label:
+                          description: Folder label
+                          type: string
+                        name:
+                          type: string
+                        preview_image:
+                          description: URL to the survey's preview image
+                          type: string
+                        survey_count:
+                          type: integer
+                        survey_id:
+                          example: '1233412'
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      summary: Get all surveys and folders for a specific site
+      tags:
+      - Surveys
+  /v2/user/permissions:
+    get:
+      operationId: get_current_user_permissions
+      public: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      accounts:
+                        items:
+                          type: object
+                        type: array
+                      is_active_guest:
+                        description: If the user is an active guest on any site
+                        type: boolean
+                      teams:
+                        items:
+                          type: object
+                        type: array
+                    type: object
+                  systemsurveyor_api:
+                    enum:
+                    - success
+                    - failed
+                    type: string
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      summary: Get permissions for the current authenticated user
+      tags:
+      - Users
+
