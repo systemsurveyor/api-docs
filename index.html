@@ -312,10 +312,10 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#system-surveyor-api-login" class="toc-h1 toc-link" data-title="Login">Login</a>
+            <a href="#system-surveyor-api-authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authenticate-to-api" class="toc-h2 toc-link" data-title="Authenticate to API">Authenticate to API</a>
+                    <a href="#returns-a-new-valid-access-token-given-a-valid-refresh-token" class="toc-h2 toc-link" data-title="Returns a new valid access token given a valid refresh token">Returns a new valid access token given a valid refresh token</a>
                   </li>
               </ul>
           </li>
@@ -329,10 +329,13 @@
                     <a href="#get-site-information" class="toc-h2 toc-link" data-title="Get site information">Get site information</a>
                   </li>
                   <li>
-                    <a href="#update-a-site" class="toc-h2 toc-link" data-title="Update a site">Update a site</a>
+                    <a href="#get-team-sites-the-current-user-has-access-to" class="toc-h2 toc-link" data-title="Get team sites the current user has access to">Get team sites the current user has access to</a>
                   </li>
                   <li>
-                    <a href="#delete-a-site" class="toc-h2 toc-link" data-title="Delete a site">Delete a site</a>
+                    <a href="#remove-site-locks" class="toc-h2 toc-link" data-title="Remove site locks">Remove site locks</a>
+                  </li>
+                  <li>
+                    <a href="#allows-users-to-share-a-site-for-other-users-to-see-for-a-given-amount-of-time" class="toc-h2 toc-link" data-title="Allows users to share a site for other users to see for a given amount of time.">Allows users to share a site for other users to see for a given amount of time.</a>
                   </li>
               </ul>
           </li>
@@ -340,18 +343,15 @@
             <a href="#system-surveyor-api-surveys" class="toc-h1 toc-link" data-title="Surveys">Surveys</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#request-survey-edit" class="toc-h2 toc-link" data-title="Request survey edit">Request survey edit</a>
-                  </li>
-                  <li>
-                    <a href="#returns-all-surveys-and-folders-for-a-specific-site" class="toc-h2 toc-link" data-title="Returns all surveys and folders for a specific site">Returns all surveys and folders for a specific site</a>
+                    <a href="#get-all-surveys-and-folders-for-a-specific-site" class="toc-h2 toc-link" data-title="Get all surveys and folders for a specific site">Get all surveys and folders for a specific site</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#system-surveyor-api-site-access" class="toc-h1 toc-link" data-title="Site Access">Site Access</a>
+            <a href="#system-surveyor-api-users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#allows-granting-permission-for-a-site-to-a-user-or-team" class="toc-h2 toc-link" data-title="Allows granting permission for a site to a user or team.">Allows granting permission for a site to a user or team.</a>
+                    <a href="#get-permissions-for-the-current-authenticated-user" class="toc-h2 toc-link" data-title="Get permissions for the current authenticated user">Get permissions for the current authenticated user</a>
                   </li>
               </ul>
           </li>
@@ -359,7 +359,22 @@
             <a href="#schemas" class="toc-h1 toc-link" data-title="Schemas">Schemas</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#tocS_requestSite" class="toc-h2 toc-link" data-title="requestSite">requestSite</a>
+                    <a href="#tocS_ShareSiteOrSurveyRequestSchema" class="toc-h2 toc-link" data-title="ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_SiteSchema" class="toc-h2 toc-link" data-title="SiteSchema">SiteSchema</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_SurveyFields" class="toc-h2 toc-link" data-title="SurveyFields">SurveyFields</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_SurveyOptions" class="toc-h2 toc-link" data-title="SurveyOptions">SurveyOptions</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_SurveyReportRequestSchema" class="toc-h2 toc-link" data-title="SurveyReportRequestSchema">SurveyReportRequestSchema</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_UserResponse" class="toc-h2 toc-link" data-title="UserResponse">UserResponse</a>
                   </li>
               </ul>
           </li>
@@ -382,23 +397,29 @@
 <li>HTTP Authentication, scheme: bearer </li>
 </ul>
 
-<h1 id="system-surveyor-api-login">Login</h1>
-<h2 id='authenticate-to-api'>Authenticate to API</h2>
+<h1 id="system-surveyor-api-authentication">Authentication</h1>
+<h2 id='returns-a-new-valid-access-token-given-a-valid-refresh-token'>Returns a new valid access token given a valid refresh token</h2>
+<p><a id="opIdget_refresh_token"></a></p>
+
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
+curl <span class="nt">-X</span> POST /v2/refresh_token <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'CLIENT_INFO: [object Object]'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'CLIENT_INFO'</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">"platform"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/login'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/refresh_token'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -429,7 +450,7 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
     <span class="c1">/// Make a dummy request</span>
     <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePostRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/login"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/refresh_token"</span><span class="p">;</span>
 
 
       <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
@@ -470,19 +491,16 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>POST /v2/login</code></p>
-
-<p>Login to System Surveyor using JWT token authentication.</p>
+<p><code>POST /v2/refresh_token</code></p>
 
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="authenticate-to-api-parameters">Parameters</h3>
+<h3 id="returns-a-new-valid-access-token-given-a-valid-refresh-token-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -494,6 +512,13 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 </tr>
 </thead><tbody>
 <tr>
+<td>CLIENT_INFO</td>
+<td>header</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>body</td>
 <td>body</td>
 <td>object</td>
@@ -501,14 +526,7 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» email</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» password</td>
+<td>» refresh_token</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -522,15 +540,11 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"auth_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"ssv_session_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wqJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXNiOiJKV1QiXCJhbGciOiJSUzI1NiJ9.eyJ0eXBlIjoicmVmcmVzaCIsInJvbGUiOjIsInVzZXJfaWQiOjMwNDcsImV4cCI6MTYyNTkwODg3MywiaWF0IjoxNjI1MzA0MDczfQ.AhgGvP9vyJmwXpo3f1_q3yI1rvP47LFV_UPL9FcGbWKa8tfR9nop6rqSXBRNx1ZflM-rNUbQB63DQqRIXXXvPo0df3u9CQsrcMkNllmBzfoCv_vBlcx0k53CmUz0A9tINF5ypA30i57uUVQmvOf0JEf83-Xi6DkjCf2_e7mzc_Ab4XcYVpRrFUxuV5i1L0OL7U-V9CjcA1J92rzB6ZCPUi9v8vdziOcEdCYZRzGM1oxO07rpZkPj_0KOeuh7ecqW3s51z8R6_Sj8bOz0TuAnrDBmArfzbS3TRrNPBKtADhV62oCbRF8PuNjGZa89V6V_TkJmrZsMCZiHGXRPn63Dig"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="authenticate-to-api-responses">Responses</h3>
+<h3 id="returns-a-new-valid-access-token-given-a-valid-refresh-token-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -546,9 +560,15 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 <td>OK</td>
 <td>Inline</td>
 </tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
 </tbody></table>
 
-<h3 id="authenticate-to-api-responseschema">Response Schema</h3>
+<h3 id="returns-a-new-valid-access-token-given-a-valid-refresh-token-responseschema">Response Schema</h3>
 
 <p>Status Code <strong>200</strong></p>
 
@@ -562,13 +582,6 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>» token</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» refresh_token</td>
 <td>string</td>
 <td>false</td>
@@ -576,28 +589,7 @@ curl <span class="nt">-X</span> POST /v2/login <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» auth_token</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» user_id</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» email</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» ssv_session_id</td>
+<td>» token</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -611,7 +603,7 @@ This operation does not require authentication
 
 <h1 id="system-surveyor-api-sites">Sites</h1>
 <h2 id='create-a-new-site'>Create a new site</h2>
-<p><a id="opIdcreateSite"></a></p>
+<p><a id="opIdcreate_site"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -661,27 +653,28 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
       <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site"</span><span class="p">;</span>
 
       <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
-  ""name"": ""string"",
-  ""team_id"": 0,
-  ""state"": ""string"",
   ""city"": ""string"",
-  ""zip_code"": ""string"",
-  ""street"": ""string"",
+  ""is_archived"": null,
   ""label"": ""string"",
-  ""version"": 0,
+  ""name"": ""string"",
   ""reference_id"": ""string"",
+  ""site_id"": ""string"",
+  ""state"": ""string"",
+  ""street"": ""string"",
   ""tags"": [
     ""string""
-  ]
+  ],
+  ""team_id"": 0,
+  ""zip_code"": ""string""
 }"</span><span class="p">;</span>
-      <span class="n">requestSite</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+      <span class="n">SiteSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
       <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
 
 
     <span class="p">}</span>
 
     <span class="c1">/// Performs a POST Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">requestSite</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">SiteSchema</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
@@ -693,7 +686,7 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 
 
     <span class="c1">/// Serialize an object to Json</span>
-    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">requestSite</span> <span class="n">content</span><span class="p">)</span>
+    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">SiteSchema</span> <span class="n">content</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
@@ -720,18 +713,19 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="create-a-new-site-parameters">Parameters</h3>
@@ -748,29 +742,8 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <tr>
 <td>body</td>
 <td>body</td>
-<td><a href="#schemarequestsite">requestSite</a></td>
+<td><a href="#schemasiteschema">SiteSchema</a></td>
 <td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» team_id</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» state</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -781,7 +754,119 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» zip_code</td>
+<td>» created_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» creator</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_archived</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» legacy_site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modifier</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» reference_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -795,10 +880,17 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» label</td>
+<td>» tags</td>
 <td>body</td>
-<td>string</td>
+<td>[string]</td>
 <td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» team_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 </tr>
 <tr>
@@ -809,16 +901,9 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» reference_id</td>
+<td>» zip_code</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» tags</td>
-<td>body</td>
-<td>[string]</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -830,7 +915,7 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 <p>201 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46787da3-1e6e-4d9b-a858-ac9e12dc3efb"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="create-a-new-site-responses">Responses</h3>
@@ -891,18 +976,17 @@ curl <span class="nt">-X</span> POST /v2/site <span class="se">\</span>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
 <h2 id='get-site-information'>Get site information</h2>
-<p><a id="opIdgetSiteById"></a></p>
+<p><a id="opIdget_site"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class="nb">id</span><span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span>site_id<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
@@ -910,7 +994,7 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v2/site/{id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v2/site/{site_id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -940,7 +1024,7 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
     <span class="c1">/// Make a dummy request</span>
     <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{id}"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{site_id}"</span><span class="p">;</span>
       <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
     <span class="p">}</span>
 
@@ -970,9 +1054,9 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>GET /v2/site/{id}</code></p>
+<p><code>GET /v2/site/{site_id}</code></p>
 
-<p>Response also includes available permissions for the current user of the site</p>
+<p>Response also includes available permissions for the current user for the site</p>
 
 <h3 id="get-site-information-parameters">Parameters</h3>
 
@@ -986,11 +1070,11 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>site_id</td>
 <td>path</td>
 <td>integer</td>
 <td>true</td>
-<td>Site ID</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
@@ -1000,30 +1084,45 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"current_user_permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"is_site_guest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_change_site_access"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_create_surveys"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_delete_surveys"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_edit_contacts"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_edit_site"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_invite_guests"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_modify_surveys"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_revoke_survey_edit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_can_view_site_access"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46787da3-1e6e-4d9b-a858-ac9e12dc3efb"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"string"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"systemsurveyor_api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="get-site-information-responses">Responses</h3>
@@ -1076,167 +1175,273 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span><span class
 </tr>
 </thead><tbody>
 <tr>
-<td>» site_id</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» team_id</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» label</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» city</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» state</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» street</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» zip_code</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» creator</td>
+<td>» data</td>
 <td>object</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» user_id</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» first_name</td>
+<td>»» city</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» last_name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» modifier</td>
+<td>»» creator</td>
 <td>object</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» user_id</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» first_name</td>
+<td>»»» first_name</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» last_name</td>
+<td>»»» last_name</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» is_archived</td>
+<td>»»» user_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» current_user_permissions</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» is_site_guest</td>
 <td>boolean</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» version</td>
-<td>number</td>
+<td>»»» user_can_change_site_access</td>
+<td>boolean</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» reference_id</td>
+<td>»»» user_can_create_surveys</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_delete_surveys</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_edit_contacts</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_edit_site</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_invite_guests</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_modify_surveys</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_revoke_survey_edit</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_can_view_site_access</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>If user can view team members list</td>
+</tr>
+<tr>
+<td>»» is_archived</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» label</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» tags</td>
+<td>»» modifier</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» first_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» last_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» user_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» reference_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» site_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» state</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» street</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» tags</td>
 <td>[string]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
+<tr>
+<td>»» team_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» version</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» zip_code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» systemsurveyor_api</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>systemsurveyor_api</td>
+<td>success</td>
+</tr>
+<tr>
+<td>systemsurveyor_api</td>
+<td>failed</td>
+</tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
-<h2 id='update-a-site'>Update a site</h2>
-<p><a id="opIdupdateSite"></a></p>
+<h2 id='get-team-sites-the-current-user-has-access-to'>Get team sites the current user has access to</h2>
+<p><a id="opIdget_team_sites"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class="nb">id</span><span class="o">}</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+curl <span class="nt">-X</span> GET /v2/teams/<span class="o">{</span>team_id<span class="o">}</span>/sites <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">'/v2/site/{id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v2/teams/{team_id}/sites'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -1263,58 +1468,26 @@ curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class
       <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
     <span class="p">}</span>
 
-
-
     <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePutRequest</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{id}"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/teams/{team_id}/sites"</span><span class="p">;</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
 
+    <span class="c1">/// Performs a GET Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Start the request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 
-      <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
-  ""name"": ""string"",
-  ""team_id"": 0,
-  ""state"": ""string"",
-  ""city"": ""string"",
-  ""zip_code"": ""string"",
-  ""street"": ""string"",
-  ""label"": ""string"",
-  ""version"": 0,
-  ""reference_id"": ""string"",
-  ""tags"": [
-    ""string""
-  ]
-}"</span><span class="p">;</span>
-      <span class="n">requestSite</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
-      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
-
+        <span class="c1">//Validate result</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
 
     <span class="p">}</span>
 
-    <span class="c1">/// Performs a PUT Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">requestSite</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Serialize Object</span>
-        <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
-
-        <span class="c1">//Execute PUT request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PutAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
-
-        <span class="c1">//Return response</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
-    <span class="p">}</span>
 
 
-    <span class="c1">/// Serialize an object to Json</span>
-    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">requestSite</span> <span class="n">content</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Serialize Object</span>
-        <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
-
-        <span class="c1">//Create Json UTF8 String Content</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">jsonObject</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
-    <span class="p">}</span>
 
     <span class="c1">/// Deserialize object from request response</span>
     <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
@@ -1328,29 +1501,11 @@ curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>PUT /v2/site/{id}</code></p>
+<p><code>GET /v2/teams/{team_id}/sites</code></p>
 
-<p>Only team members, guests with edit permissions, site creators, account admins and team admins can update sites.</p>
+<p>Results are sorted by <code>name</code> ascending by default if no sorting is specified.</p>
 
-<blockquote>
-<p>Body parameter</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<h3 id="update-a-site-parameters">Parameters</h3>
+<h3 id="get-team-sites-the-current-user-has-access-to-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1362,92 +1517,55 @@ curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class
 </tr>
 </thead><tbody>
 <tr>
-<td>body</td>
-<td>body</td>
-<td><a href="#schemarequestsite">requestSite</a></td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» team_id</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» state</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» city</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» zip_code</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» street</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» label</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» version</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» reference_id</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» tags</td>
-<td>body</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>id</td>
+<td>team_id</td>
 <td>path</td>
 <td>integer</td>
 <td>true</td>
-<td>Site ID</td>
+<td>Team ID</td>
+</tr>
+<tr>
+<td>q</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Apply search to query</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Page to retrieve from the entire result set</td>
+</tr>
+<tr>
+<td>page_size</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Max amount of objects to return per page in the response</td>
 </tr>
 </tbody></table>
 
-<h3 id="update-a-site-responses">Responses</h3>
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1625170642</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"permission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"write"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46787da3-1e6e-4d9b-a858-ac9e12dc3efb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"surveys_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"systemsurveyor_api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="get-team-sites-the-current-user-has-access-to-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -1461,13 +1579,7 @@ curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td>None</td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Invalid request sent to endpoint</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
@@ -1475,36 +1587,110 @@ curl <span class="nt">-X</span> PUT /v2/site/<span class="o">{</span><span class
 <td>Access token is missing or invalid</td>
 <td>None</td>
 </tr>
+</tbody></table>
+
+<h3 id="get-team-sites-the-current-user-has-access-to-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
 <tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Invalid permissions to perform operation</td>
-<td>None</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» data</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
-<td>None</td>
+<td>»» city</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» modified_at</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» permission</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Permission the current logged in user has for the site</td>
+</tr>
+<tr>
+<td>»» site_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» surveys_count</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» systemsurveyor_api</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-2'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>systemsurveyor_api</td>
+<td>success</td>
+</tr>
+<tr>
+<td>systemsurveyor_api</td>
+<td>failed</td>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
-<h2 id='delete-a-site'>Delete a site</h2>
-<p><a id="opIddeleteSite"></a></p>
+<h2 id='remove-site-locks'>Remove site locks</h2>
+<p><a id="opIdremove_site_locks"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span><span class="nb">id</span><span class="o">}</span>
+curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span>site_id<span class="o">}</span>/lock
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v2/site/{id}'</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v2/site/{site_id}/lock'</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -1538,7 +1724,7 @@ curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span><span cl
     <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
     <span class="p">{</span>
       <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{id}"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{site_id}/lock"</span><span class="p">;</span>
 
       <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
     <span class="p">}</span>
@@ -1565,9 +1751,11 @@ curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span><span cl
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>DELETE /v2/site/{id}</code></p>
+<p><code>DELETE /v2/site/{site_id}/lock</code></p>
 
-<h3 id="delete-a-site-parameters">Parameters</h3>
+<p>Removes all the current edit locks for all surveys in a site where the current user is the editor</p>
+
+<h3 id="remove-site-locks-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1579,15 +1767,15 @@ curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span><span cl
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>site_id</td>
 <td>path</td>
-<td>integer</td>
+<td>string</td>
 <td>true</td>
 <td>Site ID</td>
 </tr>
 </tbody></table>
 
-<h3 id="delete-a-site-responses">Responses</h3>
+<h3 id="remove-site-locks-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -1615,32 +1803,27 @@ curl <span class="nt">-X</span> DELETE /v2/site/<span class="o">{</span><span cl
 <td>Invalid permissions to perform operation</td>
 <td>None</td>
 </tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
-<td>None</td>
-</tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
-
-<h1 id="system-surveyor-api-surveys">Surveys</h1>
-<h2 id='request-survey-edit'>Request survey edit</h2>
-<p><a id="opIdrequestSurveyEdit"></a></p>
+<h2 id='allows-users-to-share-a-site-for-other-users-to-see-for-a-given-amount-of-time'>Allows users to share a site for other users to see for a given amount of time.</h2>
+<p><a id="opIdshare_site"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span class="nb">id</span><span class="o">}</span>/lock
+curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span>site_id<span class="o">}</span>/share <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/survey/{id}/lock'</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/site/{site_id}/share'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -1671,15 +1854,23 @@ curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span cl
     <span class="c1">/// Make a dummy request</span>
     <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePostRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/survey/{id}/lock"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{site_id}/share"</span><span class="p">;</span>
 
+      <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
+  ""emails"": [
+    ""user@example.com""
+  ],
+  ""expiration_date"": null,
+  ""message"": ""string""
+}"</span><span class="p">;</span>
+      <span class="n">ShareSiteOrSurveyRequestSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+      <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
 
-      <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
 
     <span class="p">}</span>
 
     <span class="c1">/// Performs a POST Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">ShareSiteOrSurveyRequestSchema</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
@@ -1691,7 +1882,7 @@ curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span cl
 
 
     <span class="c1">/// Serialize an object to Json</span>
-    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">)</span>
+    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">ShareSiteOrSurveyRequestSchema</span> <span class="n">content</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
@@ -1712,11 +1903,22 @@ curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span cl
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>POST /v2/survey/{id}/lock</code></p>
+<p><code>POST /v2/site/{site_id}/share</code></p>
 
-<p>Places a lock on a survey so that other users cannot edit it. The user requesting edit will have the lock. If the survey already has an editor, the editor will receive an email notifying that a user would like access. Only team members or guests with write permissions can request survey edit.</p>
+<p>An email will be sent to all emails listed in <code>emails</code> field with instructions on how to access the site.</p>
 
-<h3 id="request-survey-edit-parameters">Parameters</h3>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"user@example.com"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="allows-users-to-share-a-site-for-other-users-to-see-for-a-given-amount-of-time.-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1728,15 +1930,57 @@ curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span cl
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>site_id</td>
 <td>path</td>
-<td>integer</td>
+<td>string</td>
 <td>true</td>
-<td>Survey ID</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemasharesiteorsurveyrequestschema">ShareSiteOrSurveyRequestSchema</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» emails</td>
+<td>body</td>
+<td>[string]</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» expiration_date</td>
+<td>body</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
-<h3 id="request-survey-edit-responses">Responses</h3>
+<h3 id="allows-users-to-share-a-site-for-other-users-to-see-for-a-given-amount-of-time.-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -1752,14 +1996,27 @@ curl <span class="nt">-X</span> POST /v2/survey/<span class="o">{</span><span cl
 <td>OK</td>
 <td>None</td>
 </tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
-<h2 id='returns-all-surveys-and-folders-for-a-specific-site'>Returns all surveys and folders for a specific site</h2>
-<p><a id="opIdgetSiteSurveys"></a></p>
+
+<h1 id="system-surveyor-api-surveys">Surveys</h1>
+<h2 id='get-all-surveys-and-folders-for-a-specific-site'>Get all surveys and folders for a specific site</h2>
+<p><a id="opIdget_site_surveys"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -1835,10 +2092,12 @@ curl <span class="nt">-X</span> GET /v2/site/<span class="o">{</span>site_id<spa
 </code></pre></div>
 <p><code>GET /v2/site/{site_id}/surveys</code></p>
 
-<p>Surveys that belong to folders will not be included in the response, unless a search is being made.
-Results are ordered by <code>name</code> ascending by default if no sorting is specified.</p>
+<p>Surveys that belong to folders will not be included in the response, unless
+a search is being made.</p>
 
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site-parameters">Parameters</h3>
+<p>Results are ordered by <code>name</code> ascending by default if no sorting is specified.</p>
+
+<h3 id="get-all-surveys-and-folders-for-a-specific-site-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -1852,16 +2111,9 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <tr>
 <td>site_id</td>
 <td>path</td>
-<td>integer</td>
+<td>string</td>
 <td>true</td>
 <td>Site ID</td>
-</tr>
-<tr>
-<td>q</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Search surveys and folders</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1871,35 +2123,42 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <td>Return only surveys in a specific status (<code>0</code> for archived surveys or <code>1</code> for open surveys).</td>
 </tr>
 <tr>
-<td>page</td>
+<td>external_folder_id</td>
 <td>query</td>
-<td>integer</td>
+<td>string</td>
 <td>false</td>
-<td>Page to retrieve from the entire result set.</td>
-</tr>
-<tr>
-<td>page_size</td>
-<td>query</td>
-<td>integer</td>
-<td>false</td>
-<td>Max amount of objects to return per page in the response. Defaults to 100.</td>
+<td>Filter surveys by folder using string of external_id (UUID)</td>
 </tr>
 <tr>
 <td>sort_by</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Sort by column names (comma separated). Use <code>-</code> prefix on column name to sort descending.</td>
+<td>Sort by column names (comma separated). Use <code>-</code> prefix on column name to sort descending</td>
 </tr>
 <tr>
-<td>external_folder_id</td>
+<td>q</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Filter surveys by folder using string of external_id (UUID).</td>
+<td>Apply search to query</td>
+</tr>
+<tr>
+<td>page</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Page to retrieve from the entire result set</td>
+</tr>
+<tr>
+<td>page_size</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Max amount of objects to return per page in the response</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values'>Enumerated Values</h4>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1914,6 +2173,62 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <td>status</td>
 <td>1</td>
 </tr>
+<tr>
+<td>sort_by</td>
+<td>survey_id</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>folder_id</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>name</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>document_image_url</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>editor_id</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>editor_first_name</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>editor_last_name</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>comments_count</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>elements_count</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>is_folder</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>created_at</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>modified_at</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>status</td>
+</tr>
+<tr>
+<td>sort_by</td>
+<td>survey_count</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -1922,31 +2237,29 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"systemsurveyor_api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"survey_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"editor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"elements_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"folder_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"preview_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"elements_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"is_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"editor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nl">"folder_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"survey_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="nl">"survey_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"survey_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1233412"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site-responses">Responses</h3>
+<h3 id="get-all-surveys-and-folders-for-a-specific-site-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -1976,7 +2289,7 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 </tr>
 </tbody></table>
 
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site-responseschema">Response Schema</h3>
+<h3 id="get-all-surveys-and-folders-for-a-specific-site-responseschema">Response Schema</h3>
 
 <p>Status Code <strong>200</strong></p>
 
@@ -1990,18 +2303,11 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 </tr>
 </thead><tbody>
 <tr>
-<td>» systemsurveyor_api</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» count</td>
 <td>integer</td>
 <td>false</td>
 <td>none</td>
-<td>Total count of surveys and folders in the result page</td>
+<td>Total count of surveys and folders for the site</td>
 </tr>
 <tr>
 <td>» data</td>
@@ -2011,64 +2317,8 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <td>none</td>
 </tr>
 <tr>
-<td>»» survey_id</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Name of survey or folder</td>
-</tr>
-<tr>
-<td>»» preview_image</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>»» comments_count</td>
 <td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>Number of comments for a survey</td>
-</tr>
-<tr>
-<td>»» elements_count</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» is_folder</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» created_at</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» modified_at</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» is_archived</td>
-<td>boolean</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -2076,13 +2326,6 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <tr>
 <td>»» editor</td>
 <td>object</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» user_id</td>
-<td>integer</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -2102,6 +2345,20 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <td>none</td>
 </tr>
 <tr>
+<td>»»» user_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» elements_count</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
 <td>»» folder_id</td>
 <td>string</td>
 <td>false</td>
@@ -2109,52 +2366,77 @@ Results are ordered by <code>name</code> ascending by default if no sorting is s
 <td>none</td>
 </tr>
 <tr>
+<td>»» is_archived</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_folder</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» label</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Folder label</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» preview_image</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>URL to the survey&#39;s preview image</td>
+</tr>
+<tr>
 <td>»» survey_count</td>
 <td>integer</td>
 <td>false</td>
 <td>none</td>
-<td>Number of surveys in folder</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-2'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>systemsurveyor_api</td>
-<td>success</td>
+<td>none</td>
 </tr>
 <tr>
-<td>systemsurveyor_api</td>
-<td>failed</td>
+<td>»» survey_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
 
-<h1 id="system-surveyor-api-site-access">Site Access</h1>
-<h2 id='allows-granting-permission-for-a-site-to-a-user-or-team'>Allows granting permission for a site to a user or team.</h2>
-<p><a id="opIdaddSiteAccess"></a></p>
+<h1 id="system-surveyor-api-users">Users</h1>
+<h2 id='get-permissions-for-the-current-authenticated-user'>Get permissions for the current authenticated user</h2>
+<p><a id="opIdget_current_user_permissions"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span><span class="nb">id</span><span class="o">}</span>/access <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+curl <span class="nt">-X</span> GET /v2/user/permissions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v2/site/{id}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v2/user/permissions'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -2181,38 +2463,26 @@ curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span><span clas
       <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
     <span class="p">}</span>
 
-
     <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePostRequest</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/site/{id}/access"</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v2/user/permissions"</span><span class="p">;</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
 
+    <span class="c1">/// Performs a GET Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Start the request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
 
-      <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+        <span class="c1">//Validate result</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
 
     <span class="p">}</span>
 
-    <span class="c1">/// Performs a POST Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Serialize Object</span>
-        <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
-
-        <span class="c1">//Execute POST request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
-    <span class="p">}</span>
 
 
-
-    <span class="c1">/// Serialize an object to Json</span>
-    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Serialize Object</span>
-        <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
-
-        <span class="c1">//Create Json UTF8 String Content</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">jsonObject</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
-    <span class="p">}</span>
 
     <span class="c1">/// Deserialize object from request response</span>
     <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
@@ -2226,96 +2496,27 @@ curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span><span clas
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>POST /v2/site/{id}/access</code></p>
-
-<p>Requires having <code>SITE_ACCESS_PERMISSIONS</code> feature enabled in the account&#39;s plan.</p>
+<p><code>GET /v2/user/permissions</code></p>
 
 <blockquote>
-<p>Body parameter</p>
+<p>Example responses</p>
+
+<p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"permission"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"is_active_guest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"systemsurveyor_api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="allows-granting-permission-for-a-site-to-a-user-or-team.-parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>path</td>
-<td>string</td>
-<td>true</td>
-<td>Site ID</td>
-</tr>
-<tr>
-<td>body</td>
-<td>body</td>
-<td>object</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» user_id</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» team_id</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» permission</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» expiration_date</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
-<td>Datetime in Unix timestamp format</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>» permission</td>
-<td>0</td>
-</tr>
-<tr>
-<td>» permission</td>
-<td>1</td>
-</tr>
-<tr>
-<td>» permission</td>
-<td>2</td>
-</tr>
-</tbody></table>
-
-<h3 id="allows-granting-permission-for-a-site-to-a-user-or-team.-responses">Responses</h3>
+<h3 id="get-permissions-for-the-current-authenticated-user-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -2329,7 +2530,7 @@ curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span><span clas
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
@@ -2337,46 +2538,94 @@ curl <span class="nt">-X</span> POST /v2/site/<span class="o">{</span><span clas
 <td>Access token is missing or invalid</td>
 <td>None</td>
 </tr>
+</tbody></table>
+
+<h3 id="get-permissions-for-the-current-authenticated-user-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
 <tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Invalid permissions to perform operation</td>
-<td>None</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
-<td>None</td>
+<td>»» accounts</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_active_guest</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>If the user is an active guest on any site</td>
+</tr>
+<tr>
+<td>»» teams</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» systemsurveyor_api</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>systemsurveyor_api</td>
+<td>success</td>
+</tr>
+<tr>
+<td>systemsurveyor_api</td>
+<td>failed</td>
 </tr>
 </tbody></table>
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None
+<aside class="success">
+This operation does not require authentication
 </aside>
 <h1 id='schemas'>Schemas</h1>
-<h2 id="tocS_requestSite">requestSite</h2>
+<h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemarequestsite"></a>
-<a id="schema_requestSite"></a>
-<a id="tocSrequestsite"></a>
-<a id="tocsrequestsite"></a></p>
+<p><a id="schemasharesiteorsurveyrequestschema"></a>
+<a id="schema_ShareSiteOrSurveyRequestSchema"></a>
+<a id="tocSsharesiteorsurveyrequestschema"></a>
+<a id="tocssharesiteorsurveyrequestschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"user@example.com"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties'>Properties</h3>
@@ -2390,26 +2639,90 @@ None
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>created_at</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>emails</td>
+<td>[string]</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>expiration_date</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>message</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>team_id</td>
-<td>integer</td>
+<td>modified_at</td>
+<td>&#39;null&#39;</td>
 <td>false</td>
-<td>none</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
+</tbody></table>
+
+<h2 id="tocS_SiteSchema">SiteSchema</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemasiteschema"></a>
+<a id="schema_SiteSchema"></a>
+<a id="tocSsiteschema"></a>
+<a id="tocssiteschema"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legacy_site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-2'>Properties</h3>
+<table><thead>
 <tr>
-<td>state</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
 </tr>
+</thead><tbody>
 <tr>
 <td>city</td>
 <td>string</td>
@@ -2418,7 +2731,77 @@ None
 <td>none</td>
 </tr>
 <tr>
-<td>zip_code</td>
+<td>created_at</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>creator</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>is_archived</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>legacy_site_id</td>
+<td>integer</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>modifier</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>reference_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>state</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -2432,9 +2815,16 @@ None
 <td>none</td>
 </tr>
 <tr>
-<td>label</td>
-<td>string</td>
+<td>tags</td>
+<td>[string]</td>
 <td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>team_id</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -2442,20 +2832,335 @@ None
 <td>version</td>
 <td>integer</td>
 <td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>zip_code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_SurveyFields">SurveyFields</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemasurveyfields"></a>
+<a id="schema_SurveyFields"></a>
+<a id="tocSsurveyfields"></a>
+<a id="tocssurveyfields"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-3'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>field_id</td>
+<td>string</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>reference_id</td>
+<td>value</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_SurveyOptions">SurveyOptions</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemasurveyoptions"></a>
+<a id="schema_SurveyOptions"></a>
+<a id="tocSsurveyoptions"></a>
+<a id="tocssurveyoptions"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-4'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>[<a href="#schemasurveyfields">SurveyFields</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>template_name</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>tags</td>
+<td>value</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>scope</td>
+<td>template</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>model</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>content</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_SurveyReportRequestSchema">SurveyReportRequestSchema</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemasurveyreportrequestschema"></a>
+<a id="schema_SurveyReportRequestSchema"></a>
+<a id="tocSsurveyreportrequestschema"></a>
+<a id="tocssurveyreportrequestschema"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_site_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ed7905a-4735-4cf7-b1ab-521e066fb971"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-5'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>custom_data</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>filters</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>ids</td>
 <td>[string]</td>
 <td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>is_excel</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>is_site_report</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>options</td>
+<td>[<a href="#schemasurveyoptions">SurveyOptions</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>output</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>paper_size</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>report_id</td>
+<td>string(uuid)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>output</td>
+<td>pdf</td>
+</tr>
+<tr>
+<td>output</td>
+<td>html</td>
+</tr>
+<tr>
+<td>output</td>
+<td>xls</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_UserResponse">UserResponse</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemauserresponse"></a>
+<a id="schema_UserResponse"></a>
+<a id="tocSuserresponse"></a>
+<a id="tocsuserresponse"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-6'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
