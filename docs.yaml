@@ -34,6 +34,106 @@ components:
     UnprocessableEntityError:
       description: Unable to process the contained instructions
   schemas:
+    Accessory:
+      properties:
+        created_at:
+          readOnly: true
+        description:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        labor_hours:
+          type: number
+        manufacturer:
+          type: string
+        model:
+          type: string
+        price:
+          type: number
+      required:
+      - description
+      - labor_hours
+      - model
+      - price
+      type: object
+    Attribute:
+      properties:
+        attribute_id:
+          type: integer
+        value:
+          type: string
+      required:
+      - attribute_id
+      - value
+      type: object
+    EPContent:
+      properties:
+        attribute:
+          default: []
+          items:
+            $ref: '#/components/schemas/Attribute'
+          type: array
+        child:
+          default: []
+          items:
+            type: string
+          type: array
+        pdf_url:
+          default: []
+          items:
+            $ref: '#/components/schemas/Link'
+          maxItems: 2
+          type: array
+      type: object
+    ElementProfileSchema:
+      properties:
+        accessories:
+          items:
+            $ref: '#/components/schemas/Accessory'
+          type: array
+        content:
+          $ref: '#/components/schemas/EPContent'
+        created_at:
+          readOnly: true
+        created_by:
+          readOnly: true
+          type: integer
+        element_id:
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        is_default:
+          type: boolean
+        modified_at:
+          readOnly: true
+        name:
+          type: string
+        sort:
+          type: integer
+        team_id:
+          type: integer
+      required:
+      - content
+      - element_id
+      - name
+      - team_id
+      type: object
+    Link:
+      properties:
+        link_type:
+          type: integer
+        name:
+          type: string
+        url:
+          format: url
+          type: string
+      required:
+      - link_type
+      - name
+      - url
+      type: object
     ShareSiteOrSurveyRequestSchema:
       properties:
         created_at:
