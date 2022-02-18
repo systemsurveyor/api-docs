@@ -34,29 +34,6 @@ components:
     UnprocessableEntityError:
       description: Unable to process the contained instructions
   schemas:
-    Accessory:
-      properties:
-        created_at:
-          readOnly: true
-        description:
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        labor_hours:
-          type: number
-        manufacturer:
-          type: string
-        model:
-          type: string
-        price:
-          type: number
-      required:
-      - description
-      - labor_hours
-      - model
-      - price
-      type: object
     Attribute:
       properties:
         attribute_id:
@@ -66,6 +43,34 @@ components:
       required:
       - attribute_id
       - value
+      type: object
+    EPAccessory:
+      properties:
+        created_at:
+          readOnly: true
+        description:
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        labor_hours:
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+          type:
+          - number
+          - '''null'''
+        manufacturer:
+          type: string
+        model:
+          type: string
+        price:
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+          type:
+          - number
+          - '''null'''
+      required:
+      - description
       type: object
     EPContent:
       properties:
@@ -90,7 +95,7 @@ components:
       properties:
         accessories:
           items:
-            $ref: '#/components/schemas/Accessory'
+            $ref: '#/components/schemas/EPAccessory'
           type: array
         content:
           $ref: '#/components/schemas/EPContent'
