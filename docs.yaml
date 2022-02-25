@@ -8,6 +8,22 @@ components:
         default: 1
         minimum: 1
         type: integer
+    page[number]:
+      description: Page to retrieve from the entire result set
+      in: query
+      name: page
+      schema:
+        default: 1
+        minimum: 1
+        type: integer
+    page[size]:
+      description: Max amount of objects to return per page in the response
+      in: query
+      name: page_size
+      schema:
+        default: 100
+        maximum: 100
+        type: integer
     page_size:
       description: Max amount of objects to return per page in the response
       in: query
@@ -82,7 +98,7 @@ components:
         child:
           default: []
           items:
-            type: string
+            $ref: '#/components/schemas/SubElement'
           type: array
         pdf_url:
           default: []
@@ -218,6 +234,16 @@ components:
       required:
       - name
       - team_id
+      type: object
+    SubElement:
+      properties:
+        element_id:
+          type: string
+        systemtype_id:
+          type: string
+      required:
+      - element_id
+      - systemtype_id
       type: object
     SurveyFields:
       properties:
