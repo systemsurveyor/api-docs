@@ -11,7 +11,7 @@ components:
     page[number]:
       description: Page to retrieve from the entire result set
       in: query
-      name: page
+      name: page[number]
       schema:
         default: 1
         minimum: 1
@@ -19,7 +19,7 @@ components:
     page[size]:
       description: Max amount of objects to return per page in the response
       in: query
-      name: page_size
+      name: page[size]
       schema:
         default: 100
         maximum: 100
