@@ -143,6 +143,21 @@ components:
       - name
       - team_id
       type: object
+    FolderSchema:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        label:
+          type: string
+        name:
+          type: string
+        team_id:
+          type: integer
+      required:
+      - name
+      - team_id
+      type: object
     Link:
       properties:
         link_type:
