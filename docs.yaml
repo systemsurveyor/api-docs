@@ -60,6 +60,18 @@ components:
       - attribute_id
       - value
       type: object
+    CablePath:
+      properties:
+        a_side:
+          readOnly: true
+        id:
+          readOnly: true
+          type: string
+        type:
+          type: string
+        z_side:
+          readOnly: true
+      type: object
     EPAccessory:
       properties:
         created_at:
@@ -152,11 +164,16 @@ components:
           type: string
         name:
           type: string
+        site_external_id:
+          type: string
+          writeOnly: true
+        site_id:
+          readOnly: true
+          type: integer
         team_id:
           type: integer
       required:
       - name
-      - team_id
       type: object
     Link:
       properties:
@@ -171,6 +188,13 @@ components:
       - link_type
       - name
       - url
+      type: object
+    PathConnection:
+      properties:
+        end:
+          readOnly: true
+        start:
+          readOnly: true
       type: object
     ShareSiteOrSurveyRequestSchema:
       properties:
@@ -262,6 +286,131 @@ components:
       - element_id
       - systemtype_id
       type: object
+    SurveyAnnotation:
+      properties:
+        category: {}
+        end_point: {}
+        font_size:
+          type: string
+        id:
+          readOnly: true
+          type: string
+        location: {}
+        size:
+          type: string
+        start_point: {}
+        stroke_color:
+          type: string
+        stroke_width:
+          type: string
+        text:
+          type: string
+      required:
+      - category
+      - location
+      - stroke_color
+      - stroke_width
+      type: object
+    SurveyAttribute:
+      properties:
+        attribute_id:
+          type: integer
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - attribute_id
+      - name
+      - value
+      type: object
+    SurveyElement:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        element_id:
+          type: integer
+        element_profile_id:
+          type: integer
+        systemtype_id:
+          type: integer
+        variant: {}
+        z_order:
+          type: integer
+        position: {}
+        photo_urls:
+          items:
+            type: string
+          type: array
+        pdf_urls:
+          items:
+            type: object
+          type: array
+        attributes:
+          items:
+            $ref: '#/components/schemas/SurveyAttribute'
+          type: array
+        accessories:
+          items:
+            $ref: '#/components/schemas/SurveyElementAccessory'
+          type: array
+        children:
+          items:
+            $ref: '#/components/schemas/SurveyElement'
+          type: array
+        cables:
+          items:
+            $ref: '#/components/schemas/CablePath'
+          type: array
+        connections:
+          $ref: '#/components/schemas/PathConnection'
+        activity_log:
+          items:
+            $ref: '#/components/schemas/SurveyElementActivityLog'
+          type: array
+      required:
+      - element_id
+      - name
+      - systemtype_id
+      type: object
+    SurveyElementAccessory:
+      properties:
+        description:
+          type: string
+        id:
+          readOnly: true
+          type: string
+        labor_hours:
+          type: number
+        manufacturer:
+          type: string
+        model:
+          type: string
+        price: {}
+        quantity: {}
+        row_index:
+          type: integer
+      required:
+      - manufacturer
+      - model
+      - row_index
+      type: object
+    SurveyElementActivityLog:
+      properties:
+        date:
+          readOnly: true
+        entry:
+          type: string
+        id:
+          readOnly: true
+          type: string
+      type: object
     SurveyFields:
       properties:
         field_id:
@@ -337,6 +486,75 @@ components:
       - output
       - report_id
       - site_id
+      type: object
+    SurveySchema:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        title:
+          type: string
+        label:
+          type: string
+        reference_id:
+          type: string
+        description:
+          type: string
+        summary:
+          type: string
+        location:
+          type: string
+        status:
+          writeOnly: true
+        site:
+          readOnly: true
+        icon_size:
+          type: integer
+        is_archived:
+          readOnly: true
+          type: boolean
+        unit: {}
+        version:
+          readOnly: true
+          type: integer
+        margin_range:
+          type: number
+        type:
+          readOnly: true
+        floorplan_scale:
+          type: number
+        preview_image:
+          type: string
+        floorplan_url:
+          type: string
+        creator:
+          readOnly: true
+          type: integer
+        editor:
+          readOnly: true
+          type: integer
+        modifier:
+          readOnly: true
+          type: integer
+        created_at:
+          readOnly: true
+        modified_at:
+          readOnly: true
+        elements:
+          items:
+            $ref: '#/components/schemas/SurveyElement'
+          type: array
+        annotations:
+          items:
+            $ref: '#/components/schemas/SurveyAnnotation'
+          type: array
+        users:
+          readOnly: true
+      required:
+      - icon_size
+      - margin_range
+      - title
+      - unit
       type: object
     UserResponse:
       properties:
