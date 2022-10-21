@@ -191,10 +191,8 @@ components:
       type: object
     PathConnection:
       properties:
-        end:
-          readOnly: true
-        start:
-          readOnly: true
+        end: {}
+        start: {}
       type: object
     ShareSiteOrSurveyRequestSchema:
       properties:
