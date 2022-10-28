@@ -62,15 +62,16 @@ components:
       type: object
     CablePath:
       properties:
-        a_side:
-          readOnly: true
+        a_side: {}
         id:
-          readOnly: true
           type: string
         type:
           type: string
-        z_side:
-          readOnly: true
+        z_side: {}
+      required:
+      - a_side
+      - id
+      - z_side
       type: object
     EPAccessory:
       properties:
@@ -193,6 +194,14 @@ components:
       properties:
         end: {}
         start: {}
+      type: object
+    RelatedUser:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        user_id: {}
       type: object
     ShareSiteOrSurveyRequestSchema:
       properties:
@@ -328,11 +337,12 @@ components:
     SurveyElement:
       properties:
         id:
-          readOnly: true
           type: string
         name:
           type: string
         element_id:
+          type: integer
+        element_index:
           type: integer
         element_profile_id:
           type: integer
@@ -374,6 +384,7 @@ components:
           type: array
       required:
       - element_id
+      - id
       - name
       - systemtype_id
       type: object
@@ -522,15 +533,18 @@ components:
         floorplan_scale:
           type: number
         preview_image:
+          readOnly: true
           type: string
         floorplan_url:
+          readOnly: true
           type: string
         creator:
           readOnly: true
           type: integer
         editor:
+          allOf:
+          - $ref: '#/components/schemas/RelatedUser'
           readOnly: true
-          type: integer
         modifier:
           readOnly: true
           type: integer
