@@ -386,6 +386,7 @@ components:
       - element_id
       - id
       - name
+      - position
       - systemtype_id
       type: object
     SurveyElementAccessory:
