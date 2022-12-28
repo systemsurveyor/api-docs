@@ -1428,116 +1428,42 @@ paths:
       - Teams
       - v3
   /v3/user:
-    get:
-      description: 'This includes accounts and teams that the current user belongs
-        to, either as a team member or a guest user.
-
-        '
-      operationId: get_current_user_data
+    patch:
+      operationId: update_user
       public: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                city:
+                  type: string
+                company:
+                  type: string
+                country:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                mobile:
+                  type: string
+                state:
+                  type: string
+                title:
+                  type: string
+                user_name:
+                  type: string
+              type: object
+        required: true
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  accounts:
-                    items:
-                      properties:
-                        cancel_requested:
-                          type: boolean
-                        company:
-                          type: string
-                        features:
-                          properties:
-                            comments:
-                              type: boolean
-                            multiple_teams:
-                              type: boolean
-                            site_access_permissions:
-                              type: boolean
-                            site_tagging:
-                              type: boolean
-                          type: object
-                        id:
-                          example: 450495
-                          type: integer
-                        is_free:
-                          type: boolean
-                        is_trial:
-                          type: boolean
-                      type: object
-                    type: array
-                  avatar_url:
-                    type: string
-                  company:
-                    example: System Surveyor
-                    type: string
-                  country:
-                    type: string
-                  created_at:
-                    type: integer
-                  email:
-                    example: foobar@gmail.com
-                    type: string
-                  first_name:
-                    example: John
-                    type: string
-                  id:
-                    example: 12094
-                    type: integer
-                  is_complete_setup:
-                    type: boolean
-                  last_login:
-                    type: number
-                  last_name:
-                    example: Doe
-                    type: string
-                  mobile:
-                    example: 910-423-345
-                    type: string
-                  state:
-                    type: string
-                  teams:
-                    items:
-                      properties:
-                        account_id:
-                          example: 995
-                          type: integer
-                        budget_status:
-                          type: integer
-                        id:
-                          example: 112
-                          type: integer
-                        labor_rate:
-                          type: float
-                        margin_range:
-                          type: float
-                        name:
-                          example: John's Team
-                          type: string
-                        role:
-                          example: team_member
-                          type: string
-                        unit:
-                          enum:
-                          - metric
-                          - imperial
-                          example: metric
-                          type: string
-                      type: object
-                    type: array
-                  title:
-                    example: CEO
-                    type: string
-                  user_name:
-                    example: foobar
-                    type: string
-                type: object
+        '202':
           description: OK
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-      summary: Get data for the current authenticated user
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      summary: Update user information associated with the linked account
       tags:
       - Users
       - v3
