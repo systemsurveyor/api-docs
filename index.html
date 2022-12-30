@@ -312,19 +312,11 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#system-surveyor-api-resources" class="toc-h1 toc-link" data-title="Resources">Resources</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#fetches-a-binary-resource-and-returns-it-as-bytes" class="toc-h2 toc-link" data-title="Fetches a binary resource and returns it as bytes.">Fetches a binary resource and returns it as bytes.</a>
-                  </li>
-                  <li>
-                    <a href="#sets-an-image-to-a-survey-element" class="toc-h2 toc-link" data-title="Sets an image to a survey element.">Sets an image to a survey element.</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#system-surveyor-api-folders" class="toc-h1 toc-link" data-title="Folders">Folders</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creates-a-new-site-survey-folder-or-updates-an-existing-one-if-found" class="toc-h2 toc-link" data-title="Creates a new site/survey folder or updates an existing one if found.">Creates a new site/survey folder or updates an existing one if found.</a>
+                  </li>
                   <li>
                     <a href="#soft-deletes-a-site-folder-or-a-survey-folder" class="toc-h2 toc-link" data-title="Soft deletes a site folder or a survey folder.">Soft deletes a site folder or a survey folder.</a>
                   </li>
@@ -335,13 +327,13 @@
                     <a href="#update-all-fields-of-a-folder" class="toc-h2 toc-link" data-title="Update all fields of a folder">Update all fields of a folder</a>
                   </li>
                   <li>
-                    <a href="#allows-creating-folders-inside-a-site-which-can-store-and-organize-surveys" class="toc-h2 toc-link" data-title="Allows creating folders inside a site, which can store and organize surveys">Allows creating folders inside a site, which can store and organize surveys</a>
+                    <a href="#soft-deletes-a-folder-that-can-contain-sites" class="toc-h2 toc-link" data-title="Soft deletes a folder that can contain sites.">Soft deletes a folder that can contain sites.</a>
                   </li>
                   <li>
                     <a href="#deletes-a-survey-folder-in-a-site" class="toc-h2 toc-link" data-title="Deletes a survey folder in a site.">Deletes a survey folder in a site.</a>
                   </li>
                   <li>
-                    <a href="#soft-deletes-a-folder-that-can-contain-sites" class="toc-h2 toc-link" data-title="Soft deletes a folder that can contain sites.">Soft deletes a folder that can contain sites.</a>
+                    <a href="#allows-creating-folders-inside-a-site-which-can-store-and-organize-surveys" class="toc-h2 toc-link" data-title="Allows creating folders inside a site, which can store and organize surveys">Allows creating folders inside a site, which can store and organize surveys</a>
                   </li>
               </ul>
           </li>
@@ -354,13 +346,33 @@
               </ul>
           </li>
           <li>
+            <a href="#system-surveyor-api-resources" class="toc-h1 toc-link" data-title="Resources">Resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fetches-a-binary-resource-and-returns-it-as-bytes" class="toc-h2 toc-link" data-title="Fetches a binary resource and returns it as bytes.">Fetches a binary resource and returns it as bytes.</a>
+                  </li>
+                  <li>
+                    <a href="#sets-an-image-to-a-survey-element" class="toc-h2 toc-link" data-title="Sets an image to a survey element.">Sets an image to a survey element.</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#system-surveyor-api-sites" class="toc-h1 toc-link" data-title="Sites">Sites</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creates-a-new-site-with-a-specific-external_id-or-updates-the-site-if-it-already-exists" class="toc-h2 toc-link" data-title="Creates a new site with a specific external_id or updates the site if it already exists">Creates a new site with a specific <code>external_id</code> or updates the site if it already exists</a>
+                  </li>
+                  <li>
+                    <a href="#update-specific-fields-of-a-site" class="toc-h2 toc-link" data-title="Update specific fields of a site">Update specific fields of a site</a>
+                  </li>
                   <li>
                     <a href="#hard-deletes-a-site-and-all-related-objects" class="toc-h2 toc-link" data-title="Hard deletes a site and all related objects.">Hard deletes a site and all related objects.</a>
                   </li>
                   <li>
                     <a href="#returns-all-archived-unarchived-sites-and-folders-across-all-teams-of-a-user" class="toc-h2 toc-link" data-title="Returns all archived/unarchived sites and folders across all teams of a user.">Returns all archived/unarchived sites and folders across all teams of a user.</a>
+                  </li>
+                  <li>
+                    <a href="#allows-for-batch-deleting-of-sites-and-all-related-data" class="toc-h2 toc-link" data-title="Allows for batch deleting of sites (and all related data).">Allows for batch deleting of sites (and all related data).</a>
                   </li>
               </ul>
           </li>
@@ -368,10 +380,10 @@
             <a href="#system-surveyor-api-surveys" class="toc-h1 toc-link" data-title="Surveys">Surveys</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#returns-all-surveys-and-folders-for-a-specific-site-these-are-shown-in-the-site-overview-page" class="toc-h2 toc-link" data-title="Returns all surveys and folders for a specific site. These are shown in the site overview page.">Returns all surveys and folders for a specific site. These are shown in the site overview page.</a>
+                    <a href="#allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client-or-updates-the-existing-survey-with-that-identifier-if-it-exists" class="toc-h2 toc-link" data-title="Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.">Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.</a>
                   </li>
                   <li>
-                    <a href="#allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client-or-updates-the-existing-survey-with-that-identifier-if-it-exists" class="toc-h2 toc-link" data-title="Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.">Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.</a>
+                    <a href="#returns-all-surveys-and-folders-for-a-specific-site-these-are-shown-in-the-site-overview-page" class="toc-h2 toc-link" data-title="Returns all surveys and folders for a specific site. These are shown in the site overview page.">Returns all surveys and folders for a specific site. These are shown in the site overview page.</a>
                   </li>
                   <li>
                     <a href="#deletes-a-survey-and-all-its-related-objects" class="toc-h2 toc-link" data-title="Deletes a survey and all its related objects">Deletes a survey and all its related objects</a>
@@ -389,6 +401,9 @@
           <li>
             <a href="#system-surveyor-api-users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-data-for-the-current-authenticated-user" class="toc-h2 toc-link" data-title="Get data for the current authenticated user">Get data for the current authenticated user</a>
+                  </li>
                   <li>
                     <a href="#update-user-information-associated-with-the-linked-account" class="toc-h2 toc-link" data-title="Update user information associated with the linked account">Update user information associated with the linked account</a>
                   </li>
@@ -487,171 +502,25 @@
 <li>HTTP Authentication, scheme: bearer </li>
 </ul>
 
-<h1 id="system-surveyor-api-resources">Resources</h1>
-<h2 id='fetches-a-binary-resource-and-returns-it-as-bytes'>Fetches a binary resource and returns it as bytes.</h2>
-<p><a id="opIdget_resource"></a></p>
+<h1 id="system-surveyor-api-folders">Folders</h1>
+<h2 id='creates-a-new-site-survey-folder-or-updates-an-existing-one-if-found'>Creates a new site/survey folder or updates an existing one if found.</h2>
+<p><a id="opIdcreate_or_update_folder"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET /v3/resource <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/octet-stream'</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/octet-stream'</span>
-<span class="p">}</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v3/resource'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
-
-<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-<span class="c1">/// Example of Http Client</span>
-<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-    <span class="c1">/// Setup http client</span>
-    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/resource"</span><span class="p">;</span>
-      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Performs a GET Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Start the request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
-
-        <span class="c1">//Validate result</span>
-        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
-
-    <span class="p">}</span>
-
-
-
-
-    <span class="c1">/// Deserialize object from request response</span>
-    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Read body </span>
-        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
-
-        <span class="c1">//Deserialize Body to object</span>
-        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div>
-<p><code>GET /v3/resource</code></p>
-
-<p>Resource path is a relative URL to the binary resource in EFS, passed in a <code>path</code> query parameter.</p>
-
-<p>Example path: <code>2022/08/05/207e7214-6792-4288-8820-438b1f3233be.png</code></p>
-
-<h3 id="fetches-a-binary-resource-and-returns-it-as-bytes.-parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>path</td>
-<td>path</td>
-<td>string</td>
-<td>true</td>
-<td>Relative URL of the resource</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Example responses</p>
-
-<p>200 Response</p>
-</blockquote>
-
-<h3 id="fetches-a-binary-resource-and-returns-it-as-bytes.-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>A binary resource file</td>
-<td>string</td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Invalid request sent to endpoint</td>
-<td>None</td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Access token is missing or invalid</td>
-<td>None</td>
-</tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
-<td>None</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-<h2 id='sets-an-image-to-a-survey-element'>Sets an image to a survey element.</h2>
-<p><a id="opIdadd_survey_element_resource"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>survey_element_id<span class="o">}</span>/resource <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/pdf'</span> <span class="se">\</span>
+curl <span class="nt">-X</span> PUT /v3/folder/<span class="o">{</span>folder_id<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/pdf'</span><span class="p">,</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v3/survey_element/{survey_element_id}/resource'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">'/v3/folder/{folder_id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -679,30 +548,42 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
     <span class="p">}</span>
 
 
+
     <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePostRequest</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePutRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/survey_element/{survey_element_id}/resource"</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/folder/{folder_id}"</span><span class="p">;</span>
 
 
-      <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+      <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
+  ""label"": ""string"",
+  ""name"": ""string"",
+  ""site_external_id"": ""string"",
+  ""team_id"": 0
+}"</span><span class="p">;</span>
+      <span class="n">FolderSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+
 
     <span class="p">}</span>
 
-    <span class="c1">/// Performs a POST Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="c1">/// Performs a PUT Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">FolderSchema</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
 
-        <span class="c1">//Execute POST request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
+        <span class="c1">//Execute PUT request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PutAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
+
+        <span class="c1">//Return response</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
     <span class="p">}</span>
 
 
-
     <span class="c1">/// Serialize an object to Json</span>
-    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">)</span>
+    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">FolderSchema</span> <span class="n">content</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Serialize Object</span>
         <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
@@ -723,13 +604,22 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>POST /v3/survey_element/{survey_element_id}/resource</code></p>
+<p><code>PUT /v3/folder/{folder_id}</code></p>
+
+<p>To create/update a site folder, pass a value for <code>team_id</code> field in the request payload, to create/update a survey folder
+pass a value for <code>site_id</code> field.</p>
 
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
-
-<h3 id="sets-an-image-to-a-survey-element.-parameters">Parameters</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -741,16 +631,58 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>survey_element_id</td>
+<td>folder_id</td>
 <td>path</td>
-<td>undefined</td>
+<td>string</td>
 <td>true</td>
-<td>The external id of the surveyelement</td>
+<td>Folder ID</td>
 </tr>
 <tr>
 <td>body</td>
 <td>body</td>
-<td>string(binary)</td>
+<td><a href="#schemafolderschema">FolderSchema</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_external_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» team_id</td>
+<td>body</td>
+<td>integer</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -762,12 +694,14 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022/11/01/39dace0d-7aa3-47c7-9bff-9c87fbe2c00b.png"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="sets-an-image-to-a-survey-element.-responses">Responses</h3>
+<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -780,8 +714,14 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>The path to the uploaded file</td>
-<td>Inline</td>
+<td>Folder updated</td>
+<td><a href="#schemafolderschema">FolderSchema</a></td>
+</tr>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Folder created</td>
+<td><a href="#schemafolderschema">FolderSchema</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -801,48 +741,11 @@ curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>
 <td>Invalid permissions to perform operation</td>
 <td>None</td>
 </tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
-<td>None</td>
-</tr>
-</tbody></table>
-
-<h3 id="sets-an-image-to-a-survey-element.-responseschema">Response Schema</h3>
-
-<p>Status Code <strong>200</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>» data</td>
-<td>object</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» resource_url</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
 </tbody></table>
 
 <aside class="success">
 This operation does not require authentication
 </aside>
-
-<h1 id="system-surveyor-api-folders">Folders</h1>
 <h2 id='soft-deletes-a-site-folder-or-a-survey-folder'>Soft deletes a site folder or a survey folder.</h2>
 <p><a id="opIddelete_folder"></a></p>
 
@@ -1331,6 +1234,284 @@ curl <span class="nt">-X</span> PATCH /v3/site_folder/<span class="o">{</span>fo
 <aside class="success">
 This operation does not require authentication
 </aside>
+<h2 id='soft-deletes-a-folder-that-can-contain-sites'>Soft deletes a folder that can contain sites.</h2>
+<p><a id="opIddelete_site_folder"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> DELETE /v3/site_folder/<span class="o">{</span>folder_id<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v3/site_folder/{folder_id}'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/site_folder/{folder_id}"</span><span class="p">;</span>
+
+      <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a DELETE Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Execute DELETE request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+
+        <span class="c1">//Return response</span>
+        <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>DELETE /v3/site_folder/{folder_id}</code></p>
+
+<p>Folder must be empty in order to be deleted. Only account admins, team admins, and team members can delete folders.</p>
+
+<h3 id="soft-deletes-a-folder-that-can-contain-sites.-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>folder_id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Folder ID</td>
+</tr>
+</tbody></table>
+
+<h3 id="soft-deletes-a-folder-that-can-contain-sites.-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>OK</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>The specified resource was not found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='deletes-a-survey-folder-in-a-site'>Deletes a survey folder in a site.</h2>
+<p><a id="opIddelete_survey_folder"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> DELETE /v3/survey_folder/<span class="o">{</span>folder_id<span class="o">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v3/survey_folder/{folder_id}'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/survey_folder/{folder_id}"</span><span class="p">;</span>
+
+      <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a DELETE Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Execute DELETE request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+
+        <span class="c1">//Return response</span>
+        <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>DELETE /v3/survey_folder/{folder_id}</code></p>
+
+<p>Folders that already contain surveys are not allowed to be deleted.</p>
+
+<p>Only team members with write access can delete survey folders.</p>
+
+<h3 id="deletes-a-survey-folder-in-a-site.-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>folder_id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Folder ID</td>
+</tr>
+</tbody></table>
+
+<h3 id="deletes-a-survey-folder-in-a-site.-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>OK</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 <h2 id='allows-creating-folders-inside-a-site-which-can-store-and-organize-surveys'>Allows creating folders inside a site, which can store and organize surveys</h2>
 <p><a id="opIdcreate_survey_folder"></a></p>
 
@@ -1510,284 +1691,6 @@ curl <span class="nt">-X</span> POST /v3/<span class="o">{</span>site_id<span cl
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-<h2 id='deletes-a-survey-folder-in-a-site'>Deletes a survey folder in a site.</h2>
-<p><a id="opIddelete_survey_folder"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE /v3/survey_folder/<span class="o">{</span>folder_id<span class="o">}</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v3/survey_folder/{folder_id}'</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
-
-<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-<span class="c1">/// Example of Http Client</span>
-<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-    <span class="c1">/// Setup http client</span>
-    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
-    <span class="p">}</span>
-
-
-
-
-    <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/survey_folder/{folder_id}"</span><span class="p">;</span>
-
-      <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Performs a DELETE Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Execute DELETE request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
-
-        <span class="c1">//Return response</span>
-        <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Deserialize object from request response</span>
-    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Read body </span>
-        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
-
-        <span class="c1">//Deserialize Body to object</span>
-        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div>
-<p><code>DELETE /v3/survey_folder/{folder_id}</code></p>
-
-<p>Folders that already contain surveys are not allowed to be deleted.</p>
-
-<p>Only team members with write access can delete survey folders.</p>
-
-<h3 id="deletes-a-survey-folder-in-a-site.-parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>folder_id</td>
-<td>path</td>
-<td>string</td>
-<td>true</td>
-<td>Folder ID</td>
-</tr>
-</tbody></table>
-
-<h3 id="deletes-a-survey-folder-in-a-site.-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>204</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
-<td>OK</td>
-<td>None</td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Invalid request sent to endpoint</td>
-<td>None</td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Access token is missing or invalid</td>
-<td>None</td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Invalid permissions to perform operation</td>
-<td>None</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-<h2 id='soft-deletes-a-folder-that-can-contain-sites'>Soft deletes a folder that can contain sites.</h2>
-<p><a id="opIddelete_site_folder"></a></p>
-
-<blockquote>
-<p>Code samples</p>
-</blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE /v3/site_folder/<span class="o">{</span>folder_id<span class="o">}</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v3/site_folder/{folder_id}'</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
-
-</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
-<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
-
-<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-<span class="c1">/// Example of Http Client</span>
-<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
-    <span class="c1">/// Setup http client</span>
-    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
-    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
-    <span class="p">}</span>
-
-
-
-
-    <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
-    <span class="p">{</span>
-      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/site_folder/{folder_id}"</span><span class="p">;</span>
-
-      <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Performs a DELETE Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Execute DELETE request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
-
-        <span class="c1">//Return response</span>
-        <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">/// Deserialize object from request response</span>
-    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Read body </span>
-        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
-
-        <span class="c1">//Deserialize Body to object</span>
-        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div>
-<p><code>DELETE /v3/site_folder/{folder_id}</code></p>
-
-<p>Folder must be empty in order to be deleted. Only account admins, team admins, and team members can delete folders.</p>
-
-<h3 id="soft-deletes-a-folder-that-can-contain-sites.-parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>In</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>folder_id</td>
-<td>path</td>
-<td>string</td>
-<td>true</td>
-<td>Folder ID</td>
-</tr>
-</tbody></table>
-
-<h3 id="soft-deletes-a-folder-that-can-contain-sites.-responses">Responses</h3>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>204</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
-<td>OK</td>
-<td>None</td>
-</tr>
-<tr>
-<td>400</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Invalid request sent to endpoint</td>
-<td>None</td>
-</tr>
-<tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Access token is missing or invalid</td>
-<td>None</td>
-</tr>
-<tr>
-<td>403</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Invalid permissions to perform operation</td>
-<td>None</td>
-</tr>
-<tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>The specified resource was not found</td>
 <td>None</td>
 </tr>
 </tbody></table>
@@ -2171,7 +2074,1032 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 This operation does not require authentication
 </aside>
 
+<h1 id="system-surveyor-api-resources">Resources</h1>
+<h2 id='fetches-a-binary-resource-and-returns-it-as-bytes'>Fetches a binary resource and returns it as bytes.</h2>
+<p><a id="opIdget_resource"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET /v3/resource <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/octet-stream'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/octet-stream'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v3/resource'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/resource"</span><span class="p">;</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a GET Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Start the request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+
+        <span class="c1">//Validate result</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>GET /v3/resource</code></p>
+
+<p>Resource path is a relative URL to the binary resource in EFS, passed in a <code>path</code> query parameter.</p>
+
+<p>Example path: <code>2022/08/05/207e7214-6792-4288-8820-438b1f3233be.png</code></p>
+
+<h3 id="fetches-a-binary-resource-and-returns-it-as-bytes.-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Relative URL of the resource</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+
+<h3 id="fetches-a-binary-resource-and-returns-it-as-bytes.-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>A binary resource file</td>
+<td>string</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>The specified resource was not found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='sets-an-image-to-a-survey-element'>Sets an image to a survey element.</h2>
+<p><a id="opIdadd_survey_element_resource"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST /v3/survey_element/<span class="o">{</span>survey_element_id<span class="o">}</span>/resource <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/pdf'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/pdf'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'/v3/survey_element/{survey_element_id}/resource'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePostRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/survey_element/{survey_element_id}/resource"</span><span class="p">;</span>
+
+
+      <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a POST Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Serialize Object</span>
+        <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+
+        <span class="c1">//Execute POST request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PostAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+
+    <span class="c1">/// Serialize an object to Json</span>
+    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">undefined</span> <span class="n">content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Serialize Object</span>
+        <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+
+        <span class="c1">//Create Json UTF8 String Content</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">jsonObject</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>POST /v3/survey_element/{survey_element_id}/resource</code></p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+
+<h3 id="sets-an-image-to-a-survey-element.-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>survey_element_id</td>
+<td>path</td>
+<td>undefined</td>
+<td>true</td>
+<td>The external id of the surveyelement</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>string(binary)</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"resource_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022/11/01/39dace0d-7aa3-47c7-9bff-9c87fbe2c00b.png"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="sets-an-image-to-a-survey-element.-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>The path to the uploaded file</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>The specified resource was not found</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="sets-an-image-to-a-survey-element.-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» data</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» resource_url</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="system-surveyor-api-sites">Sites</h1>
+<h2 id='creates-a-new-site-with-a-specific-external_id-or-updates-the-site-if-it-already-exists'>Creates a new site with a specific <code>external_id</code> or updates the site if it already exists</h2>
+<p><a id="opIdcreate_or_update_site"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">'/v3/site/{site_id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakePutRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/site/{site_id}"</span><span class="p">;</span>
+
+
+      <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
+  ""city"": ""string"",
+  ""is_archived"": null,
+  ""label"": ""string"",
+  ""name"": ""string"",
+  ""reference_id"": ""string"",
+  ""site_id"": ""string"",
+  ""state"": ""string"",
+  ""street"": ""string"",
+  ""tags"": [
+    ""string""
+  ],
+  ""team_id"": 0,
+  ""zip_code"": ""string""
+}"</span><span class="p">;</span>
+      <span class="n">SiteSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
+
+
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a PUT Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">SiteSchema</span> <span class="n">content</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Serialize Object</span>
+        <span class="n">StringContent</span> <span class="n">jsonContent</span> <span class="p">=</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+
+        <span class="c1">//Execute PUT request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">PutAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">,</span> <span class="n">jsonContent</span><span class="p">);</span>
+
+        <span class="c1">//Return response</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">/// Serialize an object to Json</span>
+    <span class="k">private</span> <span class="n">StringContent</span> <span class="nf">SerializeObject</span><span class="p">(</span><span class="n">SiteSchema</span> <span class="n">content</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Serialize Object</span>
+        <span class="kt">string</span> <span class="n">jsonObject</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">SerializeObject</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+
+        <span class="c1">//Create Json UTF8 String Content</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">StringContent</span><span class="p">(</span><span class="n">jsonObject</span><span class="p">,</span> <span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">,</span> <span class="s">"application/json"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>PUT /v3/site/{site_id}</code></p>
+
+<p>Pass a folder external ID in a <code>folder_external_id</code> field in the payload to create the site inside that folder.</p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>site_id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Site ID</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemasiteschema">SiteSchema</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» city</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» creator</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_archived</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» legacy_site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modifier</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» reference_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» street</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» tags</td>
+<td>body</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» team_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» version</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» zip_code</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful update</td>
+<td>None</td>
+</tr>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Successful create</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='update-specific-fields-of-a-site'>Update specific fields of a site</h2>
+<p><a id="opIdpatch_site"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'/v3/site/{site_id}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+
+
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>PATCH /v3/site/{site_id}</code></p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="update-specific-fields-of-a-site-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>site_id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Site ID</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemasiteschema">SiteSchema</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» city</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» creator</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_archived</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» legacy_site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>&#39;null&#39;</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modifier</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» reference_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» street</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» tags</td>
+<td>body</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» team_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» version</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» zip_code</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful update</td>
+<td>None</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Invalid request sent to endpoint</td>
+<td>None</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 <h2 id='hard-deletes-a-site-and-all-related-objects'>Hard deletes a site and all related objects.</h2>
 <p><a id="opIddelete_site"></a></p>
 
@@ -2676,24 +3604,22 @@ curl <span class="nt">-X</span> GET /v3/sites <span class="se">\</span>
 <aside class="success">
 This operation does not require authentication
 </aside>
-
-<h1 id="system-surveyor-api-surveys">Surveys</h1>
-<h2 id='returns-all-surveys-and-folders-for-a-specific-site-these-are-shown-in-the-site-overview-page'>Returns all surveys and folders for a specific site. These are shown in the site overview page.</h2>
-<p><a id="opIdget_site_surveys_and_folders"></a></p>
+<h2 id='allows-for-batch-deleting-of-sites-and-all-related-data'>Allows for batch deleting of sites (and all related data).</h2>
+<p><a id="opIddelete_sites"></a></p>
 
 <blockquote>
 <p>Code samples</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET /v3/site/<span class="o">{</span>site_id<span class="o">}</span>/surveys <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+curl <span class="nt">-X</span> DELETE /v3/sites <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v3/site/{site_id}/surveys'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/v3/sites'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -2720,26 +3646,27 @@ curl <span class="nt">-X</span> GET /v3/site/<span class="o">{</span>site_id<spa
       <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
     <span class="p">}</span>
 
+
+
+
     <span class="c1">/// Make a dummy request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeDeleteRequest</span><span class="p">()</span>
     <span class="p">{</span>
-      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/site/{site_id}/surveys"</span><span class="p">;</span>
-      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+      <span class="kt">int</span> <span class="n">id</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/sites"</span><span class="p">;</span>
+
+      <span class="k">await</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="c1">/// Performs a GET Request</span>
-    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="c1">/// Performs a DELETE Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeleteAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">//Start the request</span>
-        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+        <span class="c1">//Execute DELETE request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">DeleteAsync</span><span class="p">(</span><span class="n">url</span> <span class="p">+</span> <span class="s">$"/</span><span class="p">{</span><span class="n">id</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
 
-        <span class="c1">//Validate result</span>
-        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
-
+        <span class="c1">//Return response</span>
+        <span class="k">await</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
     <span class="p">}</span>
-
-
-
 
     <span class="c1">/// Deserialize object from request response</span>
     <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
@@ -2753,27 +3680,19 @@ curl <span class="nt">-X</span> GET /v3/site/<span class="o">{</span>site_id<spa
 <span class="p">}</span>
 
 </code></pre></div>
-<p><code>GET /v3/site/{site_id}/surveys</code></p>
+<p><code>DELETE /v3/sites</code></p>
 
-<p>Surveys that belong to folders will not be included in the response, unless
-a search is being made.</p>
+<p>Users must be team members and have write access on all sites to be deleted, otherwise the entire operation will fail.
+Guest users are not allowed to batch delete sites.</p>
 
-<p>Results are ordered by <code>title</code> ascending by default if no sorting is specified.</p>
-
-<p>Query Parameters:</p>
-
-<ul>
-<li><p>q: Search surveys and folders.</p></li>
-<li><p>filter[status]: Return only surveys in a specific status (<code>archived</code> or <code>open</code>). Folders will also be returned in the response.</p></li>
-<li><p>filter[external_folder_id]: Filter surveys by folder using string of external_id (UUID). Only surveys will be returned.</p></li>
-<li><p>filter[modified_after]: Return surveys and folders that have been created or modified after a timestamp (in UTC Epoch format).</p></li>
-<li><p>filter[deleted_after]: Return surveys and folders that have been deleted after the specified timestamp.</p></li>
-<li><p>page[number]: Page to retrieve from the entire result set.</p></li>
-<li><p>page[size]: Max amount of objects to return per page in the response. Defaults to 100.</p></li>
-<li><p>sort: Sort by fields (comma separated). Use <code>-</code> prefix on field name to sort descending.</p></li>
-</ul>
-
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-parameters">Parameters</h3>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<h3 id="allows-for-batch-deleting-of-sites-(and-all-related-data).-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -2785,159 +3704,15 @@ a search is being made.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>site_id</td>
-<td>path</td>
-<td>string</td>
+<td>body</td>
+<td>body</td>
+<td>array[string]</td>
 <td>true</td>
-<td>Site ID</td>
-</tr>
-<tr>
-<td>filter[status]</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Return only surveys in a specific status (<code>archived</code> or <code>open</code>).</td>
-</tr>
-<tr>
-<td>filter[external_folder_id]</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Filter surveys by folder using string of external_id (UUID)</td>
-</tr>
-<tr>
-<td>filter[modified_after]</td>
-<td>query</td>
-<td>number</td>
-<td>false</td>
-<td>Return only surveys and folders that have been created or modified after a timestamp (in UTC Epoch format).</td>
-</tr>
-<tr>
-<td>filter[deleted_after]</td>
-<td>query</td>
-<td>number</td>
-<td>false</td>
-<td>Return surveys and folders that have been deleted after the specified timestamp.</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Sort by column names (comma separated). Use <code>-</code> prefix on column name to sort descending</td>
-</tr>
-<tr>
-<td>q</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>Apply search to query</td>
-</tr>
-<tr>
-<td>page[number]</td>
-<td>query</td>
-<td>integer</td>
-<td>false</td>
-<td>Page to retrieve from the entire result set</td>
-</tr>
-<tr>
-<td>page[size]</td>
-<td>query</td>
-<td>integer</td>
-<td>false</td>
-<td>Max amount of objects to return per page in the response</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>filter[status]</td>
-<td>archived</td>
-</tr>
-<tr>
-<td>filter[status]</td>
-<td>open</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>id</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>title</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>document_image_url</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>editor_id</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>editor_first_name</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>editor_last_name</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>comments_count</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>elements_count</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>is_folder</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>created_at</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>modified_at</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>status</td>
-</tr>
-<tr>
-<td>sort</td>
-<td>survey_count</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
-<blockquote>
-<p>Example responses</p>
-
-<p>200 Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"surveys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"elements_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"is_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TGS-123"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"preview_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"survey_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My survey"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-responses">Responses</h3>
+<h3 id="allows-for-batch-deleting-of-sites-(and-all-related-data).-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -2948,10 +3723,10 @@ a search is being made.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>200</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
 <td>OK</td>
-<td>Inline</td>
+<td>None</td>
 </tr>
 <tr>
 <td>401</td>
@@ -2967,87 +3742,11 @@ a search is being made.</p>
 </tr>
 </tbody></table>
 
-<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-responseschema">Response Schema</h3>
-
-<p>Status Code <strong>200</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>» surveys</td>
-<td>[object]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» elements_count</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>Element count for survey</td>
-</tr>
-<tr>
-<td>»» id</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» is_archived</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>If the survey is archived or not</td>
-</tr>
-<tr>
-<td>»» is_folder</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» label</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» preview_image</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>URL to the survey&#39;s preview image</td>
-</tr>
-<tr>
-<td>»» survey_count</td>
-<td>integer</td>
-<td>false</td>
-<td>none</td>
-<td>Survey count for folder</td>
-</tr>
-<tr>
-<td>»» title</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
-
 <aside class="success">
 This operation does not require authentication
 </aside>
+
+<h1 id="system-surveyor-api-surveys">Surveys</h1>
 <h2 id='allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client-or-updates-the-existing-survey-with-that-identifier-if-it-exists'>Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.</h2>
 <p><a id="opIdcreate_or_update_survey"></a></p>
 
@@ -4039,6 +4738,376 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <aside class="success">
 This operation does not require authentication
 </aside>
+<h2 id='returns-all-surveys-and-folders-for-a-specific-site-these-are-shown-in-the-site-overview-page'>Returns all surveys and folders for a specific site. These are shown in the site overview page.</h2>
+<p><a id="opIdget_site_surveys_and_folders"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET /v3/site/<span class="o">{</span>site_id<span class="o">}</span>/surveys <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v3/site/{site_id}/surveys'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/site/{site_id}/surveys"</span><span class="p">;</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a GET Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Start the request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+
+        <span class="c1">//Validate result</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>GET /v3/site/{site_id}/surveys</code></p>
+
+<p>Surveys that belong to folders will not be included in the response, unless
+a search is being made.</p>
+
+<p>Results are ordered by <code>title</code> ascending by default if no sorting is specified.</p>
+
+<p>Query Parameters:</p>
+
+<ul>
+<li><p>q: Search surveys and folders.</p></li>
+<li><p>filter[status]: Return only surveys in a specific status (<code>archived</code> or <code>open</code>). Folders will also be returned in the response.</p></li>
+<li><p>filter[external_folder_id]: Filter surveys by folder using string of external_id (UUID). Only surveys will be returned.</p></li>
+<li><p>filter[modified_after]: Return surveys and folders that have been created or modified after a timestamp (in UTC Epoch format).</p></li>
+<li><p>filter[deleted_after]: Return surveys and folders that have been deleted after the specified timestamp.</p></li>
+<li><p>page[number]: Page to retrieve from the entire result set.</p></li>
+<li><p>page[size]: Max amount of objects to return per page in the response. Defaults to 100.</p></li>
+<li><p>sort: Sort by fields (comma separated). Use <code>-</code> prefix on field name to sort descending.</p></li>
+</ul>
+
+<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>site_id</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>Site ID</td>
+</tr>
+<tr>
+<td>filter[status]</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Return only surveys in a specific status (<code>archived</code> or <code>open</code>).</td>
+</tr>
+<tr>
+<td>filter[external_folder_id]</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Filter surveys by folder using string of external_id (UUID)</td>
+</tr>
+<tr>
+<td>filter[modified_after]</td>
+<td>query</td>
+<td>number</td>
+<td>false</td>
+<td>Return only surveys and folders that have been created or modified after a timestamp (in UTC Epoch format).</td>
+</tr>
+<tr>
+<td>filter[deleted_after]</td>
+<td>query</td>
+<td>number</td>
+<td>false</td>
+<td>Return surveys and folders that have been deleted after the specified timestamp.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Sort by column names (comma separated). Use <code>-</code> prefix on column name to sort descending</td>
+</tr>
+<tr>
+<td>q</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Apply search to query</td>
+</tr>
+<tr>
+<td>page[number]</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Page to retrieve from the entire result set</td>
+</tr>
+<tr>
+<td>page[size]</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>Max amount of objects to return per page in the response</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filter[status]</td>
+<td>archived</td>
+</tr>
+<tr>
+<td>filter[status]</td>
+<td>open</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>id</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>title</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>document_image_url</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>editor_id</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>editor_first_name</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>editor_last_name</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>comments_count</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>elements_count</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>is_folder</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>created_at</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>modified_at</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>status</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>survey_count</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"surveys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"elements_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_folder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TGS-123"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"preview_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"survey_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My survey"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Invalid permissions to perform operation</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns-all-surveys-and-folders-for-a-specific-site.-these-are-shown-in-the-site-overview-page.-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» surveys</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» elements_count</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>Element count for survey</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_archived</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>If the survey is archived or not</td>
+</tr>
+<tr>
+<td>»» is_folder</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» label</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» preview_image</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>URL to the survey&#39;s preview image</td>
+</tr>
+<tr>
+<td>»» survey_count</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>Survey count for folder</td>
+</tr>
+<tr>
+<td>»» title</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 <h2 id='deletes-a-survey-and-all-its-related-objects'>Deletes a survey and all its related objects</h2>
 <p><a id="opIddelete_survey"></a></p>
 
@@ -4324,6 +5393,430 @@ This operation does not require authentication
 </aside>
 
 <h1 id="system-surveyor-api-users">Users</h1>
+<h2 id='get-data-for-the-current-authenticated-user'>Get data for the current authenticated user</h2>
+<p><a id="opIdget_current_user_data"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET /v3/user <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/v3/user'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight csharp tab-csharp"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Net.Http.Headers</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Newtonsoft.Json</span><span class="p">;</span>
+
+<span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+<span class="c1">/// Example of Http Client</span>
+<span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">HttpExample</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">HttpClient</span> <span class="n">Client</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">/// &lt;&lt;summary&gt;&gt;</span>
+    <span class="c1">/// Setup http client</span>
+    <span class="c1">/// &lt;&lt;/summary&gt;&gt;</span>
+    <span class="k">public</span> <span class="nf">HttpExample</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">Client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Make a dummy request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">MakeGetRequest</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/user"</span><span class="p">;</span>
+      <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Performs a GET Request</span>
+    <span class="k">public</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">GetAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">url</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Start the request</span>
+        <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+
+        <span class="c1">//Validate result</span>
+        <span class="n">response</span><span class="p">.</span><span class="nf">EnsureSuccessStatusCode</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+
+
+
+    <span class="c1">/// Deserialize object from request response</span>
+    <span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">HttpResponseMessage</span> <span class="n">response</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Read body </span>
+        <span class="kt">string</span> <span class="n">responseBody</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="nf">ReadAsStringAsync</span><span class="p">();</span>
+
+        <span class="c1">//Deserialize Body to object</span>
+        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div>
+<p><code>GET /v3/user</code></p>
+
+<p>This includes accounts and teams that the current user belongs to, either as a team member or a guest user.</p>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"cancel_requested"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"multiple_teams"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_access_permissions"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_tagging"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">450495</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_free"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_trial"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System Surveyor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12094</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_complete_setup"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_login"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"mobile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"910-423-345"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">995</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"budget_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">112</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"labor_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"margin_range"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John's Team"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"team_member"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metric"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CEO"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="get-data-for-the-current-authenticated-user-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>OK</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>401</td>
+<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
+<td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="get-data-for-the-current-authenticated-user-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» accounts</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» cancel_requested</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» company</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» features</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» comments</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» multiple_teams</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» site_access_permissions</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» site_tagging</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_free</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_trial</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» avatar_url</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» company</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» country</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» email</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» first_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_complete_setup</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» last_login</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» last_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» mobile</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» teams</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» account_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» budget_status</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» labor_rate</td>
+<td>float</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» margin_range</td>
+<td>float</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» role</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» unit</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» title</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» user_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>unit</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>imperial</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 <h2 id='update-user-information-associated-with-the-linked-account'>Update user information associated with the linked account</h2>
 <p><a id="opIdupdate_user"></a></p>
 
@@ -4332,11 +5825,13 @@ This operation does not require authentication
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> PATCH /v3/user <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'/v3/user'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -4482,6 +5977,55 @@ curl <span class="nt">-X</span> PATCH /v3/user <span class="se">\</span>
 </tr>
 </tbody></table>
 
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"cancel_requested"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"comments"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"multiple_teams"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_access_permissions"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_tagging"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">450495</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_free"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"is_trial"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System Surveyor"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12094</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_complete_setup"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_login"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"mobile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"910-423-345"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"teams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">995</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"budget_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">112</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"labor_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"margin_range"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John's Team"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"team_member"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"metric"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CEO"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foobar"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <h3 id="update-user-information-associated-with-the-linked-account-responses">Responses</h3>
 
 <table><thead>
@@ -4493,10 +6037,10 @@ curl <span class="nt">-X</span> PATCH /v3/user <span class="se">\</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>202</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.3">Accepted</a></td>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
@@ -4509,6 +6053,275 @@ curl <span class="nt">-X</span> PATCH /v3/user <span class="se">\</span>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
 <td>Invalid permissions to perform operation</td>
 <td>None</td>
+</tr>
+</tbody></table>
+
+<h3 id="update-user-information-associated-with-the-linked-account-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» accounts</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» cancel_requested</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» company</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» features</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» comments</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» multiple_teams</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» site_access_permissions</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» site_tagging</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_free</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» is_trial</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» avatar_url</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» company</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» country</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» created_at</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» email</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» first_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_complete_setup</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» last_login</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» last_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» mobile</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» teams</td>
+<td>[object]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» account_id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» budget_status</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» labor_rate</td>
+<td>float</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» margin_range</td>
+<td>float</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» role</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» unit</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» title</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» user_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>unit</td>
+<td>metric</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>imperial</td>
 </tr>
 </tbody></table>
 
@@ -5999,7 +7812,7 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6147,7 +7960,7 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<h4 id='enumerated-values-7'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -6295,7 +8108,7 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-6'>Enumerated Values</h4>
+<h4 id='enumerated-values-8'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
