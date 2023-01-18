@@ -24,6 +24,13 @@ jobs:
     - name: Generate Markdown
       run: widdershins --search false --language_tabs 'shell:cURL' 'python:Python' 'csharp:C#' --summary --expandBody docs.yaml -o source/index.html.md
 
+    - name: Commit to Repository
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: source/index.html.md
+        default_author: github_actions
+        message: "Source Index Update"
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
