@@ -1474,7 +1474,7 @@ public class HttpExample
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|site_id|path|integer|true|none|
+|site_id|path|string|true|none|
 
 > Example responses
 
