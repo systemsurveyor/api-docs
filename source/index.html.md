@@ -3299,7 +3299,7 @@ This includes accounts and teams that the current user belongs to, either as a t
         "end_date": 0,
         "id": 0,
         "plan": {
-          "id": null,
+          "id": 0,
           "max_attachments_per_element": 0,
           "max_seats": 0,
           "name": "string"
@@ -3378,7 +3378,7 @@ Status Code **200**
 |»»» end_date|integer|false|none|none|
 |»»» id|integer|false|none|none|
 |»»» plan|object|false|none|none|
-|»»»» id|any|false|none|none|
+|»»»» id|integer|false|none|none|
 |»»»» max_attachments_per_element|integer|false|none|none|
 |»»»» max_seats|integer|false|none|none|
 |»»»» name|string|false|none|none|
