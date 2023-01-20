@@ -3104,14 +3104,38 @@ This includes accounts and teams that the current user belongs to, either as a t
       "cancel_requested": true,
       "company": "string",
       "features": {
+        "add_folder": true,
         "comments": true,
+        "exclude_powered_by": true,
+        "export_survey": true,
+        "guest_user": true,
+        "hidden_attributes": true,
         "multiple_teams": true,
+        "public_api": true,
+        "report_custom_watermark": true,
+        "report_export_excel": true,
+        "report_include_company_logo": true,
+        "report_include_ssv_logo": true,
+        "report_require_ssv_watermark": true,
         "site_access_permissions": true,
-        "site_tagging": true
+        "site_tagging": true,
+        "sso": true,
+        "v2_survey": true
       },
       "id": 450495,
       "is_free": true,
-      "is_trial": true
+      "is_trial": true,
+      "subscription": {
+        "end_date": 0,
+        "id": 0,
+        "plan": {
+          "id": null,
+          "max_attachments_per_element": 0,
+          "max_seats": 0,
+          "name": "string"
+        },
+        "quantity": 0
+      }
     }
   ],
   "avatar_url": "string",
@@ -3160,13 +3184,35 @@ Status Code **200**
 |»» cancel_requested|boolean|false|none|none|
 |»» company|string|false|none|none|
 |»» features|object|false|none|none|
+|»»» add_folder|boolean|false|none|none|
 |»»» comments|boolean|false|none|none|
+|»»» exclude_powered_by|boolean|false|none|none|
+|»»» export_survey|boolean|false|none|none|
+|»»» guest_user|boolean|false|none|none|
+|»»» hidden_attributes|boolean|false|none|none|
 |»»» multiple_teams|boolean|false|none|none|
+|»»» public_api|boolean|false|none|none|
+|»»» report_custom_watermark|boolean|false|none|none|
+|»»» report_export_excel|boolean|false|none|none|
+|»»» report_include_company_logo|boolean|false|none|none|
+|»»» report_include_ssv_logo|boolean|false|none|none|
+|»»» report_require_ssv_watermark|boolean|false|none|none|
 |»»» site_access_permissions|boolean|false|none|none|
 |»»» site_tagging|boolean|false|none|none|
+|»»» sso|boolean|false|none|none|
+|»»» v2_survey|boolean|false|none|none|
 |»» id|integer|false|none|none|
 |»» is_free|boolean|false|none|none|
 |»» is_trial|boolean|false|none|none|
+|»» subscription|object|false|none|none|
+|»»» end_date|integer|false|none|none|
+|»»» id|integer|false|none|none|
+|»»» plan|object|false|none|none|
+|»»»» id|any|false|none|none|
+|»»»» max_attachments_per_element|integer|false|none|none|
+|»»»» max_seats|integer|false|none|none|
+|»»»» name|string|false|none|none|
+|»»» quantity|integer|false|none|none|
 |» avatar_url|string|false|none|none|
 |» company|string|false|none|none|
 |» country|string|false|none|none|
