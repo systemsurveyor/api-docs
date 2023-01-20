@@ -1678,7 +1678,8 @@ paths:
                               type: integer
                             plan:
                               properties:
-                                id: type:integer
+                                id:
+                                  type: integer
                                 max_attachments_per_element:
                                   type: integer
                                 max_seats:
