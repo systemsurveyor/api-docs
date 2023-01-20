@@ -786,8 +786,8 @@ paths:
         name: site_id
         required: true
         schema:
-          example: 14875
-          type: integer
+          example: 074bb7b5-86d2-4ea6-9851-7f8a4397844f
+          type: string
       public: true
       responses:
         '200':
