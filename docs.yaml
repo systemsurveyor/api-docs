@@ -779,6 +779,87 @@ paths:
       - Resources
       - v3
   /v3/site/{site_id}:
+    get:
+      operationId: get_site
+      parameters:
+      - in: path
+        name: site_id
+        required: true
+        schema:
+          example: 14875
+          type: integer
+      public: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  city:
+                    type: string
+                  created_at:
+                    example: 1452384000
+                    type: integer
+                  creator:
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      user_id:
+                        type: integer
+                    type: object
+                  id:
+                    example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                    type: string
+                  is_active:
+                    type: boolean
+                  label:
+                    type: string
+                  modified_at:
+                    example: 1673557029
+                    type: integer
+                  modifier:
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      user_id:
+                        type: integer
+                    type: object
+                  name:
+                    type: string
+                  reference_id:
+                    type: string
+                  state:
+                    type: string
+                  street:
+                    type: string
+                  survey_count:
+                    type: integer
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                  team_id:
+                    type: integer
+                  version:
+                    type: integer
+                  zip_code:
+                    type: string
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      summary: Get site information
+      tags:
+      - Sites
+      - v3
     put:
       description: 'Pass a folder external ID in a `folder_external_id` field in the
         payload to create the site inside that folder.
