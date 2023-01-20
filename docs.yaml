@@ -1547,13 +1547,39 @@ paths:
                           type: string
                         features:
                           properties:
+                            add_folder:
+                              type: boolean
                             comments:
                               type: boolean
+                            exclude_powered_by:
+                              type: boolean
+                            export_survey:
+                              type: boolean
+                            guest_user:
+                              type: boolean
+                            hidden_attributes:
+                              type: boolean
                             multiple_teams:
+                              type: boolean
+                            public_api:
+                              type: boolean
+                            report_custom_watermark:
+                              type: boolean
+                            report_export_excel:
+                              type: boolean
+                            report_include_company_logo:
+                              type: boolean
+                            report_include_ssv_logo:
+                              type: boolean
+                            report_require_ssv_watermark:
                               type: boolean
                             site_access_permissions:
                               type: boolean
                             site_tagging:
+                              type: boolean
+                            sso:
+                              type: boolean
+                            v2_survey:
                               type: boolean
                           type: object
                         id:
@@ -1563,6 +1589,25 @@ paths:
                           type: boolean
                         is_trial:
                           type: boolean
+                        subscription:
+                          properties:
+                            end_date:
+                              type: integer
+                            id:
+                              type: integer
+                            plan:
+                              properties:
+                                id: type:integer
+                                max_attachments_per_element:
+                                  type: integer
+                                max_seats:
+                                  type: integer
+                                name:
+                                  type: string
+                              type: object
+                            quantity:
+                              type: integer
+                          type: object
                       type: object
                     type: array
                   avatar_url:
