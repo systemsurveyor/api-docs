@@ -1385,6 +1385,176 @@ This operation does not require authentication
 
 <h1 id="system-surveyor-api-sites">Sites</h1>
 
+## Get site information
+
+<a id="opIdget_site"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /v3/site/{site_id} \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/v3/site/{site_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v3/site/{site_id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`GET /v3/site/{site_id}`
+
+<h3 id="get-site-information-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|site_id|path|integer|true|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "city": "string",
+  "created_at": 1452384000,
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
+  "is_active": true,
+  "label": "string",
+  "modified_at": 1673557029,
+  "modifier": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "name": "string",
+  "reference_id": "string",
+  "state": "string",
+  "street": "string",
+  "survey_count": 0,
+  "tags": [
+    "string"
+  ],
+  "team_id": 0,
+  "version": 0,
+  "zip_code": "string"
+}
+```
+
+<h3 id="get-site-information-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<h3 id="get-site-information-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» city|string|false|none|none|
+|» created_at|integer|false|none|none|
+|» creator|object|false|none|none|
+|»» first_name|string|false|none|none|
+|»» last_name|string|false|none|none|
+|»» user_id|integer|false|none|none|
+|» id|string|false|none|none|
+|» is_active|boolean|false|none|none|
+|» label|string|false|none|none|
+|» modified_at|integer|false|none|none|
+|» modifier|object|false|none|none|
+|»» first_name|string|false|none|none|
+|»» last_name|string|false|none|none|
+|»» user_id|integer|false|none|none|
+|» name|string|false|none|none|
+|» reference_id|string|false|none|none|
+|» state|string|false|none|none|
+|» street|string|false|none|none|
+|» survey_count|integer|false|none|none|
+|» tags|[string]|false|none|none|
+|» team_id|integer|false|none|none|
+|» version|integer|false|none|none|
+|» zip_code|string|false|none|none|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Creates a new site with a specific `external_id` or updates the site if it already exists
 
 <a id="opIdcreate_or_update_site"></a>
