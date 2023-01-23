@@ -24,6 +24,9 @@ jobs:
     - name: Generate Markdown
       run: widdershins --search false --language_tabs 'shell:cURL' 'python:Python' 'csharp:C#' --summary --expandBody docs.yaml -o source/index.html.md
 
+    - name: Modify Markdown (custom text sections)
+      run: python custom_swagger.py
+
     - name: Commit to Repository
       uses: EndBug/add-and-commit@v9
       with:
