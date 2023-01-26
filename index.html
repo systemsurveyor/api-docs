@@ -448,10 +448,10 @@
                     <a href="#tocS_EPAccessory" class="toc-h2 toc-link" data-title="EPAccessory">EPAccessory</a>
                   </li>
                   <li>
-                    <a href="#tocS_Link" class="toc-h2 toc-link" data-title="Link">Link</a>
+                    <a href="#tocS_Attribute" class="toc-h2 toc-link" data-title="Attribute">Attribute</a>
                   </li>
                   <li>
-                    <a href="#tocS_Attribute" class="toc-h2 toc-link" data-title="Attribute">Attribute</a>
+                    <a href="#tocS_Link" class="toc-h2 toc-link" data-title="Link">Link</a>
                   </li>
                   <li>
                     <a href="#tocS_SubElement" class="toc-h2 toc-link" data-title="SubElement">SubElement</a>
@@ -937,8 +937,8 @@ curl <span class="nt">-X</span> PUT /v3/folder/<span class="o">{</span>folder_id
 
 
       <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
-  ""site_external_id"": ""string"",
   ""name"": ""string"",
+  ""site_external_id"": ""string"",
   ""team_id"": 0,
   ""label"": ""string""
 }"</span><span class="p">;</span>
@@ -993,8 +993,8 @@ pass a value for <code>site_id</code> field.</p>
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"site_external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1025,6 +1025,13 @@ pass a value for <code>site_id</code> field.</p>
 <td>none</td>
 </tr>
 <tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» site_external_id</td>
 <td>body</td>
 <td>string</td>
@@ -1032,10 +1039,10 @@ pass a value for <code>site_id</code> field.</p>
 <td>none</td>
 </tr>
 <tr>
-<td>» name</td>
+<td>» id</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -1047,13 +1054,6 @@ pass a value for <code>site_id</code> field.</p>
 </tr>
 <tr>
 <td>» label</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» id</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -1075,9 +1075,9 @@ pass a value for <code>site_id</code> field.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -1426,9 +1426,9 @@ curl <span class="nt">-X</span> POST /v3/site_folder <span class="se">\</span>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -1586,9 +1586,9 @@ curl <span class="nt">-X</span> PATCH /v3/site_folder/<span class="o">{</span>fo
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -1775,9 +1775,9 @@ curl <span class="nt">-X</span> POST /v3/<span class="o">{</span>site_id<span cl
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2156,34 +2156,34 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
       <span class="kt">string</span> <span class="n">url</span> <span class="p">=</span> <span class="s">"/v3/report"</span><span class="p">;</span>
 
       <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
-  ""custom_data"": {},
-  ""survey_ids"": [
-    ""string""
-  ],
   ""options"": [
     {
-      ""template_name"": ""string"",
       ""scope"": ""template"",
+      ""template_name"": ""string"",
       ""id"": ""string"",
-      ""value"": true,
       ""inputs"": [
         {
           ""value"": ""string"",
           ""field_id"": ""string""
         }
-      ]
+      ],
+      ""value"": true
     }
   ],
+  ""paper_size"": ""string"",
   ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
+  ""survey_ids"": [
+    ""string""
+  ],
+  ""custom_data"": {},
   ""is_site_report"": false,
+  ""output"": ""pdf"",
+  ""is_excel"": false,
   ""filters"": [
     {}
   ],
   ""name"": ""string"",
-  ""output"": ""pdf"",
-  ""site_id"": ""string"",
-  ""is_excel"": false,
-  ""paper_size"": ""string""
+  ""site_id"": ""string""
 }"</span><span class="p">;</span>
       <span class="n">SurveyReportRequestSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
       <span class="k">await</span> <span class="nf">PostAsync</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
@@ -2233,34 +2233,34 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"survey_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ed7905a-4735-4cf7-b1ab-521e066fb971"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"survey_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"is_site_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-parameters">Parameters</h3>
@@ -2282,30 +2282,9 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» custom_data</td>
-<td>body</td>
-<td>object</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» survey_ids</td>
-<td>body</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» options</td>
 <td>body</td>
 <td>[<a href="#schemasurveyoptions">SurveyOptions</a>]</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» template_name</td>
-<td>body</td>
-<td>string</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -2317,16 +2296,16 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>»» id</td>
+<td>»» template_name</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» value</td>
+<td>»» id</td>
 <td>body</td>
-<td>boolean</td>
+<td>string</td>
 <td>true</td>
 <td>none</td>
 </tr>
@@ -2352,6 +2331,20 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
+<td>»» value</td>
+<td>body</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» paper_size</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» report_id</td>
 <td>body</td>
 <td>string(uuid)</td>
@@ -2359,7 +2352,35 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
+<td>» survey_ids</td>
+<td>body</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» custom_data</td>
+<td>body</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» is_site_report</td>
+<td>body</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» output</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is_excel</td>
 <td>body</td>
 <td>boolean</td>
 <td>false</td>
@@ -2380,31 +2401,10 @@ curl <span class="nt">-X</span> POST /v3/report <span class="se">\</span>
 <td>none</td>
 </tr>
 <tr>
-<td>» output</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» site_id</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» is_excel</td>
-<td>body</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» paper_size</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
 <td>none</td>
 </tr>
 </tbody></table>
@@ -2887,19 +2887,19 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 
 
       <span class="kt">string</span> <span class="n">json</span> <span class="p">=</span> <span class="s">@"{
+  ""team_id"": 0,
+  ""street"": ""string"",
+  ""site_id"": ""string"",
+  ""city"": ""string"",
+  ""name"": ""string"",
+  ""state"": ""string"",
+  ""reference_id"": ""string"",
   ""is_archived"": null,
-  ""label"": ""string"",
+  ""zip_code"": ""string"",
   ""tags"": [
     ""string""
   ],
-  ""name"": ""string"",
-  ""team_id"": 0,
-  ""state"": ""string"",
-  ""site_id"": ""string"",
-  ""city"": ""string"",
-  ""reference_id"": ""string"",
-  ""zip_code"": ""string"",
-  ""street"": ""string""
+  ""label"": ""string""
 }"</span><span class="p">;</span>
       <span class="n">SiteSchema</span> <span class="n">content</span> <span class="p">=</span> <span class="n">JsonConvert</span><span class="p">.</span><span class="nf">DeserializeObject</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
       <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="nf">PutAsync</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">url</span><span class="p">);</span>
@@ -2951,19 +2951,19 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-parameters">Parameters</h3>
@@ -2992,72 +2992,9 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>» modifier</td>
-<td>body</td>
-<td><a href="#schemauserresponse">UserResponse</a></td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» first_name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» user_id</td>
-<td>body</td>
-<td>integer</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» last_name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» created_at</td>
 <td>body</td>
 <td>null</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» is_archived</td>
-<td>body</td>
-<td>any</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» label</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» tags</td>
-<td>body</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» legacy_site_id</td>
-<td>body</td>
-<td>integer</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -3066,34 +3003,6 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>body</td>
 <td>integer</td>
 <td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» modified_at</td>
-<td>body</td>
-<td>null</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» state</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» site_id</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» version</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -3111,10 +3020,38 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>»» user_id</td>
 <td>body</td>
 <td>integer</td>
 <td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» street</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modifier</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -3125,7 +3062,56 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» version</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» legacy_site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» city</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -3139,6 +3125,13 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
+<td>» is_archived</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» zip_code</td>
 <td>body</td>
 <td>string</td>
@@ -3146,7 +3139,14 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>» street</td>
+<td>» tags</td>
+<td>body</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -3266,19 +3266,19 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="update-specific-fields-of-a-site-parameters">Parameters</h3>
@@ -3307,72 +3307,9 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>none</td>
 </tr>
 <tr>
-<td>» modifier</td>
-<td>body</td>
-<td><a href="#schemauserresponse">UserResponse</a></td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» first_name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» user_id</td>
-<td>body</td>
-<td>integer</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» last_name</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» created_at</td>
 <td>body</td>
 <td>null</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» is_archived</td>
-<td>body</td>
-<td>any</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» label</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» tags</td>
-<td>body</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» name</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» legacy_site_id</td>
-<td>body</td>
-<td>integer</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -3381,34 +3318,6 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>body</td>
 <td>integer</td>
 <td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» modified_at</td>
-<td>body</td>
-<td>null</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» state</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» site_id</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» version</td>
-<td>body</td>
-<td>integer</td>
-<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -3426,10 +3335,38 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>none</td>
 </tr>
 <tr>
+<td>»» last_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>»» user_id</td>
 <td>body</td>
 <td>integer</td>
 <td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» street</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modifier</td>
+<td>body</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» first_name</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
 <td>none</td>
 </tr>
 <tr>
@@ -3440,7 +3377,56 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>none</td>
 </tr>
 <tr>
+<td>»» user_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» version</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» legacy_site_id</td>
+<td>body</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» site_id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» modified_at</td>
+<td>body</td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» city</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» name</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» state</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -3454,6 +3440,13 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>none</td>
 </tr>
 <tr>
+<td>» is_archived</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>» zip_code</td>
 <td>body</td>
 <td>string</td>
@@ -3461,7 +3454,14 @@ curl <span class="nt">-X</span> PATCH /v3/site/<span class="o">{</span>site_id<s
 <td>none</td>
 </tr>
 <tr>
-<td>» street</td>
+<td>» tags</td>
+<td>body</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» label</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -4626,20 +4626,20 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
       ],
       ""attributes"": [
         {
-          ""name"": ""string"",
+          ""value"": ""string"",
           ""attribute_id"": 0,
-          ""value"": ""string""
+          ""name"": ""string""
         }
       ],
       ""accessories"": [
         {
-          ""labor_hours"": 0,
+          ""quantity"": null,
+          ""price"": null,
           ""model"": ""string"",
           ""manufacturer"": ""string"",
+          ""labor_hours"": 0,
           ""description"": ""string"",
-          ""price"": null,
-          ""row_index"": 0,
-          ""quantity"": null
+          ""row_index"": 0
         }
       ],
       ""children"": [
@@ -4654,8 +4654,8 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
         }
       ],
       ""connections"": {
-        ""end"": null,
-        ""start"": null
+        ""start"": null,
+        ""end"": null
       },
       ""activity_log"": [
         {
@@ -4666,15 +4666,15 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
   ],
   ""annotations"": [
     {
-      ""stroke_color"": ""string"",
-      ""size"": ""string"",
-      ""text"": ""string"",
       ""start_point"": null,
-      ""category"": null,
-      ""location"": null,
-      ""end_point"": null,
       ""font_size"": ""string"",
-      ""stroke_width"": ""string""
+      ""size"": ""string"",
+      ""stroke_width"": ""string"",
+      ""stroke_color"": ""string"",
+      ""category"": null,
+      ""end_point"": null,
+      ""text"": ""string"",
+      ""location"": null
     }
   ]
 }"</span><span class="p">;</span>
@@ -4758,20 +4758,20 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
           </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4786,8 +4786,8 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"activity_log"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -4798,15 +4798,15 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"annotations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"start_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"font_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -4998,16 +4998,16 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»» user_id</td>
+<td>»» last_name</td>
 <td>body</td>
-<td>any</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» last_name</td>
+<td>»» user_id</td>
 <td>body</td>
-<td>string</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -5124,16 +5124,9 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» name</td>
+<td>»»» value</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» attribute_id</td>
-<td>body</td>
-<td>integer</td>
 <td>true</td>
 <td>none</td>
 </tr>
@@ -5145,7 +5138,14 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» value</td>
+<td>»»» attribute_id</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» name</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
@@ -5159,37 +5159,9 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» id</td>
+<td>»»» quantity</td>
 <td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» labor_hours</td>
-<td>body</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» model</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» manufacturer</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» description</td>
-<td>body</td>
-<td>string</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -5201,17 +5173,45 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» row_index</td>
+<td>»»» model</td>
 <td>body</td>
-<td>integer</td>
+<td>string</td>
 <td>true</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»»» quantity</td>
+<td>»»» id</td>
 <td>body</td>
-<td>any</td>
+<td>string</td>
 <td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» manufacturer</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» labor_hours</td>
+<td>body</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» description</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» row_index</td>
+<td>body</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 </tr>
 <tr>
@@ -5264,14 +5264,14 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» end</td>
+<td>»»» start</td>
 <td>body</td>
 <td>any</td>
 <td>false</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»»» start</td>
+<td>»»» end</td>
 <td>body</td>
 <td>any</td>
 <td>false</td>
@@ -5285,9 +5285,9 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» date</td>
+<td>»»» entry</td>
 <td>body</td>
-<td>any</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -5299,9 +5299,9 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»»» entry</td>
+<td>»»» date</td>
 <td>body</td>
-<td>string</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -5313,56 +5313,7 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
-<td>»» stroke_color</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» id</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» size</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» text</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
 <td>»» start_point</td>
-<td>body</td>
-<td>any</td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» category</td>
-<td>body</td>
-<td>any</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» location</td>
-<td>body</td>
-<td>any</td>
-<td>true</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» end_point</td>
 <td>body</td>
 <td>any</td>
 <td>false</td>
@@ -5376,9 +5327,58 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
 <td>none</td>
 </tr>
 <tr>
+<td>»» size</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
 <td>»» stroke_width</td>
 <td>body</td>
 <td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» stroke_color</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» category</td>
+<td>body</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» end_point</td>
+<td>body</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» text</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» location</td>
+<td>body</td>
+<td>any</td>
 <td>true</td>
 <td>none</td>
 </tr>
@@ -5438,8 +5438,8 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
   </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"editor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -5463,22 +5463,22 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -5493,30 +5493,30 @@ curl <span class="nt">-X</span> PUT /v3/site/<span class="o">{</span>site_id<spa
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"activity_log"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"annotations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"start_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"font_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
@@ -6985,8 +6985,8 @@ jwt
 <a id="tocsuserresponse"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties'>Properties</h3>
@@ -7007,16 +7007,16 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>user_id</td>
-<td>integer</td>
-<td>true</td>
+<td>last_name</td>
+<td>string</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>last_name</td>
-<td>string</td>
-<td>false</td>
+<td>user_id</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7031,33 +7031,33 @@ jwt
 <a id="tocSsiteschema"></a>
 <a id="tocssiteschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legacy_site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"legacy_site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"reference_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-2'>Properties</h3>
@@ -7071,50 +7071,8 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>modifier</td>
-<td><a href="#schemauserresponse">UserResponse</a></td>
-<td>false</td>
-<td>read-only</td>
-<td>none</td>
-</tr>
-<tr>
 <td>created_at</td>
 <td>null</td>
-<td>false</td>
-<td>read-only</td>
-<td>none</td>
-</tr>
-<tr>
-<td>is_archived</td>
-<td>any</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>label</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>legacy_site_id</td>
-<td>integer</td>
 <td>false</td>
 <td>read-only</td>
 <td>none</td>
@@ -7127,24 +7085,24 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>modified_at</td>
-<td>null</td>
+<td>creator</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
 <td>false</td>
 <td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
-<td>state</td>
+<td>street</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>site_id</td>
-<td>string</td>
+<td>modifier</td>
+<td><a href="#schemauserresponse">UserResponse</a></td>
 <td>false</td>
-<td>none</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
@@ -7155,14 +7113,42 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>creator</td>
-<td><a href="#schemauserresponse">UserResponse</a></td>
+<td>legacy_site_id</td>
+<td>integer</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>modified_at</td>
+<td>null</td>
 <td>false</td>
 <td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
 <td>city</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>state</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -7176,6 +7162,13 @@ jwt
 <td>none</td>
 </tr>
 <tr>
+<td>is_archived</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
 <td>zip_code</td>
 <td>string</td>
 <td>false</td>
@@ -7183,7 +7176,14 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>street</td>
+<td>tags</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>label</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -7200,13 +7200,13 @@ jwt
 <a id="tocSsharesiteorsurveyrequestschema"></a>
 <a id="tocssharesiteorsurveyrequestschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"user@example.com"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-3'>Properties</h3>
@@ -7220,6 +7220,13 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
+<td>message</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
 <td>created_at</td>
 <td>null</td>
 <td>false</td>
@@ -7227,9 +7234,9 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>message</td>
-<td>string</td>
-<td>false</td>
+<td>emails</td>
+<td>[string]</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7243,13 +7250,6 @@ jwt
 <tr>
 <td>expiration_date</td>
 <td>any</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>emails</td>
-<td>[string]</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
@@ -7304,16 +7304,16 @@ jwt
 <a id="tocSsurveyoptions"></a>
 <a id="tocssurveyoptions"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-5'>Properties</h3>
@@ -7327,16 +7327,16 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>template_name</td>
+<td>scope</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>scope</td>
+<td>template_name</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7348,16 +7348,16 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>value</td>
-<td>boolean</td>
-<td>true</td>
+<td>inputs</td>
+<td>[<a href="#schemasurveyfields">SurveyFields</a>]</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>inputs</td>
-<td>[<a href="#schemasurveyfields">SurveyFields</a>]</td>
-<td>false</td>
+<td>value</td>
+<td>boolean</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7392,34 +7392,34 @@ jwt
 <a id="tocSsurveyreportrequestschema"></a>
 <a id="tocssurveyreportrequestschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"survey_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"string"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
   </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ed7905a-4735-4cf7-b1ab-521e066fb971"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"survey_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"is_site_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-6'>Properties</h3>
@@ -7433,22 +7433,15 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>custom_data</td>
-<td>object</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>survey_ids</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>options</td>
 <td>[<a href="#schemasurveyoptions">SurveyOptions</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>paper_size</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -7461,7 +7454,35 @@ jwt
 <td>none</td>
 </tr>
 <tr>
+<td>survey_ids</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>custom_data</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
 <td>is_site_report</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>output</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>is_excel</td>
 <td>boolean</td>
 <td>false</td>
 <td>none</td>
@@ -7482,30 +7503,9 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>output</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>site_id</td>
 <td>string</td>
 <td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>is_excel</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>paper_size</td>
-<td>string</td>
-<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7540,34 +7540,34 @@ jwt
 <a id="tocSsurveyreportrequestschemadeprecated"></a>
 <a id="tocssurveyreportrequestschemadeprecated"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"template_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nl">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"field_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"is_site_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"report_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ed7905a-4735-4cf7-b1ab-521e066fb971"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"custom_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"string"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_site_report"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"output"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pdf"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"is_excel"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"paper_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-7'>Properties</h3>
@@ -7581,13 +7581,6 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>custom_data</td>
-<td>object</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>options</td>
 <td>[<a href="#schemasurveyoptions">SurveyOptions</a>]</td>
 <td>false</td>
@@ -7595,8 +7588,8 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>is_site_report</td>
-<td>boolean</td>
+<td>paper_size</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -7609,8 +7602,8 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>filters</td>
-<td>[object]</td>
+<td>custom_data</td>
+<td>object</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -7623,21 +7616,14 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
+<td>is_site_report</td>
+<td>boolean</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
 <td>output</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>site_id</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
@@ -7651,9 +7637,23 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>paper_size</td>
-<td>string</td>
+<td>filters</td>
+<td>[object]</td>
 <td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td>string</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -7688,17 +7688,17 @@ jwt
 <a id="tocSepaccessory"></a>
 <a id="tocsepaccessory"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="mi">0</span><span class="w">
   </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="mi">0</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-8'>Properties</h3>
@@ -7712,17 +7712,17 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>integer</td>
+<td>created_at</td>
+<td>any</td>
 <td>false</td>
 <td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
-<td>created_at</td>
-<td>any</td>
+<td>price</td>
+<td>number,null</td>
 <td>false</td>
-<td>read-only</td>
+<td>none</td>
 <td>none</td>
 </tr>
 <tr>
@@ -7733,22 +7733,15 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>description</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
+<td>id</td>
+<td>integer</td>
+<td>false</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
 <td>manufacturer</td>
 <td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>price</td>
-<td>number,null</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -7760,49 +7753,9 @@ jwt
 <td>none</td>
 <td>none</td>
 </tr>
-</tbody></table>
-
-<h2 id="tocS_Link">Link</h2>
-
-<!-- backwards compatibility -->
-
-<p><a id="schemalink"></a>
-<a id="schema_Link"></a>
-<a id="tocSlink"></a>
-<a id="tocslink"></a></p>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"link_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre></div><h3 id='properties-9'>Properties</h3>
-<table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
+<td>description</td>
 <td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>link_type</td>
-<td>integer</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>url</td>
-<td>string(url)</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
@@ -7818,8 +7771,48 @@ jwt
 <a id="tocSattribute"></a>
 <a id="tocsattribute"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='properties-9'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>attribute_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_Link">Link</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemalink"></a>
+<a id="schema_Link"></a>
+<a id="tocSlink"></a>
+<a id="tocslink"></a></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"link_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-10'>Properties</h3>
@@ -7833,14 +7826,21 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>attribute_id</td>
+<td>link_type</td>
 <td>integer</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>value</td>
+<td>url</td>
+<td>string(url)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
@@ -7857,8 +7857,8 @@ jwt
 <a id="tocSsubelement"></a>
 <a id="tocssubelement"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"systemtype_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"element_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"element_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"systemtype_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-11'>Properties</h3>
@@ -7872,14 +7872,14 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>systemtype_id</td>
+<td>element_id</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>element_id</td>
+<td>systemtype_id</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
@@ -7896,8 +7896,8 @@ jwt
 <a id="tocSepcontent"></a>
 <a id="tocsepcontent"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nl">"attribute"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nl">"child"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -7912,15 +7912,15 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>pdf_url</td>
-<td>[<a href="#schemalink">Link</a>]</td>
+<td>attribute</td>
+<td>[<a href="#schemaattribute">Attribute</a>]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>attribute</td>
-<td>[<a href="#schemaattribute">Attribute</a>]</td>
+<td>pdf_url</td>
+<td>[<a href="#schemalink">Link</a>]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -7943,35 +7943,35 @@ jwt
 <a id="tocSelementprofileschema"></a>
 <a id="tocselementprofileschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"element_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sort"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
       </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
       </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"attribute"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"pdf_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"child"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nl">"modified_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-13'>Properties</h3>
@@ -7985,10 +7985,31 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>sort</td>
-<td>integer</td>
+<td>created_at</td>
+<td>any</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>is_default</td>
+<td>boolean</td>
 <td>false</td>
 <td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>team_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>integer</td>
+<td>false</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
@@ -8006,44 +8027,9 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>created_at</td>
-<td>any</td>
-<td>false</td>
-<td>read-only</td>
-<td>none</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>is_default</td>
-<td>boolean</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>accessories</td>
-<td>[<a href="#schemaepaccessory">EPAccessory</a>]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>team_id</td>
+<td>sort</td>
 <td>integer</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>content</td>
-<td><a href="#schemaepcontent">EPContent</a></td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -8055,10 +8041,24 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>created_by</td>
-<td>integer</td>
+<td>accessories</td>
+<td>[<a href="#schemaepaccessory">EPAccessory</a>]</td>
 <td>false</td>
-<td>read-only</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>content</td>
+<td><a href="#schemaepcontent">EPContent</a></td>
+<td>true</td>
+<td>none</td>
 <td>none</td>
 </tr>
 </tbody></table>
@@ -8072,11 +8072,11 @@ jwt
 <a id="tocSfolderschema"></a>
 <a id="tocsfolderschema"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"site_external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"site_external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"team_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -8091,6 +8091,13 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
 <td>site_external_id</td>
 <td>string</td>
 <td>false</td>
@@ -8098,10 +8105,10 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>name</td>
+<td>id</td>
 <td>string</td>
-<td>true</td>
-<td>none</td>
+<td>false</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
@@ -8116,13 +8123,6 @@ jwt
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>false</td>
-<td>read-only</td>
 <td>none</td>
 </tr>
 <tr>
@@ -8144,8 +8144,8 @@ jwt
 <a id="tocsrelateduser"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-15'>Properties</h3>
@@ -8166,15 +8166,15 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>user_id</td>
-<td>any</td>
+<td>last_name</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>last_name</td>
-<td>string</td>
+<td>user_id</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -8190,10 +8190,10 @@ jwt
 <a id="tocSsurveyattribute"></a>
 <a id="tocssurveyattribute"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-16'>Properties</h3>
@@ -8207,15 +8207,8 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>value</td>
 <td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>attribute_id</td>
-<td>integer</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
@@ -8228,7 +8221,14 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>value</td>
+<td>attribute_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
@@ -8245,14 +8245,14 @@ jwt
 <a id="tocSsurveyelementaccessory"></a>
 <a id="tocssurveyelementaccessory"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-17'>Properties</h3>
@@ -8266,36 +8266,8 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>string</td>
-<td>false</td>
-<td>read-only</td>
-<td>none</td>
-</tr>
-<tr>
-<td>labor_hours</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>model</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>manufacturer</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>description</td>
-<td>string</td>
+<td>quantity</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -8308,16 +8280,44 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>row_index</td>
-<td>integer</td>
+<td>model</td>
+<td>string</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>quantity</td>
-<td>any</td>
+<td>id</td>
+<td>string</td>
 <td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
+<td>manufacturer</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>labor_hours</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>row_index</td>
+<td>integer</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
@@ -8387,8 +8387,8 @@ jwt
 <a id="tocSpathconnection"></a>
 <a id="tocspathconnection"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-19'>Properties</h3>
@@ -8402,14 +8402,14 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>end</td>
+<td>start</td>
 <td>any</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>start</td>
+<td>end</td>
 <td>any</td>
 <td>false</td>
 <td>none</td>
@@ -8426,9 +8426,9 @@ jwt
 <a id="tocSsurveyelementactivitylog"></a>
 <a id="tocssurveyelementactivitylog"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-20'>Properties</h3>
@@ -8442,10 +8442,10 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>date</td>
-<td>any</td>
+<td>entry</td>
+<td>string</td>
 <td>false</td>
-<td>read-only</td>
+<td>none</td>
 <td>none</td>
 </tr>
 <tr>
@@ -8456,10 +8456,10 @@ jwt
 <td>none</td>
 </tr>
 <tr>
-<td>entry</td>
-<td>string</td>
+<td>date</td>
+<td>any</td>
 <td>false</td>
-<td>none</td>
+<td>read-only</td>
 <td>none</td>
 </tr>
 </tbody></table>
@@ -8490,22 +8490,22 @@ jwt
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -8527,22 +8527,22 @@ jwt
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
@@ -8555,14 +8555,14 @@ jwt
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"activity_log"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -8576,14 +8576,14 @@ jwt
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"activity_log"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -8728,16 +8728,16 @@ jwt
 <a id="tocSsurveyannotation"></a>
 <a id="tocssurveyannotation"></a></p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"start_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nl">"font_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div><h3 id='properties-22'>Properties</h3>
@@ -8751,56 +8751,7 @@ jwt
 </tr>
 </thead><tbody>
 <tr>
-<td>stroke_color</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>false</td>
-<td>read-only</td>
-<td>none</td>
-</tr>
-<tr>
-<td>size</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>text</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>start_point</td>
-<td>any</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>category</td>
-<td>any</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>location</td>
-<td>any</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>end_point</td>
 <td>any</td>
 <td>false</td>
 <td>none</td>
@@ -8814,8 +8765,57 @@ jwt
 <td>none</td>
 </tr>
 <tr>
+<td>size</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>false</td>
+<td>read-only</td>
+<td>none</td>
+</tr>
+<tr>
 <td>stroke_width</td>
 <td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>stroke_color</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>category</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>end_point</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>location</td>
+<td>any</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
@@ -8853,8 +8853,8 @@ jwt
   </span><span class="nl">"creator"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"editor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"modifier"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -8878,22 +8878,22 @@ jwt
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"attribute_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"accessories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"manufacturer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"labor_hours"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"row_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -8908,30 +8908,30 @@ jwt
         </span><span class="p">}</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nl">"activity_log"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"entry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+          </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"annotations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"start_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"font_size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stroke_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"end_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
