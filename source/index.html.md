@@ -26,1106 +26,6 @@ headingLevel: 2
 
 - HTTP Authentication, scheme: bearer 
 
-<h1 id="system-surveyor-api-folders">Folders</h1>
-
-## Creates a new site/survey folder or updates an existing one if found.
-
-<a id="opIdcreate_or_update_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PUT /v3/folder/{folder_id} \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.put('/v3/folder/{folder_id}', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakePutRequest()
-    {
-      int id = 1;
-      string url = "/v3/folder/{folder_id}";
-
-      
-      string json = @"{
-  ""label"": ""string"",
-  ""name"": ""string"",
-  ""site_external_id"": ""string"",
-  ""team_id"": 0
-}";
-      FolderSchema content = JsonConvert.DeserializeObject(json);
-      var result = await PutAsync(id, content, url);
-      
-          
-    }
-
-    /// Performs a PUT Request
-    public async Task PutAsync(int id, FolderSchema content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute PUT request
-        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
-
-        //Return response
-        return await DeserializeObject(response);
-    }
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(FolderSchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`PUT /v3/folder/{folder_id}`
-
-To create/update a site folder, pass a value for `team_id` field in the request payload, to create/update a survey folder
-pass a value for `site_id` field.
-
-> Body parameter
-
-```json
-{
-  "label": "string",
-  "name": "string",
-  "site_external_id": "string",
-  "team_id": 0
-}
-```
-
-<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|folder_id|path|string|true|Folder ID|
-|body|body|[FolderSchema](#schemafolderschema)|true|none|
-|» id|body|string|false|none|
-|» label|body|string|false|none|
-|» name|body|string|true|none|
-|» site_external_id|body|string|false|none|
-|» site_id|body|integer|false|none|
-|» team_id|body|integer|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "id": "string",
-  "label": "string",
-  "name": "string",
-  "site_id": 0,
-  "team_id": 0
-}
-```
-
-<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Folder updated|[FolderSchema](#schemafolderschema)|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Folder created|[FolderSchema](#schemafolderschema)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Soft deletes a site folder or a survey folder.
-
-<a id="opIddelete_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE /v3/folder/{folder_id}
-
-```
-
-```python
-import requests
-
-r = requests.delete('/v3/folder/{folder_id}')
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`DELETE /v3/folder/{folder_id}`
-
-Folder must be empty in order to be deleted.
-
-Only account admins, team admins, and team members can delete folders. Only team members with write access can delete survey
-folders.
-
-<h3 id="soft-deletes-a-site-folder-or-a-survey-folder.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|folder_id|path|string|true|Folder ID|
-
-<h3 id="soft-deletes-a-site-folder-or-a-survey-folder.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Creates a new folder that can hold sites
-
-<a id="opIdcreate_site_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST /v3/site_folder \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('/v3/site_folder', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/site_folder";
-      
-      
-      await PostAsync(null, url);
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(undefined content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(undefined content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`POST /v3/site_folder`
-
-> Body parameter
-
-```json
-{
-  "label": "S0124",
-  "name": "My Folder",
-  "team_id": 0
-}
-```
-
-<h3 id="creates-a-new-folder-that-can-hold-sites-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object|true|none|
-|» label|body|string|false|none|
-|» name|body|string|false|Folder name. Does not need to be unique|
-|» team_id|body|integer|false|none|
-
-> Example responses
-
-> 201 Response
-
-```json
-{
-  "id": "string",
-  "label": "string",
-  "name": "string",
-  "site_id": 0,
-  "team_id": 0
-}
-```
-
-<h3 id="creates-a-new-folder-that-can-hold-sites-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Update all fields of a folder
-
-<a id="opIdupdate_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PATCH /v3/site_folder/{folder_external_id} \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.patch('/v3/site_folder/{folder_external_id}', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`PATCH /v3/site_folder/{folder_external_id}`
-
-> Body parameter
-
-```json
-{
-  "label": "ER-1233",
-  "name": "My Folder"
-}
-```
-
-<h3 id="update-all-fields-of-a-folder-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|id|path|string|true|Folder ID|
-|body|body|object|true|none|
-|» label|body|string|false|none|
-|» name|body|string|false|Folder name. Does not need to be unique|
-
-> Example responses
-
-> 201 Response
-
-```json
-{
-  "id": "string",
-  "label": "string",
-  "name": "string",
-  "site_id": 0,
-  "team_id": 0
-}
-```
-
-<h3 id="update-all-fields-of-a-folder-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Soft deletes a folder that can contain sites.
-
-<a id="opIddelete_site_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE /v3/site_folder/{folder_id}
-
-```
-
-```python
-import requests
-
-r = requests.delete('/v3/site_folder/{folder_id}')
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/site_folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`DELETE /v3/site_folder/{folder_id}`
-
-Folder must be empty in order to be deleted. Only account admins, team admins, and team members can delete folders.
-
-<h3 id="soft-deletes-a-folder-that-can-contain-sites.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|folder_id|path|string|true|Folder ID|
-
-<h3 id="soft-deletes-a-folder-that-can-contain-sites.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Deletes a survey folder in a site.
-
-<a id="opIddelete_survey_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE /v3/survey_folder/{folder_id}
-
-```
-
-```python
-import requests
-
-r = requests.delete('/v3/survey_folder/{folder_id}')
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/survey_folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`DELETE /v3/survey_folder/{folder_id}`
-
-Folders that already contain surveys are not allowed to be deleted.
-
-Only team members with write access can delete survey folders.
-
-<h3 id="deletes-a-survey-folder-in-a-site.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|folder_id|path|string|true|Folder ID|
-
-<h3 id="deletes-a-survey-folder-in-a-site.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## Allows creating folders inside a site, which can store and organize surveys
-
-<a id="opIdcreate_survey_folder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST /v3/{site_id}/folder \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('/v3/{site_id}/folder', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/{site_id}/folder";
-      
-      
-      await PostAsync(null, url);
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(undefined content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(undefined content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`POST /v3/{site_id}/folder`
-
-> Body parameter
-
-```json
-{
-  "label": "LS1-34",
-  "name": "My Folder"
-}
-```
-
-<h3 id="allows-creating-folders-inside-a-site,-which-can-store-and-organize-surveys-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|site_id|path|string|true|Site external ID|
-|body|body|object|true|none|
-|» label|body|string|false|Folder label|
-|» name|body|string|false|Folder name. Does not need to be unique|
-
-> Example responses
-
-> 201 Response
-
-```json
-{
-  "id": "string",
-  "label": "string",
-  "name": "string",
-  "site_id": 0,
-  "team_id": 0
-}
-```
-
-<h3 id="allows-creating-folders-inside-a-site,-which-can-store-and-organize-surveys-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="system-surveyor-api-reports">Reports</h1>
-
-## Queues a message for creating reports for sites or surveys
-
-<a id="opIdcreate_report"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST /v3/report \
-  -H 'Content-Type: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('/v3/report', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/report";
-      
-      string json = @"{
-  ""custom_data"": {},
-  ""filters"": [
-    {}
-  ],
-  ""is_excel"": false,
-  ""is_site_report"": false,
-  ""name"": ""string"",
-  ""options"": [
-    {
-      ""id"": ""string"",
-      ""inputs"": [
-        {
-          ""field_id"": ""string"",
-          ""value"": ""string""
-        }
-      ],
-      ""scope"": ""template"",
-      ""template_name"": ""string"",
-      ""value"": true
-    }
-  ],
-  ""output"": ""pdf"",
-  ""paper_size"": ""string"",
-  ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
-  ""site_id"": ""string"",
-  ""survey_ids"": [
-    ""string""
-  ]
-}";
-      SurveyReportRequestSchema content = JsonConvert.DeserializeObject(json);
-      await PostAsync(content, url);
-      
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(SurveyReportRequestSchema content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(SurveyReportRequestSchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`POST /v3/report`
-
-Reports are created by an external PHP service by picking up messages from the queue.
-
-> Body parameter
-
-```json
-{
-  "custom_data": {},
-  "filters": [
-    {}
-  ],
-  "is_excel": false,
-  "is_site_report": false,
-  "name": "string",
-  "options": [
-    {
-      "id": "string",
-      "inputs": [
-        {
-          "field_id": "string",
-          "value": "string"
-        }
-      ],
-      "scope": "template",
-      "template_name": "string",
-      "value": true
-    }
-  ],
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "site_id": "string",
-  "survey_ids": [
-    "string"
-  ]
-}
-```
-
-<h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[SurveyReportRequestSchema](#schemasurveyreportrequestschema)|true|none|
-|» custom_data|body|object|false|none|
-|» filters|body|[object]|false|none|
-|» is_excel|body|boolean|false|none|
-|» is_site_report|body|boolean|false|none|
-|» name|body|string|true|none|
-|» options|body|[[SurveyOptions](#schemasurveyoptions)]|false|none|
-|»» id|body|string|true|none|
-|»» inputs|body|[[SurveyFields](#schemasurveyfields)]|false|none|
-|»»» field_id|body|string|true|none|
-|»»» value|body|string|true|none|
-|»» scope|body|string|true|none|
-|»» template_name|body|string|false|none|
-|»» value|body|boolean|true|none|
-|» output|body|string|true|none|
-|» paper_size|body|string|false|none|
-|» report_id|body|string(uuid)|true|none|
-|» site_id|body|string|true|none|
-|» survey_ids|body|[string]|false|none|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|»» scope|template|
-|»» scope|model|
-|»» scope|content|
-|» output|pdf|
-|» output|html|
-|» output|xls|
-
-<h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Report scheduled successfully|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
 <h1 id="system-surveyor-api-resources">Resources</h1>
 
 ## Fetches a binary resource and returns it as bytes.
@@ -1383,6 +283,1106 @@ Status Code **200**
 This operation does not require authentication
 </aside>
 
+<h1 id="system-surveyor-api-folders">Folders</h1>
+
+## Creates a new site/survey folder or updates an existing one if found.
+
+<a id="opIdcreate_or_update_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT /v3/folder/{folder_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.put('/v3/folder/{folder_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v3/folder/{folder_id}";
+
+      
+      string json = @"{
+  ""team_id"": 0,
+  ""site_external_id"": ""string"",
+  ""name"": ""string"",
+  ""label"": ""string""
+}";
+      FolderSchema content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, FolderSchema content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(FolderSchema content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`PUT /v3/folder/{folder_id}`
+
+To create/update a site folder, pass a value for `team_id` field in the request payload, to create/update a survey folder
+pass a value for `site_id` field.
+
+> Body parameter
+
+```json
+{
+  "team_id": 0,
+  "site_external_id": "string",
+  "name": "string",
+  "label": "string"
+}
+```
+
+<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|folder_id|path|string|true|Folder ID|
+|body|body|[FolderSchema](#schemafolderschema)|true|none|
+|» id|body|string|false|none|
+|» site_id|body|integer|false|none|
+|» team_id|body|integer|false|none|
+|» site_external_id|body|string|false|none|
+|» name|body|string|true|none|
+|» label|body|string|false|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": "string",
+  "site_id": 0,
+  "team_id": 0,
+  "name": "string",
+  "label": "string"
+}
+```
+
+<h3 id="creates-a-new-site/survey-folder-or-updates-an-existing-one-if-found.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Folder updated|[FolderSchema](#schemafolderschema)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Folder created|[FolderSchema](#schemafolderschema)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Soft deletes a site folder or a survey folder.
+
+<a id="opIddelete_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /v3/folder/{folder_id}
+
+```
+
+```python
+import requests
+
+r = requests.delete('/v3/folder/{folder_id}')
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v3/folder/{folder_id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`DELETE /v3/folder/{folder_id}`
+
+Folder must be empty in order to be deleted.
+
+Only account admins, team admins, and team members can delete folders. Only team members with write access can delete survey
+folders.
+
+<h3 id="soft-deletes-a-site-folder-or-a-survey-folder.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|folder_id|path|string|true|Folder ID|
+
+<h3 id="soft-deletes-a-site-folder-or-a-survey-folder.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Creates a new folder that can hold sites
+
+<a id="opIdcreate_site_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /v3/site_folder \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/v3/site_folder', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v3/site_folder";
+      
+      
+      await PostAsync(null, url);
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(undefined content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(undefined content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`POST /v3/site_folder`
+
+> Body parameter
+
+```json
+{
+  "name": "My Folder",
+  "label": "S0124",
+  "team_id": 0
+}
+```
+
+<h3 id="creates-a-new-folder-that-can-hold-sites-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|object|true|none|
+|» name|body|string|false|Folder name. Does not need to be unique|
+|» label|body|string|false|none|
+|» team_id|body|integer|false|none|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "id": "string",
+  "site_id": 0,
+  "team_id": 0,
+  "name": "string",
+  "label": "string"
+}
+```
+
+<h3 id="creates-a-new-folder-that-can-hold-sites-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Update all fields of a folder
+
+<a id="opIdupdate_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PATCH /v3/site_folder/{folder_external_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.patch('/v3/site_folder/{folder_external_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`PATCH /v3/site_folder/{folder_external_id}`
+
+> Body parameter
+
+```json
+{
+  "name": "My Folder",
+  "label": "ER-1233"
+}
+```
+
+<h3 id="update-all-fields-of-a-folder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|id|path|string|true|Folder ID|
+|body|body|object|true|none|
+|» name|body|string|false|Folder name. Does not need to be unique|
+|» label|body|string|false|none|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "id": "string",
+  "site_id": 0,
+  "team_id": 0,
+  "name": "string",
+  "label": "string"
+}
+```
+
+<h3 id="update-all-fields-of-a-folder-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Allows creating folders inside a site, which can store and organize surveys
+
+<a id="opIdcreate_survey_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /v3/{site_id}/folder \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/v3/{site_id}/folder', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v3/{site_id}/folder";
+      
+      
+      await PostAsync(null, url);
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(undefined content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(undefined content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`POST /v3/{site_id}/folder`
+
+> Body parameter
+
+```json
+{
+  "name": "My Folder",
+  "label": "LS1-34"
+}
+```
+
+<h3 id="allows-creating-folders-inside-a-site,-which-can-store-and-organize-surveys-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|site_id|path|string|true|Site external ID|
+|body|body|object|true|none|
+|» name|body|string|false|Folder name. Does not need to be unique|
+|» label|body|string|false|Folder label|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "id": "string",
+  "site_id": 0,
+  "team_id": 0,
+  "name": "string",
+  "label": "string"
+}
+```
+
+<h3 id="allows-creating-folders-inside-a-site,-which-can-store-and-organize-surveys-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|[FolderSchema](#schemafolderschema)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Deletes a survey folder in a site.
+
+<a id="opIddelete_survey_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /v3/survey_folder/{folder_id}
+
+```
+
+```python
+import requests
+
+r = requests.delete('/v3/survey_folder/{folder_id}')
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v3/survey_folder/{folder_id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`DELETE /v3/survey_folder/{folder_id}`
+
+Folders that already contain surveys are not allowed to be deleted.
+
+Only team members with write access can delete survey folders.
+
+<h3 id="deletes-a-survey-folder-in-a-site.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|folder_id|path|string|true|Folder ID|
+
+<h3 id="deletes-a-survey-folder-in-a-site.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Soft deletes a folder that can contain sites.
+
+<a id="opIddelete_site_folder"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /v3/site_folder/{folder_id}
+
+```
+
+```python
+import requests
+
+r = requests.delete('/v3/site_folder/{folder_id}')
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v3/site_folder/{folder_id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`DELETE /v3/site_folder/{folder_id}`
+
+Folder must be empty in order to be deleted. Only account admins, team admins, and team members can delete folders.
+
+<h3 id="soft-deletes-a-folder-that-can-contain-sites.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|folder_id|path|string|true|Folder ID|
+
+<h3 id="soft-deletes-a-folder-that-can-contain-sites.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="system-surveyor-api-reports">Reports</h1>
+
+## Queues a message for creating reports for sites or surveys
+
+<a id="opIdcreate_report"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /v3/report \
+  -H 'Content-Type: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json'
+}
+
+r = requests.post('/v3/report', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v3/report";
+      
+      string json = @"{
+  ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
+  ""name"": ""string"",
+  ""is_site_report"": false,
+  ""site_id"": ""string"",
+  ""survey_ids"": [
+    ""string""
+  ],
+  ""options"": [
+    {
+      ""value"": true,
+      ""id"": ""string"",
+      ""inputs"": [
+        {
+          ""value"": ""string"",
+          ""field_id"": ""string""
+        }
+      ],
+      ""scope"": ""template"",
+      ""template_name"": ""string""
+    }
+  ],
+  ""paper_size"": ""string"",
+  ""output"": ""pdf"",
+  ""is_excel"": false,
+  ""custom_data"": {},
+  ""filters"": [
+    {}
+  ]
+}";
+      SurveyReportRequestSchema content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(SurveyReportRequestSchema content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(SurveyReportRequestSchema content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`POST /v3/report`
+
+Reports are created by an external PHP service by picking up messages from the queue.
+
+> Body parameter
+
+```json
+{
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "name": "string",
+  "is_site_report": false,
+  "site_id": "string",
+  "survey_ids": [
+    "string"
+  ],
+  "options": [
+    {
+      "value": true,
+      "id": "string",
+      "inputs": [
+        {
+          "value": "string",
+          "field_id": "string"
+        }
+      ],
+      "scope": "template",
+      "template_name": "string"
+    }
+  ],
+  "paper_size": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "custom_data": {},
+  "filters": [
+    {}
+  ]
+}
+```
+
+<h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[SurveyReportRequestSchema](#schemasurveyreportrequestschema)|true|none|
+|» report_id|body|string(uuid)|true|none|
+|» name|body|string|true|none|
+|» is_site_report|body|boolean|false|none|
+|» site_id|body|string|true|none|
+|» survey_ids|body|[string]|false|none|
+|» options|body|[[SurveyOptions](#schemasurveyoptions)]|false|none|
+|»» value|body|boolean|true|none|
+|»» id|body|string|true|none|
+|»» inputs|body|[[SurveyFields](#schemasurveyfields)]|false|none|
+|»»» value|body|string|true|none|
+|»»» field_id|body|string|true|none|
+|»» scope|body|string|true|none|
+|»» template_name|body|string|false|none|
+|» paper_size|body|string|false|none|
+|» output|body|string|true|none|
+|» is_excel|body|boolean|false|none|
+|» custom_data|body|object|false|none|
+|» filters|body|[object]|false|none|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|»» scope|template|
+|»» scope|model|
+|»» scope|content|
+|» output|pdf|
+|» output|html|
+|» output|xls|
+
+<h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|202|[Accepted](https://tools.ietf.org/html/rfc7231#section-6.3.3)|Report scheduled successfully|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 <h1 id="system-surveyor-api-sites">Sites</h1>
 
 ## Get site information
@@ -1482,33 +1482,33 @@ public class HttpExample
 
 ```json
 {
-  "city": "string",
-  "created_at": 1452384000,
-  "creator": {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": 0
-  },
   "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
-  "is_active": true,
-  "label": "string",
-  "modified_at": 1673557029,
-  "modifier": {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": 0
-  },
+  "team_id": 0,
   "name": "string",
-  "reference_id": "string",
+  "label": "string",
+  "survey_count": 0,
+  "city": "string",
   "state": "string",
   "street": "string",
-  "survey_count": 0,
+  "zip_code": "string",
+  "is_active": true,
+  "version": 0,
+  "reference_id": "string",
   "tags": [
     "string"
   ],
-  "team_id": 0,
-  "version": 0,
-  "zip_code": "string"
+  "creator": {
+    "user_id": 0,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": 0,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "created_at": 1452384000,
+  "modified_at": 1673557029
 }
 ```
 
@@ -1527,29 +1527,29 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» city|string|false|none|none|
-|» created_at|integer|false|none|none|
-|» creator|object|false|none|none|
-|»» first_name|string|false|none|none|
-|»» last_name|string|false|none|none|
-|»» user_id|integer|false|none|none|
 |» id|string|false|none|none|
-|» is_active|boolean|false|none|none|
-|» label|string|false|none|none|
-|» modified_at|integer|false|none|none|
-|» modifier|object|false|none|none|
-|»» first_name|string|false|none|none|
-|»» last_name|string|false|none|none|
-|»» user_id|integer|false|none|none|
+|» team_id|integer|false|none|none|
 |» name|string|false|none|none|
-|» reference_id|string|false|none|none|
+|» label|string|false|none|none|
+|» survey_count|integer|false|none|none|
+|» city|string|false|none|none|
 |» state|string|false|none|none|
 |» street|string|false|none|none|
-|» survey_count|integer|false|none|none|
-|» tags|[string]|false|none|none|
-|» team_id|integer|false|none|none|
-|» version|integer|false|none|none|
 |» zip_code|string|false|none|none|
+|» is_active|boolean|false|none|none|
+|» version|integer|false|none|none|
+|» reference_id|string|false|none|none|
+|» tags|[string]|false|none|none|
+|» creator|object|false|none|none|
+|»» user_id|integer|false|none|none|
+|»» first_name|string|false|none|none|
+|»» last_name|string|false|none|none|
+|» modifier|object|false|none|none|
+|»» user_id|integer|false|none|none|
+|»» first_name|string|false|none|none|
+|»» last_name|string|false|none|none|
+|» created_at|integer|false|none|none|
+|» modified_at|integer|false|none|none|
 
 <aside class="success">
 This operation does not require authentication
@@ -1614,19 +1614,19 @@ public class HttpExample
 
       
       string json = @"{
-  ""city"": ""string"",
-  ""is_archived"": null,
-  ""label"": ""string"",
-  ""name"": ""string"",
-  ""reference_id"": ""string"",
   ""site_id"": ""string"",
-  ""state"": ""string"",
-  ""street"": ""string"",
+  ""is_archived"": null,
+  ""name"": ""string"",
   ""tags"": [
     ""string""
   ],
+  ""zip_code"": ""string"",
+  ""label"": ""string"",
+  ""reference_id"": ""string"",
+  ""state"": ""string"",
+  ""street"": ""string"",
   ""team_id"": 0,
-  ""zip_code"": ""string""
+  ""city"": ""string""
 }";
       SiteSchema content = JsonConvert.DeserializeObject(json);
       var result = await PutAsync(id, content, url);
@@ -1679,19 +1679,19 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 
 ```json
 {
-  "city": "string",
-  "is_archived": null,
-  "label": "string",
-  "name": "string",
-  "reference_id": "string",
   "site_id": "string",
-  "state": "string",
-  "street": "string",
+  "is_archived": null,
+  "name": "string",
   "tags": [
     "string"
   ],
+  "zip_code": "string",
+  "label": "string",
+  "reference_id": "string",
+  "state": "string",
+  "street": "string",
   "team_id": 0,
-  "zip_code": "string"
+  "city": "string"
 }
 ```
 
@@ -1701,29 +1701,29 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» city|body|string|false|none|
-|» created_at|body|'null'|false|none|
+|» site_id|body|string|false|none|
+|» is_archived|body|any|false|none|
+|» name|body|string|true|none|
+|» legacy_site_id|body|integer|false|none|
+|» tags|body|[string]|false|none|
+|» zip_code|body|string|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
 |»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
-|» is_archived|body|any|false|none|
 |» label|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» modified_at|body|'null'|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
 |»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
-|» name|body|string|true|none|
+|» created_at|body|null|false|none|
+|» modified_at|body|null|false|none|
 |» reference_id|body|string|false|none|
-|» site_id|body|string|false|none|
 |» state|body|string|false|none|
 |» street|body|string|false|none|
-|» tags|body|[string]|false|none|
 |» team_id|body|integer|true|none|
+|» city|body|string|false|none|
 |» version|body|integer|false|none|
-|» zip_code|body|string|false|none|
 
 <h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
 
@@ -1811,19 +1811,19 @@ public class HttpExample
 
 ```json
 {
-  "city": "string",
-  "is_archived": null,
-  "label": "string",
-  "name": "string",
-  "reference_id": "string",
   "site_id": "string",
-  "state": "string",
-  "street": "string",
+  "is_archived": null,
+  "name": "string",
   "tags": [
     "string"
   ],
+  "zip_code": "string",
+  "label": "string",
+  "reference_id": "string",
+  "state": "string",
+  "street": "string",
   "team_id": 0,
-  "zip_code": "string"
+  "city": "string"
 }
 ```
 
@@ -1833,29 +1833,29 @@ public class HttpExample
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» city|body|string|false|none|
-|» created_at|body|'null'|false|none|
+|» site_id|body|string|false|none|
+|» is_archived|body|any|false|none|
+|» name|body|string|true|none|
+|» legacy_site_id|body|integer|false|none|
+|» tags|body|[string]|false|none|
+|» zip_code|body|string|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
 |»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
-|» is_archived|body|any|false|none|
 |» label|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» modified_at|body|'null'|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
 |»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
-|» name|body|string|true|none|
+|» created_at|body|null|false|none|
+|» modified_at|body|null|false|none|
 |» reference_id|body|string|false|none|
-|» site_id|body|string|false|none|
 |» state|body|string|false|none|
 |» street|body|string|false|none|
-|» tags|body|[string]|false|none|
 |» team_id|body|integer|true|none|
+|» city|body|string|false|none|
 |» version|body|integer|false|none|
-|» zip_code|body|string|false|none|
 
 <h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
 
@@ -2087,28 +2087,28 @@ Filtered by folder:
 {
   "sites": [
     {
-      "favorite_timestamp": 12034903409,
-      "has_favorite_sites": true,
       "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
-      "modified_at": 1644374426,
-      "modifier": {
-        "first_name": "John",
-        "last_name": "Doe",
-        "user_id": 12390
-      },
       "name": "Union Square",
-      "owner": {
-        "first_name": "John",
-        "last_name": "Doe",
-        "user_id": 12390
-      },
       "survey_count": 12,
+      "modified_at": 1644374426,
+      "owner": {
+        "user_id": 12390,
+        "first_name": "John",
+        "last_name": "Doe"
+      },
+      "modifier": {
+        "user_id": 12390,
+        "first_name": "John",
+        "last_name": "Doe"
+      },
       "team": {
-        "name": "string",
-        "team_id": 1049
+        "team_id": 1049,
+        "name": "string"
       },
       "type": "site",
-      "version": 45479945
+      "version": 45479945,
+      "favorite_timestamp": 12034903409,
+      "has_favorite_sites": true
     }
   ]
 }
@@ -2128,25 +2128,25 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» sites|[object]|false|none|Result list of sites or folders|
-|»» favorite_timestamp|integer|false|none|Timestamp of when the site was added to favorites|
-|»» has_favorite_sites|boolean|false|none|Indicates if a folder has sites that are in the user's workbench|
 |»» id|string|false|none|none|
-|»» modified_at|integer|false|none|Datetime of the most recently modified survey in the site. If the site has no surveys, falls back to the<br>site's own `modified_at` datetime.|
-|»» modifier|object|false|none|none|
-|»»» first_name|string|false|none|none|
-|»»» last_name|string|false|none|none|
-|»»» user_id|integer|false|none|none|
 |»» name|string|false|none|none|
+|»» survey_count|integer|false|none|none|
+|»» modified_at|integer|false|none|Datetime of the most recently modified survey in the site. If the site has no surveys, falls back to the<br>site's own `modified_at` datetime.|
 |»» owner|object|false|none|none|
+|»»» user_id|integer|false|none|none|
 |»»» first_name|string|false|none|none|
 |»»» last_name|string|false|none|none|
+|»» modifier|object|false|none|none|
 |»»» user_id|integer|false|none|none|
-|»» survey_count|integer|false|none|none|
+|»»» first_name|string|false|none|none|
+|»»» last_name|string|false|none|none|
 |»» team|object|false|none|none|
-|»»» name|string|false|none|none|
 |»»» team_id|integer|false|none|none|
+|»»» name|string|false|none|none|
 |»» type|string|false|none|If the result item is a site or a folder|
 |»» version|integer|false|none|none|
+|»» favorite_timestamp|integer|false|none|Timestamp of when the site was added to favorites|
+|»» has_favorite_sites|boolean|false|none|Indicates if a folder has sites that are in the user's workbench|
 
 #### Enumerated Values
 
@@ -2275,493 +2275,6 @@ This operation does not require authentication
 </aside>
 
 <h1 id="system-surveyor-api-surveys">Surveys</h1>
-
-## Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.
-
-<a id="opIdcreate_or_update_survey"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PUT /v3/site/{site_id}/survey/{survey_id} \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.put('/v3/site/{site_id}/survey/{survey_id}', headers = headers)
-
-print(r.json())
-
-```
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakePutRequest()
-    {
-      int id = 1;
-      string url = "/v3/site/{site_id}/survey/{survey_id}";
-
-      
-      string json = @"{
-  ""title"": ""string"",
-  ""label"": ""string"",
-  ""reference_id"": ""string"",
-  ""description"": ""string"",
-  ""summary"": ""string"",
-  ""location"": ""string"",
-  ""status"": null,
-  ""icon_size"": 0,
-  ""unit"": null,
-  ""margin_range"": 0,
-  ""floorplan_scale"": 0,
-  ""elements"": [
-    {
-      ""id"": ""string"",
-      ""name"": ""string"",
-      ""element_id"": 0,
-      ""element_index"": 0,
-      ""element_profile_id"": 0,
-      ""systemtype_id"": 0,
-      ""variant"": null,
-      ""z_order"": 0,
-      ""position"": null,
-      ""photo_urls"": [
-        ""string""
-      ],
-      ""pdf_urls"": [
-        {}
-      ],
-      ""attributes"": [
-        {
-          ""attribute_id"": 0,
-          ""name"": ""string"",
-          ""value"": ""string""
-        }
-      ],
-      ""accessories"": [
-        {
-          ""description"": ""string"",
-          ""labor_hours"": 0,
-          ""manufacturer"": ""string"",
-          ""model"": ""string"",
-          ""price"": null,
-          ""quantity"": null,
-          ""row_index"": 0
-        }
-      ],
-      ""children"": [
-        {}
-      ],
-      ""cables"": [
-        {
-          ""a_side"": null,
-          ""id"": ""string"",
-          ""type"": ""string"",
-          ""z_side"": null
-        }
-      ],
-      ""connections"": {
-        ""end"": null,
-        ""start"": null
-      },
-      ""activity_log"": [
-        {
-          ""entry"": ""string""
-        }
-      ]
-    }
-  ],
-  ""annotations"": [
-    {
-      ""category"": null,
-      ""end_point"": null,
-      ""font_size"": ""string"",
-      ""location"": null,
-      ""size"": ""string"",
-      ""start_point"": null,
-      ""stroke_color"": ""string"",
-      ""stroke_width"": ""string"",
-      ""text"": ""string""
-    }
-  ]
-}";
-      SurveySchema content = JsonConvert.DeserializeObject(json);
-      var result = await PutAsync(id, content, url);
-      
-          
-    }
-
-    /// Performs a PUT Request
-    public async Task PutAsync(int id, SurveySchema content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute PUT request
-        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
-
-        //Return response
-        return await DeserializeObject(response);
-    }
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(SurveySchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
-
-```
-
-`PUT /v3/site/{site_id}/survey/{survey_id}`
-
-Also allows creating/updating surveys with elements, comments, and annotations.
-
-> Body parameter
-
-```json
-{
-  "title": "string",
-  "label": "string",
-  "reference_id": "string",
-  "description": "string",
-  "summary": "string",
-  "location": "string",
-  "status": null,
-  "icon_size": 0,
-  "unit": null,
-  "margin_range": 0,
-  "floorplan_scale": 0,
-  "elements": [
-    {
-      "id": "string",
-      "name": "string",
-      "element_id": 0,
-      "element_index": 0,
-      "element_profile_id": 0,
-      "systemtype_id": 0,
-      "variant": null,
-      "z_order": 0,
-      "position": null,
-      "photo_urls": [
-        "string"
-      ],
-      "pdf_urls": [
-        {}
-      ],
-      "attributes": [
-        {
-          "attribute_id": 0,
-          "name": "string",
-          "value": "string"
-        }
-      ],
-      "accessories": [
-        {
-          "description": "string",
-          "labor_hours": 0,
-          "manufacturer": "string",
-          "model": "string",
-          "price": null,
-          "quantity": null,
-          "row_index": 0
-        }
-      ],
-      "children": [
-        {}
-      ],
-      "cables": [
-        {
-          "a_side": null,
-          "id": "string",
-          "type": "string",
-          "z_side": null
-        }
-      ],
-      "connections": {
-        "end": null,
-        "start": null
-      },
-      "activity_log": [
-        {
-          "entry": "string"
-        }
-      ]
-    }
-  ],
-  "annotations": [
-    {
-      "category": null,
-      "end_point": null,
-      "font_size": "string",
-      "location": null,
-      "size": "string",
-      "start_point": null,
-      "stroke_color": "string",
-      "stroke_width": "string",
-      "text": "string"
-    }
-  ]
-}
-```
-
-<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|site_id|path|string|true|Site external ID|
-|survey_id|path|string|true|Survey external ID|
-|body|body|[SurveySchema](#schemasurveyschema)|true|none|
-|» id|body|string|false|none|
-|» title|body|string|true|none|
-|» label|body|string|false|none|
-|» reference_id|body|string|false|none|
-|» description|body|string|false|none|
-|» summary|body|string|false|none|
-|» location|body|string|false|none|
-|» status|body|any|false|none|
-|» site|body|any|false|none|
-|» icon_size|body|integer|true|none|
-|» is_archived|body|boolean|false|none|
-|» unit|body|any|true|none|
-|» version|body|integer|false|none|
-|» margin_range|body|number|true|none|
-|» type|body|any|false|none|
-|» floorplan_scale|body|number|false|none|
-|» preview_image|body|string|false|none|
-|» floorplan_url|body|string|false|none|
-|» creator|body|integer|false|none|
-|» editor|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» first_name|body|string|false|none|
-|»» last_name|body|string|false|none|
-|»» user_id|body|any|false|none|
-|» modifier|body|integer|false|none|
-|» created_at|body|any|false|none|
-|» modified_at|body|any|false|none|
-|» elements|body|[[SurveyElement](#schemasurveyelement)]|false|none|
-|»» id|body|string|true|none|
-|»» name|body|string|true|none|
-|»» element_id|body|integer|true|none|
-|»» element_index|body|integer|false|none|
-|»» element_profile_id|body|integer|false|none|
-|»» systemtype_id|body|integer|true|none|
-|»» variant|body|any|false|none|
-|»» z_order|body|integer|false|none|
-|»» position|body|any|true|none|
-|»» photo_urls|body|[string]|false|none|
-|»» pdf_urls|body|[object]|false|none|
-|»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
-|»»» attribute_id|body|integer|true|none|
-|»»» id|body|integer|false|none|
-|»»» name|body|string|true|none|
-|»»» value|body|string|true|none|
-|»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
-|»»» description|body|string|false|none|
-|»»» id|body|string|false|none|
-|»»» labor_hours|body|number|false|none|
-|»»» manufacturer|body|string|true|none|
-|»»» model|body|string|true|none|
-|»»» price|body|any|false|none|
-|»»» quantity|body|any|false|none|
-|»»» row_index|body|integer|true|none|
-|»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
-|»» cables|body|[[CablePath](#schemacablepath)]|false|none|
-|»»» a_side|body|any|true|none|
-|»»» id|body|string|true|none|
-|»»» type|body|string|false|none|
-|»»» z_side|body|any|true|none|
-|»» connections|body|[PathConnection](#schemapathconnection)|false|none|
-|»»» end|body|any|false|none|
-|»»» start|body|any|false|none|
-|»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
-|»»» date|body|any|false|none|
-|»»» entry|body|string|false|none|
-|»»» id|body|string|false|none|
-|» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
-|»» category|body|any|true|none|
-|»» end_point|body|any|false|none|
-|»» font_size|body|string|false|none|
-|»» id|body|string|false|none|
-|»» location|body|any|true|none|
-|»» size|body|string|false|none|
-|»» start_point|body|any|false|none|
-|»» stroke_color|body|string|true|none|
-|»» stroke_width|body|string|true|none|
-|»» text|body|string|false|none|
-|» users|body|any|false|none|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "id": "string",
-  "title": "string",
-  "label": "string",
-  "reference_id": "string",
-  "description": "string",
-  "summary": "string",
-  "location": "string",
-  "site": null,
-  "icon_size": 0,
-  "is_archived": true,
-  "unit": null,
-  "version": 0,
-  "margin_range": 0,
-  "type": null,
-  "floorplan_scale": 0,
-  "preview_image": "string",
-  "floorplan_url": "string",
-  "creator": 0,
-  "editor": {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": null
-  },
-  "modifier": 0,
-  "created_at": null,
-  "modified_at": null,
-  "elements": [
-    {
-      "id": "string",
-      "name": "string",
-      "element_id": 0,
-      "element_index": 0,
-      "element_profile_id": 0,
-      "systemtype_id": 0,
-      "variant": null,
-      "z_order": 0,
-      "position": null,
-      "photo_urls": [
-        "string"
-      ],
-      "pdf_urls": [
-        {}
-      ],
-      "attributes": [
-        {
-          "attribute_id": 0,
-          "id": 0,
-          "name": "string",
-          "value": "string"
-        }
-      ],
-      "accessories": [
-        {
-          "description": "string",
-          "id": "string",
-          "labor_hours": 0,
-          "manufacturer": "string",
-          "model": "string",
-          "price": null,
-          "quantity": null,
-          "row_index": 0
-        }
-      ],
-      "children": [
-        {}
-      ],
-      "cables": [
-        {
-          "a_side": null,
-          "id": "string",
-          "type": "string",
-          "z_side": null
-        }
-      ],
-      "connections": {
-        "end": null,
-        "start": null
-      },
-      "activity_log": [
-        {
-          "date": null,
-          "entry": "string",
-          "id": "string"
-        }
-      ]
-    }
-  ],
-  "annotations": [
-    {
-      "category": null,
-      "end_point": null,
-      "font_size": "string",
-      "id": "string",
-      "location": null,
-      "size": "string",
-      "start_point": null,
-      "stroke_color": "string",
-      "stroke_width": "string",
-      "text": "string"
-    }
-  ],
-  "users": null
-}
-```
-
-<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Survey updated successfully|[SurveySchema](#schemasurveyschema)|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Survey created successfully|[SurveySchema](#schemasurveyschema)|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
 
 ## Returns all surveys and folders for a specific site. These are shown in the site overview page.
 
@@ -2909,14 +2422,14 @@ Query Parameters:
 {
   "surveys": [
     {
-      "elements_count": 90,
       "id": "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb",
-      "is_archived": false,
-      "is_folder": false,
+      "title": "My survey",
       "label": "TGS-123",
+      "is_folder": false,
       "preview_image": "string",
+      "elements_count": 90,
       "survey_count": 34,
-      "title": "My survey"
+      "is_archived": false
     }
   ]
 }
@@ -2937,14 +2450,511 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» surveys|[object]|false|none|none|
-|»» elements_count|integer|false|none|Element count for survey|
 |»» id|string|false|none|none|
-|»» is_archived|boolean|false|none|If the survey is archived or not|
-|»» is_folder|boolean|false|none|none|
-|»» label|string|false|none|none|
-|»» preview_image|string|false|none|URL to the survey's preview image|
-|»» survey_count|integer|false|none|Survey count for folder|
 |»» title|string|false|none|none|
+|»» label|string|false|none|none|
+|»» is_folder|boolean|false|none|none|
+|»» preview_image|string|false|none|URL to the survey's preview image|
+|»» elements_count|integer|false|none|Element count for survey|
+|»» survey_count|integer|false|none|Survey count for folder|
+|»» is_archived|boolean|false|none|If the survey is archived or not|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.
+
+<a id="opIdcreate_or_update_survey"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT /v3/site/{site_id}/survey/{survey_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.put('/v3/site/{site_id}/survey/{survey_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v3/site/{site_id}/survey/{survey_id}";
+
+      
+      string json = @"{
+  ""title"": ""string"",
+  ""label"": ""string"",
+  ""reference_id"": ""string"",
+  ""description"": ""string"",
+  ""summary"": ""string"",
+  ""location"": ""string"",
+  ""status"": null,
+  ""icon_size"": 0,
+  ""unit"": null,
+  ""margin_range"": 0,
+  ""floorplan_scale"": 0,
+  ""elements"": [
+    {
+      ""id"": ""string"",
+      ""name"": ""string"",
+      ""element_id"": 0,
+      ""element_index"": 0,
+      ""element_profile_id"": 0,
+      ""systemtype_id"": 0,
+      ""variant"": null,
+      ""z_order"": 0,
+      ""position"": null,
+      ""photo_urls"": [
+        ""string""
+      ],
+      ""pdf_urls"": [
+        {}
+      ],
+      ""attributes"": [
+        {
+          ""name"": ""string"",
+          ""value"": ""string"",
+          ""attribute_id"": 0
+        }
+      ],
+      ""accessories"": [
+        {
+          ""model"": ""string"",
+          ""labor_hours"": 0,
+          ""description"": ""string"",
+          ""price"": null,
+          ""quantity"": null,
+          ""manufacturer"": ""string"",
+          ""row_index"": 0
+        }
+      ],
+      ""children"": [
+        {}
+      ],
+      ""cables"": [
+        {
+          ""id"": ""string"",
+          ""z_side"": null,
+          ""a_side"": null,
+          ""type"": ""string""
+        }
+      ],
+      ""connections"": {
+        ""end"": null,
+        ""start"": null
+      },
+      ""activity_log"": [
+        {
+          ""entry"": ""string""
+        }
+      ]
+    }
+  ],
+  ""annotations"": [
+    {
+      ""stroke_width"": ""string"",
+      ""stroke_color"": ""string"",
+      ""start_point"": null,
+      ""category"": null,
+      ""location"": null,
+      ""font_size"": ""string"",
+      ""size"": ""string"",
+      ""text"": ""string"",
+      ""end_point"": null
+    }
+  ]
+}";
+      SurveySchema content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, SurveySchema content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(SurveySchema content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
+`PUT /v3/site/{site_id}/survey/{survey_id}`
+
+Also allows creating/updating surveys with elements, comments, and annotations.
+
+> Body parameter
+
+```json
+{
+  "title": "string",
+  "label": "string",
+  "reference_id": "string",
+  "description": "string",
+  "summary": "string",
+  "location": "string",
+  "status": null,
+  "icon_size": 0,
+  "unit": null,
+  "margin_range": 0,
+  "floorplan_scale": 0,
+  "elements": [
+    {
+      "id": "string",
+      "name": "string",
+      "element_id": 0,
+      "element_index": 0,
+      "element_profile_id": 0,
+      "systemtype_id": 0,
+      "variant": null,
+      "z_order": 0,
+      "position": null,
+      "photo_urls": [
+        "string"
+      ],
+      "pdf_urls": [
+        {}
+      ],
+      "attributes": [
+        {
+          "name": "string",
+          "value": "string",
+          "attribute_id": 0
+        }
+      ],
+      "accessories": [
+        {
+          "model": "string",
+          "labor_hours": 0,
+          "description": "string",
+          "price": null,
+          "quantity": null,
+          "manufacturer": "string",
+          "row_index": 0
+        }
+      ],
+      "children": [
+        {}
+      ],
+      "cables": [
+        {
+          "id": "string",
+          "z_side": null,
+          "a_side": null,
+          "type": "string"
+        }
+      ],
+      "connections": {
+        "end": null,
+        "start": null
+      },
+      "activity_log": [
+        {
+          "entry": "string"
+        }
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "start_point": null,
+      "category": null,
+      "location": null,
+      "font_size": "string",
+      "size": "string",
+      "text": "string",
+      "end_point": null
+    }
+  ]
+}
+```
+
+<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|site_id|path|string|true|Site external ID|
+|survey_id|path|string|true|Survey external ID|
+|body|body|[SurveySchema](#schemasurveyschema)|true|none|
+|» id|body|string|false|none|
+|» title|body|string|true|none|
+|» label|body|string|false|none|
+|» reference_id|body|string|false|none|
+|» description|body|string|false|none|
+|» summary|body|string|false|none|
+|» location|body|string|false|none|
+|» status|body|any|false|none|
+|» site|body|any|false|none|
+|» icon_size|body|integer|true|none|
+|» is_archived|body|boolean|false|none|
+|» unit|body|any|true|none|
+|» version|body|integer|false|none|
+|» margin_range|body|number|true|none|
+|» type|body|any|false|none|
+|» floorplan_scale|body|number|false|none|
+|» preview_image|body|string|false|none|
+|» floorplan_url|body|string|false|none|
+|» sync_status|body|any|false|none|
+|» creator|body|integer|false|none|
+|» editor|body|[RelatedUser](#schemarelateduser)|false|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|any|false|none|
+|» modifier|body|integer|false|none|
+|» created_at|body|any|false|none|
+|» modified_at|body|any|false|none|
+|» elements|body|[[SurveyElement](#schemasurveyelement)]|false|none|
+|»» id|body|string|true|none|
+|»» name|body|string|true|none|
+|»» element_id|body|integer|true|none|
+|»» element_index|body|integer|false|none|
+|»» element_profile_id|body|integer|false|none|
+|»» systemtype_id|body|integer|true|none|
+|»» variant|body|any|false|none|
+|»» z_order|body|integer|false|none|
+|»» position|body|any|true|none|
+|»» photo_urls|body|[string]|false|none|
+|»» pdf_urls|body|[object]|false|none|
+|»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
+|»»» name|body|string|true|none|
+|»»» value|body|string|true|none|
+|»»» attribute_id|body|integer|true|none|
+|»»» id|body|integer|false|none|
+|»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
+|»»» model|body|string|true|none|
+|»»» id|body|string|false|none|
+|»»» labor_hours|body|number|false|none|
+|»»» description|body|string|false|none|
+|»»» price|body|any|false|none|
+|»»» quantity|body|any|false|none|
+|»»» manufacturer|body|string|true|none|
+|»»» row_index|body|integer|true|none|
+|»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
+|»» cables|body|[[CablePath](#schemacablepath)]|false|none|
+|»»» id|body|string|true|none|
+|»»» z_side|body|any|true|none|
+|»»» a_side|body|any|true|none|
+|»»» type|body|string|false|none|
+|»» connections|body|[PathConnection](#schemapathconnection)|false|none|
+|»»» end|body|any|false|none|
+|»»» start|body|any|false|none|
+|»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
+|»»» entry|body|string|false|none|
+|»»» date|body|any|false|none|
+|»»» id|body|string|false|none|
+|» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
+|»» stroke_width|body|string|true|none|
+|»» stroke_color|body|string|true|none|
+|»» id|body|string|false|none|
+|»» start_point|body|any|false|none|
+|»» category|body|any|true|none|
+|»» location|body|any|true|none|
+|»» font_size|body|string|false|none|
+|»» size|body|string|false|none|
+|»» text|body|string|false|none|
+|»» end_point|body|any|false|none|
+|» users|body|any|false|none|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» sync_status|synced|
+|» sync_status|pending|
+|» sync_status|errored|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": "string",
+  "title": "string",
+  "label": "string",
+  "reference_id": "string",
+  "description": "string",
+  "summary": "string",
+  "location": "string",
+  "site": null,
+  "icon_size": 0,
+  "is_archived": true,
+  "unit": null,
+  "version": 0,
+  "margin_range": 0,
+  "type": null,
+  "floorplan_scale": 0,
+  "preview_image": "string",
+  "floorplan_url": "string",
+  "sync_status": "synced",
+  "creator": 0,
+  "editor": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
+  },
+  "modifier": 0,
+  "created_at": null,
+  "modified_at": null,
+  "elements": [
+    {
+      "id": "string",
+      "name": "string",
+      "element_id": 0,
+      "element_index": 0,
+      "element_profile_id": 0,
+      "systemtype_id": 0,
+      "variant": null,
+      "z_order": 0,
+      "position": null,
+      "photo_urls": [
+        "string"
+      ],
+      "pdf_urls": [
+        {}
+      ],
+      "attributes": [
+        {
+          "name": "string",
+          "value": "string",
+          "attribute_id": 0,
+          "id": 0
+        }
+      ],
+      "accessories": [
+        {
+          "model": "string",
+          "id": "string",
+          "labor_hours": 0,
+          "description": "string",
+          "price": null,
+          "quantity": null,
+          "manufacturer": "string",
+          "row_index": 0
+        }
+      ],
+      "children": [
+        {}
+      ],
+      "cables": [
+        {
+          "id": "string",
+          "z_side": null,
+          "a_side": null,
+          "type": "string"
+        }
+      ],
+      "connections": {
+        "end": null,
+        "start": null
+      },
+      "activity_log": [
+        {
+          "entry": "string",
+          "date": null,
+          "id": "string"
+        }
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "id": "string",
+      "start_point": null,
+      "category": null,
+      "location": null,
+      "font_size": "string",
+      "size": "string",
+      "text": "string",
+      "end_point": null
+    }
+  ],
+  "users": null
+}
+```
+
+<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Survey updated successfully|[SurveySchema](#schemasurveyschema)|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Survey created successfully|[SurveySchema](#schemasurveyschema)|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
 <aside class="success">
 This operation does not require authentication
@@ -3269,71 +3279,71 @@ This includes accounts and teams that the current user belongs to, either as a t
 
 ```json
 {
-  "accounts": [
-    {
-      "cancel_requested": true,
-      "company": "string",
-      "features": {
-        "add_folder": true,
-        "comments": true,
-        "exclude_powered_by": true,
-        "export_survey": true,
-        "guest_user": true,
-        "hidden_attributes": true,
-        "multiple_teams": true,
-        "public_api": true,
-        "report_custom_watermark": true,
-        "report_export_excel": true,
-        "report_include_company_logo": true,
-        "report_include_ssv_logo": true,
-        "report_require_ssv_watermark": true,
-        "site_access_permissions": true,
-        "site_tagging": true,
-        "sso": true,
-        "v2_survey": true
-      },
-      "id": 450495,
-      "is_free": true,
-      "is_trial": true,
-      "subscription": {
-        "end_date": 0,
-        "id": 0,
-        "plan": {
-          "id": 0,
-          "max_attachments_per_element": 0,
-          "max_seats": 0,
-          "name": "string"
-        },
-        "quantity": 0
-      }
-    }
-  ],
-  "avatar_url": "string",
-  "company": "System Surveyor",
-  "country": "string",
-  "created_at": 0,
-  "email": "foobar@gmail.com",
-  "first_name": "John",
   "id": 12094,
-  "is_complete_setup": true,
-  "last_login": 0,
+  "user_name": "foobar",
+  "first_name": "John",
   "last_name": "Doe",
+  "title": "CEO",
+  "email": "foobar@gmail.com",
+  "company": "System Surveyor",
   "mobile": "910-423-345",
+  "country": "string",
   "state": "string",
+  "last_login": 0,
+  "avatar_url": "string",
+  "is_complete_setup": true,
+  "created_at": 0,
   "teams": [
     {
-      "account_id": 995,
-      "budget_status": 0,
       "id": 112,
-      "labor_rate": null,
-      "margin_range": null,
       "name": "John's Team",
+      "account_id": 995,
       "role": "team_member",
-      "unit": "metric"
+      "unit": "metric",
+      "labor_rate": null,
+      "budget_status": 0,
+      "margin_range": null
     }
   ],
-  "title": "CEO",
-  "user_name": "foobar"
+  "accounts": [
+    {
+      "id": 450495,
+      "company": "string",
+      "is_trial": true,
+      "is_free": true,
+      "cancel_requested": true,
+      "subscription": {
+        "id": 0,
+        "quantity": 0,
+        "end_date": 0,
+        "plan": {
+          "id": 0,
+          "name": "string",
+          "max_seats": 0,
+          "max_attachments_per_element": 0
+        }
+      },
+      "features": {
+        "comments": true,
+        "site_tagging": true,
+        "report_custom_watermark": true,
+        "exclude_powered_by": true,
+        "sso": true,
+        "hidden_attributes": true,
+        "site_access_permissions": true,
+        "multiple_teams": true,
+        "report_include_ssv_logo": true,
+        "report_include_company_logo": true,
+        "guest_user": true,
+        "add_folder": true,
+        "export_survey": true,
+        "report_export_excel": true,
+        "report_require_ssv_watermark": true,
+        "v2_survey": true,
+        "public_api": true
+      }
+    }
+  ]
 }
 ```
 
@@ -3350,62 +3360,62 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» accounts|[object]|false|none|none|
-|»» cancel_requested|boolean|false|none|none|
-|»» company|string|false|none|none|
-|»» features|object|false|none|none|
-|»»» add_folder|boolean|false|none|none|
-|»»» comments|boolean|false|none|none|
-|»»» exclude_powered_by|boolean|false|none|none|
-|»»» export_survey|boolean|false|none|none|
-|»»» guest_user|boolean|false|none|none|
-|»»» hidden_attributes|boolean|false|none|none|
-|»»» multiple_teams|boolean|false|none|none|
-|»»» public_api|boolean|false|none|none|
-|»»» report_custom_watermark|boolean|false|none|none|
-|»»» report_export_excel|boolean|false|none|none|
-|»»» report_include_company_logo|boolean|false|none|none|
-|»»» report_include_ssv_logo|boolean|false|none|none|
-|»»» report_require_ssv_watermark|boolean|false|none|none|
-|»»» site_access_permissions|boolean|false|none|none|
-|»»» site_tagging|boolean|false|none|none|
-|»»» sso|boolean|false|none|none|
-|»»» v2_survey|boolean|false|none|none|
-|»» id|integer|false|none|none|
-|»» is_free|boolean|false|none|none|
-|»» is_trial|boolean|false|none|none|
-|»» subscription|object|false|none|none|
-|»»» end_date|integer|false|none|none|
-|»»» id|integer|false|none|none|
-|»»» plan|object|false|none|none|
-|»»»» id|integer|false|none|none|
-|»»»» max_attachments_per_element|integer|false|none|none|
-|»»»» max_seats|integer|false|none|none|
-|»»»» name|string|false|none|none|
-|»»» quantity|integer|false|none|none|
-|» avatar_url|string|false|none|none|
-|» company|string|false|none|none|
-|» country|string|false|none|none|
-|» created_at|integer|false|none|none|
-|» email|string|false|none|none|
-|» first_name|string|false|none|none|
 |» id|integer|false|none|none|
-|» is_complete_setup|boolean|false|none|none|
-|» last_login|number|false|none|none|
+|» user_name|string|false|none|none|
+|» first_name|string|false|none|none|
 |» last_name|string|false|none|none|
+|» title|string|false|none|none|
+|» email|string|false|none|none|
+|» company|string|false|none|none|
 |» mobile|string|false|none|none|
+|» country|string|false|none|none|
 |» state|string|false|none|none|
+|» last_login|number|false|none|none|
+|» avatar_url|string|false|none|none|
+|» is_complete_setup|boolean|false|none|none|
+|» created_at|integer|false|none|none|
 |» teams|[object]|false|none|none|
-|»» account_id|integer|false|none|none|
-|»» budget_status|integer|false|none|none|
 |»» id|integer|false|none|none|
-|»» labor_rate|float|false|none|none|
-|»» margin_range|float|false|none|none|
 |»» name|string|false|none|none|
+|»» account_id|integer|false|none|none|
 |»» role|string|false|none|none|
 |»» unit|string|false|none|none|
-|» title|string|false|none|none|
-|» user_name|string|false|none|none|
+|»» labor_rate|float|false|none|none|
+|»» budget_status|integer|false|none|none|
+|»» margin_range|float|false|none|none|
+|» accounts|[object]|false|none|none|
+|»» id|integer|false|none|none|
+|»» company|string|false|none|none|
+|»» is_trial|boolean|false|none|none|
+|»» is_free|boolean|false|none|none|
+|»» cancel_requested|boolean|false|none|none|
+|»» subscription|object|false|none|none|
+|»»» id|integer|false|none|none|
+|»»» quantity|integer|false|none|none|
+|»»» end_date|integer|false|none|none|
+|»»» plan|object|false|none|none|
+|»»»» id|integer|false|none|none|
+|»»»» name|string|false|none|none|
+|»»»» max_seats|integer|false|none|none|
+|»»»» max_attachments_per_element|integer|false|none|none|
+|»» features|object|false|none|none|
+|»»» comments|boolean|false|none|none|
+|»»» site_tagging|boolean|false|none|none|
+|»»» report_custom_watermark|boolean|false|none|none|
+|»»» exclude_powered_by|boolean|false|none|none|
+|»»» sso|boolean|false|none|none|
+|»»» hidden_attributes|boolean|false|none|none|
+|»»» site_access_permissions|boolean|false|none|none|
+|»»» multiple_teams|boolean|false|none|none|
+|»»» report_include_ssv_logo|boolean|false|none|none|
+|»»» report_include_company_logo|boolean|false|none|none|
+|»»» guest_user|boolean|false|none|none|
+|»»» add_folder|boolean|false|none|none|
+|»»» export_survey|boolean|false|none|none|
+|»»» report_export_excel|boolean|false|none|none|
+|»»» report_require_ssv_watermark|boolean|false|none|none|
+|»»» v2_survey|boolean|false|none|none|
+|»»» public_api|boolean|false|none|none|
 
 #### Enumerated Values
 
@@ -3492,15 +3502,15 @@ public class HttpExample
 
 ```json
 {
-  "city": "string",
-  "company": "string",
-  "country": "string",
   "first_name": "string",
   "last_name": "string",
+  "user_name": "string",
+  "company": "string",
   "mobile": "string",
-  "state": "string",
   "title": "string",
-  "user_name": "string"
+  "country": "string",
+  "state": "string",
+  "city": "string"
 }
 ```
 
@@ -3509,15 +3519,15 @@ public class HttpExample
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|object|true|none|
-|» city|body|string|false|none|
-|» company|body|string|false|none|
-|» country|body|string|false|none|
 |» first_name|body|string|false|none|
 |» last_name|body|string|false|none|
-|» mobile|body|string|false|none|
-|» state|body|string|false|none|
-|» title|body|string|false|none|
 |» user_name|body|string|false|none|
+|» company|body|string|false|none|
+|» mobile|body|string|false|none|
+|» title|body|string|false|none|
+|» country|body|string|false|none|
+|» state|body|string|false|none|
+|» city|body|string|false|none|
 
 > Example responses
 
@@ -3525,47 +3535,47 @@ public class HttpExample
 
 ```json
 {
-  "accounts": [
-    {
-      "cancel_requested": true,
-      "company": "string",
-      "features": {
-        "comments": true,
-        "multiple_teams": true,
-        "site_access_permissions": true,
-        "site_tagging": true
-      },
-      "id": 450495,
-      "is_free": true,
-      "is_trial": true
-    }
-  ],
-  "avatar_url": "string",
-  "company": "System Surveyor",
-  "country": "string",
-  "created_at": 0,
-  "email": "foobar@gmail.com",
-  "first_name": "John",
   "id": 12094,
-  "is_complete_setup": true,
-  "last_login": 0,
+  "user_name": "foobar",
+  "first_name": "John",
   "last_name": "Doe",
+  "title": "CEO",
+  "email": "foobar@gmail.com",
+  "company": "System Surveyor",
   "mobile": "910-423-345",
+  "country": "string",
   "state": "string",
+  "last_login": 0,
+  "avatar_url": "string",
+  "is_complete_setup": true,
+  "created_at": 0,
   "teams": [
     {
-      "account_id": 995,
-      "budget_status": 0,
       "id": 112,
-      "labor_rate": null,
-      "margin_range": null,
       "name": "John's Team",
+      "account_id": 995,
       "role": "team_member",
-      "unit": "metric"
+      "unit": "metric",
+      "labor_rate": null,
+      "budget_status": 0,
+      "margin_range": null
     }
   ],
-  "title": "CEO",
-  "user_name": "foobar"
+  "accounts": [
+    {
+      "id": 450495,
+      "company": "string",
+      "is_trial": true,
+      "is_free": true,
+      "cancel_requested": true,
+      "features": {
+        "comments": true,
+        "site_tagging": true,
+        "multiple_teams": true,
+        "site_access_permissions": true
+      }
+    }
+  ]
 }
 ```
 
@@ -3583,40 +3593,40 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» accounts|[object]|false|none|none|
-|»» cancel_requested|boolean|false|none|none|
-|»» company|string|false|none|none|
-|»» features|object|false|none|none|
-|»»» comments|boolean|false|none|none|
-|»»» multiple_teams|boolean|false|none|none|
-|»»» site_access_permissions|boolean|false|none|none|
-|»»» site_tagging|boolean|false|none|none|
-|»» id|integer|false|none|none|
-|»» is_free|boolean|false|none|none|
-|»» is_trial|boolean|false|none|none|
-|» avatar_url|string|false|none|none|
-|» company|string|false|none|none|
-|» country|string|false|none|none|
-|» created_at|integer|false|none|none|
-|» email|string|false|none|none|
-|» first_name|string|false|none|none|
 |» id|integer|false|none|none|
-|» is_complete_setup|boolean|false|none|none|
-|» last_login|number|false|none|none|
+|» user_name|string|false|none|none|
+|» first_name|string|false|none|none|
 |» last_name|string|false|none|none|
+|» title|string|false|none|none|
+|» email|string|false|none|none|
+|» company|string|false|none|none|
 |» mobile|string|false|none|none|
+|» country|string|false|none|none|
 |» state|string|false|none|none|
+|» last_login|number|false|none|none|
+|» avatar_url|string|false|none|none|
+|» is_complete_setup|boolean|false|none|none|
+|» created_at|integer|false|none|none|
 |» teams|[object]|false|none|none|
-|»» account_id|integer|false|none|none|
-|»» budget_status|integer|false|none|none|
 |»» id|integer|false|none|none|
-|»» labor_rate|float|false|none|none|
-|»» margin_range|float|false|none|none|
 |»» name|string|false|none|none|
+|»» account_id|integer|false|none|none|
 |»» role|string|false|none|none|
 |»» unit|string|false|none|none|
-|» title|string|false|none|none|
-|» user_name|string|false|none|none|
+|»» labor_rate|float|false|none|none|
+|»» budget_status|integer|false|none|none|
+|»» margin_range|float|false|none|none|
+|» accounts|[object]|false|none|none|
+|»» id|integer|false|none|none|
+|»» company|string|false|none|none|
+|»» is_trial|boolean|false|none|none|
+|»» is_free|boolean|false|none|none|
+|»» cancel_requested|boolean|false|none|none|
+|»» features|object|false|none|none|
+|»»» comments|boolean|false|none|none|
+|»»» site_tagging|boolean|false|none|none|
+|»»» multiple_teams|boolean|false|none|none|
+|»»» site_access_permissions|boolean|false|none|none|
 
 #### Enumerated Values
 
@@ -3631,6 +3641,361 @@ This operation does not require authentication
 
 # Schemas
 
+<h2 id="tocS_UserResponse">UserResponse</h2>
+<!-- backwards compatibility -->
+<a id="schemauserresponse"></a>
+<a id="schema_UserResponse"></a>
+<a id="tocSuserresponse"></a>
+<a id="tocsuserresponse"></a>
+
+```json
+{
+  "first_name": "string",
+  "last_name": "string",
+  "user_id": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|first_name|string|false|none|none|
+|last_name|string|false|none|none|
+|user_id|integer|true|none|none|
+
+<h2 id="tocS_SiteSchema">SiteSchema</h2>
+<!-- backwards compatibility -->
+<a id="schemasiteschema"></a>
+<a id="schema_SiteSchema"></a>
+<a id="tocSsiteschema"></a>
+<a id="tocssiteschema"></a>
+
+```json
+{
+  "site_id": "string",
+  "is_archived": null,
+  "name": "string",
+  "legacy_site_id": 0,
+  "tags": [
+    "string"
+  ],
+  "zip_code": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "label": "string",
+  "modifier": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "created_at": null,
+  "modified_at": null,
+  "reference_id": "string",
+  "state": "string",
+  "street": "string",
+  "team_id": 0,
+  "city": "string",
+  "version": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|site_id|string|false|none|none|
+|is_archived|any|false|none|none|
+|name|string|true|none|none|
+|legacy_site_id|integer|false|read-only|none|
+|tags|[string]|false|none|none|
+|zip_code|string|false|none|none|
+|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
+|label|string|false|none|none|
+|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
+|created_at|null|false|read-only|none|
+|modified_at|null|false|read-only|none|
+|reference_id|string|false|none|none|
+|state|string|false|none|none|
+|street|string|false|none|none|
+|team_id|integer|true|none|none|
+|city|string|false|none|none|
+|version|integer|false|read-only|none|
+
+<h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
+<!-- backwards compatibility -->
+<a id="schemasharesiteorsurveyrequestschema"></a>
+<a id="schema_ShareSiteOrSurveyRequestSchema"></a>
+<a id="tocSsharesiteorsurveyrequestschema"></a>
+<a id="tocssharesiteorsurveyrequestschema"></a>
+
+```json
+{
+  "created_at": null,
+  "modified_at": null,
+  "emails": [
+    "user@example.com"
+  ],
+  "message": "string",
+  "expiration_date": null
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|created_at|null|false|read-only|none|
+|modified_at|null|false|read-only|none|
+|emails|[string]|true|none|none|
+|message|string|false|none|none|
+|expiration_date|any|true|none|none|
+
+<h2 id="tocS_SurveyFields">SurveyFields</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyfields"></a>
+<a id="schema_SurveyFields"></a>
+<a id="tocSsurveyfields"></a>
+<a id="tocssurveyfields"></a>
+
+```json
+{
+  "value": "string",
+  "field_id": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|value|string|true|none|none|
+|field_id|string|true|none|none|
+
+<h2 id="tocS_SurveyOptions">SurveyOptions</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyoptions"></a>
+<a id="schema_SurveyOptions"></a>
+<a id="tocSsurveyoptions"></a>
+<a id="tocssurveyoptions"></a>
+
+```json
+{
+  "value": true,
+  "id": "string",
+  "inputs": [
+    {
+      "value": "string",
+      "field_id": "string"
+    }
+  ],
+  "scope": "template",
+  "template_name": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|value|boolean|true|none|none|
+|id|string|true|none|none|
+|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
+|scope|string|true|none|none|
+|template_name|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|scope|template|
+|scope|model|
+|scope|content|
+
+<h2 id="tocS_SurveyReportRequestSchema">SurveyReportRequestSchema</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyreportrequestschema"></a>
+<a id="schema_SurveyReportRequestSchema"></a>
+<a id="tocSsurveyreportrequestschema"></a>
+<a id="tocssurveyreportrequestschema"></a>
+
+```json
+{
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "name": "string",
+  "is_site_report": false,
+  "site_id": "string",
+  "survey_ids": [
+    "string"
+  ],
+  "options": [
+    {
+      "value": true,
+      "id": "string",
+      "inputs": [
+        {
+          "value": "string",
+          "field_id": "string"
+        }
+      ],
+      "scope": "template",
+      "template_name": "string"
+    }
+  ],
+  "paper_size": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "custom_data": {},
+  "filters": [
+    {}
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|report_id|string(uuid)|true|none|none|
+|name|string|true|none|none|
+|is_site_report|boolean|false|none|none|
+|site_id|string|true|none|none|
+|survey_ids|[string]|false|none|none|
+|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
+|paper_size|string|false|none|none|
+|output|string|true|none|none|
+|is_excel|boolean|false|none|none|
+|custom_data|object|false|none|none|
+|filters|[object]|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|output|pdf|
+|output|html|
+|output|xls|
+
+<h2 id="tocS_SurveyReportRequestSchemaDeprecated">SurveyReportRequestSchemaDeprecated</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyreportrequestschemadeprecated"></a>
+<a id="schema_SurveyReportRequestSchemaDeprecated"></a>
+<a id="tocSsurveyreportrequestschemadeprecated"></a>
+<a id="tocssurveyreportrequestschemadeprecated"></a>
+
+```json
+{
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "name": "string",
+  "is_site_report": false,
+  "site_id": "string",
+  "options": [
+    {
+      "value": true,
+      "id": "string",
+      "inputs": [
+        {
+          "value": "string",
+          "field_id": "string"
+        }
+      ],
+      "scope": "template",
+      "template_name": "string"
+    }
+  ],
+  "paper_size": "string",
+  "output": "pdf",
+  "ids": [
+    "string"
+  ],
+  "custom_data": {},
+  "filters": [
+    {}
+  ],
+  "is_excel": false
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|report_id|string(uuid)|true|none|none|
+|name|string|true|none|none|
+|is_site_report|boolean|false|none|none|
+|site_id|string|true|none|none|
+|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
+|paper_size|string|false|none|none|
+|output|string|true|none|none|
+|ids|[string]|false|none|none|
+|custom_data|object|false|none|none|
+|filters|[object]|false|none|none|
+|is_excel|boolean|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|output|pdf|
+|output|html|
+|output|xls|
+
+<h2 id="tocS_Link">Link</h2>
+<!-- backwards compatibility -->
+<a id="schemalink"></a>
+<a id="schema_Link"></a>
+<a id="tocSlink"></a>
+<a id="tocslink"></a>
+
+```json
+{
+  "name": "string",
+  "url": "string",
+  "link_type": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|none|
+|url|string(url)|true|none|none|
+|link_type|integer|true|none|none|
+
+<h2 id="tocS_SubElement">SubElement</h2>
+<!-- backwards compatibility -->
+<a id="schemasubelement"></a>
+<a id="schema_SubElement"></a>
+<a id="tocSsubelement"></a>
+<a id="tocssubelement"></a>
+
+```json
+{
+  "element_id": "string",
+  "systemtype_id": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|element_id|string|true|none|none|
+|systemtype_id|string|true|none|none|
+
 <h2 id="tocS_Attribute">Attribute</h2>
 <!-- backwards compatibility -->
 <a id="schemaattribute"></a>
@@ -3640,8 +4005,8 @@ This operation does not require authentication
 
 ```json
 {
-  "attribute_id": 0,
-  "value": "string"
+  "value": "string",
+  "attribute_id": 0
 }
 
 ```
@@ -3650,22 +4015,21 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|attribute_id|integer|true|none|none|
 |value|string|true|none|none|
+|attribute_id|integer|true|none|none|
 
-<h2 id="tocS_CablePath">CablePath</h2>
+<h2 id="tocS_EPContent">EPContent</h2>
 <!-- backwards compatibility -->
-<a id="schemacablepath"></a>
-<a id="schema_CablePath"></a>
-<a id="tocScablepath"></a>
-<a id="tocscablepath"></a>
+<a id="schemaepcontent"></a>
+<a id="schema_EPContent"></a>
+<a id="tocSepcontent"></a>
+<a id="tocsepcontent"></a>
 
 ```json
 {
-  "a_side": null,
-  "id": "string",
-  "type": "string",
-  "z_side": null
+  "pdf_url": [],
+  "child": [],
+  "attribute": []
 }
 
 ```
@@ -3674,10 +4038,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|a_side|any|true|none|none|
-|id|string|true|none|none|
-|type|string|false|none|none|
-|z_side|any|true|none|none|
+|pdf_url|[[Link](#schemalink)]|false|none|none|
+|child|[[SubElement](#schemasubelement)]|false|none|none|
+|attribute|[[Attribute](#schemaattribute)]|false|none|none|
 
 <h2 id="tocS_EPAccessory">EPAccessory</h2>
 <!-- backwards compatibility -->
@@ -3688,14 +4051,14 @@ This operation does not require authentication
 
 ```json
 {
-  "created_at": null,
-  "description": "string",
-  "id": 0,
+  "manufacturer": "",
   "labor_hours": [
     0
   ],
-  "manufacturer": "",
   "model": "",
+  "id": 0,
+  "description": "string",
+  "created_at": null,
   "price": [
     0
   ]
@@ -3707,37 +4070,13 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|created_at|any|false|read-only|none|
-|description|string|true|none|none|
-|id|integer|false|read-only|none|
-|labor_hours|number,'null'|false|none|none|
 |manufacturer|string|false|none|none|
+|labor_hours|number,null|false|none|none|
 |model|string|false|none|none|
-|price|number,'null'|false|none|none|
-
-<h2 id="tocS_EPContent">EPContent</h2>
-<!-- backwards compatibility -->
-<a id="schemaepcontent"></a>
-<a id="schema_EPContent"></a>
-<a id="tocSepcontent"></a>
-<a id="tocsepcontent"></a>
-
-```json
-{
-  "attribute": [],
-  "child": [],
-  "pdf_url": []
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|attribute|[[Attribute](#schemaattribute)]|false|none|none|
-|child|[[SubElement](#schemasubelement)]|false|none|none|
-|pdf_url|[[Link](#schemalink)]|false|none|none|
+|id|integer|false|read-only|none|
+|description|string|true|none|none|
+|created_at|any|false|read-only|none|
+|price|number,null|false|none|none|
 
 <h2 id="tocS_ElementProfileSchema">ElementProfileSchema</h2>
 <!-- backwards compatibility -->
@@ -3748,35 +4087,35 @@ This operation does not require authentication
 
 ```json
 {
+  "name": "string",
+  "content": {
+    "pdf_url": [],
+    "child": [],
+    "attribute": []
+  },
+  "created_by": 0,
+  "id": 0,
+  "element_id": 0,
   "accessories": [
     {
-      "created_at": null,
-      "description": "string",
-      "id": 0,
+      "manufacturer": "",
       "labor_hours": [
         0
       ],
-      "manufacturer": "",
       "model": "",
+      "id": 0,
+      "description": "string",
+      "created_at": null,
       "price": [
         0
       ]
     }
   ],
-  "content": {
-    "attribute": [],
-    "child": [],
-    "pdf_url": []
-  },
   "created_at": null,
-  "created_by": 0,
-  "element_id": 0,
-  "id": 0,
-  "is_default": true,
   "modified_at": null,
-  "name": "string",
   "sort": 0,
-  "team_id": 0
+  "team_id": 0,
+  "is_default": true
 }
 
 ```
@@ -3785,17 +4124,17 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
-|content|[EPContent](#schemaepcontent)|true|none|none|
-|created_at|any|false|read-only|none|
-|created_by|integer|false|read-only|none|
-|element_id|integer|true|none|none|
-|id|integer|false|read-only|none|
-|is_default|boolean|false|none|none|
-|modified_at|any|false|read-only|none|
 |name|string|true|none|none|
+|content|[EPContent](#schemaepcontent)|true|none|none|
+|created_by|integer|false|read-only|none|
+|id|integer|false|read-only|none|
+|element_id|integer|true|none|none|
+|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
+|created_at|any|false|read-only|none|
+|modified_at|any|false|read-only|none|
 |sort|integer|false|none|none|
 |team_id|integer|true|none|none|
+|is_default|boolean|false|none|none|
 
 <h2 id="tocS_FolderSchema">FolderSchema</h2>
 <!-- backwards compatibility -->
@@ -3807,11 +4146,11 @@ This operation does not require authentication
 ```json
 {
   "id": "string",
-  "label": "string",
-  "name": "string",
-  "site_external_id": "string",
   "site_id": 0,
-  "team_id": 0
+  "team_id": 0,
+  "site_external_id": "string",
+  "name": "string",
+  "label": "string"
 }
 
 ```
@@ -3821,57 +4160,11 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|string|false|read-only|none|
-|label|string|false|none|none|
-|name|string|true|none|none|
-|site_external_id|string|false|write-only|none|
 |site_id|integer|false|read-only|none|
 |team_id|integer|false|none|none|
-
-<h2 id="tocS_Link">Link</h2>
-<!-- backwards compatibility -->
-<a id="schemalink"></a>
-<a id="schema_Link"></a>
-<a id="tocSlink"></a>
-<a id="tocslink"></a>
-
-```json
-{
-  "link_type": 0,
-  "name": "string",
-  "url": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|link_type|integer|true|none|none|
+|site_external_id|string|false|write-only|none|
 |name|string|true|none|none|
-|url|string(url)|true|none|none|
-
-<h2 id="tocS_PathConnection">PathConnection</h2>
-<!-- backwards compatibility -->
-<a id="schemapathconnection"></a>
-<a id="schema_PathConnection"></a>
-<a id="tocSpathconnection"></a>
-<a id="tocspathconnection"></a>
-
-```json
-{
-  "end": null,
-  "start": null
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|end|any|false|none|none|
-|start|any|false|none|none|
+|label|string|false|none|none|
 
 <h2 id="tocS_RelatedUser">RelatedUser</h2>
 <!-- backwards compatibility -->
@@ -3897,158 +4190,6 @@ This operation does not require authentication
 |last_name|string|false|none|none|
 |user_id|any|false|none|none|
 
-<h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
-<!-- backwards compatibility -->
-<a id="schemasharesiteorsurveyrequestschema"></a>
-<a id="schema_ShareSiteOrSurveyRequestSchema"></a>
-<a id="tocSsharesiteorsurveyrequestschema"></a>
-<a id="tocssharesiteorsurveyrequestschema"></a>
-
-```json
-{
-  "created_at": null,
-  "emails": [
-    "user@example.com"
-  ],
-  "expiration_date": null,
-  "message": "string",
-  "modified_at": null
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|created_at|'null'|false|read-only|none|
-|emails|[string]|true|none|none|
-|expiration_date|any|true|none|none|
-|message|string|false|none|none|
-|modified_at|'null'|false|read-only|none|
-
-<h2 id="tocS_SiteSchema">SiteSchema</h2>
-<!-- backwards compatibility -->
-<a id="schemasiteschema"></a>
-<a id="schema_SiteSchema"></a>
-<a id="tocSsiteschema"></a>
-<a id="tocssiteschema"></a>
-
-```json
-{
-  "city": "string",
-  "created_at": null,
-  "creator": {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": 0
-  },
-  "is_archived": null,
-  "label": "string",
-  "legacy_site_id": 0,
-  "modified_at": null,
-  "modifier": {
-    "first_name": "string",
-    "last_name": "string",
-    "user_id": 0
-  },
-  "name": "string",
-  "reference_id": "string",
-  "site_id": "string",
-  "state": "string",
-  "street": "string",
-  "tags": [
-    "string"
-  ],
-  "team_id": 0,
-  "version": 0,
-  "zip_code": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|city|string|false|none|none|
-|created_at|'null'|false|read-only|none|
-|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
-|is_archived|any|false|none|none|
-|label|string|false|none|none|
-|legacy_site_id|integer|false|read-only|none|
-|modified_at|'null'|false|read-only|none|
-|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
-|name|string|true|none|none|
-|reference_id|string|false|none|none|
-|site_id|string|false|none|none|
-|state|string|false|none|none|
-|street|string|false|none|none|
-|tags|[string]|false|none|none|
-|team_id|integer|true|none|none|
-|version|integer|false|read-only|none|
-|zip_code|string|false|none|none|
-
-<h2 id="tocS_SubElement">SubElement</h2>
-<!-- backwards compatibility -->
-<a id="schemasubelement"></a>
-<a id="schema_SubElement"></a>
-<a id="tocSsubelement"></a>
-<a id="tocssubelement"></a>
-
-```json
-{
-  "element_id": "string",
-  "systemtype_id": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|element_id|string|true|none|none|
-|systemtype_id|string|true|none|none|
-
-<h2 id="tocS_SurveyAnnotation">SurveyAnnotation</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyannotation"></a>
-<a id="schema_SurveyAnnotation"></a>
-<a id="tocSsurveyannotation"></a>
-<a id="tocssurveyannotation"></a>
-
-```json
-{
-  "category": null,
-  "end_point": null,
-  "font_size": "string",
-  "id": "string",
-  "location": null,
-  "size": "string",
-  "start_point": null,
-  "stroke_color": "string",
-  "stroke_width": "string",
-  "text": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|category|any|true|none|none|
-|end_point|any|false|none|none|
-|font_size|string|false|none|none|
-|id|string|false|read-only|none|
-|location|any|true|none|none|
-|size|string|false|none|none|
-|start_point|any|false|none|none|
-|stroke_color|string|true|none|none|
-|stroke_width|string|true|none|none|
-|text|string|false|none|none|
-
 <h2 id="tocS_SurveyAttribute">SurveyAttribute</h2>
 <!-- backwards compatibility -->
 <a id="schemasurveyattribute"></a>
@@ -4058,10 +4199,10 @@ This operation does not require authentication
 
 ```json
 {
-  "attribute_id": 0,
-  "id": 0,
   "name": "string",
-  "value": "string"
+  "value": "string",
+  "attribute_id": 0,
+  "id": 0
 }
 
 ```
@@ -4070,10 +4211,116 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|attribute_id|integer|true|none|none|
-|id|integer|false|read-only|none|
 |name|string|true|none|none|
 |value|string|true|none|none|
+|attribute_id|integer|true|none|none|
+|id|integer|false|read-only|none|
+
+<h2 id="tocS_SurveyElementAccessory">SurveyElementAccessory</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyelementaccessory"></a>
+<a id="schema_SurveyElementAccessory"></a>
+<a id="tocSsurveyelementaccessory"></a>
+<a id="tocssurveyelementaccessory"></a>
+
+```json
+{
+  "model": "string",
+  "id": "string",
+  "labor_hours": 0,
+  "description": "string",
+  "price": null,
+  "quantity": null,
+  "manufacturer": "string",
+  "row_index": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|model|string|true|none|none|
+|id|string|false|read-only|none|
+|labor_hours|number|false|none|none|
+|description|string|false|none|none|
+|price|any|false|none|none|
+|quantity|any|false|none|none|
+|manufacturer|string|true|none|none|
+|row_index|integer|true|none|none|
+
+<h2 id="tocS_CablePath">CablePath</h2>
+<!-- backwards compatibility -->
+<a id="schemacablepath"></a>
+<a id="schema_CablePath"></a>
+<a id="tocScablepath"></a>
+<a id="tocscablepath"></a>
+
+```json
+{
+  "id": "string",
+  "z_side": null,
+  "a_side": null,
+  "type": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|true|none|none|
+|z_side|any|true|none|none|
+|a_side|any|true|none|none|
+|type|string|false|none|none|
+
+<h2 id="tocS_PathConnection">PathConnection</h2>
+<!-- backwards compatibility -->
+<a id="schemapathconnection"></a>
+<a id="schema_PathConnection"></a>
+<a id="tocSpathconnection"></a>
+<a id="tocspathconnection"></a>
+
+```json
+{
+  "end": null,
+  "start": null
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|end|any|false|none|none|
+|start|any|false|none|none|
+
+<h2 id="tocS_SurveyElementActivityLog">SurveyElementActivityLog</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyelementactivitylog"></a>
+<a id="schema_SurveyElementActivityLog"></a>
+<a id="tocSsurveyelementactivitylog"></a>
+<a id="tocssurveyelementactivitylog"></a>
+
+```json
+{
+  "entry": "string",
+  "date": null,
+  "id": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|entry|string|false|none|none|
+|date|any|false|read-only|none|
+|id|string|false|read-only|none|
 
 <h2 id="tocS_SurveyElement">SurveyElement</h2>
 <!-- backwards compatibility -->
@@ -4101,21 +4348,21 @@ This operation does not require authentication
   ],
   "attributes": [
     {
-      "attribute_id": 0,
-      "id": 0,
       "name": "string",
-      "value": "string"
+      "value": "string",
+      "attribute_id": 0,
+      "id": 0
     }
   ],
   "accessories": [
     {
-      "description": "string",
+      "model": "string",
       "id": "string",
       "labor_hours": 0,
-      "manufacturer": "string",
-      "model": "string",
+      "description": "string",
       "price": null,
       "quantity": null,
+      "manufacturer": "string",
       "row_index": 0
     }
   ],
@@ -4138,31 +4385,31 @@ This operation does not require authentication
       ],
       "attributes": [
         {
-          "attribute_id": 0,
-          "id": 0,
           "name": "string",
-          "value": "string"
+          "value": "string",
+          "attribute_id": 0,
+          "id": 0
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "model": "string",
           "id": "string",
           "labor_hours": 0,
-          "manufacturer": "string",
-          "model": "string",
+          "description": "string",
           "price": null,
           "quantity": null,
+          "manufacturer": "string",
           "row_index": 0
         }
       ],
       "children": [],
       "cables": [
         {
-          "a_side": null,
           "id": "string",
-          "type": "string",
-          "z_side": null
+          "z_side": null,
+          "a_side": null,
+          "type": "string"
         }
       ],
       "connections": {
@@ -4171,8 +4418,8 @@ This operation does not require authentication
       },
       "activity_log": [
         {
-          "date": null,
           "entry": "string",
+          "date": null,
           "id": "string"
         }
       ]
@@ -4180,10 +4427,10 @@ This operation does not require authentication
   ],
   "cables": [
     {
-      "a_side": null,
       "id": "string",
-      "type": "string",
-      "z_side": null
+      "z_side": null,
+      "a_side": null,
+      "type": "string"
     }
   ],
   "connections": {
@@ -4192,8 +4439,8 @@ This operation does not require authentication
   },
   "activity_log": [
     {
-      "date": null,
       "entry": "string",
+      "date": null,
       "id": "string"
     }
   ]
@@ -4223,23 +4470,25 @@ This operation does not require authentication
 |connections|[PathConnection](#schemapathconnection)|false|none|none|
 |activity_log|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|none|
 
-<h2 id="tocS_SurveyElementAccessory">SurveyElementAccessory</h2>
+<h2 id="tocS_SurveyAnnotation">SurveyAnnotation</h2>
 <!-- backwards compatibility -->
-<a id="schemasurveyelementaccessory"></a>
-<a id="schema_SurveyElementAccessory"></a>
-<a id="tocSsurveyelementaccessory"></a>
-<a id="tocssurveyelementaccessory"></a>
+<a id="schemasurveyannotation"></a>
+<a id="schema_SurveyAnnotation"></a>
+<a id="tocSsurveyannotation"></a>
+<a id="tocssurveyannotation"></a>
 
 ```json
 {
-  "description": "string",
+  "stroke_width": "string",
+  "stroke_color": "string",
   "id": "string",
-  "labor_hours": 0,
-  "manufacturer": "string",
-  "model": "string",
-  "price": null,
-  "quantity": null,
-  "row_index": 0
+  "start_point": null,
+  "category": null,
+  "location": null,
+  "font_size": "string",
+  "size": "string",
+  "text": "string",
+  "end_point": null
 }
 
 ```
@@ -4248,231 +4497,16 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
+|stroke_width|string|true|none|none|
+|stroke_color|string|true|none|none|
 |id|string|false|read-only|none|
-|labor_hours|number|false|none|none|
-|manufacturer|string|true|none|none|
-|model|string|true|none|none|
-|price|any|false|none|none|
-|quantity|any|false|none|none|
-|row_index|integer|true|none|none|
-
-<h2 id="tocS_SurveyElementActivityLog">SurveyElementActivityLog</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyelementactivitylog"></a>
-<a id="schema_SurveyElementActivityLog"></a>
-<a id="tocSsurveyelementactivitylog"></a>
-<a id="tocssurveyelementactivitylog"></a>
-
-```json
-{
-  "date": null,
-  "entry": "string",
-  "id": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|date|any|false|read-only|none|
-|entry|string|false|none|none|
-|id|string|false|read-only|none|
-
-<h2 id="tocS_SurveyFields">SurveyFields</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyfields"></a>
-<a id="schema_SurveyFields"></a>
-<a id="tocSsurveyfields"></a>
-<a id="tocssurveyfields"></a>
-
-```json
-{
-  "field_id": "string",
-  "value": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|field_id|string|true|none|none|
-|value|string|true|none|none|
-
-<h2 id="tocS_SurveyOptions">SurveyOptions</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyoptions"></a>
-<a id="schema_SurveyOptions"></a>
-<a id="tocSsurveyoptions"></a>
-<a id="tocssurveyoptions"></a>
-
-```json
-{
-  "id": "string",
-  "inputs": [
-    {
-      "field_id": "string",
-      "value": "string"
-    }
-  ],
-  "scope": "template",
-  "template_name": "string",
-  "value": true
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string|true|none|none|
-|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
-|scope|string|true|none|none|
-|template_name|string|false|none|none|
-|value|boolean|true|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|scope|template|
-|scope|model|
-|scope|content|
-
-<h2 id="tocS_SurveyReportRequestSchema">SurveyReportRequestSchema</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyreportrequestschema"></a>
-<a id="schema_SurveyReportRequestSchema"></a>
-<a id="tocSsurveyreportrequestschema"></a>
-<a id="tocssurveyreportrequestschema"></a>
-
-```json
-{
-  "custom_data": {},
-  "filters": [
-    {}
-  ],
-  "is_excel": false,
-  "is_site_report": false,
-  "name": "string",
-  "options": [
-    {
-      "id": "string",
-      "inputs": [
-        {
-          "field_id": "string",
-          "value": "string"
-        }
-      ],
-      "scope": "template",
-      "template_name": "string",
-      "value": true
-    }
-  ],
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "site_id": "string",
-  "survey_ids": [
-    "string"
-  ]
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|custom_data|object|false|none|none|
-|filters|[object]|false|none|none|
-|is_excel|boolean|false|none|none|
-|is_site_report|boolean|false|none|none|
-|name|string|true|none|none|
-|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|output|string|true|none|none|
-|paper_size|string|false|none|none|
-|report_id|string(uuid)|true|none|none|
-|site_id|string|true|none|none|
-|survey_ids|[string]|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|output|pdf|
-|output|html|
-|output|xls|
-
-<h2 id="tocS_SurveyReportRequestSchemaDeprecated">SurveyReportRequestSchemaDeprecated</h2>
-<!-- backwards compatibility -->
-<a id="schemasurveyreportrequestschemadeprecated"></a>
-<a id="schema_SurveyReportRequestSchemaDeprecated"></a>
-<a id="tocSsurveyreportrequestschemadeprecated"></a>
-<a id="tocssurveyreportrequestschemadeprecated"></a>
-
-```json
-{
-  "custom_data": {},
-  "filters": [
-    {}
-  ],
-  "ids": [
-    "string"
-  ],
-  "is_excel": false,
-  "is_site_report": false,
-  "name": "string",
-  "options": [
-    {
-      "id": "string",
-      "inputs": [
-        {
-          "field_id": "string",
-          "value": "string"
-        }
-      ],
-      "scope": "template",
-      "template_name": "string",
-      "value": true
-    }
-  ],
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "site_id": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|custom_data|object|false|none|none|
-|filters|[object]|false|none|none|
-|ids|[string]|false|none|none|
-|is_excel|boolean|false|none|none|
-|is_site_report|boolean|false|none|none|
-|name|string|true|none|none|
-|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|output|string|true|none|none|
-|paper_size|string|false|none|none|
-|report_id|string(uuid)|true|none|none|
-|site_id|string|true|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|output|pdf|
-|output|html|
-|output|xls|
+|start_point|any|false|none|none|
+|category|any|true|none|none|
+|location|any|true|none|none|
+|font_size|string|false|none|none|
+|size|string|false|none|none|
+|text|string|false|none|none|
+|end_point|any|false|none|none|
 
 <h2 id="tocS_SurveySchema">SurveySchema</h2>
 <!-- backwards compatibility -->
@@ -4501,6 +4535,7 @@ This operation does not require authentication
   "floorplan_scale": 0,
   "preview_image": "string",
   "floorplan_url": "string",
+  "sync_status": "synced",
   "creator": 0,
   "editor": {
     "first_name": "string",
@@ -4529,21 +4564,21 @@ This operation does not require authentication
       ],
       "attributes": [
         {
-          "attribute_id": 0,
-          "id": 0,
           "name": "string",
-          "value": "string"
+          "value": "string",
+          "attribute_id": 0,
+          "id": 0
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "model": "string",
           "id": "string",
           "labor_hours": 0,
-          "manufacturer": "string",
-          "model": "string",
+          "description": "string",
           "price": null,
           "quantity": null,
+          "manufacturer": "string",
           "row_index": 0
         }
       ],
@@ -4552,10 +4587,10 @@ This operation does not require authentication
       ],
       "cables": [
         {
-          "a_side": null,
           "id": "string",
-          "type": "string",
-          "z_side": null
+          "z_side": null,
+          "a_side": null,
+          "type": "string"
         }
       ],
       "connections": {
@@ -4564,8 +4599,8 @@ This operation does not require authentication
       },
       "activity_log": [
         {
-          "date": null,
           "entry": "string",
+          "date": null,
           "id": "string"
         }
       ]
@@ -4573,16 +4608,16 @@ This operation does not require authentication
   ],
   "annotations": [
     {
-      "category": null,
-      "end_point": null,
-      "font_size": "string",
-      "id": "string",
-      "location": null,
-      "size": "string",
-      "start_point": null,
-      "stroke_color": "string",
       "stroke_width": "string",
-      "text": "string"
+      "stroke_color": "string",
+      "id": "string",
+      "start_point": null,
+      "category": null,
+      "location": null,
+      "font_size": "string",
+      "size": "string",
+      "text": "string",
+      "end_point": null
     }
   ],
   "users": null
@@ -4612,6 +4647,7 @@ This operation does not require authentication
 |floorplan_scale|number|false|none|none|
 |preview_image|string|false|read-only|none|
 |floorplan_url|string|false|read-only|none|
+|sync_status|any|false|read-only|none|
 |creator|integer|false|read-only|none|
 |editor|[RelatedUser](#schemarelateduser)|false|read-only|none|
 |modifier|integer|false|read-only|none|
@@ -4621,27 +4657,11 @@ This operation does not require authentication
 |annotations|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|none|
 |users|any|false|read-only|none|
 
-<h2 id="tocS_UserResponse">UserResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemauserresponse"></a>
-<a id="schema_UserResponse"></a>
-<a id="tocSuserresponse"></a>
-<a id="tocsuserresponse"></a>
+#### Enumerated Values
 
-```json
-{
-  "first_name": "string",
-  "last_name": "string",
-  "user_id": 0
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|first_name|string|false|none|none|
-|last_name|string|false|none|none|
-|user_id|integer|true|none|none|
+|Property|Value|
+|---|---|
+|sync_status|synced|
+|sync_status|pending|
+|sync_status|errored|
 
