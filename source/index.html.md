@@ -316,7 +316,8 @@ jwt
 # You can also use wget
 curl -X PUT /v3/folder/{folder_id} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -324,7 +325,8 @@ curl -X PUT /v3/folder/{folder_id} \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.put('/v3/folder/{folder_id}', headers = headers)
@@ -368,9 +370,9 @@ public class HttpExample
       
       string json = @"{
   ""name"": ""string"",
-  ""site_external_id"": ""string"",
   ""team_id"": 0,
-  ""label"": ""string""
+  ""label"": ""string"",
+  ""site_external_id"": ""string""
 }";
       FolderSchema content = JsonConvert.DeserializeObject(json);
       var result = await PutAsync(id, content, url);
@@ -425,9 +427,9 @@ pass a value for `site_id` field.
 ```json
 {
   "name": "string",
-  "site_external_id": "string",
   "team_id": 0,
-  "label": "string"
+  "label": "string",
+  "site_external_id": "string"
 }
 ```
 
@@ -438,11 +440,11 @@ pass a value for `site_id` field.
 |folder_id|path|string|true|Folder ID|
 |body|body|[FolderSchema](#schemafolderschema)|true|none|
 |» name|body|string|true|none|
+|» site_id|body|integer|false|none|
+|» team_id|body|integer|false|none|
+|» label|body|string|false|none|
 |» site_external_id|body|string|false|none|
 |» id|body|string|false|none|
-|» team_id|body|integer|false|none|
-|» site_id|body|integer|false|none|
-|» label|body|string|false|none|
 
 > Example responses
 
@@ -451,10 +453,10 @@ pass a value for `site_id` field.
 ```json
 {
   "name": "string",
-  "id": "string",
-  "team_id": 0,
   "site_id": 0,
-  "label": "string"
+  "team_id": 0,
+  "label": "string",
+  "id": "string"
 }
 ```
 
@@ -468,8 +470,9 @@ pass a value for `site_id` field.
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Soft deletes a site folder or a survey folder.
@@ -480,14 +483,18 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/folder/{folder_id}
+curl -X DELETE /v3/folder/{folder_id} \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
 
-r = requests.delete('/v3/folder/{folder_id}')
+r = requests.delete('/v3/folder/{folder_id}', headers = headers)
 
 print(r.json())
 
@@ -575,8 +582,9 @@ folders.
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Creates a new folder that can hold sites
@@ -589,7 +597,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST /v3/site_folder \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -597,7 +606,8 @@ curl -X POST /v3/site_folder \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.post('/v3/site_folder', headers = headers)
@@ -704,10 +714,10 @@ public class HttpExample
 ```json
 {
   "name": "string",
-  "id": "string",
-  "team_id": 0,
   "site_id": 0,
-  "label": "string"
+  "team_id": 0,
+  "label": "string",
+  "id": "string"
 }
 ```
 
@@ -719,8 +729,9 @@ public class HttpExample
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Update all fields of a folder
@@ -733,7 +744,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X PATCH /v3/site_folder/{folder_external_id} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -741,7 +753,8 @@ curl -X PATCH /v3/site_folder/{folder_external_id} \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.patch('/v3/site_folder/{folder_external_id}', headers = headers)
@@ -818,10 +831,10 @@ public class HttpExample
 ```json
 {
   "name": "string",
-  "id": "string",
-  "team_id": 0,
   "site_id": 0,
-  "label": "string"
+  "team_id": 0,
+  "label": "string",
+  "id": "string"
 }
 ```
 
@@ -833,8 +846,9 @@ public class HttpExample
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Allows creating folders inside a site, which can store and organize surveys
@@ -847,7 +861,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X POST /v3/{site_id}/folder \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -855,7 +870,8 @@ curl -X POST /v3/{site_id}/folder \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.post('/v3/{site_id}/folder', headers = headers)
@@ -961,10 +977,10 @@ public class HttpExample
 ```json
 {
   "name": "string",
-  "id": "string",
-  "team_id": 0,
   "site_id": 0,
-  "label": "string"
+  "team_id": 0,
+  "label": "string",
+  "id": "string"
 }
 ```
 
@@ -976,8 +992,9 @@ public class HttpExample
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Deletes a survey folder in a site.
@@ -988,14 +1005,18 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/survey_folder/{folder_id}
+curl -X DELETE /v3/survey_folder/{folder_id} \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
 
-r = requests.delete('/v3/survey_folder/{folder_id}')
+r = requests.delete('/v3/survey_folder/{folder_id}', headers = headers)
 
 print(r.json())
 
@@ -1081,8 +1102,9 @@ Only team members with write access can delete survey folders.
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Soft deletes a folder that can contain sites.
@@ -1093,14 +1115,18 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/site_folder/{folder_id}
+curl -X DELETE /v3/site_folder/{folder_id} \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
 
-r = requests.delete('/v3/site_folder/{folder_id}')
+r = requests.delete('/v3/site_folder/{folder_id}', headers = headers)
 
 print(r.json())
 
@@ -1185,8 +1211,9 @@ Folder must be empty in order to be deleted. Only account admins, team admins, a
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 <h1 id="system-surveyor-api-reports">Reports</h1>
@@ -1200,14 +1227,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X POST /v3/report \
-  -H 'Content-Type: application/json'
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.post('/v3/report', headers = headers)
@@ -1247,34 +1276,34 @@ public class HttpExample
       string url = "/v3/report";
       
       string json = @"{
-  ""name"": ""string"",
-  ""survey_ids"": [
-    ""string""
-  ],
-  ""output"": ""pdf"",
-  ""paper_size"": ""string"",
-  ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
   ""options"": [
     {
-      ""id"": ""string"",
       ""scope"": ""template"",
-      ""template_name"": ""string"",
       ""inputs"": [
         {
           ""field_id"": ""string"",
           ""value"": ""string""
         }
       ],
+      ""template_name"": ""string"",
+      ""id"": ""string"",
       ""value"": true
     }
   ],
-  ""is_excel"": false,
+  ""paper_size"": ""string"",
+  ""survey_ids"": [
+    ""string""
+  ],
   ""site_id"": ""string"",
-  ""custom_data"": {},
+  ""is_site_report"": false,
+  ""is_excel"": false,
+  ""name"": ""string"",
+  ""output"": ""pdf"",
   ""filters"": [
     {}
   ],
-  ""is_site_report"": false
+  ""custom_data"": {},
+  ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971""
 }";
       SurveyReportRequestSchema content = JsonConvert.DeserializeObject(json);
       await PostAsync(content, url);
@@ -1325,34 +1354,34 @@ Reports are created by an external PHP service by picking up messages from the q
 
 ```json
 {
-  "name": "string",
-  "survey_ids": [
-    "string"
-  ],
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
   "options": [
     {
-      "id": "string",
       "scope": "template",
-      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
+      "template_name": "string",
+      "id": "string",
       "value": true
     }
   ],
-  "is_excel": false,
+  "paper_size": "string",
+  "survey_ids": [
+    "string"
+  ],
   "site_id": "string",
-  "custom_data": {},
+  "is_site_report": false,
+  "is_excel": false,
+  "name": "string",
+  "output": "pdf",
   "filters": [
     {}
   ],
-  "is_site_report": false
+  "custom_data": {},
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971"
 }
 ```
 
@@ -1361,35 +1390,35 @@ Reports are created by an external PHP service by picking up messages from the q
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[SurveyReportRequestSchema](#schemasurveyreportrequestschema)|true|none|
-|» name|body|string|true|none|
-|» survey_ids|body|[string]|false|none|
-|» output|body|string|true|none|
-|» paper_size|body|string|false|none|
-|» report_id|body|string(uuid)|true|none|
 |» options|body|[[SurveyOptions](#schemasurveyoptions)]|false|none|
-|»» id|body|string|true|none|
 |»» scope|body|string|true|none|
-|»» template_name|body|string|false|none|
 |»» inputs|body|[[SurveyFields](#schemasurveyfields)]|false|none|
 |»»» field_id|body|string|true|none|
 |»»» value|body|string|true|none|
+|»» template_name|body|string|false|none|
+|»» id|body|string|true|none|
 |»» value|body|boolean|true|none|
-|» is_excel|body|boolean|false|none|
+|» paper_size|body|string|false|none|
+|» survey_ids|body|[string]|false|none|
 |» site_id|body|string|true|none|
-|» custom_data|body|object|false|none|
-|» filters|body|[object]|false|none|
 |» is_site_report|body|boolean|false|none|
+|» is_excel|body|boolean|false|none|
+|» name|body|string|true|none|
+|» output|body|string|true|none|
+|» filters|body|[object]|false|none|
+|» custom_data|body|object|false|none|
+|» report_id|body|string(uuid)|true|none|
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|» output|pdf|
-|» output|html|
-|» output|xls|
 |»» scope|template|
 |»» scope|model|
 |»» scope|content|
+|» output|pdf|
+|» output|html|
+|» output|xls|
 
 <h3 id="queues-a-message-for-creating-reports-for-sites-or-surveys-responses">Responses</h3>
 
@@ -1400,8 +1429,9 @@ Reports are created by an external PHP service by picking up messages from the q
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 <h1 id="system-surveyor-api-sites">Sites</h1>
@@ -1415,14 +1445,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET /v3/site/{site_id} \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.get('/v3/site/{site_id}', headers = headers)
@@ -1572,8 +1604,9 @@ Status Code **200**
 |» created_at|integer|false|none|none|
 |» modified_at|integer|false|none|none|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Creates a new site with a specific `external_id` or updates the site if it already exists
@@ -1585,14 +1618,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X PUT /v3/site/{site_id} \
-  -H 'Content-Type: application/json'
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.put('/v3/site/{site_id}', headers = headers)
@@ -1635,19 +1670,19 @@ public class HttpExample
 
       
       string json = @"{
-  ""city"": ""string"",
-  ""reference_id"": ""string"",
-  ""site_id"": ""string"",
-  ""name"": ""string"",
   ""zip_code"": ""string"",
-  ""state"": ""string"",
   ""label"": ""string"",
+  ""street"": ""string"",
+  ""reference_id"": ""string"",
+  ""team_id"": 0,
+  ""name"": ""string"",
+  ""site_id"": ""string"",
+  ""city"": ""string"",
   ""tags"": [
     ""string""
   ],
-  ""street"": ""string"",
-  ""is_archived"": null,
-  ""team_id"": 0
+  ""state"": ""string"",
+  ""is_archived"": null
 }";
       SiteSchema content = JsonConvert.DeserializeObject(json);
       var result = await PutAsync(id, content, url);
@@ -1700,19 +1735,19 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 
 ```json
 {
-  "city": "string",
-  "reference_id": "string",
-  "site_id": "string",
-  "name": "string",
   "zip_code": "string",
-  "state": "string",
   "label": "string",
+  "street": "string",
+  "reference_id": "string",
+  "team_id": 0,
+  "name": "string",
+  "site_id": "string",
+  "city": "string",
   "tags": [
     "string"
   ],
-  "street": "string",
-  "is_archived": null,
-  "team_id": 0
+  "state": "string",
+  "is_archived": null
 }
 ```
 
@@ -1722,29 +1757,29 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» city|body|string|false|none|
-|» reference_id|body|string|false|none|
-|» created_at|body|null|false|none|
-|» site_id|body|string|false|none|
-|» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
-|» name|body|string|true|none|
+|» version|body|integer|false|none|
 |» zip_code|body|string|false|none|
-|» state|body|string|false|none|
-|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» first_name|body|string|false|none|
+|» label|body|string|false|none|
+|» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
-|» label|body|string|false|none|
-|» modified_at|body|null|false|none|
-|» tags|body|[string]|false|none|
+|»» first_name|body|string|false|none|
 |» street|body|string|false|none|
-|» is_archived|body|any|false|none|
+|» reference_id|body|string|false|none|
 |» legacy_site_id|body|integer|false|none|
 |» team_id|body|integer|true|none|
-|» version|body|integer|false|none|
+|» name|body|string|true|none|
+|» site_id|body|string|false|none|
+|» city|body|string|false|none|
+|» tags|body|[string]|false|none|
+|» state|body|string|false|none|
+|» modified_at|body|null|false|none|
+|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
+|»» user_id|body|integer|true|none|
+|»» last_name|body|string|false|none|
+|»» first_name|body|string|false|none|
+|» created_at|body|null|false|none|
+|» is_archived|body|any|false|none|
 
 <h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
 
@@ -1756,8 +1791,9 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Update specific fields of a site
@@ -1769,14 +1805,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X PATCH /v3/site/{site_id} \
-  -H 'Content-Type: application/json'
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.patch('/v3/site/{site_id}', headers = headers)
@@ -1832,19 +1870,19 @@ public class HttpExample
 
 ```json
 {
-  "city": "string",
-  "reference_id": "string",
-  "site_id": "string",
-  "name": "string",
   "zip_code": "string",
-  "state": "string",
   "label": "string",
+  "street": "string",
+  "reference_id": "string",
+  "team_id": 0,
+  "name": "string",
+  "site_id": "string",
+  "city": "string",
   "tags": [
     "string"
   ],
-  "street": "string",
-  "is_archived": null,
-  "team_id": 0
+  "state": "string",
+  "is_archived": null
 }
 ```
 
@@ -1854,29 +1892,29 @@ public class HttpExample
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» city|body|string|false|none|
-|» reference_id|body|string|false|none|
-|» created_at|body|null|false|none|
-|» site_id|body|string|false|none|
-|» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
-|» name|body|string|true|none|
+|» version|body|integer|false|none|
 |» zip_code|body|string|false|none|
-|» state|body|string|false|none|
-|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» first_name|body|string|false|none|
+|» label|body|string|false|none|
+|» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
-|» label|body|string|false|none|
-|» modified_at|body|null|false|none|
-|» tags|body|[string]|false|none|
+|»» first_name|body|string|false|none|
 |» street|body|string|false|none|
-|» is_archived|body|any|false|none|
+|» reference_id|body|string|false|none|
 |» legacy_site_id|body|integer|false|none|
 |» team_id|body|integer|true|none|
-|» version|body|integer|false|none|
+|» name|body|string|true|none|
+|» site_id|body|string|false|none|
+|» city|body|string|false|none|
+|» tags|body|[string]|false|none|
+|» state|body|string|false|none|
+|» modified_at|body|null|false|none|
+|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
+|»» user_id|body|integer|true|none|
+|»» last_name|body|string|false|none|
+|»» first_name|body|string|false|none|
+|» created_at|body|null|false|none|
+|» is_archived|body|any|false|none|
 
 <h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
 
@@ -1887,8 +1925,9 @@ public class HttpExample
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Hard deletes a site and all related objects.
@@ -1899,14 +1938,18 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/site/{site_id}
+curl -X DELETE /v3/site/{site_id} \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
 
-r = requests.delete('/v3/site/{site_id}')
+r = requests.delete('/v3/site/{site_id}', headers = headers)
 
 print(r.json())
 
@@ -1987,8 +2030,9 @@ public class HttpExample
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Returns all archived/unarchived sites and folders across all teams of a user.
@@ -2000,14 +2044,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET /v3/sites \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.get('/v3/sites', headers = headers)
@@ -2176,8 +2222,9 @@ Status Code **200**
 |type|site|
 |type|folder|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Allows for batch deleting of sites (and all related data).
@@ -2189,14 +2236,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X DELETE /v3/sites \
-  -H 'Content-Type: application/json'
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.delete('/v3/sites', headers = headers)
@@ -2291,8 +2340,9 @@ Guest users are not allowed to batch delete sites.
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 <h1 id="system-surveyor-api-surveys">Surveys</h1>
@@ -2306,14 +2356,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET /v3/site/{site_id}/surveys \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.get('/v3/site/{site_id}/surveys', headers = headers)
@@ -2480,8 +2532,9 @@ Status Code **200**
 |»» survey_count|integer|false|none|Survey count for folder|
 |»» is_archived|boolean|false|none|If the survey is archived or not|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.
@@ -2494,7 +2547,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X PUT /v3/site/{site_id}/survey/{survey_id} \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -2502,7 +2556,8 @@ curl -X PUT /v3/site/{site_id}/survey/{survey_id} \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.put('/v3/site/{site_id}/survey/{survey_id}', headers = headers)
@@ -2575,20 +2630,20 @@ public class HttpExample
       ],
       ""attributes"": [
         {
-          ""name"": ""string"",
           ""attribute_id"": 0,
-          ""value"": ""string""
+          ""value"": ""string"",
+          ""name"": ""string""
         }
       ],
       ""accessories"": [
         {
-          ""manufacturer"": ""string"",
-          ""description"": ""string"",
-          ""price"": null,
-          ""quantity"": null,
-          ""row_index"": 0,
+          ""labor_hours"": 0,
           ""model"": ""string"",
-          ""labor_hours"": 0
+          ""price"": null,
+          ""row_index"": 0,
+          ""description"": ""string"",
+          ""quantity"": null,
+          ""manufacturer"": ""string""
         }
       ],
       ""children"": [
@@ -2596,15 +2651,15 @@ public class HttpExample
       ],
       ""cables"": [
         {
-          ""z_side"": null,
-          ""a_side"": null,
           ""id"": ""string"",
+          ""a_side"": null,
+          ""z_side"": null,
           ""type"": ""string""
         }
       ],
       ""connections"": {
-        ""end"": null,
-        ""start"": null
+        ""start"": null,
+        ""end"": null
       },
       ""activity_log"": [
         {
@@ -2615,15 +2670,15 @@ public class HttpExample
   ],
   ""annotations"": [
     {
-      ""location"": null,
-      ""category"": null,
-      ""stroke_color"": ""string"",
+      ""size"": ""string"",
       ""start_point"": null,
-      ""stroke_width"": ""string"",
       ""end_point"": null,
-      ""font_size"": ""string"",
       ""text"": ""string"",
-      ""size"": ""string""
+      ""category"": null,
+      ""location"": null,
+      ""stroke_color"": ""string"",
+      ""stroke_width"": ""string"",
+      ""font_size"": ""string""
     }
   ]
 }";
@@ -2708,20 +2763,20 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "manufacturer": "string",
-          "description": "string",
-          "price": null,
-          "quantity": null,
-          "row_index": 0,
+          "labor_hours": 0,
           "model": "string",
-          "labor_hours": 0
+          "price": null,
+          "row_index": 0,
+          "description": "string",
+          "quantity": null,
+          "manufacturer": "string"
         }
       ],
       "children": [
@@ -2729,15 +2784,15 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
-          "z_side": null,
-          "a_side": null,
           "id": "string",
+          "a_side": null,
+          "z_side": null,
           "type": "string"
         }
       ],
       "connections": {
-        "end": null,
-        "start": null
+        "start": null,
+        "end": null
       },
       "activity_log": [
         {
@@ -2748,15 +2803,15 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   ],
   "annotations": [
     {
-      "location": null,
-      "category": null,
-      "stroke_color": "string",
+      "size": "string",
       "start_point": null,
-      "stroke_width": "string",
       "end_point": null,
-      "font_size": "string",
       "text": "string",
-      "size": "string"
+      "category": null,
+      "location": null,
+      "stroke_color": "string",
+      "stroke_width": "string",
+      "font_size": "string"
     }
   ]
 }
@@ -2790,9 +2845,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |» sync_status|body|any|false|none|
 |» creator|body|integer|false|none|
 |» editor|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» first_name|body|string|false|none|
 |»» user_id|body|any|false|none|
 |»» last_name|body|string|false|none|
+|»» first_name|body|string|false|none|
 |» modifier|body|integer|false|none|
 |» created_at|body|any|false|none|
 |» modified_at|body|any|false|none|
@@ -2809,43 +2864,43 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |»» photo_urls|body|[string]|false|none|
 |»» pdf_urls|body|[object]|false|none|
 |»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
-|»»» name|body|string|true|none|
 |»»» attribute_id|body|integer|true|none|
-|»»» id|body|integer|false|none|
 |»»» value|body|string|true|none|
+|»»» id|body|integer|false|none|
+|»»» name|body|string|true|none|
 |»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
-|»»» manufacturer|body|string|true|none|
-|»»» description|body|string|false|none|
-|»»» price|body|any|false|none|
-|»»» quantity|body|any|false|none|
-|»»» id|body|string|false|none|
-|»»» row_index|body|integer|true|none|
-|»»» model|body|string|true|none|
 |»»» labor_hours|body|number|false|none|
+|»»» model|body|string|true|none|
+|»»» price|body|any|false|none|
+|»»» row_index|body|integer|true|none|
+|»»» id|body|string|false|none|
+|»»» description|body|string|false|none|
+|»»» quantity|body|any|false|none|
+|»»» manufacturer|body|string|true|none|
 |»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
 |»» cables|body|[[CablePath](#schemacablepath)]|false|none|
-|»»» z_side|body|any|true|none|
-|»»» a_side|body|any|true|none|
 |»»» id|body|string|true|none|
+|»»» a_side|body|any|true|none|
+|»»» z_side|body|any|true|none|
 |»»» type|body|string|false|none|
 |»» connections|body|[PathConnection](#schemapathconnection)|false|none|
-|»»» end|body|any|false|none|
 |»»» start|body|any|false|none|
+|»»» end|body|any|false|none|
 |»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
 |»»» date|body|any|false|none|
 |»»» id|body|string|false|none|
 |»»» entry|body|string|false|none|
 |» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
-|»» location|body|any|true|none|
-|»» category|body|any|true|none|
-|»» id|body|string|false|none|
-|»» stroke_color|body|string|true|none|
-|»» start_point|body|any|false|none|
-|»» stroke_width|body|string|true|none|
-|»» end_point|body|any|false|none|
-|»» font_size|body|string|false|none|
-|»» text|body|string|false|none|
 |»» size|body|string|false|none|
+|»» start_point|body|any|false|none|
+|»» end_point|body|any|false|none|
+|»» text|body|string|false|none|
+|»» id|body|string|false|none|
+|»» category|body|any|true|none|
+|»» location|body|any|true|none|
+|»» stroke_color|body|string|true|none|
+|»» stroke_width|body|string|true|none|
+|»» font_size|body|string|false|none|
 |» users|body|any|false|none|
 
 #### Enumerated Values
@@ -2882,9 +2937,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "first_name": "string",
     "user_id": null,
-    "last_name": "string"
+    "last_name": "string",
+    "first_name": "string"
   },
   "modifier": 0,
   "created_at": null,
@@ -2908,22 +2963,22 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "value": "string",
           "id": 0,
-          "value": "string"
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "manufacturer": "string",
-          "description": "string",
-          "price": null,
-          "quantity": null,
-          "id": "string",
-          "row_index": 0,
+          "labor_hours": 0,
           "model": "string",
-          "labor_hours": 0
+          "price": null,
+          "row_index": 0,
+          "id": "string",
+          "description": "string",
+          "quantity": null,
+          "manufacturer": "string"
         }
       ],
       "children": [
@@ -2931,15 +2986,15 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
-          "z_side": null,
-          "a_side": null,
           "id": "string",
+          "a_side": null,
+          "z_side": null,
           "type": "string"
         }
       ],
       "connections": {
-        "end": null,
-        "start": null
+        "start": null,
+        "end": null
       },
       "activity_log": [
         {
@@ -2952,16 +3007,16 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   ],
   "annotations": [
     {
-      "location": null,
-      "category": null,
-      "id": "string",
-      "stroke_color": "string",
+      "size": "string",
       "start_point": null,
-      "stroke_width": "string",
       "end_point": null,
-      "font_size": "string",
       "text": "string",
-      "size": "string"
+      "id": "string",
+      "category": null,
+      "location": null,
+      "stroke_color": "string",
+      "stroke_width": "string",
+      "font_size": "string"
     }
   ],
   "users": null
@@ -2977,8 +3032,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Deletes a survey and all its related objects
@@ -2989,14 +3045,18 @@ This operation does not require authentication
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/survey/{survey_id}
+curl -X DELETE /v3/survey/{survey_id} \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
 
-r = requests.delete('/v3/survey/{survey_id}')
+r = requests.delete('/v3/survey/{survey_id}', headers = headers)
 
 print(r.json())
 
@@ -3080,8 +3140,9 @@ Also expires any shares of the survey.
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 <h1 id="system-surveyor-api-teams">Teams</h1>
@@ -3095,14 +3156,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET /v3/teams \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.get('/v3/teams', headers = headers)
@@ -3201,8 +3264,9 @@ Status Code **200**
 |» data|[object]|false|none|none|
 |»» type|any|false|none|none|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 <h1 id="system-surveyor-api-users">Users</h1>
@@ -3216,14 +3280,16 @@ This operation does not require authentication
 ```shell
 # You can also use wget
 curl -X GET /v3/user \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
 ```python
 import requests
 headers = {
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.get('/v3/user', headers = headers)
@@ -3445,8 +3511,9 @@ Status Code **200**
 |unit|metric|
 |unit|imperial|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 ## Update user information associated with the linked account
@@ -3459,7 +3526,8 @@ This operation does not require authentication
 # You can also use wget
 curl -X PATCH /v3/user \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
 
 ```
 
@@ -3467,7 +3535,8 @@ curl -X PATCH /v3/user \
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json'
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
 }
 
 r = requests.patch('/v3/user', headers = headers)
@@ -3656,8 +3725,9 @@ Status Code **200**
 |unit|metric|
 |unit|imperial|
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
 </aside>
 
 # Schemas
@@ -3671,9 +3741,9 @@ This operation does not require authentication
 
 ```json
 {
-  "first_name": "string",
   "user_id": 0,
-  "last_name": "string"
+  "last_name": "string",
+  "first_name": "string"
 }
 
 ```
@@ -3682,9 +3752,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|first_name|string|false|none|none|
 |user_id|integer|true|none|none|
 |last_name|string|false|none|none|
+|first_name|string|false|none|none|
 
 <h2 id="tocS_SiteSchema">SiteSchema</h2>
 <!-- backwards compatibility -->
@@ -3695,33 +3765,33 @@ This operation does not require authentication
 
 ```json
 {
-  "city": "string",
-  "reference_id": "string",
-  "created_at": null,
-  "site_id": "string",
-  "creator": {
-    "first_name": "string",
-    "user_id": 0,
-    "last_name": "string"
-  },
-  "name": "string",
+  "version": 0,
   "zip_code": "string",
-  "state": "string",
-  "modifier": {
-    "first_name": "string",
-    "user_id": 0,
-    "last_name": "string"
-  },
   "label": "string",
-  "modified_at": null,
+  "creator": {
+    "user_id": 0,
+    "last_name": "string",
+    "first_name": "string"
+  },
+  "street": "string",
+  "reference_id": "string",
+  "legacy_site_id": 0,
+  "team_id": 0,
+  "name": "string",
+  "site_id": "string",
+  "city": "string",
   "tags": [
     "string"
   ],
-  "street": "string",
-  "is_archived": null,
-  "legacy_site_id": 0,
-  "team_id": 0,
-  "version": 0
+  "state": "string",
+  "modified_at": null,
+  "modifier": {
+    "user_id": 0,
+    "last_name": "string",
+    "first_name": "string"
+  },
+  "created_at": null,
+  "is_archived": null
 }
 
 ```
@@ -3730,23 +3800,23 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|city|string|false|none|none|
-|reference_id|string|false|none|none|
-|created_at|null|false|read-only|none|
-|site_id|string|false|none|none|
-|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
-|name|string|true|none|none|
+|version|integer|false|read-only|none|
 |zip_code|string|false|none|none|
-|state|string|false|none|none|
-|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
 |label|string|false|none|none|
-|modified_at|null|false|read-only|none|
-|tags|[string]|false|none|none|
+|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
 |street|string|false|none|none|
-|is_archived|any|false|none|none|
+|reference_id|string|false|none|none|
 |legacy_site_id|integer|false|read-only|none|
 |team_id|integer|true|none|none|
-|version|integer|false|read-only|none|
+|name|string|true|none|none|
+|site_id|string|false|none|none|
+|city|string|false|none|none|
+|tags|[string]|false|none|none|
+|state|string|false|none|none|
+|modified_at|null|false|read-only|none|
+|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
+|created_at|null|false|read-only|none|
+|is_archived|any|false|none|none|
 
 <h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
 <!-- backwards compatibility -->
@@ -3757,13 +3827,13 @@ This operation does not require authentication
 
 ```json
 {
-  "message": "string",
-  "created_at": null,
-  "expiration_date": null,
-  "modified_at": null,
   "emails": [
     "user@example.com"
-  ]
+  ],
+  "expiration_date": null,
+  "message": "string",
+  "modified_at": null,
+  "created_at": null
 }
 
 ```
@@ -3772,11 +3842,11 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|message|string|false|none|none|
-|created_at|null|false|read-only|none|
-|expiration_date|any|true|none|none|
-|modified_at|null|false|read-only|none|
 |emails|[string]|true|none|none|
+|expiration_date|any|true|none|none|
+|message|string|false|none|none|
+|modified_at|null|false|read-only|none|
+|created_at|null|false|read-only|none|
 
 <h2 id="tocS_SurveyFields">SurveyFields</h2>
 <!-- backwards compatibility -->
@@ -3809,15 +3879,15 @@ This operation does not require authentication
 
 ```json
 {
-  "id": "string",
   "scope": "template",
-  "template_name": "string",
   "inputs": [
     {
       "field_id": "string",
       "value": "string"
     }
   ],
+  "template_name": "string",
+  "id": "string",
   "value": true
 }
 
@@ -3827,10 +3897,10 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|true|none|none|
 |scope|string|true|none|none|
-|template_name|string|false|none|none|
 |inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
+|template_name|string|false|none|none|
+|id|string|true|none|none|
 |value|boolean|true|none|none|
 
 #### Enumerated Values
@@ -3850,34 +3920,34 @@ This operation does not require authentication
 
 ```json
 {
-  "name": "string",
-  "survey_ids": [
-    "string"
-  ],
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
   "options": [
     {
-      "id": "string",
       "scope": "template",
-      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
+      "template_name": "string",
+      "id": "string",
       "value": true
     }
   ],
-  "is_excel": false,
+  "paper_size": "string",
+  "survey_ids": [
+    "string"
+  ],
   "site_id": "string",
-  "custom_data": {},
+  "is_site_report": false,
+  "is_excel": false,
+  "name": "string",
+  "output": "pdf",
   "filters": [
     {}
   ],
-  "is_site_report": false
+  "custom_data": {},
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971"
 }
 
 ```
@@ -3886,17 +3956,17 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
-|survey_ids|[string]|false|none|none|
-|output|string|true|none|none|
-|paper_size|string|false|none|none|
-|report_id|string(uuid)|true|none|none|
 |options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|is_excel|boolean|false|none|none|
+|paper_size|string|false|none|none|
+|survey_ids|[string]|false|none|none|
 |site_id|string|true|none|none|
-|custom_data|object|false|none|none|
-|filters|[object]|false|none|none|
 |is_site_report|boolean|false|none|none|
+|is_excel|boolean|false|none|none|
+|name|string|true|none|none|
+|output|string|true|none|none|
+|filters|[object]|false|none|none|
+|custom_data|object|false|none|none|
+|report_id|string(uuid)|true|none|none|
 
 #### Enumerated Values
 
@@ -3915,34 +3985,34 @@ This operation does not require authentication
 
 ```json
 {
-  "name": "string",
-  "output": "pdf",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
   "options": [
     {
-      "id": "string",
       "scope": "template",
-      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
+      "template_name": "string",
+      "id": "string",
       "value": true
     }
   ],
-  "is_excel": false,
+  "paper_size": "string",
+  "site_id": "string",
+  "is_site_report": false,
   "ids": [
     "string"
   ],
-  "site_id": "string",
-  "custom_data": {},
+  "is_excel": false,
+  "name": "string",
+  "output": "pdf",
   "filters": [
     {}
   ],
-  "is_site_report": false
+  "custom_data": {},
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971"
 }
 
 ```
@@ -3951,17 +4021,17 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
+|paper_size|string|false|none|none|
+|site_id|string|true|none|none|
+|is_site_report|boolean|false|none|none|
+|ids|[string]|false|none|none|
+|is_excel|boolean|false|none|none|
 |name|string|true|none|none|
 |output|string|true|none|none|
-|paper_size|string|false|none|none|
-|report_id|string(uuid)|true|none|none|
-|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|is_excel|boolean|false|none|none|
-|ids|[string]|false|none|none|
-|site_id|string|true|none|none|
-|custom_data|object|false|none|none|
 |filters|[object]|false|none|none|
-|is_site_report|boolean|false|none|none|
+|custom_data|object|false|none|none|
+|report_id|string(uuid)|true|none|none|
 
 #### Enumerated Values
 
@@ -3980,17 +4050,17 @@ This operation does not require authentication
 
 ```json
 {
-  "manufacturer": "",
-  "created_at": null,
-  "description": "string",
+  "labor_hours": [
+    0
+  ],
   "price": [
     0
   ],
   "id": 0,
+  "description": "string",
+  "created_at": null,
   "model": "",
-  "labor_hours": [
-    0
-  ]
+  "manufacturer": ""
 }
 
 ```
@@ -3999,35 +4069,13 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|manufacturer|string|false|none|none|
-|created_at|any|false|read-only|none|
-|description|string|true|none|none|
+|labor_hours|number,null|false|none|none|
 |price|number,null|false|none|none|
 |id|integer|false|read-only|none|
+|description|string|true|none|none|
+|created_at|any|false|read-only|none|
 |model|string|false|none|none|
-|labor_hours|number,null|false|none|none|
-
-<h2 id="tocS_SubElement">SubElement</h2>
-<!-- backwards compatibility -->
-<a id="schemasubelement"></a>
-<a id="schema_SubElement"></a>
-<a id="tocSsubelement"></a>
-<a id="tocssubelement"></a>
-
-```json
-{
-  "systemtype_id": "string",
-  "element_id": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|systemtype_id|string|true|none|none|
-|element_id|string|true|none|none|
+|manufacturer|string|false|none|none|
 
 <h2 id="tocS_Attribute">Attribute</h2>
 <!-- backwards compatibility -->
@@ -4050,6 +4098,28 @@ This operation does not require authentication
 |---|---|---|---|---|
 |attribute_id|integer|true|none|none|
 |value|string|true|none|none|
+
+<h2 id="tocS_SubElement">SubElement</h2>
+<!-- backwards compatibility -->
+<a id="schemasubelement"></a>
+<a id="schema_SubElement"></a>
+<a id="tocSsubelement"></a>
+<a id="tocssubelement"></a>
+
+```json
+{
+  "element_id": "string",
+  "systemtype_id": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|element_id|string|true|none|none|
+|systemtype_id|string|true|none|none|
 
 <h2 id="tocS_Link">Link</h2>
 <!-- backwards compatibility -->
@@ -4084,8 +4154,8 @@ This operation does not require authentication
 
 ```json
 {
-  "child": [],
   "attribute": [],
+  "child": [],
   "pdf_url": []
 }
 
@@ -4095,8 +4165,8 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|child|[[SubElement](#schemasubelement)]|false|none|none|
 |attribute|[[Attribute](#schemaattribute)]|false|none|none|
+|child|[[SubElement](#schemasubelement)]|false|none|none|
 |pdf_url|[[Link](#schemalink)]|false|none|none|
 
 <h2 id="tocS_ElementProfileSchema">ElementProfileSchema</h2>
@@ -4108,33 +4178,33 @@ This operation does not require authentication
 
 ```json
 {
+  "is_default": true,
+  "element_id": 0,
   "created_by": 0,
+  "team_id": 0,
+  "id": 0,
   "created_at": null,
   "name": "string",
   "sort": 0,
-  "id": 0,
-  "element_id": 0,
   "modified_at": null,
-  "is_default": true,
   "accessories": [
     {
-      "manufacturer": "",
-      "created_at": null,
-      "description": "string",
+      "labor_hours": [
+        0
+      ],
       "price": [
         0
       ],
       "id": 0,
+      "description": "string",
+      "created_at": null,
       "model": "",
-      "labor_hours": [
-        0
-      ]
+      "manufacturer": ""
     }
   ],
-  "team_id": 0,
   "content": {
-    "child": [],
     "attribute": [],
+    "child": [],
     "pdf_url": []
   }
 }
@@ -4145,16 +4215,16 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|is_default|boolean|false|none|none|
+|element_id|integer|true|none|none|
 |created_by|integer|false|read-only|none|
+|team_id|integer|true|none|none|
+|id|integer|false|read-only|none|
 |created_at|any|false|read-only|none|
 |name|string|true|none|none|
 |sort|integer|false|none|none|
-|id|integer|false|read-only|none|
-|element_id|integer|true|none|none|
 |modified_at|any|false|read-only|none|
-|is_default|boolean|false|none|none|
 |accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
-|team_id|integer|true|none|none|
 |content|[EPContent](#schemaepcontent)|true|none|none|
 
 <h2 id="tocS_FolderSchema">FolderSchema</h2>
@@ -4167,11 +4237,11 @@ This operation does not require authentication
 ```json
 {
   "name": "string",
-  "site_external_id": "string",
-  "id": "string",
-  "team_id": 0,
   "site_id": 0,
-  "label": "string"
+  "team_id": 0,
+  "label": "string",
+  "site_external_id": "string",
+  "id": "string"
 }
 
 ```
@@ -4181,11 +4251,11 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |name|string|true|none|none|
+|site_id|integer|false|read-only|none|
+|team_id|integer|false|none|none|
+|label|string|false|none|none|
 |site_external_id|string|false|write-only|none|
 |id|string|false|read-only|none|
-|team_id|integer|false|none|none|
-|site_id|integer|false|read-only|none|
-|label|string|false|none|none|
 
 <h2 id="tocS_RelatedUser">RelatedUser</h2>
 <!-- backwards compatibility -->
@@ -4196,9 +4266,9 @@ This operation does not require authentication
 
 ```json
 {
-  "first_name": "string",
   "user_id": null,
-  "last_name": "string"
+  "last_name": "string",
+  "first_name": "string"
 }
 
 ```
@@ -4207,9 +4277,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|first_name|string|false|none|none|
 |user_id|any|false|none|none|
 |last_name|string|false|none|none|
+|first_name|string|false|none|none|
 
 <h2 id="tocS_SurveyAttribute">SurveyAttribute</h2>
 <!-- backwards compatibility -->
@@ -4220,10 +4290,10 @@ This operation does not require authentication
 
 ```json
 {
-  "name": "string",
   "attribute_id": 0,
+  "value": "string",
   "id": 0,
-  "value": "string"
+  "name": "string"
 }
 
 ```
@@ -4232,10 +4302,10 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
 |attribute_id|integer|true|none|none|
-|id|integer|false|read-only|none|
 |value|string|true|none|none|
+|id|integer|false|read-only|none|
+|name|string|true|none|none|
 
 <h2 id="tocS_SurveyElementAccessory">SurveyElementAccessory</h2>
 <!-- backwards compatibility -->
@@ -4246,14 +4316,14 @@ This operation does not require authentication
 
 ```json
 {
-  "manufacturer": "string",
-  "description": "string",
-  "price": null,
-  "quantity": null,
-  "id": "string",
-  "row_index": 0,
+  "labor_hours": 0,
   "model": "string",
-  "labor_hours": 0
+  "price": null,
+  "row_index": 0,
+  "id": "string",
+  "description": "string",
+  "quantity": null,
+  "manufacturer": "string"
 }
 
 ```
@@ -4262,14 +4332,14 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|manufacturer|string|true|none|none|
-|description|string|false|none|none|
-|price|any|false|none|none|
-|quantity|any|false|none|none|
-|id|string|false|read-only|none|
-|row_index|integer|true|none|none|
-|model|string|true|none|none|
 |labor_hours|number|false|none|none|
+|model|string|true|none|none|
+|price|any|false|none|none|
+|row_index|integer|true|none|none|
+|id|string|false|read-only|none|
+|description|string|false|none|none|
+|quantity|any|false|none|none|
+|manufacturer|string|true|none|none|
 
 <h2 id="tocS_CablePath">CablePath</h2>
 <!-- backwards compatibility -->
@@ -4280,9 +4350,9 @@ This operation does not require authentication
 
 ```json
 {
-  "z_side": null,
-  "a_side": null,
   "id": "string",
+  "a_side": null,
+  "z_side": null,
   "type": "string"
 }
 
@@ -4292,9 +4362,9 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|z_side|any|true|none|none|
-|a_side|any|true|none|none|
 |id|string|true|none|none|
+|a_side|any|true|none|none|
+|z_side|any|true|none|none|
 |type|string|false|none|none|
 
 <h2 id="tocS_PathConnection">PathConnection</h2>
@@ -4306,8 +4376,8 @@ This operation does not require authentication
 
 ```json
 {
-  "end": null,
-  "start": null
+  "start": null,
+  "end": null
 }
 
 ```
@@ -4316,8 +4386,8 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|end|any|false|none|none|
 |start|any|false|none|none|
+|end|any|false|none|none|
 
 <h2 id="tocS_SurveyElementActivityLog">SurveyElementActivityLog</h2>
 <!-- backwards compatibility -->
@@ -4369,22 +4439,22 @@ This operation does not require authentication
   ],
   "attributes": [
     {
-      "name": "string",
       "attribute_id": 0,
+      "value": "string",
       "id": 0,
-      "value": "string"
+      "name": "string"
     }
   ],
   "accessories": [
     {
-      "manufacturer": "string",
-      "description": "string",
-      "price": null,
-      "quantity": null,
-      "id": "string",
-      "row_index": 0,
+      "labor_hours": 0,
       "model": "string",
-      "labor_hours": 0
+      "price": null,
+      "row_index": 0,
+      "id": "string",
+      "description": "string",
+      "quantity": null,
+      "manufacturer": "string"
     }
   ],
   "children": [
@@ -4406,36 +4476,36 @@ This operation does not require authentication
       ],
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "value": "string",
           "id": 0,
-          "value": "string"
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "manufacturer": "string",
-          "description": "string",
-          "price": null,
-          "quantity": null,
-          "id": "string",
-          "row_index": 0,
+          "labor_hours": 0,
           "model": "string",
-          "labor_hours": 0
+          "price": null,
+          "row_index": 0,
+          "id": "string",
+          "description": "string",
+          "quantity": null,
+          "manufacturer": "string"
         }
       ],
       "children": [],
       "cables": [
         {
-          "z_side": null,
-          "a_side": null,
           "id": "string",
+          "a_side": null,
+          "z_side": null,
           "type": "string"
         }
       ],
       "connections": {
-        "end": null,
-        "start": null
+        "start": null,
+        "end": null
       },
       "activity_log": [
         {
@@ -4448,15 +4518,15 @@ This operation does not require authentication
   ],
   "cables": [
     {
-      "z_side": null,
-      "a_side": null,
       "id": "string",
+      "a_side": null,
+      "z_side": null,
       "type": "string"
     }
   ],
   "connections": {
-    "end": null,
-    "start": null
+    "start": null,
+    "end": null
   },
   "activity_log": [
     {
@@ -4500,16 +4570,16 @@ This operation does not require authentication
 
 ```json
 {
-  "location": null,
-  "category": null,
-  "id": "string",
-  "stroke_color": "string",
+  "size": "string",
   "start_point": null,
-  "stroke_width": "string",
   "end_point": null,
-  "font_size": "string",
   "text": "string",
-  "size": "string"
+  "id": "string",
+  "category": null,
+  "location": null,
+  "stroke_color": "string",
+  "stroke_width": "string",
+  "font_size": "string"
 }
 
 ```
@@ -4518,16 +4588,16 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|location|any|true|none|none|
-|category|any|true|none|none|
-|id|string|false|read-only|none|
-|stroke_color|string|true|none|none|
-|start_point|any|false|none|none|
-|stroke_width|string|true|none|none|
-|end_point|any|false|none|none|
-|font_size|string|false|none|none|
-|text|string|false|none|none|
 |size|string|false|none|none|
+|start_point|any|false|none|none|
+|end_point|any|false|none|none|
+|text|string|false|none|none|
+|id|string|false|read-only|none|
+|category|any|true|none|none|
+|location|any|true|none|none|
+|stroke_color|string|true|none|none|
+|stroke_width|string|true|none|none|
+|font_size|string|false|none|none|
 
 <h2 id="tocS_SurveySchema">SurveySchema</h2>
 <!-- backwards compatibility -->
@@ -4559,9 +4629,9 @@ This operation does not require authentication
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "first_name": "string",
     "user_id": null,
-    "last_name": "string"
+    "last_name": "string",
+    "first_name": "string"
   },
   "modifier": 0,
   "created_at": null,
@@ -4585,22 +4655,22 @@ This operation does not require authentication
       ],
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "value": "string",
           "id": 0,
-          "value": "string"
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "manufacturer": "string",
-          "description": "string",
-          "price": null,
-          "quantity": null,
-          "id": "string",
-          "row_index": 0,
+          "labor_hours": 0,
           "model": "string",
-          "labor_hours": 0
+          "price": null,
+          "row_index": 0,
+          "id": "string",
+          "description": "string",
+          "quantity": null,
+          "manufacturer": "string"
         }
       ],
       "children": [
@@ -4608,15 +4678,15 @@ This operation does not require authentication
       ],
       "cables": [
         {
-          "z_side": null,
-          "a_side": null,
           "id": "string",
+          "a_side": null,
+          "z_side": null,
           "type": "string"
         }
       ],
       "connections": {
-        "end": null,
-        "start": null
+        "start": null,
+        "end": null
       },
       "activity_log": [
         {
@@ -4629,16 +4699,16 @@ This operation does not require authentication
   ],
   "annotations": [
     {
-      "location": null,
-      "category": null,
-      "id": "string",
-      "stroke_color": "string",
+      "size": "string",
       "start_point": null,
-      "stroke_width": "string",
       "end_point": null,
-      "font_size": "string",
       "text": "string",
-      "size": "string"
+      "id": "string",
+      "category": null,
+      "location": null,
+      "stroke_color": "string",
+      "stroke_width": "string",
+      "font_size": "string"
     }
   ],
   "users": null
