@@ -1379,89 +1379,89 @@ components:
       properties:
         first_name:
           type: string
-        user_id:
-          type: integer
         last_name:
           type: string
+        user_id:
+          type: integer
       required:
       - user_id
     SiteSchema:
       type: object
       properties:
-        modifier:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
         created_at:
           readOnly: true
           type:
           - 'null'
-        is_archived: {}
-        label:
-          type: string
-          maxLength: 255
-        tags:
-          type: array
-          items:
-            type: string
-        name:
-          type: string
-          maxLength: 250
-        legacy_site_id:
-          type: integer
-          readOnly: true
         team_id:
           type: integer
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
-        state:
-          type: string
-          maxLength: 250
-        site_id:
-          type: string
-        version:
-          type: integer
-          readOnly: true
         creator:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
+        street:
+          type: string
+          maxLength: 250
+        modifier:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+        version:
+          type: integer
+          readOnly: true
+        legacy_site_id:
+          type: integer
+          readOnly: true
+        site_id:
+          type: string
+        modified_at:
+          readOnly: true
+          type:
+          - 'null'
         city:
+          type: string
+          maxLength: 250
+        name:
+          type: string
+          maxLength: 250
+        state:
           type: string
           maxLength: 250
         reference_id:
           type: string
           maxLength: 255
+        is_archived: {}
         zip_code:
           type: string
           maxLength: 250
-        street:
+        tags:
+          type: array
+          items:
+            type: string
+        label:
           type: string
-          maxLength: 250
+          maxLength: 255
       required:
       - name
       - team_id
     ShareSiteOrSurveyRequestSchema:
       type: object
       properties:
+        message:
+          type: string
         created_at:
           readOnly: true
           type:
           - 'null'
-        message:
-          type: string
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
-        expiration_date: {}
         emails:
           type: array
           items:
             type: string
             format: email
+        modified_at:
+          readOnly: true
+          type:
+          - 'null'
+        expiration_date: {}
       required:
       - emails
       - expiration_date
@@ -1478,22 +1478,22 @@ components:
     SurveyOptions:
       type: object
       properties:
-        template_name:
-          type: string
         scope:
           type: string
           enum:
           - template
           - model
           - content
+        template_name:
+          type: string
         id:
           type: string
-        value:
-          type: boolean
         inputs:
           type: array
           items:
             $ref: '#/components/schemas/SurveyFields'
+        value:
+          type: boolean
       required:
       - id
       - scope
@@ -1501,20 +1501,31 @@ components:
     SurveyReportRequestSchema:
       type: object
       properties:
-        custom_data:
-          type: object
-        survey_ids:
-          type: array
-          items:
-            type: string
         options:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
+        paper_size:
+          type: string
         report_id:
           type: string
           format: uuid
+        survey_ids:
+          type: array
+          items:
+            type: string
+        custom_data:
+          type: object
         is_site_report:
+          type: boolean
+          default: false
+        output:
+          type: string
+          enum:
+          - pdf
+          - html
+          - xls
+        is_excel:
           type: boolean
           default: false
         filters:
@@ -1523,18 +1534,7 @@ components:
             type: object
         name:
           type: string
-        output:
-          type: string
-          enum:
-          - pdf
-          - html
-          - xls
         site_id:
-          type: string
-        is_excel:
-          type: boolean
-          default: false
-        paper_size:
           type: string
       required:
       - name
@@ -1544,40 +1544,40 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        custom_data:
-          type: object
         options:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
-        is_site_report:
-          type: boolean
-          default: false
+        paper_size:
+          type: string
         report_id:
           type: string
           format: uuid
-        filters:
-          type: array
-          items:
-            type: object
+        custom_data:
+          type: object
         ids:
           type: array
           items:
             type: string
-        name:
-          type: string
+        is_site_report:
+          type: boolean
+          default: false
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
-        site_id:
-          type: string
         is_excel:
           type: boolean
           default: false
-        paper_size:
+        filters:
+          type: array
+          items:
+            type: object
+        name:
+          type: string
+        site_id:
           type: string
       required:
       - name
@@ -1587,63 +1587,63 @@ components:
     EPAccessory:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
         created_at:
           readOnly: true
-        model:
-          type: string
-          default: ''
-        description:
-          type: string
-        manufacturer:
-          type: string
-          default: ''
         price:
           type:
           - number
           - 'null'
           default: !!python/object/apply:decimal.Decimal
           - 0E-10
+        model:
+          type: string
+          default: ''
+        id:
+          type: integer
+          readOnly: true
+        manufacturer:
+          type: string
+          default: ''
         labor_hours:
           type:
           - number
           - 'null'
           default: !!python/object/apply:decimal.Decimal
           - 0E-10
+        description:
+          type: string
       required:
       - description
+    Attribute:
+      type: object
+      properties:
+        value:
+          type: string
+        attribute_id:
+          type: integer
+      required:
+      - attribute_id
+      - value
     Link:
       type: object
       properties:
-        name:
-          type: string
         link_type:
           type: integer
         url:
           type: string
           format: url
+        name:
+          type: string
       required:
       - link_type
       - name
       - url
-    Attribute:
-      type: object
-      properties:
-        attribute_id:
-          type: integer
-        value:
-          type: string
-      required:
-      - attribute_id
-      - value
     SubElement:
       type: object
       properties:
-        systemtype_id:
-          type: string
         element_id:
+          type: string
+        systemtype_id:
           type: string
       required:
       - element_id
@@ -1651,17 +1651,17 @@ components:
     EPContent:
       type: object
       properties:
+        attribute:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/Attribute'
         pdf_url:
           type: array
           default: []
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-        attribute:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/Attribute'
         child:
           type: array
           default: []
@@ -1670,32 +1670,32 @@ components:
     ElementProfileSchema:
       type: object
       properties:
-        sort:
+        created_at:
+          readOnly: true
+        is_default:
+          type: boolean
+        team_id:
           type: integer
+        created_by:
+          type: integer
+          readOnly: true
         id:
           type: integer
           readOnly: true
         element_id:
           type: integer
-        created_at:
+        sort:
+          type: integer
+        modified_at:
           readOnly: true
-        name:
-          type: string
-        is_default:
-          type: boolean
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
-        team_id:
-          type: integer
+        name:
+          type: string
         content:
           $ref: '#/components/schemas/EPContent'
-        modified_at:
-          readOnly: true
-        created_by:
-          type: integer
-          readOnly: true
       required:
       - content
       - element_id
@@ -1704,18 +1704,18 @@ components:
     FolderSchema:
       type: object
       properties:
+        name:
+          type: string
         site_external_id:
           type: string
           writeOnly: true
-        name:
+        id:
           type: string
+          readOnly: true
         team_id:
           type: integer
         label:
           type: string
-        id:
-          type: string
-          readOnly: true
         site_id:
           type: integer
           readOnly: true
@@ -1726,20 +1726,20 @@ components:
       properties:
         first_name:
           type: string
-        user_id: {}
         last_name:
           type: string
+        user_id: {}
     SurveyAttribute:
       type: object
       properties:
-        name:
+        value:
           type: string
-        attribute_id:
-          type: integer
         id:
           type: integer
           readOnly: true
-        value:
+        attribute_id:
+          type: integer
+        name:
           type: string
       required:
       - attribute_id
@@ -1748,21 +1748,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
+        quantity: {}
+        price: {}
+        model:
+          type: string
         id:
           type: string
           readOnly: true
-        labor_hours:
-          type: number
-        model:
-          type: string
         manufacturer:
           type: string
+        labor_hours:
+          type: number
         description:
           type: string
-        price: {}
         row_index:
           type: integer
-        quantity: {}
       required:
       - manufacturer
       - model
@@ -1783,18 +1783,18 @@ components:
     PathConnection:
       type: object
       properties:
-        end: {}
         start: {}
+        end: {}
     SurveyElementActivityLog:
       type: object
       properties:
-        date:
-          readOnly: true
+        entry:
+          type: string
         id:
           type: string
           readOnly: true
-        entry:
-          type: string
+        date:
+          readOnly: true
     SurveyElement:
       type: object
       properties:
@@ -1853,23 +1853,23 @@ components:
     SurveyAnnotation:
       type: object
       properties:
-        stroke_color:
+        start_point: {}
+        font_size:
+          type: string
+        size:
           type: string
         id:
           type: string
           readOnly: true
-        size:
-          type: string
-        text:
-          type: string
-        start_point: {}
-        category: {}
-        location: {}
-        end_point: {}
-        font_size:
-          type: string
         stroke_width:
           type: string
+        stroke_color:
+          type: string
+        category: {}
+        end_point: {}
+        text:
+          type: string
+        location: {}
       required:
       - category
       - location
