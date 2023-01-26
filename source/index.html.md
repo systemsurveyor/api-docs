@@ -32,10 +32,11 @@ In order to utilize these APIs, you must have an Enterprise account, with a vali
 
 ##Authentication
 
-Once the account administrator creates your API `access_token` [link](https://app.systemsurveyor.com/v2/account/#api_management), you must include that with each request. These tokens are valid for 1 year, and can be revoked at any time by the account administrator. Here is a sample request:
+Once the account administrator creates your API `access_token` ([link](https://app.systemsurveyor.com/v2/account/#api_management)), you must include that with each request. These tokens are valid for 1 year, and can be revoked at any time by the account administrator. Here is a sample request:
 
 ```
-curl --location --request GET 'https://openapi.systemsurveyor.com/v3/user' \n--header 'Authorization: Bearer <<TOKEN>>'
+curl --location --request GET 'https://openapi.systemsurveyor.com/v3/user' \  
+--header 'Authorization: Bearer <<TOKEN>>'
 ```
 
 # Authentication
@@ -366,9 +367,9 @@ public class HttpExample
 
       
       string json = @"{
-  ""team_id"": 0,
-  ""site_external_id"": ""string"",
   ""name"": ""string"",
+  ""site_external_id"": ""string"",
+  ""team_id"": 0,
   ""label"": ""string""
 }";
       FolderSchema content = JsonConvert.DeserializeObject(json);
@@ -423,9 +424,9 @@ pass a value for `site_id` field.
 
 ```json
 {
-  "team_id": 0,
-  "site_external_id": "string",
   "name": "string",
+  "site_external_id": "string",
+  "team_id": 0,
   "label": "string"
 }
 ```
@@ -436,12 +437,12 @@ pass a value for `site_id` field.
 |---|---|---|---|---|
 |folder_id|path|string|true|Folder ID|
 |body|body|[FolderSchema](#schemafolderschema)|true|none|
-|» team_id|body|integer|false|none|
-|» site_external_id|body|string|false|none|
 |» name|body|string|true|none|
 |» id|body|string|false|none|
-|» label|body|string|false|none|
 |» site_id|body|integer|false|none|
+|» site_external_id|body|string|false|none|
+|» team_id|body|integer|false|none|
+|» label|body|string|false|none|
 
 > Example responses
 
@@ -449,11 +450,11 @@ pass a value for `site_id` field.
 
 ```json
 {
-  "team_id": 0,
   "name": "string",
   "id": "string",
-  "label": "string",
-  "site_id": 0
+  "site_id": 0,
+  "team_id": 0,
+  "label": "string"
 }
 ```
 
@@ -704,11 +705,11 @@ public class HttpExample
 
 ```json
 {
-  "team_id": 0,
   "name": "string",
   "id": "string",
-  "label": "string",
-  "site_id": 0
+  "site_id": 0,
+  "team_id": 0,
+  "label": "string"
 }
 ```
 
@@ -819,11 +820,11 @@ public class HttpExample
 
 ```json
 {
-  "team_id": 0,
   "name": "string",
   "id": "string",
-  "label": "string",
-  "site_id": 0
+  "site_id": 0,
+  "team_id": 0,
+  "label": "string"
 }
 ```
 
@@ -963,11 +964,11 @@ public class HttpExample
 
 ```json
 {
-  "team_id": 0,
   "name": "string",
   "id": "string",
-  "label": "string",
-  "site_id": 0
+  "site_id": 0,
+  "team_id": 0,
+  "label": "string"
 }
 ```
 
@@ -1253,34 +1254,34 @@ public class HttpExample
       string url = "/v3/report";
       
       string json = @"{
-  ""name"": ""string"",
-  ""paper_size"": ""string"",
-  ""is_excel"": false,
-  ""output"": ""pdf"",
   ""filters"": [
     {}
   ],
+  ""name"": ""string"",
+  ""site_id"": ""string"",
+  ""is_excel"": false,
   ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
+  ""is_site_report"": false,
+  ""output"": ""pdf"",
+  ""survey_ids"": [
+    ""string""
+  ],
+  ""custom_data"": {},
   ""options"": [
     {
-      ""value"": true,
-      ""id"": ""string"",
       ""scope"": ""template"",
+      ""template_name"": ""string"",
       ""inputs"": [
         {
           ""field_id"": ""string"",
           ""value"": ""string""
         }
       ],
-      ""template_name"": ""string""
+      ""id"": ""string"",
+      ""value"": true
     }
   ],
-  ""is_site_report"": false,
-  ""survey_ids"": [
-    ""string""
-  ],
-  ""custom_data"": {},
-  ""site_id"": ""string""
+  ""paper_size"": ""string""
 }";
       SurveyReportRequestSchema content = JsonConvert.DeserializeObject(json);
       await PostAsync(content, url);
@@ -1331,34 +1332,34 @@ Reports are created by an external PHP service by picking up messages from the q
 
 ```json
 {
-  "name": "string",
-  "paper_size": "string",
-  "is_excel": false,
-  "output": "pdf",
   "filters": [
     {}
   ],
+  "name": "string",
+  "site_id": "string",
+  "is_excel": false,
   "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "is_site_report": false,
+  "output": "pdf",
+  "survey_ids": [
+    "string"
+  ],
+  "custom_data": {},
   "options": [
     {
-      "value": true,
-      "id": "string",
       "scope": "template",
+      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
-      "template_name": "string"
+      "id": "string",
+      "value": true
     }
   ],
-  "is_site_report": false,
-  "survey_ids": [
-    "string"
-  ],
-  "custom_data": {},
-  "site_id": "string"
+  "paper_size": "string"
 }
 ```
 
@@ -1367,24 +1368,24 @@ Reports are created by an external PHP service by picking up messages from the q
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[SurveyReportRequestSchema](#schemasurveyreportrequestschema)|true|none|
-|» name|body|string|true|none|
-|» paper_size|body|string|false|none|
-|» is_excel|body|boolean|false|none|
-|» output|body|string|true|none|
 |» filters|body|[object]|false|none|
+|» name|body|string|true|none|
+|» site_id|body|string|true|none|
+|» is_excel|body|boolean|false|none|
 |» report_id|body|string(uuid)|true|none|
+|» is_site_report|body|boolean|false|none|
+|» output|body|string|true|none|
+|» survey_ids|body|[string]|false|none|
+|» custom_data|body|object|false|none|
 |» options|body|[[SurveyOptions](#schemasurveyoptions)]|false|none|
-|»» value|body|boolean|true|none|
-|»» id|body|string|true|none|
 |»» scope|body|string|true|none|
+|»» template_name|body|string|false|none|
 |»» inputs|body|[[SurveyFields](#schemasurveyfields)]|false|none|
 |»»» field_id|body|string|true|none|
 |»»» value|body|string|true|none|
-|»» template_name|body|string|false|none|
-|» is_site_report|body|boolean|false|none|
-|» survey_ids|body|[string]|false|none|
-|» custom_data|body|object|false|none|
-|» site_id|body|string|true|none|
+|»» id|body|string|true|none|
+|»» value|body|boolean|true|none|
+|» paper_size|body|string|false|none|
 
 #### Enumerated Values
 
@@ -1643,18 +1644,18 @@ public class HttpExample
 
       
       string json = @"{
-  ""team_id"": 0,
-  ""state"": ""string"",
   ""name"": ""string"",
-  ""reference_id"": ""string"",
-  ""label"": ""string"",
-  ""street"": ""string"",
-  ""is_archived"": null,
   ""site_id"": ""string"",
+  ""state"": ""string"",
   ""tags"": [
     ""string""
   ],
+  ""reference_id"": ""string"",
+  ""label"": ""string"",
   ""city"": ""string"",
+  ""is_archived"": null,
+  ""street"": ""string"",
+  ""team_id"": 0,
   ""zip_code"": ""string""
 }";
       SiteSchema content = JsonConvert.DeserializeObject(json);
@@ -1708,18 +1709,18 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 
 ```json
 {
-  "team_id": 0,
-  "state": "string",
   "name": "string",
-  "reference_id": "string",
-  "label": "string",
-  "street": "string",
-  "is_archived": null,
   "site_id": "string",
+  "state": "string",
   "tags": [
     "string"
   ],
+  "reference_id": "string",
+  "label": "string",
   "city": "string",
+  "is_archived": null,
+  "street": "string",
+  "team_id": 0,
   "zip_code": "string"
 }
 ```
@@ -1730,28 +1731,28 @@ Pass a folder external ID in a `folder_external_id` field in the payload to crea
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» team_id|body|integer|true|none|
-|» state|body|string|false|none|
 |» name|body|string|true|none|
-|» version|body|integer|false|none|
-|» reference_id|body|string|false|none|
-|» label|body|string|false|none|
+|» site_id|body|string|false|none|
+|» state|body|string|false|none|
+|» modified_at|body|null|false|none|
+|» created_at|body|null|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
-|» modified_at|body|null|false|none|
+|»» user_id|body|integer|true|none|
+|» tags|body|[string]|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» reference_id|body|string|false|none|
+|» label|body|string|false|none|
+|» city|body|string|false|none|
+|» version|body|integer|false|none|
+|» is_archived|body|any|false|none|
 |» legacy_site_id|body|integer|false|none|
 |» street|body|string|false|none|
-|» is_archived|body|any|false|none|
-|» created_at|body|null|false|none|
-|» site_id|body|string|false|none|
-|» tags|body|[string]|false|none|
-|» city|body|string|false|none|
+|» team_id|body|integer|true|none|
 |» zip_code|body|string|false|none|
 
 <h3 id="creates-a-new-site-with-a-specific-`external_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
@@ -1841,18 +1842,18 @@ public class HttpExample
 
 ```json
 {
-  "team_id": 0,
-  "state": "string",
   "name": "string",
-  "reference_id": "string",
-  "label": "string",
-  "street": "string",
-  "is_archived": null,
   "site_id": "string",
+  "state": "string",
   "tags": [
     "string"
   ],
+  "reference_id": "string",
+  "label": "string",
   "city": "string",
+  "is_archived": null,
+  "street": "string",
+  "team_id": 0,
   "zip_code": "string"
 }
 ```
@@ -1863,28 +1864,28 @@ public class HttpExample
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» team_id|body|integer|true|none|
-|» state|body|string|false|none|
 |» name|body|string|true|none|
-|» version|body|integer|false|none|
-|» reference_id|body|string|false|none|
-|» label|body|string|false|none|
+|» site_id|body|string|false|none|
+|» state|body|string|false|none|
+|» modified_at|body|null|false|none|
+|» created_at|body|null|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
-|» modified_at|body|null|false|none|
+|»» user_id|body|integer|true|none|
+|» tags|body|[string]|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
 |»» first_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
 |»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» reference_id|body|string|false|none|
+|» label|body|string|false|none|
+|» city|body|string|false|none|
+|» version|body|integer|false|none|
+|» is_archived|body|any|false|none|
 |» legacy_site_id|body|integer|false|none|
 |» street|body|string|false|none|
-|» is_archived|body|any|false|none|
-|» created_at|body|null|false|none|
-|» site_id|body|string|false|none|
-|» tags|body|[string]|false|none|
-|» city|body|string|false|none|
+|» team_id|body|integer|true|none|
 |» zip_code|body|string|false|none|
 
 <h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
@@ -2589,20 +2590,20 @@ public class HttpExample
       ],
       ""attributes"": [
         {
-          ""value"": ""string"",
           ""name"": ""string"",
+          ""value"": ""string"",
           ""attribute_id"": 0
         }
       ],
       ""accessories"": [
         {
-          ""quantity"": null,
-          ""manufacturer"": ""string"",
           ""labor_hours"": 0,
+          ""description"": ""string"",
           ""price"": null,
-          ""model"": ""string"",
           ""row_index"": 0,
-          ""description"": ""string""
+          ""quantity"": null,
+          ""model"": ""string"",
+          ""manufacturer"": ""string""
         }
       ],
       ""children"": [
@@ -2610,10 +2611,10 @@ public class HttpExample
       ],
       ""cables"": [
         {
-          ""z_side"": null,
           ""type"": ""string"",
-          ""id"": ""string"",
-          ""a_side"": null
+          ""z_side"": null,
+          ""a_side"": null,
+          ""id"": ""string""
         }
       ],
       ""connections"": {
@@ -2630,13 +2631,13 @@ public class HttpExample
   ""annotations"": [
     {
       ""category"": null,
-      ""stroke_width"": ""string"",
+      ""end_point"": null,
       ""text"": ""string"",
-      ""stroke_color"": ""string"",
+      ""location"": null,
       ""font_size"": ""string"",
       ""start_point"": null,
-      ""location"": null,
-      ""end_point"": null,
+      ""stroke_width"": ""string"",
+      ""stroke_color"": ""string"",
       ""size"": ""string""
     }
   ]
@@ -2722,20 +2723,20 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "attributes": [
         {
-          "value": "string",
           "name": "string",
+          "value": "string",
           "attribute_id": 0
         }
       ],
       "accessories": [
         {
-          "quantity": null,
-          "manufacturer": "string",
           "labor_hours": 0,
+          "description": "string",
           "price": null,
-          "model": "string",
           "row_index": 0,
-          "description": "string"
+          "quantity": null,
+          "model": "string",
+          "manufacturer": "string"
         }
       ],
       "children": [
@@ -2743,10 +2744,10 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
-          "z_side": null,
           "type": "string",
-          "id": "string",
-          "a_side": null
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
         }
       ],
       "connections": {
@@ -2763,13 +2764,13 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "annotations": [
     {
       "category": null,
-      "stroke_width": "string",
+      "end_point": null,
       "text": "string",
-      "stroke_color": "string",
+      "location": null,
       "font_size": "string",
       "start_point": null,
-      "location": null,
-      "end_point": null,
+      "stroke_width": "string",
+      "stroke_color": "string",
       "size": "string"
     }
   ]
@@ -2805,8 +2806,8 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |» creator|body|integer|false|none|
 |» editor|body|[RelatedUser](#schemarelateduser)|false|none|
 |»» first_name|body|string|false|none|
-|»» user_id|body|any|false|none|
 |»» last_name|body|string|false|none|
+|»» user_id|body|any|false|none|
 |» modifier|body|integer|false|none|
 |» created_at|body|any|false|none|
 |» modified_at|body|any|false|none|
@@ -2823,43 +2824,43 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |»» photo_urls|body|[string]|false|none|
 |»» pdf_urls|body|[object]|false|none|
 |»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
-|»»» value|body|string|true|none|
 |»»» name|body|string|true|none|
+|»»» value|body|string|true|none|
 |»»» id|body|integer|false|none|
 |»»» attribute_id|body|integer|true|none|
 |»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
-|»»» quantity|body|any|false|none|
-|»»» id|body|string|false|none|
-|»»» manufacturer|body|string|true|none|
 |»»» labor_hours|body|number|false|none|
-|»»» price|body|any|false|none|
-|»»» model|body|string|true|none|
-|»»» row_index|body|integer|true|none|
 |»»» description|body|string|false|none|
+|»»» price|body|any|false|none|
+|»»» row_index|body|integer|true|none|
+|»»» quantity|body|any|false|none|
+|»»» model|body|string|true|none|
+|»»» manufacturer|body|string|true|none|
+|»»» id|body|string|false|none|
 |»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
 |»» cables|body|[[CablePath](#schemacablepath)]|false|none|
-|»»» z_side|body|any|true|none|
 |»»» type|body|string|false|none|
-|»»» id|body|string|true|none|
+|»»» z_side|body|any|true|none|
 |»»» a_side|body|any|true|none|
+|»»» id|body|string|true|none|
 |»» connections|body|[PathConnection](#schemapathconnection)|false|none|
 |»»» end|body|any|false|none|
 |»»» start|body|any|false|none|
 |»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
-|»»» date|body|any|false|none|
 |»»» entry|body|string|false|none|
 |»»» id|body|string|false|none|
+|»»» date|body|any|false|none|
 |» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
 |»» category|body|any|true|none|
-|»» stroke_width|body|string|true|none|
+|»» end_point|body|any|false|none|
 |»» text|body|string|false|none|
-|»» stroke_color|body|string|true|none|
-|»» id|body|string|false|none|
+|»» location|body|any|true|none|
 |»» font_size|body|string|false|none|
 |»» start_point|body|any|false|none|
-|»» location|body|any|true|none|
-|»» end_point|body|any|false|none|
+|»» stroke_width|body|string|true|none|
+|»» stroke_color|body|string|true|none|
 |»» size|body|string|false|none|
+|»» id|body|string|false|none|
 |» users|body|any|false|none|
 
 #### Enumerated Values
@@ -2897,8 +2898,8 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "creator": 0,
   "editor": {
     "first_name": "string",
-    "user_id": null,
-    "last_name": "string"
+    "last_name": "string",
+    "user_id": null
   },
   "modifier": 0,
   "created_at": null,
@@ -2922,22 +2923,22 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "attributes": [
         {
-          "value": "string",
           "name": "string",
+          "value": "string",
           "id": 0,
           "attribute_id": 0
         }
       ],
       "accessories": [
         {
-          "quantity": null,
-          "id": "string",
-          "manufacturer": "string",
           "labor_hours": 0,
+          "description": "string",
           "price": null,
-          "model": "string",
           "row_index": 0,
-          "description": "string"
+          "quantity": null,
+          "model": "string",
+          "manufacturer": "string",
+          "id": "string"
         }
       ],
       "children": [
@@ -2945,10 +2946,10 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
-          "z_side": null,
           "type": "string",
-          "id": "string",
-          "a_side": null
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
         }
       ],
       "connections": {
@@ -2957,9 +2958,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       },
       "activity_log": [
         {
-          "date": null,
           "entry": "string",
-          "id": "string"
+          "id": "string",
+          "date": null
         }
       ]
     }
@@ -2967,15 +2968,15 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "annotations": [
     {
       "category": null,
-      "stroke_width": "string",
+      "end_point": null,
       "text": "string",
-      "stroke_color": "string",
-      "id": "string",
+      "location": null,
       "font_size": "string",
       "start_point": null,
-      "location": null,
-      "end_point": null,
-      "size": "string"
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "size": "string",
+      "id": "string"
     }
   ],
   "users": null
@@ -3691,8 +3692,8 @@ None, None, None, None
 ```json
 {
   "first_name": "string",
-  "user_id": 0,
-  "last_name": "string"
+  "last_name": "string",
+  "user_id": 0
 }
 
 ```
@@ -3702,8 +3703,8 @@ None, None, None, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |first_name|string|false|none|none|
-|user_id|integer|true|none|none|
 |last_name|string|false|none|none|
+|user_id|integer|true|none|none|
 
 <h2 id="tocS_SiteSchema">SiteSchema</h2>
 <!-- backwards compatibility -->
@@ -3714,32 +3715,32 @@ None, None, None, None
 
 ```json
 {
-  "team_id": 0,
-  "state": "string",
   "name": "string",
-  "version": 0,
-  "reference_id": "string",
-  "label": "string",
+  "site_id": "string",
+  "state": "string",
+  "modified_at": null,
+  "created_at": null,
   "creator": {
     "first_name": "string",
-    "user_id": 0,
-    "last_name": "string"
+    "last_name": "string",
+    "user_id": 0
   },
-  "modified_at": null,
-  "modifier": {
-    "first_name": "string",
-    "user_id": 0,
-    "last_name": "string"
-  },
-  "legacy_site_id": 0,
-  "street": "string",
-  "is_archived": null,
-  "created_at": null,
-  "site_id": "string",
   "tags": [
     "string"
   ],
+  "modifier": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "reference_id": "string",
+  "label": "string",
   "city": "string",
+  "version": 0,
+  "is_archived": null,
+  "legacy_site_id": 0,
+  "street": "string",
+  "team_id": 0,
   "zip_code": "string"
 }
 
@@ -3749,22 +3750,22 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|team_id|integer|true|none|none|
-|state|string|false|none|none|
 |name|string|true|none|none|
-|version|integer|false|read-only|none|
+|site_id|string|false|none|none|
+|state|string|false|none|none|
+|modified_at|null|false|read-only|none|
+|created_at|null|false|read-only|none|
+|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
+|tags|[string]|false|none|none|
+|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
 |reference_id|string|false|none|none|
 |label|string|false|none|none|
-|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
-|modified_at|null|false|read-only|none|
-|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
+|city|string|false|none|none|
+|version|integer|false|read-only|none|
+|is_archived|any|false|none|none|
 |legacy_site_id|integer|false|read-only|none|
 |street|string|false|none|none|
-|is_archived|any|false|none|none|
-|created_at|null|false|read-only|none|
-|site_id|string|false|none|none|
-|tags|[string]|false|none|none|
-|city|string|false|none|none|
+|team_id|integer|true|none|none|
 |zip_code|string|false|none|none|
 
 <h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
@@ -3776,13 +3777,13 @@ None, None, None, None
 
 ```json
 {
+  "modified_at": null,
+  "expiration_date": null,
   "emails": [
     "user@example.com"
   ],
-  "message": "string",
-  "modified_at": null,
   "created_at": null,
-  "expiration_date": null
+  "message": "string"
 }
 
 ```
@@ -3791,11 +3792,11 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|emails|[string]|true|none|none|
-|message|string|false|none|none|
 |modified_at|null|false|read-only|none|
-|created_at|null|false|read-only|none|
 |expiration_date|any|true|none|none|
+|emails|[string]|true|none|none|
+|created_at|null|false|read-only|none|
+|message|string|false|none|none|
 
 <h2 id="tocS_SurveyFields">SurveyFields</h2>
 <!-- backwards compatibility -->
@@ -3828,16 +3829,16 @@ None, None, None, None
 
 ```json
 {
-  "value": true,
-  "id": "string",
   "scope": "template",
+  "template_name": "string",
   "inputs": [
     {
       "field_id": "string",
       "value": "string"
     }
   ],
-  "template_name": "string"
+  "id": "string",
+  "value": true
 }
 
 ```
@@ -3846,11 +3847,11 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|value|boolean|true|none|none|
-|id|string|true|none|none|
 |scope|string|true|none|none|
-|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
 |template_name|string|false|none|none|
+|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
+|id|string|true|none|none|
+|value|boolean|true|none|none|
 
 #### Enumerated Values
 
@@ -3869,34 +3870,34 @@ None, None, None, None
 
 ```json
 {
-  "name": "string",
-  "paper_size": "string",
-  "is_excel": false,
-  "output": "pdf",
   "filters": [
     {}
   ],
+  "name": "string",
+  "site_id": "string",
+  "is_excel": false,
   "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "is_site_report": false,
+  "output": "pdf",
+  "survey_ids": [
+    "string"
+  ],
+  "custom_data": {},
   "options": [
     {
-      "value": true,
-      "id": "string",
       "scope": "template",
+      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
-      "template_name": "string"
+      "id": "string",
+      "value": true
     }
   ],
-  "is_site_report": false,
-  "survey_ids": [
-    "string"
-  ],
-  "custom_data": {},
-  "site_id": "string"
+  "paper_size": "string"
 }
 
 ```
@@ -3905,17 +3906,17 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
-|paper_size|string|false|none|none|
-|is_excel|boolean|false|none|none|
-|output|string|true|none|none|
 |filters|[object]|false|none|none|
+|name|string|true|none|none|
+|site_id|string|true|none|none|
+|is_excel|boolean|false|none|none|
 |report_id|string(uuid)|true|none|none|
-|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
 |is_site_report|boolean|false|none|none|
+|output|string|true|none|none|
 |survey_ids|[string]|false|none|none|
 |custom_data|object|false|none|none|
-|site_id|string|true|none|none|
+|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
+|paper_size|string|false|none|none|
 
 #### Enumerated Values
 
@@ -3934,34 +3935,34 @@ None, None, None, None
 
 ```json
 {
+  "filters": [
+    {}
+  ],
   "name": "string",
-  "paper_size": "string",
+  "site_id": "string",
   "ids": [
     "string"
   ],
   "is_excel": false,
-  "output": "pdf",
-  "filters": [
-    {}
-  ],
   "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "is_site_report": false,
+  "output": "pdf",
+  "custom_data": {},
   "options": [
     {
-      "value": true,
-      "id": "string",
       "scope": "template",
+      "template_name": "string",
       "inputs": [
         {
           "field_id": "string",
           "value": "string"
         }
       ],
-      "template_name": "string"
+      "id": "string",
+      "value": true
     }
   ],
-  "is_site_report": false,
-  "custom_data": {},
-  "site_id": "string"
+  "paper_size": "string"
 }
 
 ```
@@ -3970,17 +3971,17 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|filters|[object]|false|none|none|
 |name|string|true|none|none|
-|paper_size|string|false|none|none|
+|site_id|string|true|none|none|
 |ids|[string]|false|none|none|
 |is_excel|boolean|false|none|none|
-|output|string|true|none|none|
-|filters|[object]|false|none|none|
 |report_id|string(uuid)|true|none|none|
-|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
 |is_site_report|boolean|false|none|none|
+|output|string|true|none|none|
 |custom_data|object|false|none|none|
-|site_id|string|true|none|none|
+|options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
+|paper_size|string|false|none|none|
 
 #### Enumerated Values
 
@@ -3999,9 +4000,9 @@ None, None, None, None
 
 ```json
 {
-  "url": "string",
+  "link_type": 0,
   "name": "string",
-  "link_type": 0
+  "url": "string"
 }
 
 ```
@@ -4010,31 +4011,9 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|url|string(url)|true|none|none|
-|name|string|true|none|none|
 |link_type|integer|true|none|none|
-
-<h2 id="tocS_Attribute">Attribute</h2>
-<!-- backwards compatibility -->
-<a id="schemaattribute"></a>
-<a id="schema_Attribute"></a>
-<a id="tocSattribute"></a>
-<a id="tocsattribute"></a>
-
-```json
-{
-  "value": "string",
-  "attribute_id": 0
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|value|string|true|none|none|
-|attribute_id|integer|true|none|none|
+|name|string|true|none|none|
+|url|string(url)|true|none|none|
 
 <h2 id="tocS_SubElement">SubElement</h2>
 <!-- backwards compatibility -->
@@ -4058,6 +4037,28 @@ None, None, None, None
 |systemtype_id|string|true|none|none|
 |element_id|string|true|none|none|
 
+<h2 id="tocS_Attribute">Attribute</h2>
+<!-- backwards compatibility -->
+<a id="schemaattribute"></a>
+<a id="schema_Attribute"></a>
+<a id="tocSattribute"></a>
+<a id="tocsattribute"></a>
+
+```json
+{
+  "value": "string",
+  "attribute_id": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|value|string|true|none|none|
+|attribute_id|integer|true|none|none|
+
 <h2 id="tocS_EPContent">EPContent</h2>
 <!-- backwards compatibility -->
 <a id="schemaepcontent"></a>
@@ -4068,8 +4069,8 @@ None, None, None, None
 ```json
 {
   "pdf_url": [],
-  "attribute": [],
-  "child": []
+  "child": [],
+  "attribute": []
 }
 
 ```
@@ -4079,8 +4080,8 @@ None, None, None, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |pdf_url|[[Link](#schemalink)]|false|none|none|
-|attribute|[[Attribute](#schemaattribute)]|false|none|none|
 |child|[[SubElement](#schemasubelement)]|false|none|none|
+|attribute|[[Attribute](#schemaattribute)]|false|none|none|
 
 <h2 id="tocS_EPAccessory">EPAccessory</h2>
 <!-- backwards compatibility -->
@@ -4091,17 +4092,17 @@ None, None, None, None
 
 ```json
 {
-  "id": 0,
-  "manufacturer": "",
+  "created_at": null,
   "labor_hours": [
     0
   ],
+  "description": "string",
   "price": [
     0
   ],
   "model": "",
-  "created_at": null,
-  "description": "string"
+  "manufacturer": "",
+  "id": 0
 }
 
 ```
@@ -4110,13 +4111,13 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|integer|false|read-only|none|
-|manufacturer|string|false|none|none|
+|created_at|any|false|read-only|none|
 |labor_hours|number,null|false|none|none|
+|description|string|true|none|none|
 |price|number,null|false|none|none|
 |model|string|false|none|none|
-|created_at|any|false|read-only|none|
-|description|string|true|none|none|
+|manufacturer|string|false|none|none|
+|id|integer|false|read-only|none|
 
 <h2 id="tocS_ElementProfileSchema">ElementProfileSchema</h2>
 <!-- backwards compatibility -->
@@ -4129,33 +4130,33 @@ None, None, None, None
 {
   "is_default": true,
   "name": "string",
+  "created_at": null,
   "content": {
     "pdf_url": [],
-    "attribute": [],
-    "child": []
+    "child": [],
+    "attribute": []
   },
-  "team_id": 0,
   "accessories": [
     {
-      "id": 0,
-      "manufacturer": "",
+      "created_at": null,
       "labor_hours": [
         0
       ],
+      "description": "string",
       "price": [
         0
       ],
       "model": "",
-      "created_at": null,
-      "description": "string"
+      "manufacturer": "",
+      "id": 0
     }
   ],
-  "id": 0,
-  "modified_at": null,
   "sort": 0,
-  "created_at": null,
+  "modified_at": null,
   "created_by": 0,
-  "element_id": 0
+  "element_id": 0,
+  "team_id": 0,
+  "id": 0
 }
 
 ```
@@ -4166,15 +4167,15 @@ None, None, None, None
 |---|---|---|---|---|
 |is_default|boolean|false|none|none|
 |name|string|true|none|none|
-|content|[EPContent](#schemaepcontent)|true|none|none|
-|team_id|integer|true|none|none|
-|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
-|id|integer|false|read-only|none|
-|modified_at|any|false|read-only|none|
-|sort|integer|false|none|none|
 |created_at|any|false|read-only|none|
+|content|[EPContent](#schemaepcontent)|true|none|none|
+|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
+|sort|integer|false|none|none|
+|modified_at|any|false|read-only|none|
 |created_by|integer|false|read-only|none|
 |element_id|integer|true|none|none|
+|team_id|integer|true|none|none|
+|id|integer|false|read-only|none|
 
 <h2 id="tocS_FolderSchema">FolderSchema</h2>
 <!-- backwards compatibility -->
@@ -4185,12 +4186,12 @@ None, None, None, None
 
 ```json
 {
-  "team_id": 0,
-  "site_external_id": "string",
   "name": "string",
   "id": "string",
-  "label": "string",
-  "site_id": 0
+  "site_id": 0,
+  "site_external_id": "string",
+  "team_id": 0,
+  "label": "string"
 }
 
 ```
@@ -4199,12 +4200,12 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|team_id|integer|false|none|none|
-|site_external_id|string|false|write-only|none|
 |name|string|true|none|none|
 |id|string|false|read-only|none|
-|label|string|false|none|none|
 |site_id|integer|false|read-only|none|
+|site_external_id|string|false|write-only|none|
+|team_id|integer|false|none|none|
+|label|string|false|none|none|
 
 <h2 id="tocS_RelatedUser">RelatedUser</h2>
 <!-- backwards compatibility -->
@@ -4216,8 +4217,8 @@ None, None, None, None
 ```json
 {
   "first_name": "string",
-  "user_id": null,
-  "last_name": "string"
+  "last_name": "string",
+  "user_id": null
 }
 
 ```
@@ -4227,8 +4228,8 @@ None, None, None, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |first_name|string|false|none|none|
-|user_id|any|false|none|none|
 |last_name|string|false|none|none|
+|user_id|any|false|none|none|
 
 <h2 id="tocS_SurveyAttribute">SurveyAttribute</h2>
 <!-- backwards compatibility -->
@@ -4239,8 +4240,8 @@ None, None, None, None
 
 ```json
 {
-  "value": "string",
   "name": "string",
+  "value": "string",
   "id": 0,
   "attribute_id": 0
 }
@@ -4251,8 +4252,8 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|value|string|true|none|none|
 |name|string|true|none|none|
+|value|string|true|none|none|
 |id|integer|false|read-only|none|
 |attribute_id|integer|true|none|none|
 
@@ -4265,14 +4266,14 @@ None, None, None, None
 
 ```json
 {
-  "quantity": null,
-  "id": "string",
-  "manufacturer": "string",
   "labor_hours": 0,
+  "description": "string",
   "price": null,
-  "model": "string",
   "row_index": 0,
-  "description": "string"
+  "quantity": null,
+  "model": "string",
+  "manufacturer": "string",
+  "id": "string"
 }
 
 ```
@@ -4281,14 +4282,14 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|quantity|any|false|none|none|
-|id|string|false|read-only|none|
-|manufacturer|string|true|none|none|
 |labor_hours|number|false|none|none|
-|price|any|false|none|none|
-|model|string|true|none|none|
-|row_index|integer|true|none|none|
 |description|string|false|none|none|
+|price|any|false|none|none|
+|row_index|integer|true|none|none|
+|quantity|any|false|none|none|
+|model|string|true|none|none|
+|manufacturer|string|true|none|none|
+|id|string|false|read-only|none|
 
 <h2 id="tocS_CablePath">CablePath</h2>
 <!-- backwards compatibility -->
@@ -4299,10 +4300,10 @@ None, None, None, None
 
 ```json
 {
-  "z_side": null,
   "type": "string",
-  "id": "string",
-  "a_side": null
+  "z_side": null,
+  "a_side": null,
+  "id": "string"
 }
 
 ```
@@ -4311,10 +4312,10 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|z_side|any|true|none|none|
 |type|string|false|none|none|
-|id|string|true|none|none|
+|z_side|any|true|none|none|
 |a_side|any|true|none|none|
+|id|string|true|none|none|
 
 <h2 id="tocS_PathConnection">PathConnection</h2>
 <!-- backwards compatibility -->
@@ -4347,9 +4348,9 @@ None, None, None, None
 
 ```json
 {
-  "date": null,
   "entry": "string",
-  "id": "string"
+  "id": "string",
+  "date": null
 }
 
 ```
@@ -4358,9 +4359,9 @@ None, None, None, None
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|date|any|false|read-only|none|
 |entry|string|false|none|none|
 |id|string|false|read-only|none|
+|date|any|false|read-only|none|
 
 <h2 id="tocS_SurveyElement">SurveyElement</h2>
 <!-- backwards compatibility -->
@@ -4388,22 +4389,22 @@ None, None, None, None
   ],
   "attributes": [
     {
-      "value": "string",
       "name": "string",
+      "value": "string",
       "id": 0,
       "attribute_id": 0
     }
   ],
   "accessories": [
     {
-      "quantity": null,
-      "id": "string",
-      "manufacturer": "string",
       "labor_hours": 0,
+      "description": "string",
       "price": null,
-      "model": "string",
       "row_index": 0,
-      "description": "string"
+      "quantity": null,
+      "model": "string",
+      "manufacturer": "string",
+      "id": "string"
     }
   ],
   "children": [
@@ -4425,31 +4426,31 @@ None, None, None, None
       ],
       "attributes": [
         {
-          "value": "string",
           "name": "string",
+          "value": "string",
           "id": 0,
           "attribute_id": 0
         }
       ],
       "accessories": [
         {
-          "quantity": null,
-          "id": "string",
-          "manufacturer": "string",
           "labor_hours": 0,
+          "description": "string",
           "price": null,
-          "model": "string",
           "row_index": 0,
-          "description": "string"
+          "quantity": null,
+          "model": "string",
+          "manufacturer": "string",
+          "id": "string"
         }
       ],
       "children": [],
       "cables": [
         {
-          "z_side": null,
           "type": "string",
-          "id": "string",
-          "a_side": null
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
         }
       ],
       "connections": {
@@ -4458,19 +4459,19 @@ None, None, None, None
       },
       "activity_log": [
         {
-          "date": null,
           "entry": "string",
-          "id": "string"
+          "id": "string",
+          "date": null
         }
       ]
     }
   ],
   "cables": [
     {
-      "z_side": null,
       "type": "string",
-      "id": "string",
-      "a_side": null
+      "z_side": null,
+      "a_side": null,
+      "id": "string"
     }
   ],
   "connections": {
@@ -4479,9 +4480,9 @@ None, None, None, None
   },
   "activity_log": [
     {
-      "date": null,
       "entry": "string",
-      "id": "string"
+      "id": "string",
+      "date": null
     }
   ]
 }
@@ -4520,15 +4521,15 @@ None, None, None, None
 ```json
 {
   "category": null,
-  "stroke_width": "string",
+  "end_point": null,
   "text": "string",
-  "stroke_color": "string",
-  "id": "string",
+  "location": null,
   "font_size": "string",
   "start_point": null,
-  "location": null,
-  "end_point": null,
-  "size": "string"
+  "stroke_width": "string",
+  "stroke_color": "string",
+  "size": "string",
+  "id": "string"
 }
 
 ```
@@ -4538,15 +4539,15 @@ None, None, None, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |category|any|true|none|none|
-|stroke_width|string|true|none|none|
+|end_point|any|false|none|none|
 |text|string|false|none|none|
-|stroke_color|string|true|none|none|
-|id|string|false|read-only|none|
+|location|any|true|none|none|
 |font_size|string|false|none|none|
 |start_point|any|false|none|none|
-|location|any|true|none|none|
-|end_point|any|false|none|none|
+|stroke_width|string|true|none|none|
+|stroke_color|string|true|none|none|
 |size|string|false|none|none|
+|id|string|false|read-only|none|
 
 <h2 id="tocS_SurveySchema">SurveySchema</h2>
 <!-- backwards compatibility -->
@@ -4579,8 +4580,8 @@ None, None, None, None
   "creator": 0,
   "editor": {
     "first_name": "string",
-    "user_id": null,
-    "last_name": "string"
+    "last_name": "string",
+    "user_id": null
   },
   "modifier": 0,
   "created_at": null,
@@ -4604,22 +4605,22 @@ None, None, None, None
       ],
       "attributes": [
         {
-          "value": "string",
           "name": "string",
+          "value": "string",
           "id": 0,
           "attribute_id": 0
         }
       ],
       "accessories": [
         {
-          "quantity": null,
-          "id": "string",
-          "manufacturer": "string",
           "labor_hours": 0,
+          "description": "string",
           "price": null,
-          "model": "string",
           "row_index": 0,
-          "description": "string"
+          "quantity": null,
+          "model": "string",
+          "manufacturer": "string",
+          "id": "string"
         }
       ],
       "children": [
@@ -4627,10 +4628,10 @@ None, None, None, None
       ],
       "cables": [
         {
-          "z_side": null,
           "type": "string",
-          "id": "string",
-          "a_side": null
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
         }
       ],
       "connections": {
@@ -4639,9 +4640,9 @@ None, None, None, None
       },
       "activity_log": [
         {
-          "date": null,
           "entry": "string",
-          "id": "string"
+          "id": "string",
+          "date": null
         }
       ]
     }
@@ -4649,15 +4650,15 @@ None, None, None, None
   "annotations": [
     {
       "category": null,
-      "stroke_width": "string",
+      "end_point": null,
       "text": "string",
-      "stroke_color": "string",
-      "id": "string",
+      "location": null,
       "font_size": "string",
       "start_point": null,
-      "location": null,
-      "end_point": null,
-      "size": "string"
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "size": "string",
+      "id": "string"
     }
   ],
   "users": null
