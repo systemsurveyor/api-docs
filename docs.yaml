@@ -2,18 +2,18 @@ info:
   description: 'How to Use Our REST APIs
 
 
-    System Surveyor''s APIs enable bi-directional communication with it''s platform.
-    These APIs provide a software layer connecting and optimizing the network to allow
-    your users to create/edit/retrieve sites & surveys, along with all of the associated
-    data.
+    System Surveyor''s APIs enable bi-directional communication with it''s platform.            These
+    APIs provide a software layer connecting and optimizing the network to allow your
+    users to create / edit /            retrieve sites & surveys, along with all of
+    the associated data.
 
 
     ##Prerequisites
 
 
-    In order to utilize these APIs, you must have an Enterprise account, with a valid
-    plan. Your account administrator must create an `access_token` for you, which
-    is required for each request.'
+    In order to utilize these             APIs, you must have an Enterprise account,
+    with a valid plan. Your account administrator must create an             `access_token`
+    for you, which is required for each request.'
   title: System Surveyor API
   version: 2.0.0
 security: jwt
@@ -1353,89 +1353,89 @@ components:
     SiteSchema:
       type: object
       properties:
-        street:
-          type: string
-          maxLength: 250
-        label:
-          type: string
-          maxLength: 255
         name:
           type: string
           maxLength: 250
-        state:
-          type: string
-          maxLength: 250
-        city:
-          type: string
-          maxLength: 250
-        created_at:
-          readOnly: true
-          type:
-          - 'null'
         zip_code:
           type: string
           maxLength: 250
-        tags:
-          type: array
-          items:
-            type: string
-        legacy_site_id:
+        version:
           type: integer
           readOnly: true
         modified_at:
           readOnly: true
           type:
           - 'null'
+        state:
+          type: string
+          maxLength: 250
         reference_id:
           type: string
           maxLength: 255
-        version:
-          type: integer
-          readOnly: true
-        team_id:
-          type: integer
+        label:
+          type: string
+          maxLength: 255
         creator:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
-        is_archived: {}
-        site_id:
-          type: string
         modifier:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
+        created_at:
+          readOnly: true
+          type:
+          - 'null'
+        street:
+          type: string
+          maxLength: 250
+        is_archived: {}
+        tags:
+          type: array
+          items:
+            type: string
+        city:
+          type: string
+          maxLength: 250
+        team_id:
+          type: integer
+        site_id:
+          type: string
+        legacy_site_id:
+          type: integer
+          readOnly: true
       required:
       - name
       - team_id
     ShareSiteOrSurveyRequestSchema:
       type: object
       properties:
-        message:
-          type: string
-        created_at:
-          readOnly: true
-          type:
-          - 'null'
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
-        expiration_date: {}
         emails:
           type: array
           items:
             type: string
             format: email
+        modified_at:
+          readOnly: true
+          type:
+          - 'null'
+        created_at:
+          readOnly: true
+          type:
+          - 'null'
+        expiration_date: {}
+        message:
+          type: string
       required:
       - emails
       - expiration_date
     SurveyFields:
       type: object
       properties:
-        field_id:
-          type: string
         value:
+          type: string
+        field_id:
           type: string
       required:
       - field_id
@@ -1443,21 +1443,21 @@ components:
     SurveyOptions:
       type: object
       properties:
-        value:
-          type: boolean
-        template_name:
-          type: string
         inputs:
           type: array
           items:
             $ref: '#/components/schemas/SurveyFields'
+        value:
+          type: boolean
+        id:
+          type: string
         scope:
           type: string
           enum:
           - template
           - model
           - content
-        id:
+        template_name:
           type: string
       required:
       - id
@@ -1466,17 +1466,20 @@ components:
     SurveyReportRequestSchema:
       type: object
       properties:
+        output:
+          type: string
+          enum:
+          - pdf
+          - html
+          - xls
         name:
           type: string
-        paper_size:
-          type: string
-        filters:
+        options:
           type: array
           items:
-            type: object
-        is_excel:
-          type: boolean
-          default: false
+            $ref: '#/components/schemas/SurveyOptions'
+        paper_size:
+          type: string
         is_site_report:
           type: boolean
           default: false
@@ -1484,23 +1487,20 @@ components:
           type: array
           items:
             type: string
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
+        is_excel:
+          type: boolean
+          default: false
         custom_data:
           type: object
-        output:
+        filters:
+          type: array
+          items:
+            type: object
+        site_id:
           type: string
-          enum:
-          - pdf
-          - html
-          - xls
         report_id:
           type: string
           format: uuid
-        site_id:
-          type: string
       required:
       - name
       - output
@@ -1509,41 +1509,41 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        ids:
-          type: array
-          items:
-            type: string
-        name:
-          type: string
-        paper_size:
-          type: string
-        filters:
-          type: array
-          items:
-            type: object
-        is_excel:
-          type: boolean
-          default: false
-        is_site_report:
-          type: boolean
-          default: false
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
-        custom_data:
-          type: object
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
+        name:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyOptions'
+        paper_size:
+          type: string
+        ids:
+          type: array
+          items:
+            type: string
+        is_site_report:
+          type: boolean
+          default: false
+        is_excel:
+          type: boolean
+          default: false
+        custom_data:
+          type: object
+        filters:
+          type: array
+          items:
+            type: object
+        site_id:
+          type: string
         report_id:
           type: string
           format: uuid
-        site_id:
-          type: string
       required:
       - name
       - output
@@ -1552,86 +1552,86 @@ components:
     EPAccessory:
       type: object
       properties:
+        description:
+          type: string
         model:
           type: string
           default: ''
-        description:
-          type: string
         labor_hours:
           type:
           - number
           - 'null'
           default: !!python/object/apply:decimal.Decimal
           - 0E-10
+        created_at:
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        manufacturer:
+          type: string
+          default: ''
         price:
           type:
           - number
           - 'null'
           default: !!python/object/apply:decimal.Decimal
           - 0E-10
-        manufacturer:
-          type: string
-          default: ''
-        created_at:
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
       required:
       - description
-    Attribute:
+    SubElement:
       type: object
       properties:
-        attribute_id:
-          type: integer
-        value:
+        systemtype_id:
+          type: string
+        element_id:
           type: string
       required:
-      - attribute_id
-      - value
+      - element_id
+      - systemtype_id
     Link:
       type: object
       properties:
+        name:
+          type: string
         url:
           type: string
           format: url
         link_type:
           type: integer
-        name:
-          type: string
       required:
       - link_type
       - name
       - url
-    SubElement:
+    Attribute:
       type: object
       properties:
-        element_id:
+        value:
           type: string
-        systemtype_id:
-          type: string
+        attribute_id:
+          type: integer
       required:
-      - element_id
-      - systemtype_id
+      - attribute_id
+      - value
     EPContent:
       type: object
       properties:
-        attribute:
+        child:
           type: array
           default: []
           items:
-            $ref: '#/components/schemas/Attribute'
+            $ref: '#/components/schemas/SubElement'
         pdf_url:
           type: array
           default: []
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-        child:
+        attribute:
           type: array
           default: []
           items:
-            $ref: '#/components/schemas/SubElement'
+            $ref: '#/components/schemas/Attribute'
     ElementProfileSchema:
       type: object
       properties:
@@ -1639,28 +1639,28 @@ components:
           type: string
         is_default:
           type: boolean
+        modified_at:
+          readOnly: true
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
-        content:
-          $ref: '#/components/schemas/EPContent'
-        created_at:
-          readOnly: true
-        modified_at:
-          readOnly: true
-        team_id:
+        element_id:
           type: integer
         created_by:
           type: integer
           readOnly: true
-        sort:
-          type: integer
-        element_id:
-          type: integer
+        created_at:
+          readOnly: true
         id:
           type: integer
           readOnly: true
+        sort:
+          type: integer
+        content:
+          $ref: '#/components/schemas/EPContent'
+        team_id:
+          type: integer
       required:
       - content
       - element_id
@@ -1674,31 +1674,29 @@ components:
           writeOnly: true
         label:
           type: string
-        name:
-          type: string
-        id:
-          type: string
-          readOnly: true
         team_id:
           type: integer
+        name:
+          type: string
         site_id:
           type: integer
+          readOnly: true
+        id:
+          type: string
           readOnly: true
       required:
       - name
     RelatedUser:
       type: object
       properties:
-        user_id: {}
         first_name:
           type: string
+        user_id: {}
         last_name:
           type: string
     SurveyAttribute:
       type: object
       properties:
-        attribute_id:
-          type: integer
         id:
           type: integer
           readOnly: true
@@ -1706,6 +1704,8 @@ components:
           type: string
         name:
           type: string
+        attribute_id:
+          type: integer
       required:
       - attribute_id
       - name
@@ -1713,21 +1713,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
-        quantity: {}
-        model:
-          type: string
         description:
+          type: string
+        row_index:
+          type: integer
+        model:
           type: string
         labor_hours:
           type: number
-        manufacturer:
-          type: string
-        price: {}
-        row_index:
-          type: integer
+        quantity: {}
         id:
           type: string
           readOnly: true
+        manufacturer:
+          type: string
+        price: {}
       required:
       - manufacturer
       - model
@@ -1735,12 +1735,12 @@ components:
     CablePath:
       type: object
       properties:
+        z_side: {}
+        type:
+          type: string
         id:
           type: string
         a_side: {}
-        type:
-          type: string
-        z_side: {}
       required:
       - a_side
       - id
@@ -1753,10 +1753,10 @@ components:
     SurveyElementActivityLog:
       type: object
       properties:
-        date:
-          readOnly: true
         id:
           type: string
+          readOnly: true
+        date:
           readOnly: true
         entry:
           type: string
@@ -1819,21 +1819,21 @@ components:
       type: object
       properties:
         start_point: {}
-        end_point: {}
-        category: {}
-        text:
+        location: {}
+        size:
           type: string
+        category: {}
         stroke_width:
           type: string
         stroke_color:
           type: string
-        location: {}
-        size:
+        font_size:
           type: string
+        end_point: {}
         id:
           type: string
           readOnly: true
-        font_size:
+        text:
           type: string
       required:
       - category
@@ -1974,9 +1974,10 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: "Once the account administrator creates your API `access_token`\
-        \ ([link](https://app.systemsurveyor.com/v2/account/#api_management)), you\
-        \ must include that with each request. These tokens are valid for 1 year,\
-        \ and can be revoked at any time by the account administrator. Here is a sample\
-        \ request:\n\n```\ncurl --location --request GET 'https://openapi.systemsurveyor.com/v3/user'\
-        \ \\  \n--header 'Authorization: Bearer <<TOKEN>>'\n```"
+        \         ([link](https://app.systemsurveyor.com/v2/account/#api_management)),\
+        \ you must include that with each request.         These tokens are valid\
+        \ for 1 year, and can be revoked at any time by the account administrator.\
+        \         Here is a sample request:\n\n```\ncurl --location --request GET\
+        \ 'https://openapi.systemsurveyor.com/v3/user' \\         \n--header 'Authorization:\
+        \ Bearer <<TOKEN>>'\n```"
 
