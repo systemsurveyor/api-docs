@@ -3,14 +3,22 @@ title: System Surveyor API v2.0.0
 language_tabs:
   - shell: cURL
   - python: Python
-  - csharp: C#
+  - ruby: Ruby
+  - go: Go
+  - http: HTTP
+  - javascript: JavaScript
+  - javascript--nodejs: Node.JS
 language_clients:
   - shell: ""
   - python: ""
-  - csharp: ""
+  - ruby: ""
+  - go: ""
+  - http: ""
+  - javascript: ""
+  - javascript--nodejs: ""
 toc_footers: []
 includes: []
-search: false
+search: true
 highlight_theme: darkula
 headingLevel: 2
 
@@ -65,61 +73,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/resource";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/octet-stream',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/resource',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/octet-stream"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/resource", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/resource HTTP/1.1
+
+Accept: application/octet-stream
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/resource',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/resource',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -182,73 +225,101 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/survey_element/{survey_element_id}/resource";
-      
-      
-      await PostAsync(null, url);
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(undefined content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(undefined content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/pdf',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.post '/v3/survey_element/{survey_element_id}/resource',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/pdf"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/survey_element/{survey_element_id}/resource", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/survey_element/{survey_element_id}/resource HTTP/1.1
+
+Content-Type: application/pdf
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '/tmp/path-to-file.pdf';
+const headers = {
+  'Content-Type':'application/pdf',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey_element/{survey_element_id}/resource',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = /tmp/path-to-file.pdf;
+const headers = {
+  'Content-Type':'application/pdf',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey_element/{survey_element_id}/resource',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -330,85 +401,111 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakePutRequest()
-    {
-      int id = 1;
-      string url = "/v3/folder/{folder_id}";
-
-      
-      string json = @"{
-  ""name"": ""string"",
-  ""site_external_id"": ""string"",
-  ""team_id"": 0,
-  ""label"": ""string""
-}";
-      FolderSchema content = JsonConvert.DeserializeObject(json);
-      var result = await PutAsync(id, content, url);
-      
-          
-    }
-
-    /// Performs a PUT Request
-    public async Task PutAsync(int id, FolderSchema content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute PUT request
-        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
-
-        //Return response
-        return await DeserializeObject(response);
-    }
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(FolderSchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.put '/v3/folder/{folder_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PUT", "/v3/folder/{folder_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PUT /v3/folder/{folder_id} HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "string",
+  "site_external_id": "string",
+  "team_id": 0,
+  "label": "string"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/folder/{folder_id}',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "string",
+  "site_external_id": "string",
+  "team_id": 0,
+  "label": "string"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/folder/{folder_id}',
+{
+  method: 'PUT',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -495,62 +592,90 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/folder/{folder_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/folder/{folder_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/folder/{folder_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -611,73 +736,109 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/site_folder";
-      
-      
-      await PostAsync(null, url);
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(undefined content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(undefined content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.post '/v3/site_folder',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/site_folder", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/site_folder HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "My Folder",
+  "label": "S0124",
+  "team_id": 0
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "My Folder",
+  "label": "S0124",
+  "team_id": 0
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -758,44 +919,107 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.patch '/v3/site_folder/{folder_external_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PATCH", "/v3/site_folder/{folder_external_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PATCH /v3/site_folder/{folder_external_id} HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "My Folder",
+  "label": "ER-1233"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder/{folder_external_id}',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "My Folder",
+  "label": "ER-1233"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder/{folder_external_id}',
+{
+  method: 'PATCH',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -875,73 +1099,107 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
-    {
-      string url = "/v3/{site_id}/folder";
-      
-      
-      await PostAsync(null, url);
-      
-    }
-
-    /// Performs a POST Request
-    public async Task PostAsync(undefined content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
-    }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(undefined content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.post '/v3/{site_id}/folder',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/{site_id}/folder", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/{site_id}/folder HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "name": "My Folder",
+  "label": "LS1-34"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/{site_id}/folder',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "name": "My Folder",
+  "label": "LS1-34"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/{site_id}/folder',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1017,62 +1275,90 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/survey_folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/survey_folder/{folder_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/survey_folder/{folder_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/survey_folder/{folder_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey_folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey_folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1127,62 +1413,90 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/site_folder/{folder_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/site_folder/{folder_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/site_folder/{folder_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/site_folder/{folder_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_folder/{folder_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1240,104 +1554,154 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
 
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
+result = RestClient.post '/v3/report',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
     }
-    
-    
-    /// Make a dummy request
-    public async Task MakePostRequest()
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/report", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/report HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "options": [
     {
-      string url = "/v3/report";
-      
-      string json = @"{
-  ""options"": [
-    {
-      ""scope"": ""template"",
-      ""template_name"": ""string"",
-      ""id"": ""string"",
-      ""inputs"": [
+      "scope": "template",
+      "template_name": "string",
+      "id": "string",
+      "inputs": [
         {
-          ""value"": ""string"",
-          ""field_id"": ""string""
+          "value": "string",
+          "field_id": "string"
         }
       ],
-      ""value"": true
+      "value": true
     }
   ],
-  ""paper_size"": ""string"",
-  ""report_id"": ""5ed7905a-4735-4cf7-b1ab-521e066fb971"",
-  ""survey_ids"": [
-    ""string""
+  "paper_size": "string",
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "survey_ids": [
+    "string"
   ],
-  ""custom_data"": {},
-  ""is_site_report"": false,
-  ""output"": ""pdf"",
-  ""is_excel"": false,
-  ""filters"": [
+  "custom_data": {},
+  "is_site_report": false,
+  "output": "pdf",
+  "is_excel": false,
+  "filters": [
     {}
   ],
-  ""name"": ""string"",
-  ""site_id"": ""string""
-}";
-      SurveyReportRequestSchema content = JsonConvert.DeserializeObject(json);
-      await PostAsync(content, url);
-      
-      
-    }
+  "name": "string",
+  "site_id": "string"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
 
-    /// Performs a POST Request
-    public async Task PostAsync(SurveyReportRequestSchema content, string url)
+fetch('/v3/report',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "options": [
     {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute POST request
-        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+      "scope": "template",
+      "template_name": "string",
+      "id": "string",
+      "inputs": [
+        {
+          "value": "string",
+          "field_id": "string"
+        }
+      ],
+      "value": true
     }
-    
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(SurveyReportRequestSchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
+  ],
+  "paper_size": "string",
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "survey_ids": [
+    "string"
+  ],
+  "custom_data": {},
+  "is_site_report": false,
+  "output": "pdf",
+  "is_excel": false,
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "site_id": "string"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
 
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
+fetch('/v3/report',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1458,61 +1822,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/site/{site_id}";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/site/{site_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/site/{site_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/site/{site_id} HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1631,94 +2030,124 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakePutRequest()
-    {
-      int id = 1;
-      string url = "/v3/site/{site_id}";
-
-      
-      string json = @"{
-  ""team_id"": 0,
-  ""street"": ""string"",
-  ""site_id"": ""string"",
-  ""city"": ""string"",
-  ""name"": ""string"",
-  ""state"": ""string"",
-  ""reference_id"": ""string"",
-  ""is_archived"": null,
-  ""zip_code"": ""string"",
-  ""tags"": [
-    ""string""
-  ],
-  ""label"": ""string""
-}";
-      SiteSchema content = JsonConvert.DeserializeObject(json);
-      var result = await PutAsync(id, content, url);
-      
-          
-    }
-
-    /// Performs a PUT Request
-    public async Task PutAsync(int id, SiteSchema content, string url)
-    {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute PUT request
-        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
-
-        //Return response
-        return await DeserializeObject(response);
-    }
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(SiteSchema content)
-    {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.put '/v3/site/{site_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PUT", "/v3/site/{site_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PUT /v3/site/{site_id} HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "team_id": 0,
+  "street": "string",
+  "site_id": "string",
+  "city": "string",
+  "name": "string",
+  "state": "string",
+  "reference_id": "string",
+  "is_archived": null,
+  "zip_code": "string",
+  "tags": [
+    "string"
+  ],
+  "label": "string"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "team_id": 0,
+  "street": "string",
+  "site_id": "string",
+  "city": "string",
+  "name": "string",
+  "state": "string",
+  "reference_id": "string",
+  "is_archived": null,
+  "zip_code": "string",
+  "tags": [
+    "string"
+  ],
+  "label": "string"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'PUT',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1818,44 +2247,124 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.patch '/v3/site/{site_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PATCH", "/v3/site/{site_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PATCH /v3/site/{site_id} HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "team_id": 0,
+  "street": "string",
+  "site_id": "string",
+  "city": "string",
+  "name": "string",
+  "state": "string",
+  "reference_id": "string",
+  "is_archived": null,
+  "zip_code": "string",
+  "tags": [
+    "string"
+  ],
+  "label": "string"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "team_id": 0,
+  "street": "string",
+  "site_id": "string",
+  "city": "string",
+  "name": "string",
+  "state": "string",
+  "reference_id": "string",
+  "is_archived": null,
+  "zip_code": "string",
+  "tags": [
+    "string"
+  ],
+  "label": "string"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'PATCH',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -1950,62 +2459,90 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/site/{site_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/site/{site_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/site/{site_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/site/{site_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -2057,61 +2594,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/sites";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/sites',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/sites", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/sites HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/sites',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/sites',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -2249,62 +2821,100 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/sites";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/sites',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/sites", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/sites HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '[
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+]';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/sites',
+{
+  method: 'DELETE',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = [
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+];
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/sites',
+{
+  method: 'DELETE',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -2369,61 +2979,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/site/{site_id}/surveys";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/site/{site_id}/surveys',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/site/{site_id}/surveys", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/site/{site_id}/surveys HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}/surveys',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site/{site_id}/surveys',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -2561,162 +3206,265 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
 
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
+result = RestClient.put '/v3/site/{site_id}/survey/{survey_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
     }
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakePutRequest()
-    {
-      int id = 1;
-      string url = "/v3/site/{site_id}/survey/{survey_id}";
 
-      
-      string json = @"{
-  ""title"": ""string"",
-  ""label"": ""string"",
-  ""reference_id"": ""string"",
-  ""description"": ""string"",
-  ""summary"": ""string"",
-  ""location"": ""string"",
-  ""status"": null,
-  ""icon_size"": 0,
-  ""unit"": null,
-  ""margin_range"": 0,
-  ""floorplan_scale"": 0,
-  ""elements"": [
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PUT", "/v3/site/{site_id}/survey/{survey_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PUT /v3/site/{site_id}/survey/{survey_id} HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "title": "string",
+  "label": "string",
+  "reference_id": "string",
+  "description": "string",
+  "summary": "string",
+  "location": "string",
+  "status": null,
+  "icon_size": 0,
+  "unit": null,
+  "margin_range": 0,
+  "floorplan_scale": 0,
+  "elements": [
     {
-      ""id"": ""string"",
-      ""name"": ""string"",
-      ""element_id"": 0,
-      ""element_index"": 0,
-      ""element_profile_id"": 0,
-      ""systemtype_id"": 0,
-      ""variant"": null,
-      ""z_order"": 0,
-      ""position"": null,
-      ""photo_urls"": [
-        ""string""
+      "id": "string",
+      "name": "string",
+      "element_id": 0,
+      "element_index": 0,
+      "element_profile_id": 0,
+      "systemtype_id": 0,
+      "variant": null,
+      "z_order": 0,
+      "position": null,
+      "photo_urls": [
+        "string"
       ],
-      ""pdf_urls"": [
+      "pdf_urls": [
         {}
       ],
-      ""attributes"": [
+      "attributes": [
         {
-          ""value"": ""string"",
-          ""attribute_id"": 0,
-          ""name"": ""string""
+          "value": "string",
+          "attribute_id": 0,
+          "name": "string"
         }
       ],
-      ""accessories"": [
+      "accessories": [
         {
-          ""quantity"": null,
-          ""price"": null,
-          ""model"": ""string"",
-          ""manufacturer"": ""string"",
-          ""labor_hours"": 0,
-          ""description"": ""string"",
-          ""row_index"": 0
+          "quantity": null,
+          "price": null,
+          "model": "string",
+          "manufacturer": "string",
+          "labor_hours": 0,
+          "description": "string",
+          "row_index": 0
         }
       ],
-      ""children"": [
+      "children": [
         {}
       ],
-      ""cables"": [
+      "cables": [
         {
-          ""type"": ""string"",
-          ""z_side"": null,
-          ""a_side"": null,
-          ""id"": ""string""
+          "type": "string",
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
         }
       ],
-      ""connections"": {
-        ""start"": null,
-        ""end"": null
+      "connections": {
+        "start": null,
+        "end": null
       },
-      ""activity_log"": [
+      "activity_log": [
         {
-          ""entry"": ""string""
+          "entry": "string"
         }
       ]
     }
   ],
-  ""annotations"": [
+  "annotations": [
     {
-      ""start_point"": null,
-      ""font_size"": ""string"",
-      ""size"": ""string"",
-      ""stroke_width"": ""string"",
-      ""stroke_color"": ""string"",
-      ""category"": null,
-      ""end_point"": null,
-      ""text"": ""string"",
-      ""location"": null
+      "start_point": null,
+      "font_size": "string",
+      "size": "string",
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "category": null,
+      "end_point": null,
+      "text": "string",
+      "location": null
     }
   ]
-}";
-      SurveySchema content = JsonConvert.DeserializeObject(json);
-      var result = await PutAsync(id, content, url);
-      
-          
-    }
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
 
-    /// Performs a PUT Request
-    public async Task PutAsync(int id, SurveySchema content, string url)
+fetch('/v3/site/{site_id}/survey/{survey_id}',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "title": "string",
+  "label": "string",
+  "reference_id": "string",
+  "description": "string",
+  "summary": "string",
+  "location": "string",
+  "status": null,
+  "icon_size": 0,
+  "unit": null,
+  "margin_range": 0,
+  "floorplan_scale": 0,
+  "elements": [
     {
-        //Serialize Object
-        StringContent jsonContent = SerializeObject(content);
-
-        //Execute PUT request
-        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
-
-        //Return response
-        return await DeserializeObject(response);
+      "id": "string",
+      "name": "string",
+      "element_id": 0,
+      "element_index": 0,
+      "element_profile_id": 0,
+      "systemtype_id": 0,
+      "variant": null,
+      "z_order": 0,
+      "position": null,
+      "photo_urls": [
+        "string"
+      ],
+      "pdf_urls": [
+        {}
+      ],
+      "attributes": [
+        {
+          "value": "string",
+          "attribute_id": 0,
+          "name": "string"
+        }
+      ],
+      "accessories": [
+        {
+          "quantity": null,
+          "price": null,
+          "model": "string",
+          "manufacturer": "string",
+          "labor_hours": 0,
+          "description": "string",
+          "row_index": 0
+        }
+      ],
+      "children": [
+        {}
+      ],
+      "cables": [
+        {
+          "type": "string",
+          "z_side": null,
+          "a_side": null,
+          "id": "string"
+        }
+      ],
+      "connections": {
+        "start": null,
+        "end": null
+      },
+      "activity_log": [
+        {
+          "entry": "string"
+        }
+      ]
     }
-    
-    
-    /// Serialize an object to Json
-    private StringContent SerializeObject(SurveySchema content)
+  ],
+  "annotations": [
     {
-        //Serialize Object
-        string jsonObject = JsonConvert.SerializeObject(content);
-
-        //Create Json UTF8 String Content
-        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+      "start_point": null,
+      "font_size": "string",
+      "size": "string",
+      "stroke_width": "string",
+      "stroke_color": "string",
+      "category": null,
+      "end_point": null,
+      "text": "string",
+      "location": null
     }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
+  ]
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
 
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
-}
+fetch('/v3/site/{site_id}/survey/{survey_id}',
+{
+  method: 'PUT',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -3057,62 +3805,90 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    /// Make a dummy request
-    public async Task MakeDeleteRequest()
-    {
-      int id = 1;
-      string url = "/v3/survey/{survey_id}";
-
-      await DeleteAsync(id, url);
-    }
-
-    /// Performs a DELETE Request
-    public async Task DeleteAsync(int id, string url)
-    {
-        //Execute DELETE request
-        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
-
-        //Return response
-        await DeserializeObject(response);
-    }
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.delete '/v3/survey/{survey_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/survey/{survey_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/survey/{survey_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -3169,61 +3945,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/teams";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/teams',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/teams", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/teams HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/teams',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/teams',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -3293,61 +4104,96 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    /// Make a dummy request
-    public async Task MakeGetRequest()
-    {
-      string url = "/v3/user";
-      var result = await GetAsync(url);
-    }
-
-    /// Performs a GET Request
-    public async Task GetAsync(string url)
-    {
-        //Start the request
-        HttpResponseMessage response = await Client.GetAsync(url);
-
-        //Validate result
-        response.EnsureSuccessStatusCode();
-
-    }
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.get '/v3/user',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/user", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/user HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/user',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/user',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
@@ -3540,44 +4386,121 @@ print(r.json())
 
 ```
 
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+```ruby
+require 'rest-client'
+require 'json'
 
-/// <<summary>>
-/// Example of Http Client
-/// <</summary>>
-public class HttpExample
-{
-    private HttpClient Client { get; set; }
-
-    /// <<summary>>
-    /// Setup http client
-    /// <</summary>>
-    public HttpExample()
-    {
-      Client = new HttpClient();
-    }
-    
-    
-    
-    
-    
-    /// Deserialize object from request response
-    private async Task DeserializeObject(HttpResponseMessage response)
-    {
-        //Read body 
-        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //Deserialize Body to object
-        var result = JsonConvert.DeserializeObject(responseBody);
-    }
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
 }
+
+result = RestClient.patch '/v3/user',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PATCH", "/v3/user", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PATCH /v3/user HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "first_name": "string",
+  "last_name": "string",
+  "user_name": "string",
+  "company": "string",
+  "mobile": "string",
+  "title": "string",
+  "country": "string",
+  "state": "string",
+  "city": "string"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/user',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "first_name": "string",
+  "last_name": "string",
+  "user_name": "string",
+  "company": "string",
+  "mobile": "string",
+  "title": "string",
+  "country": "string",
+  "state": "string",
+  "city": "string"
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/user',
+{
+  method: 'PATCH',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
 
 ```
 
