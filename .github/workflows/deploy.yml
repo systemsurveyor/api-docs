@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Generate Markdown
-      run: widdershins --search false --language_tabs 'shell:cURL' 'python:Python' 'csharp:C#' --summary --expandBody docs.yaml -o source/index.html.md
+      run: widdershins --language_tabs 'shell:cURL' 'python:Python' 'ruby:Ruby' 'go:Go' 'http:HTTP' 'javascript:JavaScript' 'javascript--nodejs:Node.JS' --summary --expandBody docs.yaml -o source/index.html.md
 
     - name: Modify Markdown (custom text sections)
       run: python custom_swagger.py
