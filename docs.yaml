@@ -11,104 +11,6 @@ info:
   version: 2.0.0
 security: jwt
 paths:
-  /v3/resource:
-    get:
-      tags:
-      - Resources
-      - v3
-      security:
-      - jwt: []
-      operationId: get_resource
-      summary: Fetches a binary resource and returns it as bytes.
-      description: 'Resource path is a relative URL to the binary resource in EFS,
-        passed in a `path` query parameter.
-
-
-        Example path: `2022/08/05/207e7214-6792-4288-8820-438b1f3233be.png`
-
-        '
-      parameters:
-      - name: path
-        description: Relative URL of the resource
-        in: path
-        required: true
-        schema:
-          type: string
-          example: 2022/08/05/207e7214-6792-4288-8820-438b1f3233be.png
-      responses:
-        '200':
-          description: A binary resource file
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      public: true
-  /v3/survey_element/{survey_element_id}/resource:
-    post:
-      tags:
-      - Resources
-      - v3
-      security:
-      - jwt: []
-      operationId: add_survey_element_resource
-      summary: Sets an image to a survey element.
-      parameters:
-      - name: survey_element_id
-        description: The external id of the surveyelement
-        in: path
-        required: true
-      requestBody:
-        content:
-          application/pdf:
-            schema:
-              type: string
-              format: binary
-              example: /tmp/path-to-file.pdf
-          image/jpeg:
-            schema:
-              type: string
-              format: binary
-              example: /tmp/path-to-file.jpeg
-          image/jpg:
-            schema:
-              type: string
-              format: binary
-              example: /tmp/path-to-file.jpg
-          image/png:
-            schema:
-              type: string
-              format: binary
-              example: /tmp/path-to-file.png
-      responses:
-        '200':
-          description: The path to the uploaded file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      resource_url:
-                        type: string
-                        example: 2022/11/01/39dace0d-7aa3-47c7-9bff-9c87fbe2c00b.png
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
-      public: true
   /v3/folder/{folder_id}:
     put:
       tags:
@@ -445,27 +347,43 @@ paths:
                 properties:
                   id:
                     type: string
+                    description: ID for the site
                     example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
                   team_id:
                     type: integer
+                    description: ID of the team associated with the site.
+                    example: 1992
                   name:
                     type: string
+                    description: Name of the Site
+                    example: John's site
                   label:
                     type: string
+                    description: Label attached to the site
+                    example: BATS
                   survey_count:
                     type: integer
                   city:
                     type: string
+                    description: City that the site is in
+                    example: Los Angeles
                   state:
                     type: string
+                    description: State that the Site is in
+                    example: California
                   street:
                     type: string
+                    description: Street address of the site
+                    example: 1300 S SAN PEDRO ST
                   zip_code:
                     type: string
+                    description: Zip code of where the website is
+                    example: 38129
                   is_active:
                     type: boolean
                   version:
                     type: integer
+                    example: 1674845520
                   reference_id:
                     type: string
                   tags:
@@ -474,27 +392,44 @@ paths:
                       type: string
                   creator:
                     type: object
+                    description: Information about the creator of the Site.
                     properties:
                       user_id:
                         type: integer
+                        description: ID of the user who created the site.
+                        example: 9313
                       first_name:
                         type: string
+                        description: First name of the user who created the site.
+                        example: John
                       last_name:
                         type: string
+                        description: Last name of the user who created the site.
+                        example: Smith
                   modifier:
                     type: object
+                    description: Information about the latest user to modify the Site.
                     properties:
                       user_id:
                         type: integer
+                        description: ID of the user who last modified the site.
+                        example: 9313
                       first_name:
                         type: string
+                        description: First name of the user who last modified the
+                          site.
+                        example: John
                       last_name:
                         type: string
+                        description: Last name of the user who last modified the site.
+                        example: Smith
                   created_at:
                     type: integer
+                    description: Unix timestamp of when the site was created.
                     example: 1452384000
                   modified_at:
                     type: integer
+                    description: Unix time stamp for when the site was last modified.
                     example: 1673557029
         '401':
           $ref: '#/components/responses/UnauthorizedError'
@@ -510,10 +445,14 @@ paths:
       security:
       - jwt: []
       operationId: create_or_update_site
-      summary: Creates a new site with a specific `external_id` or updates the site
-        if it already exists
-      description: 'Pass a folder external ID in a `folder_external_id` field in the
-        payload to create the site inside that folder.
+      summary: Creates a new site with a specific `site_id` or updates the site if
+        it already exists
+      description: 'To create a site, pass a new UUID for the `site_id`.
+
+        To update a site, pass the existing UUID for the `site_id`.
+
+        You may pass a `folder_external_id` field in the payload to create the site
+        inside that folder.
 
         '
       parameters:
@@ -610,7 +549,7 @@ paths:
         of a user.
       description: "Explanation of usage of filters:\n\nFiltered by favorites:\n \
         \ - All sites that are in workbench but not in a folder\n  - All folders that\
-        \ have a site under them that is in the workbench\n  - Don\u2019t return sites\
+        \ have a site under them that is in the workbench\n  - Don't return sites\
         \ that are in workbench but also in a folder\n\nFiltered by folder and favorites:\n\
         \  - All sites in the folder that are in the workbench\n\nFiltered by folder:\n\
         \  - All sites in folder\n"
@@ -667,49 +606,6 @@ paths:
                         survey_count:
                           type: integer
                           example: 12
-                        modified_at:
-                          type: integer
-                          description: 'Datetime of the most recently modified survey
-                            in the site. If the site has no surveys, falls back to
-                            the
-
-                            site''s own `modified_at` datetime.
-
-                            '
-                          example: 1644374426
-                        owner:
-                          type: object
-                          properties:
-                            user_id:
-                              type: integer
-                              example: 12390
-                            first_name:
-                              type: string
-                              example: John
-                            last_name:
-                              type: string
-                              example: Doe
-                        modifier:
-                          type: object
-                          properties:
-                            user_id:
-                              type: integer
-                              example: 12390
-                            first_name:
-                              type: string
-                              example: John
-                            last_name:
-                              type: string
-                              example: Doe
-                        team:
-                          type: object
-                          properties:
-                            team_id:
-                              type: integer
-                              example: 1049
-                            name:
-                              type: string
-                              name: John Doe's team
                         type:
                           type: string
                           example: site
@@ -723,12 +619,110 @@ paths:
                         favorite_timestamp:
                           type: integer
                           example: 12034903409
-                          description: Timestamp of when the site was added to favorites
+                          description: Unix Timestamp of when the site was added to
+                            favorites
                         has_favorite_sites:
                           type: boolean
                           example: true
                           description: Indicates if a folder has sites that are in
                             the user's workbench
+                        permissions:
+                          type: object
+                          properties:
+                            is_site_guest:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_edit_site:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_change_site_access:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_invite_guests:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_delete_surveys:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_create_surveys:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_modify_surveys:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_revoke_survey_edit:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_edit_contacts:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                            user_can_view_site_access:
+                              type: boolean
+                              example: true
+                              enum:
+                              - true
+                              - false
+                        owner:
+                          type: object
+                          properties:
+                            user_id:
+                              type: integer
+                              example: 12390
+                            first_name:
+                              type: string
+                              example: John
+                            last_name:
+                              type: string
+                              example: Doe
+                        modified_at:
+                          type: integer
+                          description: 'Unix Timestamp of the most recently modified
+                            survey in the site. If the site has no surveys, falls
+                            back to the
+
+                            site''s own `modified_at` datetime.
+
+                            '
+                          example: 1644374426
+                        modifier:
+                          type: string
+                          description: User who modified the site or folder
+                        team:
+                          type: object
+                          properties:
+                            team_id:
+                              type: integer
+                              example: 1049
+                            name:
+                              type: string
+                              name: John Doe's team
         '401':
           $ref: '#/components/responses/UnauthorizedError'
       public: true
@@ -859,12 +853,14 @@ paths:
           - id
           - title
           - document_image_url
+          - preview_image
           - editor_id
           - editor_first_name
           - editor_last_name
-          - comments_count
-          - elements_count
+          - label
+          - element_count
           - is_folder
+          - is_archived
           - created_at
           - modified_at
           - status
@@ -884,34 +880,67 @@ paths:
                     type: array
                     items:
                       type: object
+                      description: The first object contains information about any
+                        folders. Check is_folder value to confirm
                       properties:
                         id:
                           type: string
+                          description: Survey or folder id
                           example: b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb
                         title:
                           type: string
-                          example: My survey
+                          description: Title given to the folder at the time of creation.
+                          example: New Folder Name
                         label:
                           type: string
+                          description: Label attached to this folder
                           example: TGS-123
                         is_folder:
                           type: boolean
-                          example: false
+                          description: Is this object a folder or a survey
+                          example: true
                         preview_image:
                           type: string
-                          description: URL to the survey's preview image
-                        elements_count:
+                          description: URL to the folder's preview image
+                          example: https://app.systemsurveyor.com/media/2023/01/28/d9a8cf3a-728e-4eae-b290-1f2d1bc35a0e.png
+                        element_count:
                           type: integer
-                          description: Element count for survey
+                          description: Count of elements in this folder
                           example: 90
                         survey_count:
                           type: integer
-                          description: Survey count for folder
-                          example: 34
+                          description: Count for the survey
+                          example: 2
                         is_archived:
                           type: boolean
+                          description: If the folder is archived or not
                           example: false
-                          description: If the survey is archived or not
+                        modified_at:
+                          type: integer
+                          description: Unix timestamp of when the survey was last
+                            modified
+                          example: 1674952923
+                        created_at:
+                          type: integer
+                          description: Unix timestamp of when this folder was created.
+                          example: 1674952923
+                        editor:
+                          type: object
+                          properties:
+                            user_id:
+                              type: integer
+                              description: ID of the user who last edited this object.
+                              example: 9313
+                            first_name:
+                              type: string
+                              description: First Name of the person who edited this
+                                folder
+                              example: John
+                            last_name:
+                              type: string
+                              description: Last Name of the person who last edited
+                                this folder
+                              example: Doe
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1009,6 +1038,13 @@ paths:
       - jwt: []
       operationId: get_user_teams
       summary: Returns all the teams the current user is a member of
+      description: 'Returns the information related to a user. This endpoint returns
+        which teams a user is a part of, plan
+
+        subscriptions, features access for the user as well as who owns the Team as
+        the lead.
+
+        '
       responses:
         '200':
           description: OK
@@ -1029,45 +1065,136 @@ paths:
                       attributes:
                         type: object
                         properties:
+                          id:
+                            type: string
+                            description: Id of the team
+                            example: 12345
                           name:
                             type: string
+                            example: John's team
+                            description: A name you give for the team.
                           unit:
                             type: string
+                            example: metric
                             enum:
                             - metric
                             - imperaial_standard
                           logo_url:
                             type: string
+                            description: URL of the team logo
+                            example: https://app.systemsurveyor.com/media/common/team-logo.png
                           labor_rate:
-                            type: number
-                            format: float
+                            type: float
+                            description: The labor rate is the hourly rate charged
+                              by the installation contractor
+                            example: 10.0
                           margin_range:
-                            type: number
+                            type: float
+                            example: 20.0
                           budget_status:
                             type: integer
-                      relationships:
-                        type: object
-                        properties:
-                          account:
-                            type: object
-                            properties:
-                              data:
-                                type: object
-                                properties:
-                                  type:
-                                    type: string
-                                  id:
-                                    type: string
+                            enum:
+                            - 0
+                            - 1
+                            description: 'Value is either 0 or 1. If 0, then budget
+                              estimator calculations are disbaled, but if set to 1
+                              then estimator is enabled.
+
+                              Recommended value is setting it to 0
+
+                              '
                           owner:
                             type: object
                             properties:
-                              data:
-                                type: object
-                                properties:
-                                  type:
-                                    type: string
-                                  id:
-                                    type: string
+                              last_name:
+                                type: string
+                                description: Last Name of the team owner
+                                example: Smith
+                              user_id:
+                                type: integer
+                                description: User ID of the team owner
+                                example: 1223
+                              first_name:
+                                type: string
+                                description: First Name of the team owner.
+                                example: John
+                          account:
+                            type: object
+                            properties: null
+                            id:
+                              type: integer
+                              example: 450495
+                            company:
+                              type: string
+                              example: System Surveyor
+                            is_trial:
+                              type: boolean
+                            is_free:
+                              type: boolean
+                            cancel_requested:
+                              type: boolean
+                            trial_expiration:
+                              type: string
+                              description: date mm-dd-yyyy of when the trial will
+                                expire.
+                            subscription:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 123
+                                quantity:
+                                  type: integer
+                                  example: 10
+                                plan:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    name:
+                                      type: string
+                                      example: Enterprise
+                                    max_seats:
+                                      type: integer
+                                    max_attachments_per_element:
+                                      type: integer
+                            features:
+                              type: object
+                              properties:
+                                comments:
+                                  type: boolean
+                                site_tagging:
+                                  type: boolean
+                                report_custom_watermark:
+                                  type: boolean
+                                exclude_powered_by:
+                                  type: boolean
+                                sso:
+                                  type: boolean
+                                hidden_attributes:
+                                  type: boolean
+                                site_access_permissions:
+                                  type: boolean
+                                multiple_teams:
+                                  type: boolean
+                                report_include_ssv_logo:
+                                  type: boolean
+                                report_include_company_logo:
+                                  type: boolean
+                                guest_user:
+                                  type: boolean
+                                add_folder:
+                                  type: boolean
+                                export_survey:
+                                  type: boolean
+                                report_export_excel:
+                                  type: boolean
+                                report_require_ssv_watermark:
+                                  type: boolean
+                                v2_survey:
+                                  type: boolean
+                                public_api:
+                                  type: boolean
         '401':
           $ref: '#/components/responses/UnauthorizedError'
       public: true
@@ -1079,9 +1206,10 @@ paths:
       security:
       - jwt: []
       operationId: get_current_user_data
-      summary: Get data for the current authenticated user
-      description: 'This includes accounts and teams that the current user belongs
-        to, either as a team member or a guest user.
+      summary: Get data for the current authenticated user at a granular level.
+      description: 'The returned information includes information about the user that
+        they provided at sign up as well as informationa about the teams they are
+        a part of, company they are with and subscription they have with System Surveyor.
 
         '
       responses:
@@ -1097,7 +1225,7 @@ paths:
                     example: 12094
                   user_name:
                     type: string
-                    example: foobar
+                    example: john_smith
                   first_name:
                     type: string
                     example: John
@@ -1118,16 +1246,20 @@ paths:
                     example: 910-423-345
                   country:
                     type: string
+                    example: United States of America (USA)
                   state:
                     type: string
-                  last_login:
-                    type: number
+                    example: Pennsylvania
+                  city:
+                    type: string
+                    example: Los Angeles
                   avatar_url:
                     type: string
-                  is_complete_setup:
-                    type: boolean
+                    example: https://app.systemsurveyor.com/media/common/avatar.png
                   created_at:
                     type: integer
+                    example: 1594652482
+                    description: Unix timestamp when this user was created.
                   teams:
                     type: array
                     items:
@@ -1135,10 +1267,11 @@ paths:
                       properties:
                         id:
                           type: integer
-                          example: 112
+                          example: 11
                         name:
                           type: string
                           example: John's Team
+                          description: Name of the team
                         account_id:
                           type: integer
                           example: 995
@@ -1153,10 +1286,27 @@ paths:
                           - imperial
                         labor_rate:
                           type: float
+                          example: 15.0
+                          description: The labor rate is the hourly rate charged by
+                            the installation contractor
                         budget_status:
                           type: integer
+                          enum:
+                          - 0
+                          - 1
+                          description: 'Value is either 0 or 1. If 0, then budget
+                            estimator calculations are disbaled, but if set to 1 then
+                            estimator is enabled.
+
+                            Recommended value is setting it to 0
+
+                            '
                         margin_range:
                           type: float
+                          example: 20.0
+                        logo_url:
+                          type: string
+                          example: https://app.systemsurveyor.com/media/common/team-logo.png
                   accounts:
                     type: array
                     items:
@@ -1167,21 +1317,25 @@ paths:
                           example: 450495
                         company:
                           type: string
+                          example: System Surveyor
                         is_trial:
                           type: boolean
                         is_free:
                           type: boolean
                         cancel_requested:
                           type: boolean
+                        trial_expiration:
+                          type: string
+                          description: date mm-dd-yyyy of when the trial will expire.
                         subscription:
                           type: object
                           properties:
                             id:
                               type: integer
+                              example: 123
                             quantity:
                               type: integer
-                            end_date:
-                              type: integer
+                              example: 10
                             plan:
                               type: object
                               properties:
@@ -1189,6 +1343,7 @@ paths:
                                   type: integer
                                 name:
                                   type: string
+                                  example: Enterprise
                                 max_seats:
                                   type: integer
                                 max_attachments_per_element:
@@ -1241,6 +1396,12 @@ paths:
       - jwt: []
       operationId: update_user
       summary: Update user information associated with the linked account
+      description: 'You can change the values for a user by supplying the new values
+        for first_name, last_name,
+
+        user_name, company, mobile, title, country, state, city
+
+        '
       requestBody:
         required: true
         content:
@@ -1276,40 +1437,57 @@ paths:
                 properties:
                   id:
                     type: integer
+                    description: ID for the user.
                     example: 12094
                   user_name:
                     type: string
+                    description: User Name given to this user at the time of creation
+                      of the account.
                     example: foobar
                   first_name:
                     type: string
+                    description: First Name of the User
                     example: John
                   last_name:
                     type: string
+                    description: Last Name of the User.
                     example: Doe
                   title:
                     type: string
+                    description: Title that the user holds in the company.
                     example: CEO
                   email:
                     type: string
+                    description: Email for the user.
                     example: foobar@gmail.com
                   company:
                     type: string
+                    description: Name of the company that this user is associated
                     example: System Surveyor
                   mobile:
                     type: string
+                    description: Mobile number of the User
                     example: 910-423-345
                   country:
                     type: string
+                    description: Name of the Country where this user is based
+                    example: Netherlands
                   state:
                     type: string
-                  last_login:
-                    type: number
+                    description: State that the user is based in.
+                    example: Pennsylvania
+                  city:
+                    type: string
+                    description: City that the user is based in.
+                    example: Philadelphia
                   avatar_url:
                     type: string
-                  is_complete_setup:
-                    type: boolean
+                    example: https://app.systemsurveyor.com/media/common/avatar.png
+                    description: URL link to a publicly accessible image.
                   created_at:
                     type: integer
+                    example: 1594652482
+                    description: Unix timestamp of when the user was created.
                   teams:
                     type: array
                     items:
@@ -1317,15 +1495,20 @@ paths:
                       properties:
                         id:
                           type: integer
+                          description: ID of the team that is associated with this
+                            user.
                           example: 112
                         name:
                           type: string
+                          description: Team Name that this user is associated with
                           example: John's Team
                         account_id:
                           type: integer
+                          description: Account id of the user.
                           example: 995
                         role:
                           type: string
+                          description: Role for the User in the team he is in.
                           example: team_member
                         unit:
                           type: string
@@ -1335,10 +1518,29 @@ paths:
                           - imperial
                         labor_rate:
                           type: float
+                          example: 10.0
+                          description: the hourly rate charged by the installation
+                            contractor
                         budget_status:
                           type: integer
+                          description: 'Value is either 0 or 1. If 0, then budget
+                            estimator calculations are disbaled, but if set to 1 then
+                            estimator is enabled.
+
+                            Recommended value is setting it to 0
+
+                            '
+                          example: 0
+                          enum:
+                          - 0
+                          - 1
                         margin_range:
                           type: float
+                          example: 20.0
+                        logo_url:
+                          type: string
+                          example: https://app.systemsurveyor.com/media/common/team-logo.png
+                          description: URL link to a publicly accessible image
                   accounts:
                     type: array
                     items:
@@ -1349,12 +1551,37 @@ paths:
                           example: 450495
                         company:
                           type: string
+                          example: System Surveyor
                         is_trial:
                           type: boolean
                         is_free:
                           type: boolean
                         cancel_requested:
                           type: boolean
+                        trial_expiration:
+                          type: string
+                          description: date mm-dd-yyyy of when the trial will expire.
+                        subscription:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 123
+                            quantity:
+                              type: integer
+                              example: 10
+                            plan:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                name:
+                                  type: string
+                                  example: Enterprise
+                                max_seats:
+                                  type: integer
+                                max_attachments_per_element:
+                                  type: integer
                         features:
                           type: object
                           properties:
@@ -1362,9 +1589,35 @@ paths:
                               type: boolean
                             site_tagging:
                               type: boolean
-                            multiple_teams:
+                            report_custom_watermark:
+                              type: boolean
+                            exclude_powered_by:
+                              type: boolean
+                            sso:
+                              type: boolean
+                            hidden_attributes:
                               type: boolean
                             site_access_permissions:
+                              type: boolean
+                            multiple_teams:
+                              type: boolean
+                            report_include_ssv_logo:
+                              type: boolean
+                            report_include_company_logo:
+                              type: boolean
+                            guest_user:
+                              type: boolean
+                            add_folder:
+                              type: boolean
+                            export_survey:
+                              type: boolean
+                            report_export_excel:
+                              type: boolean
+                            report_require_ssv_watermark:
+                              type: boolean
+                            v2_survey:
+                              type: boolean
+                            public_api:
                               type: boolean
         '401':
           $ref: '#/components/responses/UnauthorizedError'
@@ -1379,25 +1632,21 @@ components:
       properties:
         user_id:
           type: integer
-        first_name:
-          type: string
         last_name:
+          type: string
+        first_name:
           type: string
       required:
       - user_id
     SiteSchema:
       type: object
       properties:
-        modifier:
+        legacy_site_id:
+          type: integer
           readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
-        reference_id:
-          type: string
-          maxLength: 255
-        state:
-          type: string
-          maxLength: 250
+        version:
+          type: integer
+          readOnly: true
         tags:
           type: array
           items:
@@ -1405,41 +1654,45 @@ components:
         street:
           type: string
           maxLength: 250
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
-        legacy_site_id:
-          type: integer
-          readOnly: true
+        state:
+          type: string
+          maxLength: 250
         city:
           type: string
           maxLength: 250
-        version:
-          type: integer
-          readOnly: true
+        zip_code:
+          type: string
+          maxLength: 250
+        label:
+          type: string
+          maxLength: 255
         is_archived: {}
         creator:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
-        zip_code:
-          type: string
-          maxLength: 250
-        team_id:
-          type: integer
-        label:
+        reference_id:
           type: string
           maxLength: 255
-        created_at:
+        name:
+          type: string
+          maxLength: 250
+        modifier:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+        team_id:
+          type: integer
+        modified_at:
           readOnly: true
           type:
           - 'null'
         site_id:
           type: string
-        name:
-          type: string
-          maxLength: 250
+        created_at:
+          readOnly: true
+          type:
+          - 'null'
       required:
       - name
       - team_id
@@ -1449,28 +1702,20 @@ components:
         message:
           type: string
         expiration_date: {}
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
         emails:
           type: array
           items:
             type: string
             format: email
-        created_at:
-          readOnly: true
-          type:
-          - 'null'
       required:
       - emails
       - expiration_date
     SurveyFields:
       type: object
       properties:
-        field_id:
-          type: string
         value:
+          type: string
+        field_id:
           type: string
       required:
       - field_id
@@ -1478,12 +1723,6 @@ components:
     SurveyOptions:
       type: object
       properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyFields'
-        template_name:
-          type: string
         id:
           type: string
         scope:
@@ -1492,8 +1731,14 @@ components:
           - template
           - model
           - content
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyFields'
         value:
           type: boolean
+        template_name:
+          type: string
       required:
       - id
       - scope
@@ -1501,41 +1746,41 @@ components:
     SurveyReportRequestSchema:
       type: object
       properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
+        custom_data:
+          type: object
         report_id:
           type: string
           format: uuid
-        paper_size:
-          type: string
+        is_site_report:
+          type: boolean
+          default: false
+        is_excel:
+          type: boolean
+          default: false
         survey_ids:
           type: array
           items:
             type: string
-        custom_data:
-          type: object
-        is_excel:
-          type: boolean
-          default: false
-        is_site_report:
-          type: boolean
-          default: false
+        filters:
+          type: array
+          items:
+            type: object
+        name:
+          type: string
+        paper_size:
+          type: string
+        site_id:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyOptions'
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
-        filters:
-          type: array
-          items:
-            type: object
-        site_id:
-          type: string
-        name:
-          type: string
       required:
       - name
       - output
@@ -1544,60 +1789,46 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
-        report_id:
-          type: string
-          format: uuid
-        paper_size:
-          type: string
         custom_data:
           type: object
-        is_excel:
-          type: boolean
-          default: false
         ids:
           type: array
           items:
             type: string
+        report_id:
+          type: string
+          format: uuid
         is_site_report:
           type: boolean
           default: false
+        is_excel:
+          type: boolean
+          default: false
+        filters:
+          type: array
+          items:
+            type: object
+        name:
+          type: string
+        paper_size:
+          type: string
+        site_id:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyOptions'
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
-        filters:
-          type: array
-          items:
-            type: object
-        site_id:
-          type: string
-        name:
-          type: string
       required:
       - name
       - output
       - report_id
       - site_id
-    Link:
-      type: object
-      properties:
-        link_type:
-          type: integer
-        url:
-          type: string
-          format: url
-        name:
-          type: string
-      required:
-      - link_type
-      - name
-      - url
     SubElement:
       type: object
       properties:
@@ -1608,30 +1839,44 @@ components:
       required:
       - element_id
       - systemtype_id
+    Link:
+      type: object
+      properties:
+        url:
+          type: string
+          format: url
+        link_type:
+          type: integer
+        name:
+          type: string
+      required:
+      - link_type
+      - name
+      - url
     Attribute:
       type: object
       properties:
-        value:
-          type: string
         attribute_id:
           type: integer
+        value:
+          type: string
       required:
       - attribute_id
       - value
     EPContent:
       type: object
       properties:
+        child:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/SubElement'
         pdf_url:
           type: array
           default: []
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-        child:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/SubElement'
         attribute:
           type: array
           default: []
@@ -1640,6 +1885,15 @@ components:
     EPAccessory:
       type: object
       properties:
+        id:
+          type: integer
+          readOnly: true
+        price:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
         labor_hours:
           type:
           - number
@@ -1651,15 +1905,6 @@ components:
         manufacturer:
           type: string
           default: ''
-        id:
-          type: integer
-          readOnly: true
-        price:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
         model:
           type: string
           default: ''
@@ -1670,32 +1915,32 @@ components:
     ElementProfileSchema:
       type: object
       properties:
-        created_by:
-          type: integer
-          readOnly: true
         id:
           type: integer
           readOnly: true
-        modified_at:
-          readOnly: true
-        content:
-          $ref: '#/components/schemas/EPContent'
-        sort:
-          type: integer
         is_default:
           type: boolean
+        element_id:
+          type: integer
+        content:
+          $ref: '#/components/schemas/EPContent'
+        created_by:
+          type: integer
+          readOnly: true
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
-        team_id:
+        sort:
           type: integer
-        element_id:
-          type: integer
-        created_at:
-          readOnly: true
         name:
           type: string
+        team_id:
+          type: integer
+        modified_at:
+          readOnly: true
+        created_at:
+          readOnly: true
       required:
       - content
       - element_id
@@ -1704,43 +1949,43 @@ components:
     FolderSchema:
       type: object
       properties:
-        id:
+        label:
           type: string
-          readOnly: true
+        name:
+          type: string
         site_external_id:
           type: string
           writeOnly: true
-        name:
-          type: string
-        label:
-          type: string
         site_id:
           type: integer
           readOnly: true
         team_id:
           type: integer
+        id:
+          type: string
+          readOnly: true
       required:
       - name
     RelatedUser:
       type: object
       properties:
-        user_id: {}
         first_name:
           type: string
         last_name:
           type: string
+        user_id: {}
     SurveyAttribute:
       type: object
       properties:
-        name:
-          type: string
-        value:
-          type: string
         id:
           type: integer
           readOnly: true
         attribute_id:
           type: integer
+        value:
+          type: string
+        name:
+          type: string
       required:
       - attribute_id
       - name
@@ -1748,21 +1993,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
-        description:
-          type: string
-        manufacturer:
-          type: string
         id:
           type: string
           readOnly: true
         price: {}
+        labor_hours:
+          type: number
+        description:
+          type: string
         row_index:
           type: integer
+        manufacturer:
+          type: string
         quantity: {}
         model:
           type: string
-        labor_hours:
-          type: number
       required:
       - manufacturer
       - model
@@ -1771,11 +2016,11 @@ components:
       type: object
       properties:
         z_side: {}
+        id:
+          type: string
         type:
           type: string
         a_side: {}
-        id:
-          type: string
       required:
       - a_side
       - id
@@ -1788,13 +2033,11 @@ components:
     SurveyElementActivityLog:
       type: object
       properties:
-        entry:
-          type: string
+        date: {}
         id:
           type: string
-          readOnly: true
-        date:
-          readOnly: true
+        entry:
+          type: string
     SurveyElement:
       type: object
       properties:
@@ -1816,12 +2059,17 @@ components:
         position: {}
         photo_urls:
           type: array
+          readOnly: true
           items:
             type: string
         pdf_urls:
-          type: array
-          items:
-            type: object
+          readOnly: true
+        sync_status:
+          readOnly: true
+          enum:
+          - synced
+          - pending
+          - errored
         attributes:
           type: array
           items:
@@ -1853,23 +2101,23 @@ components:
     SurveyAnnotation:
       type: object
       properties:
-        location: {}
-        font_size:
-          type: string
         id:
           type: string
           readOnly: true
-        category: {}
-        size:
+        location: {}
+        font_size:
           type: string
-        start_point: {}
-        stroke_width:
+        size:
           type: string
         stroke_color:
           type: string
+        stroke_width:
+          type: string
+        start_point: {}
         text:
           type: string
         end_point: {}
+        category: {}
       required:
       - category
       - location
