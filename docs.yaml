@@ -3,9 +3,11 @@ info:
     \ bi-directional communication with it's platform.             These APIs provide\
     \ a software layer connecting and optimizing the network to allow your users to\
     \             create / edit / retrieve sites & surveys, along with all of the\
-    \ associated data.\n\n## Prerequisites\n\n            In order to utilize these\
-    \ APIs, you must have an Enterprise account, with a valid plan. Your account \
-    \            administrator must create an `access_token` for you, which is required\
+    \ associated data.\n\n            ## Domain Name\n\nThe domain name for our API\
+    \ is https://openapi.systemsurveyor.com.             This needs to be prefixed\
+    \ to all requests.\n\n            ## Prerequisites\n\nIn order to utilize these\
+    \ APIs, you must have an Enterprise account, with a valid             plan. Your\
+    \ account administrator must create an `access_token` for you, which is required\
     \ for each request."
   title: System Surveyor API
   version: 2.0.0
@@ -314,6 +316,15 @@ paths:
       responses:
         '202':
           description: Report scheduled successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    type: integer
+                    description: Unique ID of the scheduled report
+                    example: 2545
         '400':
           $ref: '#/components/responses/BadRequestError'
         '401':
@@ -1630,39 +1641,57 @@ components:
     UserResponse:
       type: object
       properties:
-        user_id:
-          type: integer
         last_name:
           type: string
         first_name:
           type: string
+        user_id:
+          type: integer
       required:
       - user_id
     SiteSchema:
       type: object
       properties:
+        created_at:
+          readOnly: true
+          type:
+          - 'null'
+        team_id:
+          type: integer
+        city:
+          type: string
+          maxLength: 250
+        site_id:
+          type: string
+        zip_code:
+          type: string
+          maxLength: 250
+        street:
+          type: string
+          maxLength: 250
+        tags:
+          type: array
+          items:
+            type: string
+        reference_id:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 250
+        name:
+          type: string
+          maxLength: 250
         legacy_site_id:
           type: integer
           readOnly: true
         version:
           type: integer
           readOnly: true
-        tags:
-          type: array
-          items:
-            type: string
-        street:
-          type: string
-          maxLength: 250
-        state:
-          type: string
-          maxLength: 250
-        city:
-          type: string
-          maxLength: 250
-        zip_code:
-          type: string
-          maxLength: 250
+        modifier:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
         label:
           type: string
           maxLength: 255
@@ -1671,25 +1700,7 @@ components:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
-        reference_id:
-          type: string
-          maxLength: 255
-        name:
-          type: string
-          maxLength: 250
-        modifier:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
-        team_id:
-          type: integer
         modified_at:
-          readOnly: true
-          type:
-          - 'null'
-        site_id:
-          type: string
-        created_at:
           readOnly: true
           type:
           - 'null'
@@ -1699,14 +1710,14 @@ components:
     ShareSiteOrSurveyRequestSchema:
       type: object
       properties:
-        message:
-          type: string
-        expiration_date: {}
         emails:
           type: array
           items:
             type: string
             format: email
+        expiration_date: {}
+        message:
+          type: string
       required:
       - emails
       - expiration_date
@@ -1723,8 +1734,6 @@ components:
     SurveyOptions:
       type: object
       properties:
-        id:
-          type: string
         scope:
           type: string
           enum:
@@ -1737,6 +1746,8 @@ components:
             $ref: '#/components/schemas/SurveyFields'
         value:
           type: boolean
+        id:
+          type: string
         template_name:
           type: string
       required:
@@ -1746,41 +1757,41 @@ components:
     SurveyReportRequestSchema:
       type: object
       properties:
-        custom_data:
-          type: object
-        report_id:
-          type: string
-          format: uuid
-        is_site_report:
-          type: boolean
-          default: false
-        is_excel:
-          type: boolean
-          default: false
-        survey_ids:
-          type: array
-          items:
-            type: string
-        filters:
-          type: array
-          items:
-            type: object
-        name:
-          type: string
-        paper_size:
-          type: string
-        site_id:
-          type: string
         options:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
+        custom_data:
+          type: object
+        site_id:
+          type: string
+        survey_ids:
+          type: array
+          items:
+            type: string
+        paper_size:
+          type: string
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
+        name:
+          type: string
+        is_excel:
+          type: boolean
+          default: false
+        is_site_report:
+          type: boolean
+          default: false
+        filters:
+          type: array
+          items:
+            type: object
+        report_id:
+          type: string
+          format: uuid
       required:
       - name
       - output
@@ -1789,70 +1800,46 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        custom_data:
-          type: object
-        ids:
-          type: array
-          items:
-            type: string
-        report_id:
-          type: string
-          format: uuid
-        is_site_report:
-          type: boolean
-          default: false
-        is_excel:
-          type: boolean
-          default: false
-        filters:
-          type: array
-          items:
-            type: object
-        name:
-          type: string
-        paper_size:
-          type: string
-        site_id:
-          type: string
         options:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
+        custom_data:
+          type: object
+        site_id:
+          type: string
+        paper_size:
+          type: string
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
+        name:
+          type: string
+        is_excel:
+          type: boolean
+          default: false
+        is_site_report:
+          type: boolean
+          default: false
+        filters:
+          type: array
+          items:
+            type: object
+        report_id:
+          type: string
+          format: uuid
+        ids:
+          type: array
+          items:
+            type: string
       required:
       - name
       - output
       - report_id
       - site_id
-    SubElement:
-      type: object
-      properties:
-        systemtype_id:
-          type: string
-        element_id:
-          type: string
-      required:
-      - element_id
-      - systemtype_id
-    Link:
-      type: object
-      properties:
-        url:
-          type: string
-          format: url
-        link_type:
-          type: integer
-        name:
-          type: string
-      required:
-      - link_type
-      - name
-      - url
     Attribute:
       type: object
       properties:
@@ -1863,9 +1850,38 @@ components:
       required:
       - attribute_id
       - value
+    SubElement:
+      type: object
+      properties:
+        element_id:
+          type: string
+        systemtype_id:
+          type: string
+      required:
+      - element_id
+      - systemtype_id
+    Link:
+      type: object
+      properties:
+        link_type:
+          type: integer
+        name:
+          type: string
+        url:
+          type: string
+          format: url
+      required:
+      - link_type
+      - name
+      - url
     EPContent:
       type: object
       properties:
+        attribute:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/Attribute'
         child:
           type: array
           default: []
@@ -1877,31 +1893,9 @@ components:
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-        attribute:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/Attribute'
     EPAccessory:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        price:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-        labor_hours:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-        description:
-          type: string
         manufacturer:
           type: string
           default: ''
@@ -1910,36 +1904,53 @@ components:
           default: ''
         created_at:
           readOnly: true
+        labor_hours:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+        price:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+        id:
+          type: integer
+          readOnly: true
+        description:
+          type: string
       required:
       - description
     ElementProfileSchema:
       type: object
       properties:
-        id:
-          type: integer
+        created_at:
           readOnly: true
+        team_id:
+          type: integer
+        element_id:
+          type: integer
         is_default:
           type: boolean
-        element_id:
+        sort:
           type: integer
         content:
           $ref: '#/components/schemas/EPContent'
         created_by:
           type: integer
           readOnly: true
+        name:
+          type: string
+        id:
+          type: integer
+          readOnly: true
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
-        sort:
-          type: integer
-        name:
-          type: string
-        team_id:
-          type: integer
         modified_at:
-          readOnly: true
-        created_at:
           readOnly: true
       required:
       - content
@@ -1949,21 +1960,21 @@ components:
     FolderSchema:
       type: object
       properties:
-        label:
-          type: string
         name:
           type: string
         site_external_id:
           type: string
           writeOnly: true
+        id:
+          type: string
+          readOnly: true
         site_id:
           type: integer
           readOnly: true
         team_id:
           type: integer
-        id:
+        label:
           type: string
-          readOnly: true
       required:
       - name
     RelatedUser:
@@ -1971,20 +1982,20 @@ components:
       properties:
         first_name:
           type: string
+        user_id: {}
         last_name:
           type: string
-        user_id: {}
     SurveyAttribute:
       type: object
       properties:
+        attribute_id:
+          type: integer
+        name:
+          type: string
         id:
           type: integer
           readOnly: true
-        attribute_id:
-          type: integer
         value:
-          type: string
-        name:
           type: string
       required:
       - attribute_id
@@ -1993,20 +2004,20 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
+        manufacturer:
+          type: string
+        model:
+          type: string
+        labor_hours:
+          type: number
+        price: {}
         id:
           type: string
           readOnly: true
-        price: {}
-        labor_hours:
-          type: number
-        description:
-          type: string
+        quantity: {}
         row_index:
           type: integer
-        manufacturer:
-          type: string
-        quantity: {}
-        model:
+        description:
           type: string
       required:
       - manufacturer
@@ -2015,12 +2026,12 @@ components:
     CablePath:
       type: object
       properties:
-        z_side: {}
         id:
           type: string
         type:
           type: string
         a_side: {}
+        z_side: {}
       required:
       - a_side
       - id
@@ -2033,11 +2044,21 @@ components:
     SurveyElementActivityLog:
       type: object
       properties:
-        date: {}
+        created_at:
+          readOnly: true
         id:
           type: string
+        date: {}
         entry:
           type: string
+        modifier:
+          type: integer
+          readOnly: true
+        creator:
+          type: integer
+          readOnly: true
+        modified_at:
+          readOnly: true
     SurveyElement:
       type: object
       properties:
@@ -2101,23 +2122,31 @@ components:
     SurveyAnnotation:
       type: object
       properties:
+        size:
+          type: string
+        opacity:
+          type: number
+          minimum: 0
+          maximum: 1
+        coordinates:
+          readOnly: true
+        end_point: {}
+        text:
+          type: string
+        fill:
+          readOnly: true
+        stroke_color:
+          type: string
+        start_point: {}
+        stroke_width:
+          type: string
         id:
           type: string
           readOnly: true
         location: {}
+        category: {}
         font_size:
           type: string
-        size:
-          type: string
-        stroke_color:
-          type: string
-        stroke_width:
-          type: string
-        start_point: {}
-        text:
-          type: string
-        end_point: {}
-        category: {}
       required:
       - category
       - location
