@@ -733,22 +733,22 @@ Accept: application/json
 const inputBody = '{
   "modified_at": null,
   "team_id": 0,
-  "label": "string",
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
+  "site_external_id": "string",
   "team": {
     "name": "string"
   },
-  "site_external_id": "string"
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
+  }
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -775,22 +775,22 @@ const fetch = require('node-fetch');
 const inputBody = {
   "modified_at": null,
   "team_id": 0,
-  "label": "string",
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
+  "site_external_id": "string",
   "team": {
     "name": "string"
   },
-  "site_external_id": "string"
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
+  }
 };
 const headers = {
   'Content-Type':'application/json',
@@ -823,22 +823,22 @@ pass a value for `site_id` field.
 {
   "modified_at": null,
   "team_id": 0,
-  "label": "string",
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
+  "site_external_id": "string",
   "team": {
     "name": "string"
   },
-  "site_external_id": "string"
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
+  }
 }
 ```
 
@@ -849,20 +849,20 @@ pass a value for `site_id` field.
 |folder_id|path|string|true|Folder ID|
 |body|body|[FolderSchema](#schemafolderschema)|true|none|
 |» modified_at|body|any|false|none|
-|» id|body|string|false|none|
 |» team_id|body|integer|false|none|
-|» label|body|string|false|none|
-|» site_id|body|integer|false|none|
-|» creator|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» user_id|body|any|false|none|
-|»» last_name|body|string|false|none|
-|»» first_name|body|string|false|none|
-|» name|body|string|true|none|
 |» modifier|body|[RelatedUser](#schemarelateduser)|false|none|
-|» team|body|[Team](#schemateam)|false|none|
-|»» name|body|string|false|none|
-|»» id|body|string|false|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|any|false|none|
 |» site_external_id|body|string|false|none|
+|» team|body|[Team](#schemateam)|false|none|
+|»» id|body|string|false|none|
+|»» name|body|string|false|none|
+|» site_id|body|integer|false|none|
+|» id|body|string|false|none|
+|» name|body|string|true|none|
+|» label|body|string|false|none|
+|» creator|body|[RelatedUser](#schemarelateduser)|false|none|
 
 > Example responses
 
@@ -871,24 +871,24 @@ pass a value for `site_id` field.
 ```json
 {
   "modified_at": null,
-  "id": "string",
   "team_id": 0,
-  "label": "string",
-  "site_id": 0,
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "team": {
-    "name": "string",
-    "id": "string"
+    "id": "string",
+    "name": "string"
+  },
+  "site_id": 0,
+  "id": "string",
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
   }
 }
 ```
@@ -1185,6 +1185,8 @@ fetch('/v3/site_folder',
 
 `POST /v3/site_folder`
 
+```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint instead.
+
 > Body parameter
 
 ```json
@@ -1211,24 +1213,24 @@ fetch('/v3/site_folder',
 ```json
 {
   "modified_at": null,
-  "id": "string",
   "team_id": 0,
-  "label": "string",
-  "site_id": 0,
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "team": {
-    "name": "string",
-    "id": "string"
+    "id": "string",
+    "name": "string"
+  },
+  "site_id": 0,
+  "id": "string",
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
   }
 }
 ```
@@ -1381,6 +1383,8 @@ fetch('/v3/site_folder/{folder_external_id}',
 
 `PATCH /v3/site_folder/{folder_external_id}`
 
+```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint instead.
+
 > Body parameter
 
 ```json
@@ -1406,24 +1410,24 @@ fetch('/v3/site_folder/{folder_external_id}',
 ```json
 {
   "modified_at": null,
-  "id": "string",
   "team_id": 0,
-  "label": "string",
-  "site_id": 0,
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "team": {
-    "name": "string",
-    "id": "string"
+    "id": "string",
+    "name": "string"
+  },
+  "site_id": 0,
+  "id": "string",
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
   }
 }
 ```
@@ -1576,6 +1580,8 @@ fetch('/v3/{site_id}/folder',
 
 `POST /v3/{site_id}/folder`
 
+```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint instead.
+
 > Body parameter
 
 ```json
@@ -1601,24 +1607,24 @@ fetch('/v3/{site_id}/folder',
 ```json
 {
   "modified_at": null,
-  "id": "string",
   "team_id": 0,
-  "label": "string",
-  "site_id": 0,
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "team": {
-    "name": "string",
-    "id": "string"
+    "id": "string",
+    "name": "string"
+  },
+  "site_id": 0,
+  "id": "string",
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
   }
 }
 ```
@@ -1750,9 +1756,7 @@ fetch('/v3/survey_folder/{folder_id}',
 
 `DELETE /v3/survey_folder/{folder_id}`
 
-Folders that already contain surveys are not allowed to be deleted.
-
-Only team members with write access can delete survey folders.
+```DEPRECATED``` use the `DELETE /v3/folder/{folder_id}` endpoint instead.
 
 <h3 id="deletes-a-survey-folder-in-a-site.-parameters">Parameters</h3>
 
@@ -1888,7 +1892,7 @@ fetch('/v3/site_folder/{folder_id}',
 
 `DELETE /v3/site_folder/{folder_id}`
 
-Folder must be empty in order to be deleted. Only account admins, team admins, and team members can delete folders.
+```DEPRECATED``` use the `DELETE /v3/folder/{folder_id}` endpoint instead.
 
 <h3 id="soft-deletes-a-folder-that-can-contain-sites.-parameters">Parameters</h3>
 
@@ -1912,6 +1916,185 @@ jwt
 </aside>
 
 <h1 id="system-surveyor-api-reports">Reports</h1>
+
+## get_report_definitions
+
+<a id="opIdget_report_definitions"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /v3/report/{team_id}/definitions \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v3/report/{team_id}/definitions', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get '/v3/report/{team_id}/definitions',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/report/{team_id}/definitions", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/report/{team_id}/definitions HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/report/{team_id}/definitions',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/report/{team_id}/definitions',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /v3/report/{team_id}/definitions`
+
+Returns report definitions available to the account and site or survey level
+
+<h3 id="get_report_definitions-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|team_id|path|string|true|Team ID|
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "report_id": "string",
+    "name": "string",
+    "description": "string",
+    "icon": "string",
+    "is_locked": true,
+    "paper_sizes": [
+      {}
+    ],
+    "options": [
+      {}
+    ]
+  }
+]
+```
+
+<h3 id="get_report_definitions-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<h3 id="get_report_definitions-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» report_id|string|false|none|none|
+|» name|string|false|none|none|
+|» description|string|false|none|none|
+|» icon|string|false|none|none|
+|» is_locked|boolean|false|none|none|
+|» paper_sizes|[object]|false|none|none|
+|» options|[object]|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
 
 ## Queues a message for creating reports for sites or surveys
 
@@ -1997,34 +2180,34 @@ Accept: application/json
 
 ```javascript
 const inputBody = '{
-  "name": "string",
-  "filters": [
-    {}
-  ],
-  "survey_ids": [
-    "string"
-  ],
   "options": [
     {
-      "template_name": "string",
-      "scope": "template",
       "inputs": [
         {
           "value": "string",
           "field_id": "string"
         }
       ],
+      "id": "string",
       "value": true,
-      "id": "string"
+      "scope": "template",
+      "template_name": "string"
     }
   ],
-  "site_id": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "is_site_report": false,
-  "paper_size": "string",
-  "output": "pdf",
   "custom_data": {},
-  "is_excel": false
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "is_site_report": false,
+  "survey_ids": [
+    "string"
+  ],
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "site_id": "string",
+  "paper_size": "string"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -2049,34 +2232,34 @@ fetch('/v3/report',
 ```javascript--nodejs
 const fetch = require('node-fetch');
 const inputBody = {
-  "name": "string",
-  "filters": [
-    {}
-  ],
-  "survey_ids": [
-    "string"
-  ],
   "options": [
     {
-      "template_name": "string",
-      "scope": "template",
       "inputs": [
         {
           "value": "string",
           "field_id": "string"
         }
       ],
+      "id": "string",
       "value": true,
-      "id": "string"
+      "scope": "template",
+      "template_name": "string"
     }
   ],
-  "site_id": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "is_site_report": false,
-  "paper_size": "string",
-  "output": "pdf",
   "custom_data": {},
-  "is_excel": false
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "is_site_report": false,
+  "survey_ids": [
+    "string"
+  ],
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "site_id": "string",
+  "paper_size": "string"
 };
 const headers = {
   'Content-Type':'application/json',
@@ -2106,34 +2289,34 @@ Reports are created by an external PHP service by picking up messages from the q
 
 ```json
 {
-  "name": "string",
-  "filters": [
-    {}
-  ],
-  "survey_ids": [
-    "string"
-  ],
   "options": [
     {
-      "template_name": "string",
-      "scope": "template",
       "inputs": [
         {
           "value": "string",
           "field_id": "string"
         }
       ],
+      "id": "string",
       "value": true,
-      "id": "string"
+      "scope": "template",
+      "template_name": "string"
     }
   ],
-  "site_id": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "is_site_report": false,
-  "paper_size": "string",
-  "output": "pdf",
   "custom_data": {},
-  "is_excel": false
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "is_site_report": false,
+  "survey_ids": [
+    "string"
+  ],
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "site_id": "string",
+  "paper_size": "string"
 }
 ```
 
@@ -2142,24 +2325,24 @@ Reports are created by an external PHP service by picking up messages from the q
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |body|body|[SurveyReportRequestSchema](#schemasurveyreportrequestschema)|true|none|
-|» name|body|string|true|none|
-|» filters|body|[object]|false|none|
-|» survey_ids|body|[string]|false|none|
 |» options|body|[[SurveyOptions](#schemasurveyoptions)]|false|none|
-|»» template_name|body|string|false|none|
-|»» scope|body|string|true|none|
 |»» inputs|body|[[SurveyFields](#schemasurveyfields)]|false|none|
 |»»» value|body|string|true|none|
 |»»» field_id|body|string|true|none|
-|»» value|body|boolean|true|none|
 |»» id|body|string|true|none|
-|» site_id|body|string|true|none|
-|» report_id|body|string(uuid)|true|none|
-|» is_site_report|body|boolean|false|none|
-|» paper_size|body|string|false|none|
-|» output|body|string|true|none|
+|»» value|body|boolean|true|none|
+|»» scope|body|string|true|none|
+|»» template_name|body|string|false|none|
 |» custom_data|body|object|false|none|
+|» filters|body|[object]|false|none|
+|» name|body|string|true|none|
+|» output|body|string|true|none|
 |» is_excel|body|boolean|false|none|
+|» is_site_report|body|boolean|false|none|
+|» survey_ids|body|[string]|false|none|
+|» report_id|body|string(uuid)|true|none|
+|» site_id|body|string|true|none|
+|» paper_size|body|string|false|none|
 
 #### Enumerated Values
 
@@ -2494,19 +2677,19 @@ Content-Type: application/json
 
 ```javascript
 const inputBody = '{
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -2530,19 +2713,19 @@ fetch('/v3/site/{site_id}',
 ```javascript--nodejs
 const fetch = require('node-fetch');
 const inputBody = {
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 };
 const headers = {
   'Content-Type':'application/json',
@@ -2573,19 +2756,19 @@ You may pass a `folder_external_id` field in the payload to create the site insi
 
 ```json
 {
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 }
 ```
 
@@ -2595,29 +2778,29 @@ You may pass a `folder_external_id` field in the payload to create the site insi
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» name|body|string|true|none|
 |» modified_at|body|null|false|none|
-|» city|body|string|false|none|
-|» site_id|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» zip_code|body|string|false|none|
-|» state|body|string|false|none|
-|» reference_id|body|string|false|none|
-|» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
-|»» first_name|body|string|false|none|
-|» street|body|string|false|none|
-|» label|body|string|false|none|
-|» team_id|body|integer|true|none|
 |» is_archived|body|any|false|none|
-|» version|body|integer|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
 |»» first_name|body|string|false|none|
-|» tags|body|[string]|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» name|body|string|true|none|
+|» state|body|string|false|none|
 |» created_at|body|null|false|none|
+|» city|body|string|false|none|
+|» team_id|body|integer|true|none|
+|» label|body|string|false|none|
+|» legacy_site_id|body|integer|false|none|
+|» creator|body|[UserResponse](#schemauserresponse)|false|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» site_id|body|string|false|none|
+|» version|body|integer|false|none|
+|» reference_id|body|string|false|none|
+|» tags|body|[string]|false|none|
+|» zip_code|body|string|false|none|
+|» street|body|string|false|none|
 
 <h3 id="creates-a-new-site-with-a-specific-`site_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
 
@@ -2713,19 +2896,19 @@ Content-Type: application/json
 
 ```javascript
 const inputBody = '{
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -2749,19 +2932,19 @@ fetch('/v3/site/{site_id}',
 ```javascript--nodejs
 const fetch = require('node-fetch');
 const inputBody = {
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 };
 const headers = {
   'Content-Type':'application/json',
@@ -2788,19 +2971,19 @@ fetch('/v3/site/{site_id}',
 
 ```json
 {
-  "name": "string",
-  "city": "string",
-  "site_id": "string",
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
+  "name": "string",
+  "state": "string",
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "site_id": "string",
+  "reference_id": "string",
   "tags": [
     "string"
-  ]
+  ],
+  "zip_code": "string",
+  "street": "string"
 }
 ```
 
@@ -2810,29 +2993,29 @@ fetch('/v3/site/{site_id}',
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» name|body|string|true|none|
 |» modified_at|body|null|false|none|
-|» city|body|string|false|none|
-|» site_id|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» zip_code|body|string|false|none|
-|» state|body|string|false|none|
-|» reference_id|body|string|false|none|
-|» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
-|»» first_name|body|string|false|none|
-|» street|body|string|false|none|
-|» label|body|string|false|none|
-|» team_id|body|integer|true|none|
 |» is_archived|body|any|false|none|
-|» version|body|integer|false|none|
 |» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» user_id|body|integer|true|none|
-|»» last_name|body|string|false|none|
 |»» first_name|body|string|false|none|
-|» tags|body|[string]|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» name|body|string|true|none|
+|» state|body|string|false|none|
 |» created_at|body|null|false|none|
+|» city|body|string|false|none|
+|» team_id|body|integer|true|none|
+|» label|body|string|false|none|
+|» legacy_site_id|body|integer|false|none|
+|» creator|body|[UserResponse](#schemauserresponse)|false|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|integer|true|none|
+|» site_id|body|string|false|none|
+|» version|body|integer|false|none|
+|» reference_id|body|string|false|none|
+|» tags|body|[string]|false|none|
+|» zip_code|body|string|false|none|
+|» street|body|string|false|none|
 
 <h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
 
@@ -3750,20 +3933,20 @@ const inputBody = '{
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "name": "string",
           "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -3771,9 +3954,9 @@ const inputBody = '{
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -3783,9 +3966,9 @@ const inputBody = '{
       },
       "activity_log": [
         {
-          "id": "string",
           "entry": "string",
-          "date": null
+          "date": null,
+          "id": "string"
         }
       ]
     }
@@ -3793,17 +3976,17 @@ const inputBody = '{
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
+      "size": "string",
+      "category": null,
+      "coordinates": null,
+      "font_size": "string",
       "stroke_width": "string",
-      "stroke_color": "string",
-      "coordinates": null
+      "text": "string"
     }
   ]
 }';
@@ -3854,20 +4037,20 @@ const inputBody = {
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "name": "string",
           "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -3875,9 +4058,9 @@ const inputBody = {
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -3887,9 +4070,9 @@ const inputBody = {
       },
       "activity_log": [
         {
-          "id": "string",
           "entry": "string",
-          "date": null
+          "date": null,
+          "id": "string"
         }
       ]
     }
@@ -3897,17 +4080,17 @@ const inputBody = {
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
+      "size": "string",
+      "category": null,
+      "coordinates": null,
+      "font_size": "string",
       "stroke_width": "string",
-      "stroke_color": "string",
-      "coordinates": null
+      "text": "string"
     }
   ]
 };
@@ -3963,20 +4146,20 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
+          "name": "string",
           "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -3984,9 +4167,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -3996,9 +4179,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       },
       "activity_log": [
         {
-          "id": "string",
           "entry": "string",
-          "date": null
+          "date": null,
+          "id": "string"
         }
       ]
     }
@@ -4006,17 +4189,17 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
+      "size": "string",
+      "category": null,
+      "coordinates": null,
+      "font_size": "string",
       "stroke_width": "string",
-      "stroke_color": "string",
-      "coordinates": null
+      "text": "string"
     }
   ]
 }
@@ -4050,9 +4233,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |» sync_status|body|any|false|none|
 |» creator|body|integer|false|none|
 |» editor|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» user_id|body|any|false|none|
-|»» last_name|body|string|false|none|
 |»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|»» user_id|body|any|false|none|
 |» modifier|body|integer|false|none|
 |» created_at|body|any|false|none|
 |» modified_at|body|any|false|none|
@@ -4070,50 +4253,50 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |»» pdf_urls|body|any|false|none|
 |»» sync_status|body|any|false|none|
 |»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
-|»»» name|body|string|true|none|
 |»»» attribute_id|body|integer|true|none|
-|»»» value|body|string|true|none|
 |»»» id|body|integer|false|none|
+|»»» name|body|string|true|none|
+|»»» value|body|string|true|none|
 |»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
-|»»» description|body|string|false|none|
+|»»» id|body|string|false|none|
+|»»» labor_hours|body|number|false|none|
 |»»» manufacturer|body|string|true|none|
 |»»» model|body|string|true|none|
-|»»» labor_hours|body|number|false|none|
-|»»» row_index|body|integer|true|none|
-|»»» price|body|any|false|none|
-|»»» id|body|string|false|none|
 |»»» quantity|body|any|false|none|
+|»»» price|body|any|false|none|
+|»»» row_index|body|integer|true|none|
+|»»» description|body|string|false|none|
 |»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
 |»» cables|body|[[CablePath](#schemacablepath)]|false|none|
+|»»» id|body|string|true|none|
 |»»» a_side|body|any|true|none|
 |»»» z_side|body|any|true|none|
-|»»» id|body|string|true|none|
 |»»» type|body|string|false|none|
 |»» connections|body|[PathConnection](#schemapathconnection)|false|none|
 |»»» end|body|any|false|none|
 |»»» start|body|any|false|none|
 |»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
 |»»» modified_at|body|any|false|none|
-|»»» id|body|string|false|none|
-|»»» creator|body|integer|false|none|
-|»»» entry|body|string|false|none|
-|»»» date|body|any|false|none|
-|»»» modifier|body|integer|false|none|
 |»»» created_at|body|any|false|none|
+|»»» entry|body|string|false|none|
+|»»» creator|body|integer|false|none|
+|»»» date|body|any|false|none|
+|»»» id|body|string|false|none|
+|»»» modifier|body|integer|false|none|
 |» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
 |»» start_point|body|any|false|none|
-|»» font_size|body|string|false|none|
-|»» text|body|string|false|none|
 |»» fill|body|any|false|none|
-|»» size|body|string|false|none|
-|»» category|body|any|true|none|
+|»» id|body|string|false|none|
+|»» stroke_color|body|string|true|none|
 |»» opacity|body|number|false|none|
 |»» end_point|body|any|false|none|
 |»» location|body|any|true|none|
-|»» stroke_width|body|string|true|none|
-|»» stroke_color|body|string|true|none|
+|»» size|body|string|false|none|
+|»» category|body|any|true|none|
 |»» coordinates|body|any|false|none|
-|»» id|body|string|false|none|
+|»» font_size|body|string|false|none|
+|»» stroke_width|body|string|true|none|
+|»» text|body|string|false|none|
 |» users|body|any|false|none|
 
 #### Enumerated Values
@@ -4153,9 +4336,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "modifier": 0,
   "created_at": null,
@@ -4178,22 +4361,22 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       "sync_status": "synced",
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string",
-          "id": 0
+          "id": 0,
+          "name": "string",
+          "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "id": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "id": "string",
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -4201,9 +4384,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -4214,12 +4397,12 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       "activity_log": [
         {
           "modified_at": null,
-          "id": "string",
-          "creator": 0,
+          "created_at": null,
           "entry": "string",
+          "creator": 0,
           "date": null,
-          "modifier": 0,
-          "created_at": null
+          "id": "string",
+          "modifier": 0
         }
       ]
     }
@@ -4227,18 +4410,18 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "id": "string",
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
-      "stroke_width": "string",
-      "stroke_color": "string",
+      "size": "string",
+      "category": null,
       "coordinates": null,
-      "id": "string"
+      "font_size": "string",
+      "stroke_width": "string",
+      "text": "string"
     }
   ],
   "users": null
@@ -4413,9 +4596,9 @@ fetch('/v3/survey/{survey_id}',
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "modifier": 0,
   "created_at": null,
@@ -4438,22 +4621,22 @@ fetch('/v3/survey/{survey_id}',
       "sync_status": "synced",
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string",
-          "id": 0
+          "id": 0,
+          "name": "string",
+          "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "id": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "id": "string",
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -4461,9 +4644,9 @@ fetch('/v3/survey/{survey_id}',
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -4474,12 +4657,12 @@ fetch('/v3/survey/{survey_id}',
       "activity_log": [
         {
           "modified_at": null,
-          "id": "string",
-          "creator": 0,
+          "created_at": null,
           "entry": "string",
+          "creator": 0,
           "date": null,
-          "modifier": 0,
-          "created_at": null
+          "id": "string",
+          "modifier": 0
         }
       ]
     }
@@ -4487,18 +4670,18 @@ fetch('/v3/survey/{survey_id}',
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "id": "string",
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
-      "stroke_width": "string",
-      "stroke_color": "string",
+      "size": "string",
+      "category": null,
       "coordinates": null,
-      "id": "string"
+      "font_size": "string",
+      "stroke_width": "string",
+      "text": "string"
     }
   ],
   "users": null
@@ -4937,6 +5120,12 @@ fetch('/v3/team/{team_id}/membership',
 ```
 
 `GET /v3/team/{team_id}/membership`
+
+<h3 id="returns-information-about-all-members-of-a-team.d-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|team_id|path|string|true|Team ID|
 
 > Example responses
 
@@ -5620,9 +5809,9 @@ jwt
 
 ```json
 {
-  "user_id": 0,
+  "first_name": "string",
   "last_name": "string",
-  "first_name": "string"
+  "user_id": 0
 }
 
 ```
@@ -5631,9 +5820,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|user_id|integer|true|none|none|
-|last_name|string|false|none|none|
 |first_name|string|false|none|none|
+|last_name|string|false|none|none|
+|user_id|integer|true|none|none|
 
 <h2 id="tocS_SiteSchema">SiteSchema</h2>
 <!-- backwards compatibility -->
@@ -5644,33 +5833,33 @@ jwt
 
 ```json
 {
-  "name": "string",
   "modified_at": null,
-  "city": "string",
-  "site_id": "string",
-  "legacy_site_id": 0,
-  "zip_code": "string",
-  "state": "string",
-  "reference_id": "string",
-  "creator": {
-    "user_id": 0,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "street": "string",
-  "label": "string",
-  "team_id": 0,
   "is_archived": null,
-  "version": 0,
   "modifier": {
-    "user_id": 0,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": 0
   },
+  "name": "string",
+  "state": "string",
+  "created_at": null,
+  "city": "string",
+  "team_id": 0,
+  "label": "string",
+  "legacy_site_id": 0,
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": 0
+  },
+  "site_id": "string",
+  "version": 0,
+  "reference_id": "string",
   "tags": [
     "string"
   ],
-  "created_at": null
+  "zip_code": "string",
+  "street": "string"
 }
 
 ```
@@ -5679,23 +5868,23 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
 |modified_at|null|false|read-only|none|
-|city|string|false|none|none|
-|site_id|string|false|none|none|
-|legacy_site_id|integer|false|read-only|none|
-|zip_code|string|false|none|none|
-|state|string|false|none|none|
-|reference_id|string|false|none|none|
-|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
-|street|string|false|none|none|
-|label|string|false|none|none|
-|team_id|integer|true|none|none|
 |is_archived|any|false|none|none|
-|version|integer|false|read-only|none|
 |modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
-|tags|[string]|false|none|none|
+|name|string|true|none|none|
+|state|string|false|none|none|
 |created_at|null|false|read-only|none|
+|city|string|false|none|none|
+|team_id|integer|true|none|none|
+|label|string|false|none|none|
+|legacy_site_id|integer|false|read-only|none|
+|creator|[UserResponse](#schemauserresponse)|false|read-only|none|
+|site_id|string|false|none|none|
+|version|integer|false|read-only|none|
+|reference_id|string|false|none|none|
+|tags|[string]|false|none|none|
+|zip_code|string|false|none|none|
+|street|string|false|none|none|
 
 <h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
 <!-- backwards compatibility -->
@@ -5706,11 +5895,11 @@ jwt
 
 ```json
 {
+  "expiration_date": null,
+  "message": "string",
   "emails": [
     "user@example.com"
-  ],
-  "expiration_date": null,
-  "message": "string"
+  ]
 }
 
 ```
@@ -5719,9 +5908,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|emails|[string]|true|none|none|
 |expiration_date|any|true|none|none|
 |message|string|false|none|none|
+|emails|[string]|true|none|none|
 
 <h2 id="tocS_SurveyFields">SurveyFields</h2>
 <!-- backwards compatibility -->
@@ -5754,16 +5943,16 @@ jwt
 
 ```json
 {
-  "template_name": "string",
-  "scope": "template",
   "inputs": [
     {
       "value": "string",
       "field_id": "string"
     }
   ],
+  "id": "string",
   "value": true,
-  "id": "string"
+  "scope": "template",
+  "template_name": "string"
 }
 
 ```
@@ -5772,11 +5961,11 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|template_name|string|false|none|none|
-|scope|string|true|none|none|
 |inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
-|value|boolean|true|none|none|
 |id|string|true|none|none|
+|value|boolean|true|none|none|
+|scope|string|true|none|none|
+|template_name|string|false|none|none|
 
 #### Enumerated Values
 
@@ -5795,34 +5984,34 @@ jwt
 
 ```json
 {
-  "name": "string",
-  "filters": [
-    {}
-  ],
-  "survey_ids": [
-    "string"
-  ],
   "options": [
     {
-      "template_name": "string",
-      "scope": "template",
       "inputs": [
         {
           "value": "string",
           "field_id": "string"
         }
       ],
+      "id": "string",
       "value": true,
-      "id": "string"
+      "scope": "template",
+      "template_name": "string"
     }
   ],
-  "site_id": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "is_site_report": false,
-  "paper_size": "string",
-  "output": "pdf",
   "custom_data": {},
-  "is_excel": false
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "is_site_report": false,
+  "survey_ids": [
+    "string"
+  ],
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "site_id": "string",
+  "paper_size": "string"
 }
 
 ```
@@ -5831,17 +6020,17 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
-|filters|[object]|false|none|none|
-|survey_ids|[string]|false|none|none|
 |options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|site_id|string|true|none|none|
-|report_id|string(uuid)|true|none|none|
-|is_site_report|boolean|false|none|none|
-|paper_size|string|false|none|none|
-|output|string|true|none|none|
 |custom_data|object|false|none|none|
+|filters|[object]|false|none|none|
+|name|string|true|none|none|
+|output|string|true|none|none|
 |is_excel|boolean|false|none|none|
+|is_site_report|boolean|false|none|none|
+|survey_ids|[string]|false|none|none|
+|report_id|string(uuid)|true|none|none|
+|site_id|string|true|none|none|
+|paper_size|string|false|none|none|
 
 #### Enumerated Values
 
@@ -5861,34 +6050,34 @@ jwt
 
 ```json
 {
-  "name": "string",
-  "filters": [
-    {}
-  ],
-  "ids": [
-    "string"
-  ],
   "options": [
     {
-      "template_name": "string",
-      "scope": "template",
       "inputs": [
         {
           "value": "string",
           "field_id": "string"
         }
       ],
+      "id": "string",
       "value": true,
-      "id": "string"
+      "scope": "template",
+      "template_name": "string"
     }
   ],
-  "site_id": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
-  "is_site_report": false,
-  "paper_size": "string",
-  "output": "pdf",
   "custom_data": {},
-  "is_excel": false
+  "filters": [
+    {}
+  ],
+  "name": "string",
+  "output": "pdf",
+  "is_excel": false,
+  "is_site_report": false,
+  "ids": [
+    "string"
+  ],
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "site_id": "string",
+  "paper_size": "string"
 }
 
 ```
@@ -5897,17 +6086,17 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
-|filters|[object]|false|none|none|
-|ids|[string]|false|none|none|
 |options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|site_id|string|true|none|none|
-|report_id|string(uuid)|true|none|none|
-|is_site_report|boolean|false|none|none|
-|paper_size|string|false|none|none|
-|output|string|true|none|none|
 |custom_data|object|false|none|none|
+|filters|[object]|false|none|none|
+|name|string|true|none|none|
+|output|string|true|none|none|
 |is_excel|boolean|false|none|none|
+|is_site_report|boolean|false|none|none|
+|ids|[string]|false|none|none|
+|report_id|string(uuid)|true|none|none|
+|site_id|string|true|none|none|
+|paper_size|string|false|none|none|
 
 #### Enumerated Values
 
@@ -5916,42 +6105,6 @@ jwt
 |output|pdf|
 |output|html|
 |output|xls|
-
-<h2 id="tocS_EPAccessory">EPAccessory</h2>
-<!-- backwards compatibility -->
-<a id="schemaepaccessory"></a>
-<a id="schema_EPAccessory"></a>
-<a id="tocSepaccessory"></a>
-<a id="tocsepaccessory"></a>
-
-```json
-{
-  "description": "string",
-  "manufacturer": "",
-  "model": "",
-  "labor_hours": [
-    0
-  ],
-  "price": [
-    0
-  ],
-  "id": 0,
-  "created_at": null
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|description|string|true|none|none|
-|manufacturer|string|false|none|none|
-|model|string|false|none|none|
-|labor_hours|number,null|false|none|none|
-|price|number,null|false|none|none|
-|id|integer|false|read-only|none|
-|created_at|any|false|read-only|none|
 
 <h2 id="tocS_Attribute">Attribute</h2>
 <!-- backwards compatibility -->
@@ -5975,30 +6128,6 @@ jwt
 |attribute_id|integer|true|none|none|
 |value|string|true|none|none|
 
-<h2 id="tocS_Link">Link</h2>
-<!-- backwards compatibility -->
-<a id="schemalink"></a>
-<a id="schema_Link"></a>
-<a id="tocSlink"></a>
-<a id="tocslink"></a>
-
-```json
-{
-  "name": "string",
-  "url": "string",
-  "link_type": 0
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|name|string|true|none|none|
-|url|string(url)|true|none|none|
-|link_type|integer|true|none|none|
-
 <h2 id="tocS_SubElement">SubElement</h2>
 <!-- backwards compatibility -->
 <a id="schemasubelement"></a>
@@ -6008,8 +6137,8 @@ jwt
 
 ```json
 {
-  "systemtype_id": "string",
-  "element_id": "string"
+  "element_id": "string",
+  "systemtype_id": "string"
 }
 
 ```
@@ -6018,8 +6147,32 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|systemtype_id|string|true|none|none|
 |element_id|string|true|none|none|
+|systemtype_id|string|true|none|none|
+
+<h2 id="tocS_Link">Link</h2>
+<!-- backwards compatibility -->
+<a id="schemalink"></a>
+<a id="schema_Link"></a>
+<a id="tocSlink"></a>
+<a id="tocslink"></a>
+
+```json
+{
+  "url": "string",
+  "name": "string",
+  "link_type": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|url|string(url)|true|none|none|
+|name|string|true|none|none|
+|link_type|integer|true|none|none|
 
 <h2 id="tocS_EPContent">EPContent</h2>
 <!-- backwards compatibility -->
@@ -6031,8 +6184,8 @@ jwt
 ```json
 {
   "attribute": [],
-  "pdf_url": [],
-  "child": []
+  "child": [],
+  "pdf_url": []
 }
 
 ```
@@ -6042,8 +6195,44 @@ jwt
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |attribute|[[Attribute](#schemaattribute)]|false|none|none|
-|pdf_url|[[Link](#schemalink)]|false|none|none|
 |child|[[SubElement](#schemasubelement)]|false|none|none|
+|pdf_url|[[Link](#schemalink)]|false|none|none|
+
+<h2 id="tocS_EPAccessory">EPAccessory</h2>
+<!-- backwards compatibility -->
+<a id="schemaepaccessory"></a>
+<a id="schema_EPAccessory"></a>
+<a id="tocSepaccessory"></a>
+<a id="tocsepaccessory"></a>
+
+```json
+{
+  "id": 0,
+  "manufacturer": "",
+  "created_at": null,
+  "description": "string",
+  "model": "",
+  "price": [
+    0
+  ],
+  "labor_hours": [
+    0
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|integer|false|read-only|none|
+|manufacturer|string|false|none|none|
+|created_at|any|false|read-only|none|
+|description|string|true|none|none|
+|model|string|false|none|none|
+|price|number,null|false|none|none|
+|labor_hours|number,null|false|none|none|
 
 <h2 id="tocS_ElementProfileSchema">ElementProfileSchema</h2>
 <!-- backwards compatibility -->
@@ -6054,35 +6243,35 @@ jwt
 
 ```json
 {
+  "element_id": 0,
+  "modified_at": null,
+  "is_default": true,
+  "id": 0,
   "name": "string",
+  "sort": 0,
+  "content": {
+    "attribute": [],
+    "child": [],
+    "pdf_url": []
+  },
+  "created_at": null,
   "accessories": [
     {
-      "description": "string",
+      "id": 0,
       "manufacturer": "",
+      "created_at": null,
+      "description": "string",
       "model": "",
-      "labor_hours": [
-        0
-      ],
       "price": [
         0
       ],
-      "id": 0,
-      "created_at": null
+      "labor_hours": [
+        0
+      ]
     }
   ],
-  "sort": 0,
-  "modified_at": null,
-  "created_by": 0,
-  "content": {
-    "attribute": [],
-    "pdf_url": [],
-    "child": []
-  },
   "team_id": 0,
-  "element_id": 0,
-  "is_default": true,
-  "id": 0,
-  "created_at": null
+  "created_by": 0
 }
 
 ```
@@ -6091,17 +6280,17 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
-|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
-|sort|integer|false|none|none|
-|modified_at|any|false|read-only|none|
-|created_by|integer|false|read-only|none|
-|content|[EPContent](#schemaepcontent)|true|none|none|
-|team_id|integer|true|none|none|
 |element_id|integer|true|none|none|
+|modified_at|any|false|read-only|none|
 |is_default|boolean|false|none|none|
 |id|integer|false|read-only|none|
+|name|string|true|none|none|
+|sort|integer|false|none|none|
+|content|[EPContent](#schemaepcontent)|true|none|none|
 |created_at|any|false|read-only|none|
+|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
+|team_id|integer|true|none|none|
+|created_by|integer|false|read-only|none|
 
 <h2 id="tocS_RelatedUser">RelatedUser</h2>
 <!-- backwards compatibility -->
@@ -6112,9 +6301,9 @@ jwt
 
 ```json
 {
-  "user_id": null,
+  "first_name": "string",
   "last_name": "string",
-  "first_name": "string"
+  "user_id": null
 }
 
 ```
@@ -6123,9 +6312,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|user_id|any|false|none|none|
-|last_name|string|false|none|none|
 |first_name|string|false|none|none|
+|last_name|string|false|none|none|
+|user_id|any|false|none|none|
 
 <h2 id="tocS_Team">Team</h2>
 <!-- backwards compatibility -->
@@ -6136,8 +6325,8 @@ jwt
 
 ```json
 {
-  "name": "string",
-  "id": "string"
+  "id": "string",
+  "name": "string"
 }
 
 ```
@@ -6146,8 +6335,8 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|false|none|none|
 |id|string|false|read-only|none|
+|name|string|false|none|none|
 
 <h2 id="tocS_FolderSchema">FolderSchema</h2>
 <!-- backwards compatibility -->
@@ -6159,26 +6348,26 @@ jwt
 ```json
 {
   "modified_at": null,
-  "id": "string",
   "team_id": 0,
-  "label": "string",
-  "site_id": 0,
-  "creator": {
-    "user_id": null,
-    "last_name": "string",
-    "first_name": "string"
-  },
-  "name": "string",
   "modifier": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
+  "site_external_id": "string",
   "team": {
-    "name": "string",
-    "id": "string"
+    "id": "string",
+    "name": "string"
   },
-  "site_external_id": "string"
+  "site_id": 0,
+  "id": "string",
+  "name": "string",
+  "label": "string",
+  "creator": {
+    "first_name": "string",
+    "last_name": "string",
+    "user_id": null
+  }
 }
 
 ```
@@ -6188,15 +6377,15 @@ jwt
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |modified_at|any|false|none|none|
-|id|string|false|read-only|none|
 |team_id|integer|false|none|none|
-|label|string|false|none|none|
-|site_id|integer|false|read-only|none|
-|creator|[RelatedUser](#schemarelateduser)|false|none|none|
-|name|string|true|none|none|
 |modifier|[RelatedUser](#schemarelateduser)|false|none|none|
-|team|[Team](#schemateam)|false|none|none|
 |site_external_id|string|false|write-only|none|
+|team|[Team](#schemateam)|false|none|none|
+|site_id|integer|false|read-only|none|
+|id|string|false|read-only|none|
+|name|string|true|none|none|
+|label|string|false|none|none|
+|creator|[RelatedUser](#schemarelateduser)|false|none|none|
 
 <h2 id="tocS_SurveyAttribute">SurveyAttribute</h2>
 <!-- backwards compatibility -->
@@ -6207,10 +6396,10 @@ jwt
 
 ```json
 {
-  "name": "string",
   "attribute_id": 0,
-  "value": "string",
-  "id": 0
+  "id": 0,
+  "name": "string",
+  "value": "string"
 }
 
 ```
@@ -6219,10 +6408,10 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|name|string|true|none|none|
 |attribute_id|integer|true|none|none|
-|value|string|true|none|none|
 |id|integer|false|read-only|none|
+|name|string|true|none|none|
+|value|string|true|none|none|
 
 <h2 id="tocS_SurveyElementAccessory">SurveyElementAccessory</h2>
 <!-- backwards compatibility -->
@@ -6233,14 +6422,14 @@ jwt
 
 ```json
 {
-  "description": "string",
+  "id": "string",
+  "labor_hours": 0,
   "manufacturer": "string",
   "model": "string",
-  "labor_hours": 0,
-  "row_index": 0,
+  "quantity": null,
   "price": null,
-  "id": "string",
-  "quantity": null
+  "row_index": 0,
+  "description": "string"
 }
 
 ```
@@ -6249,14 +6438,14 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|description|string|false|none|none|
+|id|string|false|read-only|none|
+|labor_hours|number|false|none|none|
 |manufacturer|string|true|none|none|
 |model|string|true|none|none|
-|labor_hours|number|false|none|none|
-|row_index|integer|true|none|none|
-|price|any|false|none|none|
-|id|string|false|read-only|none|
 |quantity|any|false|none|none|
+|price|any|false|none|none|
+|row_index|integer|true|none|none|
+|description|string|false|none|none|
 
 <h2 id="tocS_CablePath">CablePath</h2>
 <!-- backwards compatibility -->
@@ -6267,9 +6456,9 @@ jwt
 
 ```json
 {
+  "id": "string",
   "a_side": null,
   "z_side": null,
-  "id": "string",
   "type": "string"
 }
 
@@ -6279,9 +6468,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|id|string|true|none|none|
 |a_side|any|true|none|none|
 |z_side|any|true|none|none|
-|id|string|true|none|none|
 |type|string|false|none|none|
 
 <h2 id="tocS_PathConnection">PathConnection</h2>
@@ -6316,12 +6505,12 @@ jwt
 ```json
 {
   "modified_at": null,
-  "id": "string",
-  "creator": 0,
+  "created_at": null,
   "entry": "string",
+  "creator": 0,
   "date": null,
-  "modifier": 0,
-  "created_at": null
+  "id": "string",
+  "modifier": 0
 }
 
 ```
@@ -6331,12 +6520,12 @@ jwt
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |modified_at|any|false|read-only|none|
-|id|string|false|none|none|
-|creator|integer|false|read-only|none|
-|entry|string|false|none|none|
-|date|any|false|none|none|
-|modifier|integer|false|read-only|none|
 |created_at|any|false|read-only|none|
+|entry|string|false|none|none|
+|creator|integer|false|read-only|none|
+|date|any|false|none|none|
+|id|string|false|none|none|
+|modifier|integer|false|read-only|none|
 
 <h2 id="tocS_SurveyElement">SurveyElement</h2>
 <!-- backwards compatibility -->
@@ -6363,22 +6552,22 @@ jwt
   "sync_status": "synced",
   "attributes": [
     {
-      "name": "string",
       "attribute_id": 0,
-      "value": "string",
-      "id": 0
+      "id": 0,
+      "name": "string",
+      "value": "string"
     }
   ],
   "accessories": [
     {
-      "description": "string",
+      "id": "string",
+      "labor_hours": 0,
       "manufacturer": "string",
       "model": "string",
-      "labor_hours": 0,
-      "row_index": 0,
+      "quantity": null,
       "price": null,
-      "id": "string",
-      "quantity": null
+      "row_index": 0,
+      "description": "string"
     }
   ],
   "children": [
@@ -6399,30 +6588,30 @@ jwt
       "sync_status": "synced",
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string",
-          "id": 0
+          "id": 0,
+          "name": "string",
+          "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "id": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "id": "string",
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -6433,21 +6622,21 @@ jwt
       "activity_log": [
         {
           "modified_at": null,
-          "id": "string",
-          "creator": 0,
+          "created_at": null,
           "entry": "string",
+          "creator": 0,
           "date": null,
-          "modifier": 0,
-          "created_at": null
+          "id": "string",
+          "modifier": 0
         }
       ]
     }
   ],
   "cables": [
     {
+      "id": "string",
       "a_side": null,
       "z_side": null,
-      "id": "string",
       "type": "string"
     }
   ],
@@ -6458,12 +6647,12 @@ jwt
   "activity_log": [
     {
       "modified_at": null,
-      "id": "string",
-      "creator": 0,
+      "created_at": null,
       "entry": "string",
+      "creator": 0,
       "date": null,
-      "modifier": 0,
-      "created_at": null
+      "id": "string",
+      "modifier": 0
     }
   ]
 }
@@ -6511,18 +6700,18 @@ jwt
 ```json
 {
   "start_point": null,
-  "font_size": "string",
-  "text": "string",
   "fill": null,
-  "size": "string",
-  "category": null,
+  "id": "string",
+  "stroke_color": "string",
   "opacity": 1,
   "end_point": null,
   "location": null,
-  "stroke_width": "string",
-  "stroke_color": "string",
+  "size": "string",
+  "category": null,
   "coordinates": null,
-  "id": "string"
+  "font_size": "string",
+  "stroke_width": "string",
+  "text": "string"
 }
 
 ```
@@ -6532,18 +6721,18 @@ jwt
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |start_point|any|false|none|none|
-|font_size|string|false|none|none|
-|text|string|false|none|none|
 |fill|any|false|none|none|
-|size|string|false|none|none|
-|category|any|true|none|none|
+|id|string|false|read-only|none|
+|stroke_color|string|true|none|none|
 |opacity|number|false|none|none|
 |end_point|any|false|none|none|
 |location|any|true|none|none|
-|stroke_width|string|true|none|none|
-|stroke_color|string|true|none|none|
+|size|string|false|none|none|
+|category|any|true|none|none|
 |coordinates|any|false|none|none|
-|id|string|false|read-only|none|
+|font_size|string|false|none|none|
+|stroke_width|string|true|none|none|
+|text|string|false|none|none|
 
 <h2 id="tocS_SurveySchema">SurveySchema</h2>
 <!-- backwards compatibility -->
@@ -6575,9 +6764,9 @@ jwt
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "user_id": null,
+    "first_name": "string",
     "last_name": "string",
-    "first_name": "string"
+    "user_id": null
   },
   "modifier": 0,
   "created_at": null,
@@ -6600,22 +6789,22 @@ jwt
       "sync_status": "synced",
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string",
-          "id": 0
+          "id": 0,
+          "name": "string",
+          "value": "string"
         }
       ],
       "accessories": [
         {
-          "description": "string",
+          "id": "string",
+          "labor_hours": 0,
           "manufacturer": "string",
           "model": "string",
-          "labor_hours": 0,
-          "row_index": 0,
+          "quantity": null,
           "price": null,
-          "id": "string",
-          "quantity": null
+          "row_index": 0,
+          "description": "string"
         }
       ],
       "children": [
@@ -6623,9 +6812,9 @@ jwt
       ],
       "cables": [
         {
+          "id": "string",
           "a_side": null,
           "z_side": null,
-          "id": "string",
           "type": "string"
         }
       ],
@@ -6636,12 +6825,12 @@ jwt
       "activity_log": [
         {
           "modified_at": null,
-          "id": "string",
-          "creator": 0,
+          "created_at": null,
           "entry": "string",
+          "creator": 0,
           "date": null,
-          "modifier": 0,
-          "created_at": null
+          "id": "string",
+          "modifier": 0
         }
       ]
     }
@@ -6649,18 +6838,18 @@ jwt
   "annotations": [
     {
       "start_point": null,
-      "font_size": "string",
-      "text": "string",
       "fill": null,
-      "size": "string",
-      "category": null,
+      "id": "string",
+      "stroke_color": "string",
       "opacity": 1,
       "end_point": null,
       "location": null,
-      "stroke_width": "string",
-      "stroke_color": "string",
+      "size": "string",
+      "category": null,
       "coordinates": null,
-      "id": "string"
+      "font_size": "string",
+      "stroke_width": "string",
+      "text": "string"
     }
   ],
   "users": null
