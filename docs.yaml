@@ -260,10 +260,6 @@ paths:
       security:
       - jwt: []
       operationId: create_site_folder
-      description: '```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint
-        instead.
-
-        '
       summary: Creates a new folder that can hold sites
       requestBody:
         required: true
@@ -303,10 +299,6 @@ paths:
       security:
       - jwt: []
       operationId: update_folder
-      description: '```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint
-        instead.
-
-        '
       summary: Update all fields of a folder
       parameters:
       - name: id
@@ -351,10 +343,6 @@ paths:
       security:
       - jwt: []
       operationId: create_survey_folder
-      description: '```DEPRECATED``` use the `PUT /v3/folder/{folder_id}` endpoint
-        instead.
-
-        '
       summary: Allows creating folders inside a site, which can store and organize
         surveys
       parameters:
@@ -402,8 +390,10 @@ paths:
       - jwt: []
       operationId: delete_survey_folder
       summary: Deletes a survey folder in a site.
-      description: '```DEPRECATED``` use the `DELETE /v3/folder/{folder_id}` endpoint
-        instead.
+      description: 'Folders that already contain surveys are not allowed to be deleted.
+
+
+        Only team members with write access can delete survey folders.
 
         '
       parameters:
@@ -433,8 +423,8 @@ paths:
       - jwt: []
       operationId: delete_site_folder
       summary: Soft deletes a folder that can contain sites.
-      description: '```DEPRECATED``` use the `DELETE /v3/folder/{folder_id}` endpoint
-        instead.
+      description: 'Folder must be empty in order to be deleted. Only account admins,
+        team admins, and team members can delete folders.
 
         '
       parameters:
@@ -457,59 +447,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       public: true
-  /v3/report/{team_id}/definitions:
-    get:
-      tags:
-      - Reports
-      - v3
-      security:
-      - jwt: []
-      operationId: get_report_definitions
-      description: 'Returns report definitions available to the account and site or
-        survey level
-
-        '
-      parameters:
-      - name: team_id
-        description: Team ID
-        in: path
-        required: true
-        schema:
-          type: string
-          example: '10479'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    report_id:
-                      type: string
-                    name:
-                      type: string
-                    description:
-                      type: string
-                    icon:
-                      type: string
-                    is_locked:
-                      type: boolean
-                    paper_sizes:
-                      type: array
-                      items:
-                        type: object
-                    options:
-                      type: array
-                      items:
-                        type: object
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      public: true
   /v3/report:
     post:
       tags:
@@ -517,10 +454,12 @@ paths:
       - v3
       security:
       - jwt: []
-      summary: Queues a message for creating reports for sites or surveys
       operationId: create_report
-      description: 'Reports are created by an external PHP service by picking up messages
-        from the queue.
+      summary: Allows scheduling Excel or JSON reports.
+      description: 'Legacy Excel reports (reports that are processed by https://github.com/systemsurveyor/ssv-reporting)
+        cannot be scheduled
+
+        using this endpoint. They need to be scheduled using `POST /v2/report`.
 
         '
       requestBody:
@@ -528,7 +467,48 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SurveyReportRequestSchema'
+              type: object
+              properties:
+                site_id:
+                  type: string
+                  description: External ID of the report's site
+                  example: de6e23c1-68e8-47eb-a2ef-78b472ec090d
+                  required: true
+                survey_ids:
+                  type: array
+                  description: List of external IDs of surveys in the report
+                  required: true
+                  example:
+                  - de6e23c1-68e8-47eb-a2ef-78b472ec090d
+                  - f89b13b6-52cc-49de-90a2-cccda01bb0aa
+                  items:
+                    type: string
+                output:
+                  type: string
+                  description: Output format for the report
+                  example: xls
+                  enum:
+                  - xls
+                  - json
+                  required: true
+                scope:
+                  type: string
+                  description: Whether the report is a site report or survey report
+                  enum:
+                  - site
+                  - survey
+                  required: true
+                report_name:
+                  type: string
+                  required: true
+                  description: Name given to the new report
+                  example: My Bill of Materials report
+                report_definition_id:
+                  type: string
+                  description: External ID of the report definition the new report
+                    belongs to
+                  required: true
+                  example: f89b13b6-52cc-49de-90a2-cccda01bb0aa
       responses:
         '202':
           description: Report scheduled successfully
@@ -547,6 +527,8 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityError'
       public: true
   /v3/site/{site_id}:
     get:
@@ -1227,34 +1209,6 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
       public: true
   /v3/survey/{survey_id}:
-    get:
-      tags:
-      - Surveys
-      - v3
-      security:
-      - jwt: []
-      operationId: get_survey
-      summary: Get a survey by the survey id.
-      parameters:
-      - name: survey_id
-        description: Survey external ID
-        in: path
-        required: true
-        schema:
-          type: string
-          example: 86af1f1d-4f19-4c6c-afd6-e5ee041666ce
-      responses:
-        '200':
-          description: Survey updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SurveySchema'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      public: true
     delete:
       tags:
       - Surveys
@@ -1462,14 +1416,6 @@ paths:
       - jwt: []
       operationId: get_team_members
       summary: Returns information about all members of a team.d
-      parameters:
-      - name: team_id
-        description: Team ID
-        in: path
-        required: true
-        schema:
-          type: string
-          example: '10479'
       responses:
         '200':
           description: OK
@@ -1937,69 +1883,69 @@ components:
     UserResponse:
       type: object
       properties:
-        first_name:
-          type: string
         last_name:
           type: string
         user_id:
           type: integer
+        first_name:
+          type: string
       required:
       - user_id
     SiteSchema:
       type: object
       properties:
-        modified_at:
-          readOnly: true
-          type:
-          - 'null'
         is_archived: {}
-        modifier:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
-        name:
+        site_id:
           type: string
-          maxLength: 250
-        state:
-          type: string
-          maxLength: 250
+        team_id:
+          type: integer
         created_at:
           readOnly: true
           type:
           - 'null'
-        city:
-          type: string
-          maxLength: 250
-        team_id:
-          type: integer
-        label:
-          type: string
-          maxLength: 255
-        legacy_site_id:
+        version:
           type: integer
           readOnly: true
-        creator:
+        modifier:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
-        site_id:
+        modified_at:
+          readOnly: true
+          type:
+          - 'null'
+        street:
           type: string
-        version:
+          maxLength: 250
+        name:
+          type: string
+          maxLength: 250
+        city:
+          type: string
+          maxLength: 250
+        tags:
+          type: array
+          items:
+            type: string
+        label:
+          type: string
+          maxLength: 255
+        zip_code:
+          type: string
+          maxLength: 250
+        legacy_site_id:
           type: integer
           readOnly: true
         reference_id:
           type: string
           maxLength: 255
-        tags:
-          type: array
-          items:
-            type: string
-        zip_code:
+        state:
           type: string
           maxLength: 250
-        street:
-          type: string
-          maxLength: 250
+        creator:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
       required:
       - name
       - team_id
@@ -2034,10 +1980,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SurveyFields'
-        id:
-          type: string
-        value:
-          type: boolean
         scope:
           type: string
           enum:
@@ -2046,113 +1988,93 @@ components:
           - content
         template_name:
           type: string
+        id:
+          type: string
+        value:
+          type: boolean
       required:
       - id
       - scope
       - value
-    SurveyReportRequestSchema:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
-        custom_data:
-          type: object
-        filters:
-          type: array
-          items:
-            type: object
-        name:
-          type: string
-        output:
-          type: string
-          enum:
-          - pdf
-          - html
-          - xls
-          - json
-        is_excel:
-          type: boolean
-          default: false
-        is_site_report:
-          type: boolean
-          default: false
-        survey_ids:
-          type: array
-          items:
-            type: string
-        report_id:
-          type: string
-          format: uuid
-        site_id:
-          type: string
-        paper_size:
-          type: string
-      required:
-      - name
-      - output
-      - report_id
-      - site_id
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyOptions'
-        custom_data:
-          type: object
-        filters:
-          type: array
-          items:
-            type: object
-        name:
-          type: string
+        is_site_report:
+          type: boolean
+          default: false
         output:
           type: string
           enum:
           - pdf
           - html
           - xls
-        is_excel:
-          type: boolean
-          default: false
-        is_site_report:
-          type: boolean
-          default: false
         ids:
           type: array
           items:
             type: string
-        report_id:
+        custom_data:
+          type: object
+        name:
           type: string
-          format: uuid
+        filters:
+          type: array
+          items:
+            type: object
+        is_excel:
+          type: boolean
+          default: false
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyOptions'
         site_id:
           type: string
         paper_size:
           type: string
+        report_id:
+          type: string
+          format: uuid
       required:
       - name
       - output
       - report_id
       - site_id
-    Attribute:
+    EPAccessory:
       type: object
       properties:
-        attribute_id:
-          type: integer
-        value:
+        price:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+        created_at:
+          readOnly: true
+        model:
           type: string
+          default: ''
+        labor_hours:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+        manufacturer:
+          type: string
+          default: ''
+        description:
+          type: string
+        id:
+          type: integer
+          readOnly: true
       required:
-      - attribute_id
-      - value
+      - description
     SubElement:
       type: object
       properties:
-        element_id:
-          type: string
         systemtype_id:
+          type: string
+        element_id:
           type: string
       required:
       - element_id
@@ -2160,25 +2082,30 @@ components:
     Link:
       type: object
       properties:
+        link_type:
+          type: integer
+        name:
+          type: string
         url:
           type: string
           format: url
-        name:
-          type: string
-        link_type:
-          type: integer
       required:
       - link_type
       - name
       - url
+    Attribute:
+      type: object
+      properties:
+        value:
+          type: string
+        attribute_id:
+          type: integer
+      required:
+      - attribute_id
+      - value
     EPContent:
       type: object
       properties:
-        attribute:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/Attribute'
         child:
           type: array
           default: []
@@ -2190,65 +2117,40 @@ components:
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-    EPAccessory:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        manufacturer:
-          type: string
-          default: ''
-        created_at:
-          readOnly: true
-        description:
-          type: string
-        model:
-          type: string
-          default: ''
-        price:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-        labor_hours:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-      required:
-      - description
+        attribute:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/Attribute'
     ElementProfileSchema:
       type: object
       properties:
-        element_id:
-          type: integer
-        modified_at:
-          readOnly: true
-        is_default:
-          type: boolean
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-        sort:
-          type: integer
-        content:
-          $ref: '#/components/schemas/EPContent'
-        created_at:
-          readOnly: true
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
+        element_id:
+          type: integer
         team_id:
           type: integer
         created_by:
           type: integer
           readOnly: true
+        created_at:
+          readOnly: true
+        name:
+          type: string
+        is_default:
+          type: boolean
+        id:
+          type: integer
+          readOnly: true
+        content:
+          $ref: '#/components/schemas/EPContent'
+        modified_at:
+          readOnly: true
+        sort:
+          type: integer
       required:
       - content
       - element_id
@@ -2257,11 +2159,11 @@ components:
     RelatedUser:
       type: object
       properties:
-        first_name:
-          type: string
         last_name:
           type: string
         user_id: {}
+        first_name:
+          type: string
     Team:
       type: object
       properties:
@@ -2273,26 +2175,26 @@ components:
     FolderSchema:
       type: object
       properties:
-        modified_at: {}
+        id:
+          type: string
+          readOnly: true
+        site_external_id:
+          type: string
+          writeOnly: true
         team_id:
           type: integer
         modifier:
           $ref: '#/components/schemas/RelatedUser'
-        site_external_id:
-          type: string
-          writeOnly: true
         team:
           $ref: '#/components/schemas/Team'
+        label:
+          type: string
+        name:
+          type: string
         site_id:
           type: integer
           readOnly: true
-        id:
-          type: string
-          readOnly: true
-        name:
-          type: string
-        label:
-          type: string
+        modified_at: {}
         creator:
           $ref: '#/components/schemas/RelatedUser'
       required:
@@ -2300,13 +2202,13 @@ components:
     SurveyAttribute:
       type: object
       properties:
-        attribute_id:
-          type: integer
         id:
           type: integer
           readOnly: true
         name:
           type: string
+        attribute_id:
+          type: integer
         value:
           type: string
       required:
@@ -2316,21 +2218,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
-        id:
+        price: {}
+        row_index:
+          type: integer
+        model:
           type: string
-          readOnly: true
         labor_hours:
           type: number
         manufacturer:
           type: string
-        model:
-          type: string
         quantity: {}
-        price: {}
-        row_index:
-          type: integer
         description:
           type: string
+        id:
+          type: string
+          readOnly: true
       required:
       - manufacturer
       - model
@@ -2351,24 +2253,24 @@ components:
     PathConnection:
       type: object
       properties:
-        end: {}
         start: {}
+        end: {}
     SurveyElementActivityLog:
       type: object
       properties:
-        modified_at:
-          readOnly: true
+        id:
+          type: string
         created_at:
+          readOnly: true
+        date: {}
+        modifier:
+          type: integer
+          readOnly: true
+        modified_at:
           readOnly: true
         entry:
           type: string
         creator:
-          type: integer
-          readOnly: true
-        date: {}
-        id:
-          type: string
-        modifier:
           type: integer
           readOnly: true
     SurveyElement:
@@ -2434,28 +2336,28 @@ components:
     SurveyAnnotation:
       type: object
       properties:
-        start_point: {}
-        fill: {}
-        id:
+        size:
           type: string
-          readOnly: true
+        category: {}
         stroke_color:
           type: string
+        end_point: {}
+        text:
+          type: string
+        fill: {}
+        start_point: {}
         opacity:
           type: number
           minimum: 0
           maximum: 1
-        end_point: {}
-        location: {}
-        size:
-          type: string
-        category: {}
         coordinates: {}
-        font_size:
+        id:
           type: string
+          readOnly: true
+        location: {}
         stroke_width:
           type: string
-        text:
+        font_size:
           type: string
       required:
       - category
