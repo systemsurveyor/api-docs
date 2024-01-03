@@ -48,18 +48,18 @@ headingLevel: 2
 
 Once the account administrator creates your API `access_token`         ([link](https://app.systemsurveyor.com/v2/account/#api_management)), you must include that with each request.         These tokens are valid for 1 year, and can be revoked at any time by the account administrator.         You will find examples for each request with each endpoint below.
 
-<h1 id="system-surveyor-api-comments">Comments</h1>
+<h1 id="system-surveyor-api-resources">Resources</h1>
 
-## Adds a new comment to a survey.
+## Gets the corresponding floorplan image for a survey.
 
-<a id="opIdadd_survey_comment"></a>
+<a id="opIdget_survey_floorplan"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X POST /v3/survey/{survey_id}/comment \
-  -H 'Content-Type: application/json' \
+curl -X POST /survey/{survey_external_id}/floorplan \
+  -H 'Accept: application/octet-stream' \
   -H 'Authorization: Bearer {access-token}'
 
 ```
@@ -67,11 +67,11 @@ curl -X POST /v3/survey/{survey_id}/comment \
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json',
+  'Accept': 'application/octet-stream',
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.post('/v3/survey/{survey_id}/comment', headers = headers)
+r = requests.post('/survey/{survey_external_id}/floorplan', headers = headers)
 
 print(r.json())
 
@@ -82,11 +82,11 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Content-Type' => 'application/json',
+  'Accept' => 'application/octet-stream',
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.post '/v3/survey/{survey_id}/comment',
+result = RestClient.post '/survey/{survey_external_id}/floorplan',
   params: {
   }, headers: headers
 
@@ -105,12 +105,12 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/octet-stream"},
         "Authorization": []string{"Bearer {access-token}"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "/v3/survey/{survey_id}/comment", data)
+    req, err := http.NewRequest("POST", "/survey/{survey_external_id}/floorplan", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -121,26 +121,23 @@ func main() {
 ```
 
 ```http
-POST /v3/survey/{survey_id}/comment HTTP/1.1
+POST /survey/{survey_external_id}/floorplan HTTP/1.1
 
-Content-Type: application/json
+Accept: application/octet-stream
 
 ```
 
 ```javascript
-const inputBody = '{
-  "corpus": "Lorem ipsum",
-  "parent_id": 2334
-}';
+
 const headers = {
-  'Content-Type':'application/json',
+  'Accept':'application/octet-stream',
   'Authorization':'Bearer {access-token}'
 };
 
-fetch('/v3/survey/{survey_id}/comment',
+fetch('/survey/{survey_external_id}/floorplan',
 {
   method: 'POST',
-  body: inputBody,
+
   headers: headers
 })
 .then(function(res) {
@@ -153,19 +150,16 @@ fetch('/v3/survey/{survey_id}/comment',
 
 ```javascript--nodejs
 const fetch = require('node-fetch');
-const inputBody = {
-  "corpus": "Lorem ipsum",
-  "parent_id": 2334
-};
+
 const headers = {
-  'Content-Type':'application/json',
+  'Accept':'application/octet-stream',
   'Authorization':'Bearer {access-token}'
 };
 
-fetch('/v3/survey/{survey_id}/comment',
+fetch('/survey/{survey_external_id}/floorplan',
 {
   method: 'POST',
-  body: JSON.stringify(inputBody),
+
   headers: headers
 })
 .then(function(res) {
@@ -176,300 +170,25 @@ fetch('/v3/survey/{survey_id}/comment',
 
 ```
 
-`POST /v3/survey/{survey_id}/comment`
+`POST /survey/{survey_external_id}/floorplan`
 
-> Body parameter
+User must have at least read access on the survey's site in order to access the floorplan.
 
-```json
-{
-  "corpus": "Lorem ipsum",
-  "parent_id": 2334
-}
-```
-
-<h3 id="adds-a-new-comment-to-a-survey.-parameters">Parameters</h3>
+<h3 id="gets-the-corresponding-floorplan-image-for-a-survey.-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|object|true|none|
-|» corpus|body|string|false|none|
-|» parent_id|body|number|false|none|
+|survey_id|path|undefined|true|Survey external ID|
 
-<h3 id="adds-a-new-comment-to-a-survey.-responses">Responses</h3>
+> Example responses
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+> 200 Response
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwt
-</aside>
-
-## Get all comments from a survey
-
-<a id="opIdget_survey_comments"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET /v3/survey/{survey_id}/comments \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('/v3/survey/{survey_id}/comments', headers = headers)
-
-print(r.json())
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get '/v3/survey/{survey_id}/comments',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "/v3/survey/{survey_id}/comments", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-```http
-GET /v3/survey/{survey_id}/comments HTTP/1.1
-
-```
-
-```javascript
-
-const headers = {
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('/v3/survey/{survey_id}/comments',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('/v3/survey/{survey_id}/comments',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-`GET /v3/survey/{survey_id}/comments`
-
-<h3 id="get-all-comments-from-a-survey-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|survey_id|path|string|true|Survey ID|
-
-<h3 id="get-all-comments-from-a-survey-responses">Responses</h3>
+<h3 id="gets-the-corresponding-floorplan-image-for-a-survey.-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-jwt
-</aside>
-
-## Deletes a comment in a survey.
-
-<a id="opIddelete_survey_comment"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE /v3/survey/{survey_id}/comment/{comment_id} \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```python
-import requests
-headers = {
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.delete('/v3/survey/{survey_id}/comment/{comment_id}', headers = headers)
-
-print(r.json())
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.delete '/v3/survey/{survey_id}/comment/{comment_id}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/v3/survey/{survey_id}/comment/{comment_id}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-```http
-DELETE /v3/survey/{survey_id}/comment/{comment_id} HTTP/1.1
-
-```
-
-```javascript
-
-const headers = {
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('/v3/survey/{survey_id}/comment/{comment_id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```javascript--nodejs
-const fetch = require('node-fetch');
-
-const headers = {
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('/v3/survey/{survey_id}/comment/{comment_id}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-`DELETE /v3/survey/{survey_id}/comment/{comment_id}`
-
-Users are only allowed to delete their own comments.
-
-<h3 id="deletes-a-comment-in-a-survey.-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|survey_id|path|string|true|Survey external ID|
-|comment_id|path|number|true|Comment ID|
-
-<h3 id="deletes-a-comment-in-a-survey.-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Floorplan image binary file|string|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
@@ -479,16 +198,17 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwt
 </aside>
 
-## Allows editing a comment in a survey.
+## Replaces a survey element's photo at a given path with a new photo.
 
-<a id="opIdedit_survey_comment"></a>
+<a id="opIdupdate_survey_element_photo"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X PATCH /v3/survey/{survey_id}/comment/{comment_id} \
-  -H 'Content-Type: application/json' \
+curl -X POST /surveyelement/{survey_element_external_id}/photo \
+  -H 'Content-Type: image/png' \
+  -H 'Accept: application/json' \
   -H 'Authorization: Bearer {access-token}'
 
 ```
@@ -496,11 +216,12 @@ curl -X PATCH /v3/survey/{survey_id}/comment/{comment_id} \
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'image/png',
+  'Accept': 'application/json',
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.patch('/v3/survey/{survey_id}/comment/{comment_id}', headers = headers)
+r = requests.post('/surveyelement/{survey_element_external_id}/photo', headers = headers)
 
 print(r.json())
 
@@ -511,11 +232,12 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Content-Type' => 'application/json',
+  'Content-Type' => 'image/png',
+  'Accept' => 'application/json',
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.patch '/v3/survey/{survey_id}/comment/{comment_id}',
+result = RestClient.post '/surveyelement/{survey_element_external_id}/photo',
   params: {
   }, headers: headers
 
@@ -534,12 +256,13 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
+        "Content-Type": []string{"image/png"},
+        "Accept": []string{"application/json"},
         "Authorization": []string{"Bearer {access-token}"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PATCH", "/v3/survey/{survey_id}/comment/{comment_id}", data)
+    req, err := http.NewRequest("POST", "/surveyelement/{survey_element_external_id}/photo", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -550,25 +273,24 @@ func main() {
 ```
 
 ```http
-PATCH /v3/survey/{survey_id}/comment/{comment_id} HTTP/1.1
+POST /surveyelement/{survey_element_external_id}/photo HTTP/1.1
 
-Content-Type: application/json
+Content-Type: image/png
+Accept: application/json
 
 ```
 
 ```javascript
-const inputBody = '{
-  "corpus": "Lorem ipsum",
-  "is_open": true
-}';
+const inputBody = '/tmp/path-to-photo.png';
 const headers = {
-  'Content-Type':'application/json',
+  'Content-Type':'image/png',
+  'Accept':'application/json',
   'Authorization':'Bearer {access-token}'
 };
 
-fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+fetch('/surveyelement/{survey_element_external_id}/photo',
 {
-  method: 'PATCH',
+  method: 'POST',
   body: inputBody,
   headers: headers
 })
@@ -582,18 +304,16 @@ fetch('/v3/survey/{survey_id}/comment/{comment_id}',
 
 ```javascript--nodejs
 const fetch = require('node-fetch');
-const inputBody = {
-  "corpus": "Lorem ipsum",
-  "is_open": true
-};
+const inputBody = /tmp/path-to-photo.png;
 const headers = {
-  'Content-Type':'application/json',
+  'Content-Type':'image/png',
+  'Accept':'application/json',
   'Authorization':'Bearer {access-token}'
 };
 
-fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+fetch('/surveyelement/{survey_element_external_id}/photo',
 {
-  method: 'PATCH',
+  method: 'POST',
   body: JSON.stringify(inputBody),
   headers: headers
 })
@@ -605,36 +325,337 @@ fetch('/v3/survey/{survey_id}/comment/{comment_id}',
 
 ```
 
-`PATCH /v3/survey/{survey_id}/comment/{comment_id}`
-
-Editing/deleting and closing/re-opening comments will only be allowed for comment creators.
-
-Team/Account admins can close and reopen all comments on the survey.
+`POST /surveyelement/{survey_element_external_id}/photo`
 
 > Body parameter
 
-```json
-{
-  "corpus": "Lorem ipsum",
-  "is_open": true
-}
-```
-
-<h3 id="allows-editing-a-comment-in-a-survey.-parameters">Parameters</h3>
+<h3 id="replaces-a-survey-element's-photo-at-a-given-path-with-a-new-photo.-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|survey_id|path|string|true|Survey external ID|
-|comment_id|path|number|true|Comment ID|
-|body|body|object|true|none|
-|» corpus|body|string|false|none|
-|» is_open|body|boolean|false|none|
+|survey_element_id|path|undefined|true|Survey Element external ID|
+|body|body|string(binary)|false|none|
 
-<h3 id="allows-editing-a-comment-in-a-survey.-responses">Responses</h3>
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "photo_path": "2022/11/01/39dace0d-4oo5d-47c7-9bff-9c87fbe2c00b.pdf"
+}
+```
+
+<h3 id="replaces-a-survey-element's-photo-at-a-given-path-with-a-new-photo.-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<h3 id="replaces-a-survey-element's-photo-at-a-given-path-with-a-new-photo.-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» photo_path|string|false|none|none|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Retrieves a photo image that belongs to a survey element.
+
+<a id="opIdget_survey_element_photo"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /surveyelement/{survey_element_external_id}/photo \
+  -H 'Accept: application/octet-stream' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/octet-stream',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/surveyelement/{survey_element_external_id}/photo', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/octet-stream',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get '/surveyelement/{survey_element_external_id}/photo',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/octet-stream"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/surveyelement/{survey_element_external_id}/photo", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /surveyelement/{survey_element_external_id}/photo HTTP/1.1
+
+Accept: application/octet-stream
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/surveyelement/{survey_element_external_id}/photo',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/surveyelement/{survey_element_external_id}/photo',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /surveyelement/{survey_element_external_id}/photo`
+
+User must have at least read access on the survey's site in order to access the survey element's photos.
+
+<h3 id="retrieves-a-photo-image-that-belongs-to-a-survey-element.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|survey_element_id|path|undefined|true|Survey Element external ID|
+|path|path|undefined|true|Photo relative path|
+
+> Example responses
+
+> 200 Response
+
+<h3 id="retrieves-a-photo-image-that-belongs-to-a-survey-element.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Photo image binary file|string|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Deletes a photo from a survey element's list of photos.
+
+<a id="opIddelete_survey_element_photo"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /surveyelement/{survey_element_external_id}/photo \
+  -H 'Accept: application/octet-stream' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/octet-stream',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/surveyelement/{survey_element_external_id}/photo', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/octet-stream',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.delete '/surveyelement/{survey_element_external_id}/photo',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/octet-stream"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/surveyelement/{survey_element_external_id}/photo", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /surveyelement/{survey_element_external_id}/photo HTTP/1.1
+
+Accept: application/octet-stream
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/surveyelement/{survey_element_external_id}/photo',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/octet-stream',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/surveyelement/{survey_element_external_id}/photo',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`DELETE /surveyelement/{survey_element_external_id}/photo`
+
+<h3 id="deletes-a-photo-from-a-survey-element's-list-of-photos.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|survey_element_id|path|undefined|true|Survey Element external ID|
+|path|path|undefined|true|Photo relative path|
+
+> Example responses
+
+> 200 Response
+
+<h3 id="deletes-a-photo-from-a-survey-element's-list-of-photos.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Photo image binary file|string|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
@@ -732,22 +753,22 @@ Accept: application/json
 ```javascript
 const inputBody = '{
   "site_external_id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string"
   }
 }';
 const headers = {
@@ -774,22 +795,22 @@ fetch('/v3/folder/{folder_id}',
 const fetch = require('node-fetch');
 const inputBody = {
   "site_external_id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string"
   }
 };
 const headers = {
@@ -822,22 +843,22 @@ pass a value for `site_id` field.
 ```json
 {
   "site_external_id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string"
   }
 }
 ```
@@ -848,21 +869,21 @@ pass a value for `site_id` field.
 |---|---|---|---|---|
 |folder_id|path|string|true|Folder ID|
 |body|body|[FolderSchema](#schemafolderschema)|true|none|
+|» site_id|body|integer|false|none|
 |» id|body|string|false|none|
 |» site_external_id|body|string|false|none|
-|» team_id|body|integer|false|none|
-|» modifier|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» last_name|body|string|false|none|
-|»» user_id|body|any|false|none|
-|»» first_name|body|string|false|none|
-|» team|body|[Team](#schemateam)|false|none|
-|»» id|body|string|false|none|
-|»» name|body|string|false|none|
 |» label|body|string|false|none|
 |» name|body|string|true|none|
-|» site_id|body|integer|false|none|
 |» modified_at|body|any|false|none|
 |» creator|body|[RelatedUser](#schemarelateduser)|false|none|
+|»» user_id|body|any|false|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|» modifier|body|[RelatedUser](#schemarelateduser)|false|none|
+|» team_id|body|integer|false|none|
+|» team|body|[Team](#schemateam)|false|none|
+|»» name|body|string|false|none|
+|»» id|body|string|false|none|
 
 > Example responses
 
@@ -870,25 +891,25 @@ pass a value for `site_id` field.
 
 ```json
 {
+  "site_id": 0,
   "id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "id": "string",
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
-  "site_id": 0,
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string",
+    "id": "string"
   }
 }
 ```
@@ -910,13 +931,13 @@ jwt
 
 ## Soft deletes a site folder or a survey folder.
 
-<a id="opIddelete_folder"></a>
+<a id="opIdget_folder_sites"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X DELETE /v3/folder/{folder_id} \
+curl -X GET /v3/folder/{folder_id} \
   -H 'Authorization: Bearer {access-token}'
 
 ```
@@ -927,7 +948,7 @@ headers = {
   'Authorization': 'Bearer {access-token}'
 }
 
-r = requests.delete('/v3/folder/{folder_id}', headers = headers)
+r = requests.get('/v3/folder/{folder_id}', headers = headers)
 
 print(r.json())
 
@@ -941,7 +962,7 @@ headers = {
   'Authorization' => 'Bearer {access-token}'
 }
 
-result = RestClient.delete '/v3/folder/{folder_id}',
+result = RestClient.get '/v3/folder/{folder_id}',
   params: {
   }, headers: headers
 
@@ -964,7 +985,7 @@ func main() {
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "/v3/folder/{folder_id}", data)
+    req, err := http.NewRequest("GET", "/v3/folder/{folder_id}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -975,7 +996,7 @@ func main() {
 ```
 
 ```http
-DELETE /v3/folder/{folder_id} HTTP/1.1
+GET /v3/folder/{folder_id} HTTP/1.1
 
 ```
 
@@ -987,7 +1008,7 @@ const headers = {
 
 fetch('/v3/folder/{folder_id}',
 {
-  method: 'DELETE',
+  method: 'GET',
 
   headers: headers
 })
@@ -1008,7 +1029,7 @@ const headers = {
 
 fetch('/v3/folder/{folder_id}',
 {
-  method: 'DELETE',
+  method: 'GET',
 
   headers: headers
 })
@@ -1020,12 +1041,13 @@ fetch('/v3/folder/{folder_id}',
 
 ```
 
-`DELETE /v3/folder/{folder_id}`
+`GET /v3/folder/{folder_id}`
 
-Folder must be empty in order to be deleted.
+Returns the sites within a folder that the current user has access to.
 
-Only account admins, team admins, and team members can delete folders. Only team members with write access can delete survey
-folders.
+Query Parameters:
+    - `filter[sites_modified_after]`: Return only sites that have sites which have been created, modified, or given access
+                                    to after the specified timestamp.
 
 <h3 id="soft-deletes-a-site-folder-or-a-survey-folder.-parameters">Parameters</h3>
 
@@ -1037,11 +1059,8 @@ folders.
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -1210,25 +1229,25 @@ fetch('/v3/site_folder',
 
 ```json
 {
+  "site_id": 0,
   "id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "id": "string",
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
-  "site_id": 0,
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string",
+    "id": "string"
   }
 }
 ```
@@ -1405,25 +1424,25 @@ fetch('/v3/site_folder/{folder_external_id}',
 
 ```json
 {
+  "site_id": 0,
   "id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "id": "string",
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
-  "site_id": 0,
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string",
+    "id": "string"
   }
 }
 ```
@@ -1600,25 +1619,25 @@ fetch('/v3/{site_id}/folder',
 
 ```json
 {
+  "site_id": 0,
   "id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "id": "string",
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
-  "site_id": 0,
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string",
+    "id": "string"
   }
 }
 ```
@@ -2424,19 +2443,19 @@ Content-Type: application/json
 
 ```javascript
 const inputBody = '{
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -2460,19 +2479,19 @@ fetch('/v3/site/{site_id}',
 ```javascript--nodejs
 const fetch = require('node-fetch');
 const inputBody = {
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 };
 const headers = {
   'Content-Type':'application/json',
@@ -2503,19 +2522,19 @@ You may pass a `folder_external_id` field in the payload to create the site insi
 
 ```json
 {
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 }
 ```
 
@@ -2525,29 +2544,29 @@ You may pass a `folder_external_id` field in the payload to create the site insi
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» is_archived|body|any|false|none|
+|» legacy_site_id|body|integer|false|none|
 |» site_id|body|string|false|none|
+|» label|body|string|false|none|
+|» reference_id|body|string|false|none|
+|» name|body|string|true|none|
+|» tags|body|[string]|false|none|
 |» team_id|body|integer|true|none|
+|» state|body|string|false|none|
 |» created_at|body|null|false|none|
 |» version|body|integer|false|none|
-|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» last_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
-|»» first_name|body|string|false|none|
 |» modified_at|body|null|false|none|
-|» street|body|string|false|none|
-|» name|body|string|true|none|
-|» city|body|string|false|none|
-|» tags|body|[string]|false|none|
-|» label|body|string|false|none|
 |» zip_code|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» reference_id|body|string|false|none|
-|» state|body|string|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
 |»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
+|»» user_id|body|integer|true|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|» city|body|string|false|none|
+|» street|body|string|false|none|
+|» is_archived|body|any|false|none|
 
 <h3 id="creates-a-new-site-with-a-specific-`site_id`-or-updates-the-site-if-it-already-exists-responses">Responses</h3>
 
@@ -2643,19 +2662,19 @@ Content-Type: application/json
 
 ```javascript
 const inputBody = '{
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 }';
 const headers = {
   'Content-Type':'application/json',
@@ -2679,19 +2698,19 @@ fetch('/v3/site/{site_id}',
 ```javascript--nodejs
 const fetch = require('node-fetch');
 const inputBody = {
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 };
 const headers = {
   'Content-Type':'application/json',
@@ -2718,19 +2737,19 @@ fetch('/v3/site/{site_id}',
 
 ```json
 {
-  "is_archived": null,
   "site_id": "string",
-  "team_id": 0,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
+  "team_id": 0,
+  "state": "string",
   "zip_code": "string",
-  "reference_id": "string",
-  "state": "string"
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 }
 ```
 
@@ -2740,29 +2759,29 @@ fetch('/v3/site/{site_id}',
 |---|---|---|---|---|
 |site_id|path|string|true|Site ID|
 |body|body|[SiteSchema](#schemasiteschema)|true|none|
-|» is_archived|body|any|false|none|
+|» legacy_site_id|body|integer|false|none|
 |» site_id|body|string|false|none|
+|» label|body|string|false|none|
+|» reference_id|body|string|false|none|
+|» name|body|string|true|none|
+|» tags|body|[string]|false|none|
 |» team_id|body|integer|true|none|
+|» state|body|string|false|none|
 |» created_at|body|null|false|none|
 |» version|body|integer|false|none|
-|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
-|»» last_name|body|string|false|none|
-|»» user_id|body|integer|true|none|
-|»» first_name|body|string|false|none|
 |» modified_at|body|null|false|none|
-|» street|body|string|false|none|
-|» name|body|string|true|none|
-|» city|body|string|false|none|
-|» tags|body|[string]|false|none|
-|» label|body|string|false|none|
 |» zip_code|body|string|false|none|
-|» legacy_site_id|body|integer|false|none|
-|» reference_id|body|string|false|none|
-|» state|body|string|false|none|
 |» creator|body|[UserResponse](#schemauserresponse)|false|none|
-|»» last_name|body|string|false|none|
 |»» user_id|body|integer|true|none|
 |»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|» modifier|body|[UserResponse](#schemauserresponse)|false|none|
+|»» user_id|body|integer|true|none|
+|»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
+|» city|body|string|false|none|
+|» street|body|string|false|none|
+|» is_archived|body|any|false|none|
 
 <h3 id="update-specific-fields-of-a-site-responses">Responses</h3>
 
@@ -2913,7 +2932,7 @@ jwt
 
 ## Returns all archived/unarchived sites and folders across all teams of a user.
 
-<a id="opIdget_user_sites_and_folders"></a>
+<a id="opIdget_user_sites_and_site_folders"></a>
 
 > Code samples
 
@@ -3053,9 +3072,10 @@ Filtered by folder:
 |page[number]|query|integer|false|Page to retrieve from the entire result set|
 |page[size]|query|integer|false|Max amount of objects to return per page in the response|
 |filter[modified_after]|query|integer|false|Return only sites that have been created, modified, or favorited (added to workbench) after an specific datetime (in UTC Epoch format).|
-|filter[deleted_after]|query|integer|false|Return only sites that were deleted after an specified timestamp. Limited site data is returned using this filter.|
+|filter[deleted_after]|query|integer|false|(DEPRECATED) Return only sites that were deleted after an specified timestamp. Limited site data is returned using this filter.|
 |filter[favorites_only]|query|integer|false|Filters results to only include sites the user has added to their workbench|
 |filter[folder_id]|query|string|false|Returns only sites that belong to a specific folder|
+|filter[accessible_after]|query|integer|false|Returns only sites and folders where the user has been granted access to after a specified time|
 
 > Example responses
 
@@ -3067,6 +3087,7 @@ Filtered by folder:
     {
       "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
       "name": "Union Square",
+      "site_count": 5,
       "survey_count": 12,
       "type": "site",
       "version": 45479945,
@@ -3116,6 +3137,7 @@ Status Code **200**
 |» sites|[object]|false|none|Result list of sites or folders|
 |»» id|string|false|none|none|
 |»» name|string|false|none|none|
+|»» site_count|integer|false|none|For folders, returns the number of sites within the folder accessible by the user|
 |»» survey_count|integer|false|none|none|
 |»» type|string|false|none|If the result item is a site or a folder|
 |»» version|integer|false|none|none|
@@ -3324,6 +3346,501 @@ Guest users are not allowed to batch delete sites.
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Adds a list of sites to the user's workbench.
+
+<a id="opIdadd_sites_to_favorites"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /v3/site_favorites \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v3/site_favorites', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.post '/v3/site_favorites',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/site_favorites", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/site_favorites HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '[
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+]';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_favorites',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = [
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+];
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_favorites',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`POST /v3/site_favorites`
+
+Sites that are already in the workbench will be ignored.
+
+> Body parameter
+
+```json
+[
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+]
+```
+
+<h3 id="adds-a-list-of-sites-to-the-user's-workbench.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|array[string]|true|none|
+
+<h3 id="adds-a-list-of-sites-to-the-user's-workbench.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Removes sites from the current user's workbench.
+
+<a id="opIdremove_sites_from_favorites"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /v3/site_favorites \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v3/site_favorites', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.delete '/v3/site_favorites',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/site_favorites", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/site_favorites HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '[
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+]';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_favorites',
+{
+  method: 'DELETE',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = [
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+];
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/site_favorites',
+{
+  method: 'DELETE',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`DELETE /v3/site_favorites`
+
+Sites that are not in the users workbench and are requested for removal will be ignored.
+
+> Body parameter
+
+```json
+[
+  "b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb"
+]
+```
+
+<h3 id="removes-sites-from-the-current-user's-workbench.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|array[string]|true|none|
+
+<h3 id="removes-sites-from-the-current-user's-workbench.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Returns all of the current user's favorite sites across all teams.
+
+<a id="opIdget_user_favorite_sites"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /v3/favorite_sites \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v3/favorite_sites', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get '/v3/favorite_sites',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/favorite_sites", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/favorite_sites HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/favorite_sites',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/favorite_sites',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /v3/favorite_sites`
+
+Results are ordered by most recently favorited.
+
+Query Parameters:
+
+  - filter[modified_after]: Return only sites that have been added or removed from favorites after the specified timestamp.
+
+<h3 id="returns-all-of-the-current-user's-favorite-sites-across-all-teams.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|page[number]|query|integer|false|Page to retrieve from the entire result set|
+|page[size]|query|integer|false|Max amount of objects to return per page in the response|
+|filter[modified_after]|query|integer|false|Return only sites that have been added or removed from favorites after the specified timestamp.|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "favorite_sites": [
+    {
+      "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
+      "name": "Union Square",
+      "favorited_at": 1645157198
+    }
+  ],
+  "unfavorited_sites": [
+    {
+      "id": "46787da3-1e6e-4d9b-a858-ac9e12dc3efb",
+      "name": "Union Square",
+      "unfavorited_at": 1645157198
+    }
+  ]
+}
+```
+
+<h3 id="returns-all-of-the-current-user's-favorite-sites-across-all-teams.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+
+<h3 id="returns-all-of-the-current-user's-favorite-sites-across-all-teams.-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» favorite_sites|[object]|false|none|List of user's favorited sites|
+|»» id|string|false|none|none|
+|»» name|string|false|none|none|
+|»» favorited_at|number|false|none|Unix Timestamp indicating when the site was added to favorites.|
+|» unfavorited_sites|[object]|false|none|Result list of sites unfavorited after the specified timestamp|
+|»» id|string|false|none|none|
+|»» name|string|false|none|none|
+|»» unfavorited_at|number|false|none|Unix Timestamp indicating when the site was removed from favorites.|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -3572,7 +4089,7 @@ To perform this operation, you must be authenticated by means of one of the foll
 jwt
 </aside>
 
-## Allows creating a new survey with a unique identifier generated by the client, or updates the existing survey with that identifier if it exists.
+## Allows syncing surveys
 
 <a id="opIdcreate_or_update_survey"></a>
 
@@ -3680,20 +4197,20 @@ const inputBody = '{
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
-          "description": "string"
+          "description": "string",
+          "row_index": 0,
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [
@@ -3701,39 +4218,58 @@ const inputBody = '{
       ],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
-          "id": "string",
           "date": null,
+          "id": "string",
           "entry": "string"
+        }
+      ],
+      "web_links": [
+        {
+          "url": "string",
+          "link_type": 2,
+          "name": "string"
         }
       ]
     }
   ],
   "annotations": [
     {
-      "size": "string",
-      "category": null,
-      "stroke_color": "string",
       "end_point": null,
-      "text": "string",
-      "fill": null,
-      "start_point": null,
-      "opacity": 1,
-      "coordinates": null,
+      "category": null,
+      "font_size": "string",
+      "stroke_color": "string",
       "location": null,
+      "coordinates": null,
+      "fill": null,
       "stroke_width": "string",
-      "font_size": "string"
+      "text": "string",
+      "opacity": 1,
+      "start_point": null,
+      "size": "string"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "points": [
+        {
+          "y": 0,
+          "x": 0
+        }
+      ]
     }
   ]
 }';
@@ -3784,20 +4320,20 @@ const inputBody = {
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
-          "description": "string"
+          "description": "string",
+          "row_index": 0,
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [
@@ -3805,39 +4341,58 @@ const inputBody = {
       ],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
-          "id": "string",
           "date": null,
+          "id": "string",
           "entry": "string"
+        }
+      ],
+      "web_links": [
+        {
+          "url": "string",
+          "link_type": 2,
+          "name": "string"
         }
       ]
     }
   ],
   "annotations": [
     {
-      "size": "string",
-      "category": null,
-      "stroke_color": "string",
       "end_point": null,
-      "text": "string",
-      "fill": null,
-      "start_point": null,
-      "opacity": 1,
-      "coordinates": null,
+      "category": null,
+      "font_size": "string",
+      "stroke_color": "string",
       "location": null,
+      "coordinates": null,
+      "fill": null,
       "stroke_width": "string",
-      "font_size": "string"
+      "text": "string",
+      "opacity": 1,
+      "start_point": null,
+      "size": "string"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "points": [
+        {
+          "y": 0,
+          "x": 0
+        }
+      ]
     }
   ]
 };
@@ -3863,7 +4418,13 @@ fetch('/v3/site/{site_id}/survey/{survey_id}',
 
 `PUT /v3/site/{site_id}/survey/{survey_id}`
 
-Also allows creating/updating surveys with elements, comments, and annotations.
+Syncing works by creating a new survey with a unique identifier generated by the client, or updating the existing survey
+with that identifier if it exists. This includes creating/updating surveys with all related elements, comments, annotations,
+etc.
+
+Newly created surveys can be directly placed inside folders by passing a `folder_id` value in the request payload.
+
+After a successful sync, a new revision for the survey will be generated as a JSON file and then uploaded and stored in S3.
 
 > Body parameter
 
@@ -3893,20 +4454,20 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       "position": null,
       "attributes": [
         {
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string"
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
-          "description": "string"
+          "description": "string",
+          "row_index": 0,
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [
@@ -3914,45 +4475,64 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
-          "id": "string",
           "date": null,
+          "id": "string",
           "entry": "string"
+        }
+      ],
+      "web_links": [
+        {
+          "url": "string",
+          "link_type": 2,
+          "name": "string"
         }
       ]
     }
   ],
   "annotations": [
     {
-      "size": "string",
-      "category": null,
-      "stroke_color": "string",
       "end_point": null,
-      "text": "string",
-      "fill": null,
-      "start_point": null,
-      "opacity": 1,
-      "coordinates": null,
+      "category": null,
+      "font_size": "string",
+      "stroke_color": "string",
       "location": null,
+      "coordinates": null,
+      "fill": null,
       "stroke_width": "string",
-      "font_size": "string"
+      "text": "string",
+      "opacity": 1,
+      "start_point": null,
+      "size": "string"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "points": [
+        {
+          "y": 0,
+          "x": 0
+        }
+      ]
     }
   ]
 }
 ```
 
-<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-parameters">Parameters</h3>
+<h3 id="allows-syncing-surveys-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
@@ -3980,9 +4560,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |» sync_status|body|any|false|none|
 |» creator|body|integer|false|none|
 |» editor|body|[RelatedUser](#schemarelateduser)|false|none|
-|»» last_name|body|string|false|none|
 |»» user_id|body|any|false|none|
 |»» first_name|body|string|false|none|
+|»» last_name|body|string|false|none|
 |» modifier|body|integer|false|none|
 |» created_at|body|any|false|none|
 |» modified_at|body|any|false|none|
@@ -3997,53 +4577,65 @@ Also allows creating/updating surveys with elements, comments, and annotations.
 |»» z_order|body|integer|false|none|
 |»» position|body|any|true|none|
 |»» photo_urls|body|[string]|false|none|
-|»» pdf_urls|body|any|false|none|
 |»» sync_status|body|any|false|none|
 |»» attributes|body|[[SurveyAttribute](#schemasurveyattribute)]|false|none|
-|»»» id|body|integer|false|none|
-|»»» name|body|string|true|none|
 |»»» attribute_id|body|integer|true|none|
 |»»» value|body|string|true|none|
+|»»» name|body|string|true|none|
+|»»» id|body|integer|false|none|
 |»» accessories|body|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|
-|»»» price|body|any|false|none|
-|»»» row_index|body|integer|true|none|
-|»»» model|body|string|true|none|
-|»»» labor_hours|body|number|false|none|
 |»»» manufacturer|body|string|true|none|
 |»»» quantity|body|any|false|none|
 |»»» description|body|string|false|none|
+|»»» row_index|body|integer|true|none|
 |»»» id|body|string|false|none|
+|»»» model|body|string|true|none|
+|»»» price|body|any|false|none|
+|»»» labor_hours|body|number|false|none|
 |»» children|body|[[SurveyElement](#schemasurveyelement)]|false|none|
 |»» cables|body|[[CablePath](#schemacablepath)]|false|none|
+|»»» external_id|body|string|true|none|
 |»»» id|body|string|true|none|
-|»»» a_side|body|any|true|none|
 |»»» z_side|body|any|true|none|
 |»»» type|body|string|false|none|
+|»»» a_side|body|any|true|none|
 |»» connections|body|[PathConnection](#schemapathconnection)|false|none|
-|»»» start|body|any|false|none|
 |»»» end|body|any|false|none|
+|»»» start|body|any|false|none|
 |»» activity_log|body|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|
+|»»» date|body|any|false|none|
 |»»» id|body|string|false|none|
 |»»» created_at|body|any|false|none|
-|»»» date|body|any|false|none|
-|»»» modifier|body|integer|false|none|
 |»»» modified_at|body|any|false|none|
 |»»» entry|body|string|false|none|
 |»»» creator|body|integer|false|none|
+|»»» modifier|body|integer|false|none|
+|»» pdf_urls|body|any|false|none|
+|»» web_links|body|[[WebLink](#schemaweblink)]|false|none|
+|»»» url|body|string|true|none|
+|»»» link_type|body|any|false|none|
+|»»» name|body|string|true|none|
 |» annotations|body|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|
-|»» size|body|string|false|none|
-|»» category|body|any|true|none|
-|»» stroke_color|body|string|true|none|
 |»» end_point|body|any|false|none|
-|»» text|body|string|false|none|
-|»» fill|body|any|false|none|
-|»» start_point|body|any|false|none|
-|»» opacity|body|number|false|none|
-|»» coordinates|body|any|false|none|
-|»» id|body|string|false|none|
-|»» location|body|any|true|none|
-|»» stroke_width|body|string|true|none|
+|»» category|body|any|true|none|
 |»» font_size|body|string|false|none|
+|»» stroke_color|body|string|true|none|
+|»» location|body|any|true|none|
+|»» coordinates|body|any|false|none|
+|»» fill|body|any|false|none|
+|»» stroke_width|body|string|true|none|
+|»» text|body|string|false|none|
+|»» opacity|body|number|false|none|
+|»» id|body|string|false|none|
+|»» start_point|body|any|false|none|
+|»» size|body|string|false|none|
+|» boundaries|body|[[SurveyBoundary](#schemasurveyboundary)]|false|none|
+|»» modified_at|body|any|false|none|
+|»» id|body|string(uuid)|true|none|
+|»» points|body|[[BoundaryPoint](#schemaboundarypoint)]|true|none|
+|»»» y|body|number|true|none|
+|»»» x|body|number|true|none|
+|»» created_at|body|any|false|none|
 |» users|body|any|false|none|
 
 #### Enumerated Values
@@ -4083,9 +4675,9 @@ Also allows creating/updating surveys with elements, comments, and annotations.
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
   },
   "modifier": 0,
   "created_at": null,
@@ -4104,26 +4696,25 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       "photo_urls": [
         "string"
       ],
-      "pdf_urls": null,
       "sync_status": "synced",
       "attributes": [
         {
-          "id": 0,
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string",
+          "id": 0
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
           "description": "string",
-          "id": "string"
+          "row_index": 0,
+          "id": "string",
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [
@@ -4131,56 +4722,78 @@ Also allows creating/updating surveys with elements, comments, and annotations.
       ],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
+          "date": null,
           "id": "string",
           "created_at": null,
-          "date": null,
-          "modifier": 0,
           "modified_at": null,
           "entry": "string",
-          "creator": 0
+          "creator": 0,
+          "modifier": 0
+        }
+      ],
+      "pdf_urls": null,
+      "web_links": [
+        {
+          "url": "string",
+          "name": "string"
         }
       ]
     }
   ],
   "annotations": [
     {
-      "size": "string",
-      "category": null,
-      "stroke_color": "string",
       "end_point": null,
-      "text": "string",
-      "fill": null,
-      "start_point": null,
-      "opacity": 1,
-      "coordinates": null,
-      "id": "string",
+      "category": null,
+      "font_size": "string",
+      "stroke_color": "string",
       "location": null,
+      "coordinates": null,
+      "fill": null,
       "stroke_width": "string",
-      "font_size": "string"
+      "text": "string",
+      "opacity": 1,
+      "id": "string",
+      "start_point": null,
+      "size": "string"
+    }
+  ],
+  "boundaries": [
+    {
+      "modified_at": null,
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "points": [
+        {
+          "y": 0,
+          "x": 0
+        }
+      ],
+      "created_at": null
     }
   ],
   "users": null
 }
 ```
 
-<h3 id="allows-creating-a-new-survey-with-a-unique-identifier-generated-by-the-client,-or-updates-the-existing-survey-with-that-identifier-if-it-exists.-responses">Responses</h3>
+<h3 id="allows-syncing-surveys-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Survey updated successfully|[SurveySchema](#schemasurveyschema)|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Survey created successfully|[SurveySchema](#schemasurveyschema)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 
@@ -4316,6 +4929,603 @@ Also expires any shares of the survey.
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+<h1 id="system-surveyor-api-comments">Comments</h1>
+
+## Adds a new comment to a survey.
+
+<a id="opIdadd_survey_comment"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /v3/survey/{survey_id}/comment \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v3/survey/{survey_id}/comment', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.post '/v3/survey/{survey_id}/comment',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/v3/survey/{survey_id}/comment", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+POST /v3/survey/{survey_id}/comment HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "corpus": "Lorem ipsum",
+  "parent_id": 2334
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "corpus": "Lorem ipsum",
+  "parent_id": 2334
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment',
+{
+  method: 'POST',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`POST /v3/survey/{survey_id}/comment`
+
+> Body parameter
+
+```json
+{
+  "corpus": "Lorem ipsum",
+  "parent_id": 2334
+}
+```
+
+<h3 id="adds-a-new-comment-to-a-survey.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|object|true|none|
+|» corpus|body|string|false|none|
+|» parent_id|body|number|false|none|
+
+<h3 id="adds-a-new-comment-to-a-survey.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Get all comments from a survey
+
+<a id="opIdget_survey_comments"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /v3/survey/{survey_id}/comments \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v3/survey/{survey_id}/comments', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.get '/v3/survey/{survey_id}/comments',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/v3/survey/{survey_id}/comments", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+GET /v3/survey/{survey_id}/comments HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comments',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comments',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /v3/survey/{survey_id}/comments`
+
+<h3 id="get-all-comments-from-a-survey-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|survey_id|path|string|true|Survey ID|
+
+<h3 id="get-all-comments-from-a-survey-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|OK|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Deletes a comment in a survey.
+
+<a id="opIddelete_survey_comment"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X DELETE /v3/survey/{survey_id}/comment/{comment_id} \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v3/survey/{survey_id}/comment/{comment_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.delete '/v3/survey/{survey_id}/comment/{comment_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("DELETE", "/v3/survey/{survey_id}/comment/{comment_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+DELETE /v3/survey/{survey_id}/comment/{comment_id} HTTP/1.1
+
+```
+
+```javascript
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+
+const headers = {
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+{
+  method: 'DELETE',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`DELETE /v3/survey/{survey_id}/comment/{comment_id}`
+
+Users are only allowed to delete their own comments.
+
+<h3 id="deletes-a-comment-in-a-survey.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|survey_id|path|string|true|Survey external ID|
+|comment_id|path|number|true|Comment ID|
+
+<h3 id="deletes-a-comment-in-a-survey.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|OK|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+jwt
+</aside>
+
+## Allows editing a comment in a survey.
+
+<a id="opIdedit_survey_comment"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PATCH /v3/survey/{survey_id}/comment/{comment_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer {access-token}'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.patch('/v3/survey/{survey_id}/comment/{comment_id}', headers = headers)
+
+print(r.json())
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {access-token}'
+}
+
+result = RestClient.patch '/v3/survey/{survey_id}/comment/{comment_id}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Authorization": []string{"Bearer {access-token}"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PATCH", "/v3/survey/{survey_id}/comment/{comment_id}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+```http
+PATCH /v3/survey/{survey_id}/comment/{comment_id} HTTP/1.1
+
+Content-Type: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "corpus": "Lorem ipsum",
+  "is_open": true
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+{
+  method: 'PATCH',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```javascript--nodejs
+const fetch = require('node-fetch');
+const inputBody = {
+  "corpus": "Lorem ipsum",
+  "is_open": true
+};
+const headers = {
+  'Content-Type':'application/json',
+  'Authorization':'Bearer {access-token}'
+};
+
+fetch('/v3/survey/{survey_id}/comment/{comment_id}',
+{
+  method: 'PATCH',
+  body: JSON.stringify(inputBody),
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`PATCH /v3/survey/{survey_id}/comment/{comment_id}`
+
+Editing/deleting and closing/re-opening comments will only be allowed for comment creators.
+
+Team/Account admins can close and reopen all comments on the survey.
+
+> Body parameter
+
+```json
+{
+  "corpus": "Lorem ipsum",
+  "is_open": true
+}
+```
+
+<h3 id="allows-editing-a-comment-in-a-survey.-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|survey_id|path|string|true|Survey external ID|
+|comment_id|path|number|true|Comment ID|
+|body|body|object|true|none|
+|» corpus|body|string|false|none|
+|» is_open|body|boolean|false|none|
+
+<h3 id="allows-editing-a-comment-in-a-survey.-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid request sent to endpoint|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Access token is missing or invalid|None|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Invalid permissions to perform operation|None|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|The specified resource was not found|None|
@@ -4827,6 +6037,7 @@ The returned information includes information about the user that they provided 
           "id": 0,
           "name": "Enterprise",
           "max_seats": 0,
+          "max_elements_per_survey": 0,
           "max_attachments_per_element": 0
         }
       },
@@ -4904,6 +6115,7 @@ Status Code **200**
 |»»»» id|integer|false|none|none|
 |»»»» name|string|false|none|none|
 |»»»» max_seats|integer|false|none|none|
+|»»»» max_elements_per_survey|integer|false|none|none|
 |»»»» max_attachments_per_element|integer|false|none|none|
 |»» features|object|false|none|none|
 |»»» comments|boolean|false|none|none|
@@ -5168,6 +6380,7 @@ user_name, company, mobile, title, country, state, city
           "id": 0,
           "name": "Enterprise",
           "max_seats": 0,
+          "max_elements_per_survey": 0,
           "max_attachments_per_element": 0
         }
       },
@@ -5246,6 +6459,7 @@ Status Code **200**
 |»»»» id|integer|false|none|none|
 |»»»» name|string|false|none|none|
 |»»»» max_seats|integer|false|none|none|
+|»»»» max_elements_per_survey|integer|false|none|none|
 |»»»» max_attachments_per_element|integer|false|none|none|
 |»» features|object|false|none|none|
 |»»» comments|boolean|false|none|none|
@@ -5291,9 +6505,9 @@ jwt
 
 ```json
 {
-  "last_name": "string",
   "user_id": 0,
-  "first_name": "string"
+  "first_name": "string",
+  "last_name": "string"
 }
 
 ```
@@ -5302,9 +6516,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|last_name|string|false|none|none|
 |user_id|integer|true|none|none|
 |first_name|string|false|none|none|
+|last_name|string|false|none|none|
 
 <h2 id="tocS_SiteSchema">SiteSchema</h2>
 <!-- backwards compatibility -->
@@ -5315,33 +6529,33 @@ jwt
 
 ```json
 {
-  "is_archived": null,
+  "legacy_site_id": 0,
   "site_id": "string",
-  "team_id": 0,
-  "created_at": null,
-  "version": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": 0,
-    "first_name": "string"
-  },
-  "modified_at": null,
-  "street": "string",
+  "label": "string",
+  "reference_id": "string",
   "name": "string",
-  "city": "string",
   "tags": [
     "string"
   ],
-  "label": "string",
-  "zip_code": "string",
-  "legacy_site_id": 0,
-  "reference_id": "string",
+  "team_id": 0,
   "state": "string",
+  "created_at": null,
+  "version": 0,
+  "modified_at": null,
+  "zip_code": "string",
   "creator": {
-    "last_name": "string",
     "user_id": 0,
-    "first_name": "string"
-  }
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": 0,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "city": "string",
+  "street": "string",
+  "is_archived": null
 }
 
 ```
@@ -5350,23 +6564,23 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|is_archived|any|false|none|none|
+|legacy_site_id|integer|false|read-only|none|
 |site_id|string|false|none|none|
+|label|string|false|none|none|
+|reference_id|string|false|none|none|
+|name|string|true|none|none|
+|tags|[string]|false|none|none|
 |team_id|integer|true|none|none|
+|state|string|false|none|none|
 |created_at|null|false|read-only|none|
 |version|integer|false|read-only|none|
-|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
 |modified_at|null|false|read-only|none|
-|street|string|false|none|none|
-|name|string|true|none|none|
-|city|string|false|none|none|
-|tags|[string]|false|none|none|
-|label|string|false|none|none|
 |zip_code|string|false|none|none|
-|legacy_site_id|integer|false|read-only|none|
-|reference_id|string|false|none|none|
-|state|string|false|none|none|
 |creator|[UserResponse](#schemauserresponse)|false|read-only|none|
+|modifier|[UserResponse](#schemauserresponse)|false|read-only|none|
+|city|string|false|none|none|
+|street|string|false|none|none|
+|is_archived|any|false|none|none|
 
 <h2 id="tocS_ShareSiteOrSurveyRequestSchema">ShareSiteOrSurveyRequestSchema</h2>
 <!-- backwards compatibility -->
@@ -5377,11 +6591,11 @@ jwt
 
 ```json
 {
-  "expiration_date": null,
   "message": "string",
   "emails": [
     "user@example.com"
-  ]
+  ],
+  "expiration_date": null
 }
 
 ```
@@ -5390,9 +6604,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|expiration_date|any|true|none|none|
 |message|string|false|none|none|
 |emails|[string]|true|none|none|
+|expiration_date|any|true|none|none|
 
 <h2 id="tocS_SurveyFields">SurveyFields</h2>
 <!-- backwards compatibility -->
@@ -5403,8 +6617,8 @@ jwt
 
 ```json
 {
-  "value": "string",
-  "field_id": "string"
+  "field_id": "string",
+  "value": "string"
 }
 
 ```
@@ -5413,8 +6627,8 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|value|string|true|none|none|
 |field_id|string|true|none|none|
+|value|string|true|none|none|
 
 <h2 id="tocS_SurveyOptions">SurveyOptions</h2>
 <!-- backwards compatibility -->
@@ -5425,15 +6639,15 @@ jwt
 
 ```json
 {
+  "scope": "template",
+  "id": "string",
   "inputs": [
     {
-      "value": "string",
-      "field_id": "string"
+      "field_id": "string",
+      "value": "string"
     }
   ],
-  "scope": "template",
   "template_name": "string",
-  "id": "string",
   "value": true
 }
 
@@ -5443,10 +6657,10 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
 |scope|string|true|none|none|
-|template_name|string|false|none|none|
 |id|string|true|none|none|
+|inputs|[[SurveyFields](#schemasurveyfields)]|false|none|none|
+|template_name|string|false|none|none|
 |value|boolean|true|none|none|
 
 #### Enumerated Values
@@ -5466,34 +6680,34 @@ jwt
 
 ```json
 {
-  "is_site_report": false,
-  "output": "pdf",
+  "site_id": "string",
+  "paper_size": "string",
+  "name": "string",
   "ids": [
     "string"
   ],
   "custom_data": {},
-  "name": "string",
+  "is_site_report": false,
+  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971",
+  "output": "pdf",
   "filters": [
     {}
   ],
   "is_excel": false,
   "options": [
     {
+      "scope": "template",
+      "id": "string",
       "inputs": [
         {
-          "value": "string",
-          "field_id": "string"
+          "field_id": "string",
+          "value": "string"
         }
       ],
-      "scope": "template",
       "template_name": "string",
-      "id": "string",
       "value": true
     }
-  ],
-  "site_id": "string",
-  "paper_size": "string",
-  "report_id": "5ed7905a-4735-4cf7-b1ab-521e066fb971"
+  ]
 }
 
 ```
@@ -5502,17 +6716,17 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|is_site_report|boolean|false|none|none|
-|output|string|true|none|none|
+|site_id|string|true|none|none|
+|paper_size|string|false|none|none|
+|name|string|true|none|none|
 |ids|[string]|false|none|none|
 |custom_data|object|false|none|none|
-|name|string|true|none|none|
+|is_site_report|boolean|false|none|none|
+|report_id|string(uuid)|true|none|none|
+|output|string|true|none|none|
 |filters|[object]|false|none|none|
 |is_excel|boolean|false|none|none|
 |options|[[SurveyOptions](#schemasurveyoptions)]|false|none|none|
-|site_id|string|true|none|none|
-|paper_size|string|false|none|none|
-|report_id|string(uuid)|true|none|none|
 
 #### Enumerated Values
 
@@ -5521,42 +6735,6 @@ jwt
 |output|pdf|
 |output|html|
 |output|xls|
-
-<h2 id="tocS_EPAccessory">EPAccessory</h2>
-<!-- backwards compatibility -->
-<a id="schemaepaccessory"></a>
-<a id="schema_EPAccessory"></a>
-<a id="tocSepaccessory"></a>
-<a id="tocsepaccessory"></a>
-
-```json
-{
-  "price": [
-    0
-  ],
-  "created_at": null,
-  "model": "",
-  "labor_hours": [
-    0
-  ],
-  "manufacturer": "",
-  "description": "string",
-  "id": 0
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|price|number,null|false|none|none|
-|created_at|any|false|read-only|none|
-|model|string|false|none|none|
-|labor_hours|number,null|false|none|none|
-|manufacturer|string|false|none|none|
-|description|string|true|none|none|
-|id|integer|false|read-only|none|
 
 <h2 id="tocS_SubElement">SubElement</h2>
 <!-- backwards compatibility -->
@@ -5580,30 +6758,6 @@ jwt
 |systemtype_id|string|true|none|none|
 |element_id|string|true|none|none|
 
-<h2 id="tocS_Link">Link</h2>
-<!-- backwards compatibility -->
-<a id="schemalink"></a>
-<a id="schema_Link"></a>
-<a id="tocSlink"></a>
-<a id="tocslink"></a>
-
-```json
-{
-  "link_type": 0,
-  "name": "string",
-  "url": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|link_type|integer|true|none|none|
-|name|string|true|none|none|
-|url|string(url)|true|none|none|
-
 <h2 id="tocS_Attribute">Attribute</h2>
 <!-- backwards compatibility -->
 <a id="schemaattribute"></a>
@@ -5613,8 +6767,8 @@ jwt
 
 ```json
 {
-  "value": "string",
-  "attribute_id": 0
+  "attribute_id": 0,
+  "value": "string"
 }
 
 ```
@@ -5623,8 +6777,32 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|value|string|true|none|none|
 |attribute_id|integer|true|none|none|
+|value|string|true|none|none|
+
+<h2 id="tocS_Link">Link</h2>
+<!-- backwards compatibility -->
+<a id="schemalink"></a>
+<a id="schema_Link"></a>
+<a id="tocSlink"></a>
+<a id="tocslink"></a>
+
+```json
+{
+  "url": "string",
+  "name": "string",
+  "link_type": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|url|string(url)|true|none|none|
+|name|string|true|none|none|
+|link_type|integer|true|none|none|
 
 <h2 id="tocS_EPContent">EPContent</h2>
 <!-- backwards compatibility -->
@@ -5636,8 +6814,8 @@ jwt
 ```json
 {
   "child": [],
-  "pdf_url": [],
-  "attribute": []
+  "attribute": [],
+  "pdf_url": []
 }
 
 ```
@@ -5647,8 +6825,44 @@ jwt
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |child|[[SubElement](#schemasubelement)]|false|none|none|
-|pdf_url|[[Link](#schemalink)]|false|none|none|
 |attribute|[[Attribute](#schemaattribute)]|false|none|none|
+|pdf_url|[[Link](#schemalink)]|false|none|none|
+
+<h2 id="tocS_EPAccessory">EPAccessory</h2>
+<!-- backwards compatibility -->
+<a id="schemaepaccessory"></a>
+<a id="schema_EPAccessory"></a>
+<a id="tocSepaccessory"></a>
+<a id="tocsepaccessory"></a>
+
+```json
+{
+  "manufacturer": "",
+  "created_at": null,
+  "description": "string",
+  "id": 0,
+  "model": "",
+  "price": [
+    0
+  ],
+  "labor_hours": [
+    0
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|manufacturer|string|false|none|none|
+|created_at|any|false|read-only|none|
+|description|string|true|none|none|
+|id|integer|false|read-only|none|
+|model|string|false|none|none|
+|price|number,null|false|none|none|
+|labor_hours|number,null|false|none|none|
 
 <h2 id="tocS_ElementProfileSchema">ElementProfileSchema</h2>
 <!-- backwards compatibility -->
@@ -5659,35 +6873,35 @@ jwt
 
 ```json
 {
+  "created_by": 0,
+  "name": "string",
+  "team_id": 0,
+  "created_at": null,
+  "content": {
+    "child": [],
+    "attribute": [],
+    "pdf_url": []
+  },
+  "modified_at": null,
+  "is_default": true,
+  "id": 0,
+  "sort": 0,
   "accessories": [
     {
+      "manufacturer": "",
+      "created_at": null,
+      "description": "string",
+      "id": 0,
+      "model": "",
       "price": [
         0
       ],
-      "created_at": null,
-      "model": "",
       "labor_hours": [
         0
-      ],
-      "manufacturer": "",
-      "description": "string",
-      "id": 0
+      ]
     }
   ],
-  "element_id": 0,
-  "team_id": 0,
-  "created_by": 0,
-  "created_at": null,
-  "name": "string",
-  "is_default": true,
-  "id": 0,
-  "content": {
-    "child": [],
-    "pdf_url": [],
-    "attribute": []
-  },
-  "modified_at": null,
-  "sort": 0
+  "element_id": 0
 }
 
 ```
@@ -5696,17 +6910,17 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
-|element_id|integer|true|none|none|
-|team_id|integer|true|none|none|
 |created_by|integer|false|read-only|none|
-|created_at|any|false|read-only|none|
 |name|string|true|none|none|
-|is_default|boolean|false|none|none|
-|id|integer|false|read-only|none|
+|team_id|integer|true|none|none|
+|created_at|any|false|read-only|none|
 |content|[EPContent](#schemaepcontent)|true|none|none|
 |modified_at|any|false|read-only|none|
+|is_default|boolean|false|none|none|
+|id|integer|false|read-only|none|
 |sort|integer|false|none|none|
+|accessories|[[EPAccessory](#schemaepaccessory)]|false|none|none|
+|element_id|integer|true|none|none|
 
 <h2 id="tocS_RelatedUser">RelatedUser</h2>
 <!-- backwards compatibility -->
@@ -5717,9 +6931,9 @@ jwt
 
 ```json
 {
-  "last_name": "string",
   "user_id": null,
-  "first_name": "string"
+  "first_name": "string",
+  "last_name": "string"
 }
 
 ```
@@ -5728,9 +6942,9 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|last_name|string|false|none|none|
 |user_id|any|false|none|none|
 |first_name|string|false|none|none|
+|last_name|string|false|none|none|
 
 <h2 id="tocS_Team">Team</h2>
 <!-- backwards compatibility -->
@@ -5741,8 +6955,8 @@ jwt
 
 ```json
 {
-  "id": "string",
-  "name": "string"
+  "name": "string",
+  "id": "string"
 }
 
 ```
@@ -5751,8 +6965,8 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|string|false|read-only|none|
 |name|string|false|none|none|
+|id|string|false|read-only|none|
 
 <h2 id="tocS_FolderSchema">FolderSchema</h2>
 <!-- backwards compatibility -->
@@ -5763,26 +6977,26 @@ jwt
 
 ```json
 {
+  "site_id": 0,
   "id": "string",
   "site_external_id": "string",
-  "team_id": 0,
-  "modifier": {
-    "last_name": "string",
-    "user_id": null,
-    "first_name": "string"
-  },
-  "team": {
-    "id": "string",
-    "name": "string"
-  },
   "label": "string",
   "name": "string",
-  "site_id": 0,
   "modified_at": null,
   "creator": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "modifier": {
+    "user_id": null,
+    "first_name": "string",
+    "last_name": "string"
+  },
+  "team_id": 0,
+  "team": {
+    "name": "string",
+    "id": "string"
   }
 }
 
@@ -5792,16 +7006,16 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|site_id|integer|false|read-only|none|
 |id|string|false|read-only|none|
 |site_external_id|string|false|write-only|none|
-|team_id|integer|false|none|none|
-|modifier|[RelatedUser](#schemarelateduser)|false|none|none|
-|team|[Team](#schemateam)|false|none|none|
 |label|string|false|none|none|
 |name|string|true|none|none|
-|site_id|integer|false|read-only|none|
 |modified_at|any|false|none|none|
 |creator|[RelatedUser](#schemarelateduser)|false|none|none|
+|modifier|[RelatedUser](#schemarelateduser)|false|none|none|
+|team_id|integer|false|none|none|
+|team|[Team](#schemateam)|false|none|none|
 
 <h2 id="tocS_SurveyAttribute">SurveyAttribute</h2>
 <!-- backwards compatibility -->
@@ -5812,10 +7026,10 @@ jwt
 
 ```json
 {
-  "id": 0,
-  "name": "string",
   "attribute_id": 0,
-  "value": "string"
+  "value": "string",
+  "name": "string",
+  "id": 0
 }
 
 ```
@@ -5824,10 +7038,10 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|integer|false|read-only|none|
-|name|string|true|none|none|
 |attribute_id|integer|true|none|none|
 |value|string|true|none|none|
+|name|string|true|none|none|
+|id|integer|false|read-only|none|
 
 <h2 id="tocS_SurveyElementAccessory">SurveyElementAccessory</h2>
 <!-- backwards compatibility -->
@@ -5838,14 +7052,14 @@ jwt
 
 ```json
 {
-  "price": null,
-  "row_index": 0,
-  "model": "string",
-  "labor_hours": 0,
   "manufacturer": "string",
   "quantity": null,
   "description": "string",
-  "id": "string"
+  "row_index": 0,
+  "id": "string",
+  "model": "string",
+  "price": null,
+  "labor_hours": 0
 }
 
 ```
@@ -5854,14 +7068,14 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|price|any|false|none|none|
-|row_index|integer|true|none|none|
-|model|string|true|none|none|
-|labor_hours|number|false|none|none|
 |manufacturer|string|true|none|none|
 |quantity|any|false|none|none|
 |description|string|false|none|none|
+|row_index|integer|true|none|none|
 |id|string|false|read-only|none|
+|model|string|true|none|none|
+|price|any|false|none|none|
+|labor_hours|number|false|none|none|
 
 <h2 id="tocS_CablePath">CablePath</h2>
 <!-- backwards compatibility -->
@@ -5872,10 +7086,11 @@ jwt
 
 ```json
 {
+  "external_id": "string",
   "id": "string",
-  "a_side": null,
   "z_side": null,
-  "type": "string"
+  "type": "string",
+  "a_side": null
 }
 
 ```
@@ -5884,10 +7099,11 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|external_id|string|true|none|none|
 |id|string|true|none|none|
-|a_side|any|true|none|none|
 |z_side|any|true|none|none|
 |type|string|false|none|none|
+|a_side|any|true|none|none|
 
 <h2 id="tocS_PathConnection">PathConnection</h2>
 <!-- backwards compatibility -->
@@ -5898,8 +7114,8 @@ jwt
 
 ```json
 {
-  "start": null,
-  "end": null
+  "end": null,
+  "start": null
 }
 
 ```
@@ -5908,8 +7124,8 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|start|any|false|none|none|
 |end|any|false|none|none|
+|start|any|false|none|none|
 
 <h2 id="tocS_SurveyElementActivityLog">SurveyElementActivityLog</h2>
 <!-- backwards compatibility -->
@@ -5920,13 +7136,13 @@ jwt
 
 ```json
 {
+  "date": null,
   "id": "string",
   "created_at": null,
-  "date": null,
-  "modifier": 0,
   "modified_at": null,
   "entry": "string",
-  "creator": 0
+  "creator": 0,
+  "modifier": 0
 }
 
 ```
@@ -5935,13 +7151,37 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|date|any|false|none|none|
 |id|string|false|none|none|
 |created_at|any|false|read-only|none|
-|date|any|false|none|none|
-|modifier|integer|false|read-only|none|
 |modified_at|any|false|read-only|none|
 |entry|string|false|none|none|
 |creator|integer|false|read-only|none|
+|modifier|integer|false|read-only|none|
+
+<h2 id="tocS_WebLink">WebLink</h2>
+<!-- backwards compatibility -->
+<a id="schemaweblink"></a>
+<a id="schema_WebLink"></a>
+<a id="tocSweblink"></a>
+<a id="tocsweblink"></a>
+
+```json
+{
+  "url": "string",
+  "link_type": 2,
+  "name": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|url|string|true|none|none|
+|link_type|any|false|write-only|none|
+|name|string|true|none|none|
 
 <h2 id="tocS_SurveyElement">SurveyElement</h2>
 <!-- backwards compatibility -->
@@ -5964,26 +7204,25 @@ jwt
   "photo_urls": [
     "string"
   ],
-  "pdf_urls": null,
   "sync_status": "synced",
   "attributes": [
     {
-      "id": 0,
-      "name": "string",
       "attribute_id": 0,
-      "value": "string"
+      "value": "string",
+      "name": "string",
+      "id": 0
     }
   ],
   "accessories": [
     {
-      "price": null,
-      "row_index": 0,
-      "model": "string",
-      "labor_hours": 0,
       "manufacturer": "string",
       "quantity": null,
       "description": "string",
-      "id": "string"
+      "row_index": 0,
+      "id": "string",
+      "model": "string",
+      "price": null,
+      "labor_hours": 0
     }
   ],
   "children": [
@@ -6000,75 +7239,92 @@ jwt
       "photo_urls": [
         "string"
       ],
-      "pdf_urls": null,
       "sync_status": "synced",
       "attributes": [
         {
-          "id": 0,
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string",
+          "id": 0
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
           "description": "string",
-          "id": "string"
+          "row_index": 0,
+          "id": "string",
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
+          "date": null,
           "id": "string",
           "created_at": null,
-          "date": null,
-          "modifier": 0,
           "modified_at": null,
           "entry": "string",
-          "creator": 0
+          "creator": 0,
+          "modifier": 0
+        }
+      ],
+      "pdf_urls": null,
+      "web_links": [
+        {
+          "url": "string",
+          "link_type": 2,
+          "name": "string"
         }
       ]
     }
   ],
   "cables": [
     {
+      "external_id": "string",
       "id": "string",
-      "a_side": null,
       "z_side": null,
-      "type": "string"
+      "type": "string",
+      "a_side": null
     }
   ],
   "connections": {
-    "start": null,
-    "end": null
+    "end": null,
+    "start": null
   },
   "activity_log": [
     {
+      "date": null,
       "id": "string",
       "created_at": null,
-      "date": null,
-      "modifier": 0,
       "modified_at": null,
       "entry": "string",
-      "creator": 0
+      "creator": 0,
+      "modifier": 0
+    }
+  ],
+  "pdf_urls": null,
+  "web_links": [
+    {
+      "url": "string",
+      "link_type": 2,
+      "name": "string"
     }
   ]
 }
@@ -6089,7 +7345,6 @@ jwt
 |z_order|integer|false|none|none|
 |position|any|true|none|none|
 |photo_urls|[string]|false|read-only|none|
-|pdf_urls|any|false|read-only|none|
 |sync_status|any|false|read-only|none|
 |attributes|[[SurveyAttribute](#schemasurveyattribute)]|false|none|none|
 |accessories|[[SurveyElementAccessory](#schemasurveyelementaccessory)]|false|none|none|
@@ -6097,6 +7352,8 @@ jwt
 |cables|[[CablePath](#schemacablepath)]|false|none|none|
 |connections|[PathConnection](#schemapathconnection)|false|none|none|
 |activity_log|[[SurveyElementActivityLog](#schemasurveyelementactivitylog)]|false|none|none|
+|pdf_urls|any|false|read-only|none|
+|web_links|[[WebLink](#schemaweblink)]|false|none|none|
 
 #### Enumerated Values
 
@@ -6115,19 +7372,19 @@ jwt
 
 ```json
 {
-  "size": "string",
-  "category": null,
-  "stroke_color": "string",
   "end_point": null,
-  "text": "string",
-  "fill": null,
-  "start_point": null,
-  "opacity": 1,
-  "coordinates": null,
-  "id": "string",
+  "category": null,
+  "font_size": "string",
+  "stroke_color": "string",
   "location": null,
+  "coordinates": null,
+  "fill": null,
   "stroke_width": "string",
-  "font_size": "string"
+  "text": "string",
+  "opacity": 1,
+  "id": "string",
+  "start_point": null,
+  "size": "string"
 }
 
 ```
@@ -6136,19 +7393,72 @@ jwt
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|size|string|false|none|none|
-|category|any|true|none|none|
-|stroke_color|string|true|none|none|
 |end_point|any|false|none|none|
-|text|string|false|none|none|
-|fill|any|false|none|none|
-|start_point|any|false|none|none|
-|opacity|number|false|none|none|
-|coordinates|any|false|none|none|
-|id|string|false|read-only|none|
-|location|any|true|none|none|
-|stroke_width|string|true|none|none|
+|category|any|true|none|none|
 |font_size|string|false|none|none|
+|stroke_color|string|true|none|none|
+|location|any|true|none|none|
+|coordinates|any|false|none|none|
+|fill|any|false|none|none|
+|stroke_width|string|true|none|none|
+|text|string|false|none|none|
+|opacity|number|false|none|none|
+|id|string|false|read-only|none|
+|start_point|any|false|none|none|
+|size|string|false|none|none|
+
+<h2 id="tocS_BoundaryPoint">BoundaryPoint</h2>
+<!-- backwards compatibility -->
+<a id="schemaboundarypoint"></a>
+<a id="schema_BoundaryPoint"></a>
+<a id="tocSboundarypoint"></a>
+<a id="tocsboundarypoint"></a>
+
+```json
+{
+  "y": 0,
+  "x": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|y|number|true|none|none|
+|x|number|true|none|none|
+
+<h2 id="tocS_SurveyBoundary">SurveyBoundary</h2>
+<!-- backwards compatibility -->
+<a id="schemasurveyboundary"></a>
+<a id="schema_SurveyBoundary"></a>
+<a id="tocSsurveyboundary"></a>
+<a id="tocssurveyboundary"></a>
+
+```json
+{
+  "modified_at": null,
+  "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+  "points": [
+    {
+      "y": 0,
+      "x": 0
+    }
+  ],
+  "created_at": null
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|modified_at|any|false|read-only|none|
+|id|string(uuid)|true|none|none|
+|points|[[BoundaryPoint](#schemaboundarypoint)]|true|none|none|
+|created_at|any|false|read-only|none|
 
 <h2 id="tocS_SurveySchema">SurveySchema</h2>
 <!-- backwards compatibility -->
@@ -6180,9 +7490,9 @@ jwt
   "sync_status": "synced",
   "creator": 0,
   "editor": {
-    "last_name": "string",
     "user_id": null,
-    "first_name": "string"
+    "first_name": "string",
+    "last_name": "string"
   },
   "modifier": 0,
   "created_at": null,
@@ -6201,26 +7511,25 @@ jwt
       "photo_urls": [
         "string"
       ],
-      "pdf_urls": null,
       "sync_status": "synced",
       "attributes": [
         {
-          "id": 0,
-          "name": "string",
           "attribute_id": 0,
-          "value": "string"
+          "value": "string",
+          "name": "string",
+          "id": 0
         }
       ],
       "accessories": [
         {
-          "price": null,
-          "row_index": 0,
-          "model": "string",
-          "labor_hours": 0,
           "manufacturer": "string",
           "quantity": null,
           "description": "string",
-          "id": "string"
+          "row_index": 0,
+          "id": "string",
+          "model": "string",
+          "price": null,
+          "labor_hours": 0
         }
       ],
       "children": [
@@ -6228,44 +7537,66 @@ jwt
       ],
       "cables": [
         {
+          "external_id": "string",
           "id": "string",
-          "a_side": null,
           "z_side": null,
-          "type": "string"
+          "type": "string",
+          "a_side": null
         }
       ],
       "connections": {
-        "start": null,
-        "end": null
+        "end": null,
+        "start": null
       },
       "activity_log": [
         {
+          "date": null,
           "id": "string",
           "created_at": null,
-          "date": null,
-          "modifier": 0,
           "modified_at": null,
           "entry": "string",
-          "creator": 0
+          "creator": 0,
+          "modifier": 0
+        }
+      ],
+      "pdf_urls": null,
+      "web_links": [
+        {
+          "url": "string",
+          "link_type": 2,
+          "name": "string"
         }
       ]
     }
   ],
   "annotations": [
     {
-      "size": "string",
-      "category": null,
-      "stroke_color": "string",
       "end_point": null,
-      "text": "string",
-      "fill": null,
-      "start_point": null,
-      "opacity": 1,
-      "coordinates": null,
-      "id": "string",
+      "category": null,
+      "font_size": "string",
+      "stroke_color": "string",
       "location": null,
+      "coordinates": null,
+      "fill": null,
       "stroke_width": "string",
-      "font_size": "string"
+      "text": "string",
+      "opacity": 1,
+      "id": "string",
+      "start_point": null,
+      "size": "string"
+    }
+  ],
+  "boundaries": [
+    {
+      "modified_at": null,
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "points": [
+        {
+          "y": 0,
+          "x": 0
+        }
+      ],
+      "created_at": null
     }
   ],
   "users": null
@@ -6303,6 +7634,7 @@ jwt
 |modified_at|any|false|read-only|none|
 |elements|[[SurveyElement](#schemasurveyelement)]|false|none|none|
 |annotations|[[SurveyAnnotation](#schemasurveyannotation)]|false|none|none|
+|boundaries|[[SurveyBoundary](#schemasurveyboundary)]|false|none|none|
 |users|any|false|read-only|none|
 
 #### Enumerated Values
@@ -6312,4 +7644,36 @@ jwt
 |sync_status|synced|
 |sync_status|pending|
 |sync_status|errored|
+
+<h2 id="tocS_UserPreferencesSchema">UserPreferencesSchema</h2>
+<!-- backwards compatibility -->
+<a id="schemauserpreferencesschema"></a>
+<a id="schema_UserPreferencesSchema"></a>
+<a id="tocSuserpreferencesschema"></a>
+<a id="tocsuserpreferencesschema"></a>
+
+```json
+{
+  "comment_notification_daily_batch": true,
+  "auto_sync": true,
+  "comment_notification_editor_only": true,
+  "comment_notification_time": "string",
+  "timezone": "string",
+  "comment_notification_enabled": true,
+  "comment_notification_mentions_only": true
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|comment_notification_daily_batch|boolean|false|none|none|
+|auto_sync|boolean|false|none|none|
+|comment_notification_editor_only|boolean|false|none|none|
+|comment_notification_time|string|false|none|none|
+|timezone|string|false|none|none|
+|comment_notification_enabled|boolean|false|none|none|
+|comment_notification_mentions_only|boolean|false|none|none|
 
