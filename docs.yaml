@@ -13,95 +13,32 @@ info:
   version: 2.0.0
 security: jwt
 paths:
-  /v3/survey/{survey_id}/comment:
+  /survey/{survey_external_id}/floorplan:
     post:
       tags:
-      - Comments
+      - Resources
+      - Surveys
       - v3
       security:
       - jwt: []
-      operationId: add_survey_comment
-      summary: Adds a new comment to a survey.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                corpus:
-                  type: string
-                  required: true
-                  example: Lorem ipsum
-                parent_id:
-                  type: number
-                  required: true
-                  example: 2334
-      responses:
-        '201':
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestError'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      public: true
-  /v3/survey/{survey_id}/comments:
-    get:
-      tags:
-      - Comments
-      - v3
-      security:
-      - jwt: []
-      operationId: get_survey_comments
-      summary: Get all comments from a survey
-      parameters:
-      - name: survey_id
-        description: Survey ID
-        in: path
-        required: true
-        schema:
-          type: string
-          example: 40759717-c239-4504-a0a5-7e7f57220995
-      responses:
-        '201':
-          description: OK
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '403':
-          $ref: '#/components/responses/ForbiddenError'
-      public: true
-  /v3/survey/{survey_id}/comment/{comment_id}:
-    delete:
-      tags:
-      - Comments
-      - v3
-      security:
-      - jwt: []
-      operationId: delete_survey_comment
-      summary: Deletes a comment in a survey.
-      description: 'Users are only allowed to delete their own comments.
-
-        '
+      operationId: get_survey_floorplan
+      summary: Gets the corresponding floorplan image for a survey.
+      description: User must have at least read access on the survey's site in order
+        to access the floorplan.
       parameters:
       - name: survey_id
         description: Survey external ID
         in: path
         required: true
-        schema:
-          type: string
-          example: 40759717-c239-4504-a0a5-7e7f57220995
-      - name: comment_id
-        description: Comment ID
-        in: path
-        required: true
-        schema:
-          type: number
-          example: 149595
+        example: 39dace0d-7aa3-47c7-9bff-9c87fbe2c00b
       responses:
-        '204':
-          description: OK
+        '200':
+          description: Floorplan image binary file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -109,54 +46,112 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       public: true
-    patch:
+  /surveyelement/{survey_element_external_id}/photo:
+    post:
       tags:
-      - Comments
+      - Resources
+      - SurveyElements
       - v3
       security:
       - jwt: []
-      operationId: edit_survey_comment
-      summary: Allows editing a comment in a survey.
-      description: 'Editing/deleting and closing/re-opening comments will only be
-        allowed for comment creators.
-
-
-        Team/Account admins can close and reopen all comments on the survey.
-
-        '
+      operationId: update_survey_element_photo
+      summary: Replaces a survey element's photo at a given path with a new photo.
       parameters:
-      - name: survey_id
-        description: Survey external ID
+      - name: survey_element_id
+        description: Survey Element external ID
         in: path
         required: true
-        schema:
-          type: string
-          example: 40759717-c239-4504-a0a5-7e7f57220995
-      - name: comment_id
-        description: Comment ID
-        in: path
-        required: true
-        schema:
-          type: number
-          example: 149595
+        example: 39dace0d-7aa3-47c7-9bff-9c87fbe2c00b
       requestBody:
-        required: true
         content:
-          application/json:
+          image/png:
             schema:
-              type: object
-              properties:
-                corpus:
-                  type: string
-                  required: false
-                  example: Lorem ipsum
-                is_open:
-                  type: boolean
-                  required: false
-                  example: true
+              type: string
+              format: binary
+              example: /tmp/path-to-photo.png
       responses:
         '200':
-          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  photo_path:
+                    type: string
+                    example: 2022/11/01/39dace0d-4oo5d-47c7-9bff-9c87fbe2c00b.pdf
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      public: true
+    get:
+      tags:
+      - Resources
+      - Surveys
+      - v3
+      security:
+      - jwt: []
+      operationId: get_survey_element_photo
+      summary: Retrieves a photo image that belongs to a survey element.
+      description: User must have at least read access on the survey's site in order
+        to access the survey element's photos.
+      parameters:
+      - name: survey_element_id
+        description: Survey Element external ID
+        in: path
+        required: true
+        example: 39dace0d-7aa3-47c7-9bff-9c87fbe2c00b
+      - name: path
+        description: Photo relative path
+        in: path
+        required: true
+        example: 2022/11/01/39dace0d-4oo5d-47c7-9bff-9c87fbe2c00b.png
+      responses:
+        '200':
+          description: Photo image binary file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags:
+      - Resources
+      - Surveys
+      - v3
+      security:
+      - jwt: []
+      operationId: delete_survey_element_photo
+      summary: Deletes a photo from a survey element's list of photos.
+      parameters:
+      - name: survey_element_id
+        description: Survey Element external ID
+        in: path
+        required: true
+        example: 39dace0d-7aa3-47c7-9bff-9c87fbe2c00b
+      - name: path
+        description: Photo relative path
+        in: path
+        required: true
+        example: 2022/11/01/39dace0d-4oo5d-47c7-9bff-9c87fbe2c00b.png
+      responses:
+        '200':
+          description: Photo image binary file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
         '400':
           $ref: '#/components/responses/BadRequestError'
         '401':
@@ -252,6 +247,31 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       public: true
+    get:
+      tags:
+      - Folders
+      - v3
+      security:
+      - jwt: []
+      operationId: get_folder_sites
+      summary: Soft deletes a site folder or a survey folder.
+      description: "Returns the sites within a folder that the current user has access\
+        \ to.\n\nQuery Parameters:\n    - `filter[sites_modified_after]`: Return only\
+        \ sites that have sites which have been created, modified, or given access\n\
+        \                                    to after the specified timestamp.\n"
+      parameters:
+      - name: folder_id
+        description: Folder ID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 40759717-c239-4504-a0a5-7e7f57220995
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /v3/site_folder:
     post:
       tags:
@@ -753,7 +773,7 @@ paths:
       - v3
       security:
       - jwt: []
-      operationId: get_user_sites_and_folders
+      operationId: get_user_sites_and_site_folders
       summary: Returns all archived/unarchived sites and folders across all teams
         of a user.
       description: "Explanation of usage of filters:\n\nFiltered by favorites:\n \
@@ -773,8 +793,8 @@ paths:
           type: integer
           example: 1645157198
       - name: filter[deleted_after]
-        description: Return only sites that were deleted after an specified timestamp.
-          Limited site data is returned using this filter.
+        description: (DEPRECATED) Return only sites that were deleted after an specified
+          timestamp. Limited site data is returned using this filter.
         in: query
         schema:
           type: integer
@@ -792,6 +812,13 @@ paths:
         schema:
           type: string
           example: 963dcf8a-9c99-4da0-adeb-12b86d99b122
+      - name: filter[accessible_after]
+        description: Returns only sites and folders where the user has been granted
+          access to after a specified time
+        in: query
+        schema:
+          type: integer
+          example: 56489413165
       responses:
         '200':
           description: OK
@@ -812,6 +839,11 @@ paths:
                         name:
                           type: string
                           example: Union Square
+                        site_count:
+                          type: integer
+                          example: 5
+                          description: For folders, returns the number of sites within
+                            the folder accessible by the user
                         survey_count:
                           type: integer
                           example: 12
@@ -967,6 +999,132 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/ForbiddenError'
+  /v3/site_favorites:
+    post:
+      tags:
+      - Sites
+      - v3
+      security:
+      - jwt: []
+      operationId: add_sites_to_favorites
+      summary: Adds a list of sites to the user's workbench.
+      description: Sites that are already in the workbench will be ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Site external ID
+                example: b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb
+                required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      public: true
+    delete:
+      tags:
+      - Sites
+      - v3
+      security:
+      - jwt: []
+      operationId: remove_sites_from_favorites
+      summary: Removes sites from the current user's workbench.
+      description: 'Sites that are not in the users workbench and are requested for
+        removal will be ignored.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Site ID
+                example: b14663f6-9ad1-40c0-8a1a-32f2e19b1ccb
+                required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      public: true
+  /v3/favorite_sites:
+    get:
+      tags:
+      - Sites
+      - v3
+      security:
+      - jwt: []
+      operationId: get_user_favorite_sites
+      summary: Returns all of the current user's favorite sites across all teams.
+      description: "Results are ordered by most recently favorited.\n\nQuery Parameters:\n\
+        \n  - filter[modified_after]: Return only sites that have been added or removed\
+        \ from favorites after the specified timestamp.\n"
+      parameters:
+      - $ref: '#/components/parameters/page[number]'
+      - $ref: '#/components/parameters/page[size]'
+      - name: filter[modified_after]
+        description: Return only sites that have been added or removed from favorites
+          after the specified timestamp.
+        in: query
+        schema:
+          type: integer
+          example: 1645157198
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  favorite_sites:
+                    type: array
+                    description: List of user's favorited sites
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                        name:
+                          type: string
+                          example: Union Square
+                        favorited_at:
+                          type: number
+                          example: 1645157198
+                          description: Unix Timestamp indicating when the site was
+                            added to favorites.
+                  unfavorited_sites:
+                    type: array
+                    description: Result list of sites unfavorited after the specified
+                      timestamp
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 46787da3-1e6e-4d9b-a858-ac9e12dc3efb
+                        name:
+                          type: string
+                          example: Union Square
+                        unfavorited_at:
+                          type: number
+                          example: 1645157198
+                          description: Unix Timestamp indicating when the site was
+                            removed from favorites.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      public: true
   /v3/site/{site_id}/surveys:
     get:
       tags:
@@ -1163,10 +1321,22 @@ paths:
       security:
       - jwt: []
       operationId: create_or_update_survey
-      summary: Allows creating a new survey with a unique identifier generated by
-        the client, or updates the existing survey with that identifier if it exists.
-      description: 'Also allows creating/updating surveys with elements, comments,
-        and annotations.
+      summary: Allows syncing surveys
+      description: 'Syncing works by creating a new survey with a unique identifier
+        generated by the client, or updating the existing survey
+
+        with that identifier if it exists. This includes creating/updating surveys
+        with all related elements, comments, annotations,
+
+        etc.
+
+
+        Newly created surveys can be directly placed inside folders by passing a `folder_id`
+        value in the request payload.
+
+
+        After a successful sync, a new revision for the survey will be generated as
+        a JSON file and then uploaded and stored in S3.
 
         '
       parameters:
@@ -1203,6 +1373,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SurveySchema'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1231,6 +1403,159 @@ paths:
       responses:
         '204':
           description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      public: true
+  /v3/survey/{survey_id}/comment:
+    post:
+      tags:
+      - Comments
+      - v3
+      security:
+      - jwt: []
+      operationId: add_survey_comment
+      summary: Adds a new comment to a survey.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                corpus:
+                  type: string
+                  required: true
+                  example: Lorem ipsum
+                parent_id:
+                  type: number
+                  required: true
+                  example: 2334
+      responses:
+        '201':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      public: true
+  /v3/survey/{survey_id}/comments:
+    get:
+      tags:
+      - Comments
+      - v3
+      security:
+      - jwt: []
+      operationId: get_survey_comments
+      summary: Get all comments from a survey
+      parameters:
+      - name: survey_id
+        description: Survey ID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 40759717-c239-4504-a0a5-7e7f57220995
+      responses:
+        '201':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      public: true
+  /v3/survey/{survey_id}/comment/{comment_id}:
+    delete:
+      tags:
+      - Comments
+      - v3
+      security:
+      - jwt: []
+      operationId: delete_survey_comment
+      summary: Deletes a comment in a survey.
+      description: 'Users are only allowed to delete their own comments.
+
+        '
+      parameters:
+      - name: survey_id
+        description: Survey external ID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 40759717-c239-4504-a0a5-7e7f57220995
+      - name: comment_id
+        description: Comment ID
+        in: path
+        required: true
+        schema:
+          type: number
+          example: 149595
+      responses:
+        '204':
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      public: true
+    patch:
+      tags:
+      - Comments
+      - v3
+      security:
+      - jwt: []
+      operationId: edit_survey_comment
+      summary: Allows editing a comment in a survey.
+      description: 'Editing/deleting and closing/re-opening comments will only be
+        allowed for comment creators.
+
+
+        Team/Account admins can close and reopen all comments on the survey.
+
+        '
+      parameters:
+      - name: survey_id
+        description: Survey external ID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 40759717-c239-4504-a0a5-7e7f57220995
+      - name: comment_id
+        description: Comment ID
+        in: path
+        required: true
+        schema:
+          type: number
+          example: 149595
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                corpus:
+                  type: string
+                  required: false
+                  example: Lorem ipsum
+                is_open:
+                  type: boolean
+                  required: false
+                  example: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
         '403':
@@ -1599,6 +1924,8 @@ paths:
                                   example: Enterprise
                                 max_seats:
                                   type: integer
+                                max_elements_per_survey:
+                                  type: integer
                                 max_attachments_per_element:
                                   type: integer
                         features:
@@ -1833,6 +2160,8 @@ paths:
                                   example: Enterprise
                                 max_seats:
                                   type: integer
+                                max_elements_per_survey:
+                                  type: integer
                                 max_attachments_per_element:
                                   type: integer
                         features:
@@ -1883,22 +2212,40 @@ components:
     UserResponse:
       type: object
       properties:
-        last_name:
-          type: string
         user_id:
           type: integer
         first_name:
+          type: string
+        last_name:
           type: string
       required:
       - user_id
     SiteSchema:
       type: object
       properties:
-        is_archived: {}
+        legacy_site_id:
+          type: integer
+          readOnly: true
         site_id:
           type: string
+        label:
+          type: string
+          maxLength: 255
+        reference_id:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          pattern: ^[0-9A-Za-z .,?!"';:/\()_#*&-]{1,250}$
+        tags:
+          type: array
+          items:
+            type: string
         team_id:
           type: integer
+        state:
+          type: string
+          maxLength: 250
         created_at:
           readOnly: true
           type:
@@ -1906,53 +2253,34 @@ components:
         version:
           type: integer
           readOnly: true
-        modifier:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
         modified_at:
           readOnly: true
           type:
           - 'null'
-        street:
-          type: string
-          maxLength: 250
-        name:
-          type: string
-          maxLength: 250
-        city:
-          type: string
-          maxLength: 250
-        tags:
-          type: array
-          items:
-            type: string
-        label:
-          type: string
-          maxLength: 255
         zip_code:
-          type: string
-          maxLength: 250
-        legacy_site_id:
-          type: integer
-          readOnly: true
-        reference_id:
-          type: string
-          maxLength: 255
-        state:
           type: string
           maxLength: 250
         creator:
           readOnly: true
           allOf:
           - $ref: '#/components/schemas/UserResponse'
+        modifier:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+        city:
+          type: string
+          maxLength: 250
+        street:
+          type: string
+          maxLength: 250
+        is_archived: {}
       required:
       - name
       - team_id
     ShareSiteOrSurveyRequestSchema:
       type: object
       properties:
-        expiration_date: {}
         message:
           type: string
         emails:
@@ -1960,15 +2288,16 @@ components:
           items:
             type: string
             format: email
+        expiration_date: {}
       required:
       - emails
       - expiration_date
     SurveyFields:
       type: object
       properties:
-        value:
-          type: string
         field_id:
+          type: string
+        value:
           type: string
       required:
       - field_id
@@ -1976,19 +2305,19 @@ components:
     SurveyOptions:
       type: object
       properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyFields'
         scope:
           type: string
           enum:
           - template
           - model
           - content
-        template_name:
-          type: string
         id:
+          type: string
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyFields'
+        template_name:
           type: string
         value:
           type: boolean
@@ -1999,23 +2328,30 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        is_site_report:
-          type: boolean
-          default: false
-        output:
+        site_id:
           type: string
-          enum:
-          - pdf
-          - html
-          - xls
+        paper_size:
+          type: string
+        name:
+          type: string
         ids:
           type: array
           items:
             type: string
         custom_data:
           type: object
-        name:
+        is_site_report:
+          type: boolean
+          default: false
+        report_id:
           type: string
+          format: uuid
+        output:
+          type: string
+          enum:
+          - pdf
+          - html
+          - xls
         filters:
           type: array
           items:
@@ -2027,48 +2363,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
-        site_id:
-          type: string
-        paper_size:
-          type: string
-        report_id:
-          type: string
-          format: uuid
       required:
       - name
       - output
       - report_id
       - site_id
-    EPAccessory:
-      type: object
-      properties:
-        price:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-        created_at:
-          readOnly: true
-        model:
-          type: string
-          default: ''
-        labor_hours:
-          type:
-          - number
-          - 'null'
-          default: !!python/object/apply:decimal.Decimal
-          - 0E-10
-        manufacturer:
-          type: string
-          default: ''
-        description:
-          type: string
-        id:
-          type: integer
-          readOnly: true
-      required:
-      - description
     SubElement:
       type: object
       properties:
@@ -2079,30 +2378,30 @@ components:
       required:
       - element_id
       - systemtype_id
+    Attribute:
+      type: object
+      properties:
+        attribute_id:
+          type: integer
+        value:
+          type: string
+      required:
+      - attribute_id
+      - value
     Link:
       type: object
       properties:
-        link_type:
-          type: integer
-        name:
-          type: string
         url:
           type: string
           format: url
+        name:
+          type: string
+        link_type:
+          type: integer
       required:
       - link_type
       - name
       - url
-    Attribute:
-      type: object
-      properties:
-        value:
-          type: string
-        attribute_id:
-          type: integer
-      required:
-      - attribute_id
-      - value
     EPContent:
       type: object
       properties:
@@ -2111,45 +2410,75 @@ components:
           default: []
           items:
             $ref: '#/components/schemas/SubElement'
+        attribute:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/Attribute'
         pdf_url:
           type: array
           default: []
           maxItems: 2
           items:
             $ref: '#/components/schemas/Link'
-        attribute:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/Attribute'
+    EPAccessory:
+      type: object
+      properties:
+        manufacturer:
+          type: string
+          default: ''
+        created_at:
+          readOnly: true
+        description:
+          type: string
+        id:
+          type: integer
+          readOnly: true
+        model:
+          type: string
+          default: ''
+        price:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+        labor_hours:
+          type:
+          - number
+          - 'null'
+          default: !!python/object/apply:decimal.Decimal
+          - 0E-10
+      required:
+      - description
     ElementProfileSchema:
       type: object
       properties:
-        accessories:
-          type: array
-          items:
-            $ref: '#/components/schemas/EPAccessory'
-        element_id:
-          type: integer
-        team_id:
-          type: integer
         created_by:
           type: integer
           readOnly: true
-        created_at:
-          readOnly: true
         name:
           type: string
-        is_default:
-          type: boolean
-        id:
+        team_id:
           type: integer
+        created_at:
           readOnly: true
         content:
           $ref: '#/components/schemas/EPContent'
         modified_at:
           readOnly: true
+        is_default:
+          type: boolean
+        id:
+          type: integer
+          readOnly: true
         sort:
+          type: integer
+        accessories:
+          type: array
+          items:
+            $ref: '#/components/schemas/EPAccessory'
+        element_id:
           type: integer
       required:
       - content
@@ -2159,58 +2488,58 @@ components:
     RelatedUser:
       type: object
       properties:
-        last_name:
-          type: string
         user_id: {}
         first_name:
+          type: string
+        last_name:
           type: string
     Team:
       type: object
       properties:
+        name:
+          type: string
         id:
           type: string
           readOnly: true
-        name:
-          type: string
     FolderSchema:
       type: object
       properties:
+        site_id:
+          type: integer
+          readOnly: true
         id:
           type: string
           readOnly: true
         site_external_id:
           type: string
           writeOnly: true
-        team_id:
-          type: integer
-        modifier:
-          $ref: '#/components/schemas/RelatedUser'
-        team:
-          $ref: '#/components/schemas/Team'
         label:
           type: string
         name:
           type: string
-        site_id:
-          type: integer
-          readOnly: true
         modified_at: {}
         creator:
           $ref: '#/components/schemas/RelatedUser'
+        modifier:
+          $ref: '#/components/schemas/RelatedUser'
+        team_id:
+          type: integer
+        team:
+          $ref: '#/components/schemas/Team'
       required:
       - name
     SurveyAttribute:
       type: object
       properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
         attribute_id:
           type: integer
         value:
           type: string
+        name:
+          type: string
+        id:
+          type: integer
+          readOnly: true
       required:
       - attribute_id
       - name
@@ -2218,21 +2547,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
-        price: {}
-        row_index:
-          type: integer
-        model:
-          type: string
-        labor_hours:
-          type: number
         manufacturer:
           type: string
         quantity: {}
         description:
           type: string
+        row_index:
+          type: integer
         id:
           type: string
           readOnly: true
+        model:
+          type: string
+        price: {}
+        labor_hours:
+          type: number
       required:
       - manufacturer
       - model
@@ -2240,31 +2569,31 @@ components:
     CablePath:
       type: object
       properties:
+        external_id:
+          type: string
         id:
           type: string
-        a_side: {}
         z_side: {}
         type:
           type: string
+        a_side: {}
       required:
       - a_side
+      - external_id
       - id
       - z_side
     PathConnection:
       type: object
       properties:
-        start: {}
         end: {}
+        start: {}
     SurveyElementActivityLog:
       type: object
       properties:
+        date: {}
         id:
           type: string
         created_at:
-          readOnly: true
-        date: {}
-        modifier:
-          type: integer
           readOnly: true
         modified_at:
           readOnly: true
@@ -2273,6 +2602,22 @@ components:
         creator:
           type: integer
           readOnly: true
+        modifier:
+          type: integer
+          readOnly: true
+    WebLink:
+      type: object
+      properties:
+        url:
+          type: string
+        link_type:
+          default: 2
+          writeOnly: true
+        name:
+          type: string
+      required:
+      - name
+      - url
     SurveyElement:
       type: object
       properties:
@@ -2297,8 +2642,6 @@ components:
           readOnly: true
           items:
             type: string
-        pdf_urls:
-          readOnly: true
         sync_status:
           readOnly: true
           enum:
@@ -2327,6 +2670,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SurveyElementActivityLog'
+        pdf_urls:
+          readOnly: true
+        web_links:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebLink'
       required:
       - element_id
       - id
@@ -2336,34 +2685,63 @@ components:
     SurveyAnnotation:
       type: object
       properties:
-        size:
-          type: string
+        end_point: {}
         category: {}
+        font_size:
+          type: string
         stroke_color:
           type: string
-        end_point: {}
+        location: {}
+        coordinates: {}
+        fill: {}
+        stroke_width:
+          type: string
         text:
           type: string
-        fill: {}
-        start_point: {}
         opacity:
           type: number
           minimum: 0
           maximum: 1
-        coordinates: {}
         id:
           type: string
           readOnly: true
-        location: {}
-        stroke_width:
-          type: string
-        font_size:
+        start_point: {}
+        size:
           type: string
       required:
       - category
       - location
       - stroke_color
       - stroke_width
+    BoundaryPoint:
+      type: object
+      properties:
+        y:
+          type: number
+          minimum: 0.0
+        x:
+          type: number
+          minimum: 0.0
+      required:
+      - x
+      - y
+    SurveyBoundary:
+      type: object
+      properties:
+        modified_at:
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+        points:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoundaryPoint'
+        created_at:
+          readOnly: true
+      required:
+      - id
+      - points
     SurveySchema:
       type: object
       properties:
@@ -2435,6 +2813,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SurveyAnnotation'
+        boundaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyBoundary'
         users:
           readOnly: true
       required:
@@ -2442,6 +2824,23 @@ components:
       - margin_range
       - title
       - unit
+    UserPreferencesSchema:
+      type: object
+      properties:
+        comment_notification_daily_batch:
+          type: boolean
+        auto_sync:
+          type: boolean
+        comment_notification_editor_only:
+          type: boolean
+        comment_notification_time:
+          type: string
+        timezone:
+          type: string
+        comment_notification_enabled:
+          type: boolean
+        comment_notification_mentions_only:
+          type: boolean
   responses:
     BadRequestError:
       description: Invalid request sent to endpoint
