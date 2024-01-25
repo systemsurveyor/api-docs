@@ -468,6 +468,42 @@ paths:
           $ref: '#/components/responses/NotFoundError'
       public: true
   /v3/report:
+    get:
+      tags:
+      - Reports
+      - v3
+      security:
+      - jwt: []
+      operationId: get_report_file
+      summary: Retrieves a report result file after it has been generated.
+      description: The user must have read access on the site the report was generated
+        for
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+          example: /www/data/export/pdf/12398/2024/1/b5d05d5a-d665-4adc-b5b9-60d1c296c695.pdf
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '204':
+          description: Report in progress
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityError'
+      public: true
     post:
       tags:
       - Reports
@@ -549,6 +585,25 @@ paths:
           $ref: '#/components/responses/ForbiddenError'
         '422':
           $ref: '#/components/responses/UnprocessableEntityError'
+      public: true
+  /v3/reports:
+    get:
+      tags:
+      - Reports
+      - v3
+      security:
+      - jwt: []
+      operationId: get_current_user_reports
+      summary: Returns all reports that have been created by the current user.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSchema'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
       public: true
   /v3/site/{site_id}:
     get:
@@ -783,6 +838,7 @@ paths:
         \  - All sites in the folder that are in the workbench\n\nFiltered by folder:\n\
         \  - All sites in folder\n"
       parameters:
+      - $ref: '#/components/parameters/q'
       - $ref: '#/components/parameters/page[number]'
       - $ref: '#/components/parameters/page[size]'
       - name: filter[modified_after]
@@ -1563,6 +1619,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
       public: true
+  /v3/team/{team_id}/system_types:
+    get:
+      tags:
+      - SystemTypes
+      - v3
+      security:
+      - jwt: []
+      operationId: get_team_selected_system_types
+      summary: Returns a team's selected system types.
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: number
+          example: 2948
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTypeSchema'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      public: true
   /v3/teams:
     get:
       tags:
@@ -2209,13 +2293,25 @@ paths:
 openapi: 3.1.0
 components:
   schemas:
+    ElementSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        abbreviation:
+          type: string
+        icon:
+          readOnly: true
+        name:
+          type: string
     UserResponse:
       type: object
       properties:
-        user_id:
-          type: integer
         first_name:
           type: string
+        user_id:
+          type: integer
         last_name:
           type: string
       required:
@@ -2223,33 +2319,42 @@ components:
     SiteSchema:
       type: object
       properties:
+        team_id:
+          type: integer
+        creator:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
         legacy_site_id:
           type: integer
           readOnly: true
-        site_id:
-          type: string
-        label:
-          type: string
-          maxLength: 255
-        reference_id:
-          type: string
-          maxLength: 255
-        name:
-          type: string
-          pattern: ^[0-9A-Za-z .,?!"';:/\()_#*&-]{1,250}$
         tags:
           type: array
           items:
             type: string
-        team_id:
-          type: integer
-        state:
-          type: string
-          maxLength: 250
         created_at:
           readOnly: true
           type:
           - 'null'
+        reference_id:
+          type: string
+          maxLength: 255
+        zip_code:
+          type: string
+          maxLength: 250
+        state:
+          type: string
+          maxLength: 250
+        label:
+          type: string
+          maxLength: 255
+        modifier:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/UserResponse'
+        is_archived: {}
+        site_id:
+          type: string
         version:
           type: integer
           readOnly: true
@@ -2257,24 +2362,15 @@ components:
           readOnly: true
           type:
           - 'null'
-        zip_code:
-          type: string
-          maxLength: 250
-        creator:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
-        modifier:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/UserResponse'
         city:
           type: string
           maxLength: 250
         street:
           type: string
           maxLength: 250
-        is_archived: {}
+        name:
+          type: string
+          pattern: "^[0-9A-Za-z\xC0-\xD6\xD8-\xF6\xF8-\xFF .,?!\"';:/\\()_#*&-]{1,250}$"
       required:
       - name
       - team_id
@@ -2283,21 +2379,21 @@ components:
       properties:
         message:
           type: string
+        expiration_date: {}
         emails:
           type: array
           items:
             type: string
             format: email
-        expiration_date: {}
       required:
       - emails
       - expiration_date
     SurveyFields:
       type: object
       properties:
-        field_id:
-          type: string
         value:
+          type: string
+        field_id:
           type: string
       required:
       - field_id
@@ -2305,22 +2401,22 @@ components:
     SurveyOptions:
       type: object
       properties:
+        template_name:
+          type: string
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurveyFields'
         scope:
           type: string
           enum:
           - template
           - model
           - content
-        id:
-          type: string
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurveyFields'
-        template_name:
-          type: string
         value:
           type: boolean
+        id:
+          type: string
       required:
       - id
       - scope
@@ -2328,24 +2424,18 @@ components:
     SurveyReportRequestSchemaDeprecated:
       type: object
       properties:
-        site_id:
+        is_excel:
+          type: boolean
+          default: false
+        report_id:
           type: string
-        paper_size:
-          type: string
-        name:
-          type: string
+          format: uuid
         ids:
           type: array
           items:
             type: string
         custom_data:
           type: object
-        is_site_report:
-          type: boolean
-          default: false
-        report_id:
-          type: string
-          format: uuid
         output:
           type: string
           enum:
@@ -2356,28 +2446,24 @@ components:
           type: array
           items:
             type: object
-        is_excel:
+        is_site_report:
           type: boolean
           default: false
         options:
           type: array
           items:
             $ref: '#/components/schemas/SurveyOptions'
+        paper_size:
+          type: string
+        site_id:
+          type: string
+        name:
+          type: string
       required:
       - name
       - output
       - report_id
       - site_id
-    SubElement:
-      type: object
-      properties:
-        systemtype_id:
-          type: string
-        element_id:
-          type: string
-      required:
-      - element_id
-      - systemtype_id
     Attribute:
       type: object
       properties:
@@ -2388,16 +2474,26 @@ components:
       required:
       - attribute_id
       - value
+    SubElement:
+      type: object
+      properties:
+        systemtype_id:
+          type: string
+        element_id:
+          type: string
+      required:
+      - element_id
+      - systemtype_id
     Link:
       type: object
       properties:
+        link_type:
+          type: integer
         url:
           type: string
           format: url
         name:
           type: string
-        link_type:
-          type: integer
       required:
       - link_type
       - name
@@ -2405,16 +2501,16 @@ components:
     EPContent:
       type: object
       properties:
-        child:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/SubElement'
         attribute:
           type: array
           default: []
           items:
             $ref: '#/components/schemas/Attribute'
+        child:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/SubElement'
         pdf_url:
           type: array
           default: []
@@ -2424,25 +2520,25 @@ components:
     EPAccessory:
       type: object
       properties:
+        description:
+          type: string
+        created_at:
+          readOnly: true
         manufacturer:
           type: string
           default: ''
-        created_at:
-          readOnly: true
-        description:
-          type: string
         id:
           type: integer
           readOnly: true
-        model:
-          type: string
-          default: ''
         price:
           type:
           - number
           - 'null'
           default: !!python/object/apply:decimal.Decimal
           - 0E-10
+        model:
+          type: string
+          default: ''
         labor_hours:
           type:
           - number
@@ -2454,32 +2550,32 @@ components:
     ElementProfileSchema:
       type: object
       properties:
-        created_by:
-          type: integer
-          readOnly: true
-        name:
-          type: string
+        content:
+          $ref: '#/components/schemas/EPContent'
         team_id:
+          type: integer
+        element_id:
           type: integer
         created_at:
           readOnly: true
-        content:
-          $ref: '#/components/schemas/EPContent'
-        modified_at:
-          readOnly: true
         is_default:
           type: boolean
-        id:
-          type: integer
-          readOnly: true
         sort:
           type: integer
         accessories:
           type: array
           items:
             $ref: '#/components/schemas/EPAccessory'
-        element_id:
+        created_by:
           type: integer
+          readOnly: true
+        modified_at:
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
       required:
       - content
       - element_id
@@ -2488,58 +2584,76 @@ components:
     RelatedUser:
       type: object
       properties:
-        user_id: {}
         first_name:
           type: string
         last_name:
           type: string
+        user_id: {}
     Team:
       type: object
       properties:
-        name:
-          type: string
         id:
           type: string
           readOnly: true
+        name:
+          type: string
     FolderSchema:
       type: object
       properties:
-        site_id:
-          type: integer
-          readOnly: true
-        id:
-          type: string
-          readOnly: true
-        site_external_id:
-          type: string
-          writeOnly: true
-        label:
-          type: string
-        name:
-          type: string
-        modified_at: {}
         creator:
-          $ref: '#/components/schemas/RelatedUser'
-        modifier:
           $ref: '#/components/schemas/RelatedUser'
         team_id:
           type: integer
+        name:
+          type: string
+        modifier:
+          $ref: '#/components/schemas/RelatedUser'
         team:
           $ref: '#/components/schemas/Team'
+        id:
+          type: string
+          readOnly: true
+        label:
+          type: string
+        modified_at: {}
+        site_external_id:
+          type: string
+          writeOnly: true
+        site_id:
+          type: integer
+          readOnly: true
       required:
       - name
-    SurveyAttribute:
+    ReportSchema:
       type: object
       properties:
-        attribute_id:
-          type: integer
-        value:
-          type: string
+        expires_at: {}
         name:
           type: string
         id:
           type: integer
+        survey_id:
+          type: integer
+        status: {}
+        token:
+          type: string
+        type: {}
+        file_path:
+          type: string
+        site_id:
+          type: integer
+    SurveyAttribute:
+      type: object
+      properties:
+        value:
+          type: string
+        attribute_id:
+          type: integer
+        id:
+          type: integer
           readOnly: true
+        name:
+          type: string
       required:
       - attribute_id
       - name
@@ -2547,21 +2661,21 @@ components:
     SurveyElementAccessory:
       type: object
       properties:
-        manufacturer:
-          type: string
-        quantity: {}
         description:
           type: string
         row_index:
           type: integer
-        id:
-          type: string
-          readOnly: true
-        model:
+        manufacturer:
           type: string
         price: {}
         labor_hours:
           type: number
+        model:
+          type: string
+        id:
+          type: string
+          readOnly: true
+        quantity: {}
       required:
       - manufacturer
       - model
@@ -2569,14 +2683,14 @@ components:
     CablePath:
       type: object
       properties:
-        external_id:
-          type: string
+        a_side: {}
+        z_side: {}
         id:
           type: string
-        z_side: {}
+        external_id:
+          type: string
         type:
           type: string
-        a_side: {}
       required:
       - a_side
       - external_id
@@ -2590,29 +2704,41 @@ components:
     SurveyElementActivityLog:
       type: object
       properties:
-        date: {}
-        id:
-          type: string
+        creator:
+          type: integer
+          readOnly: true
         created_at:
           readOnly: true
+        date: {}
+        modifier:
+          type: integer
+          readOnly: true
+        id:
+          type: string
         modified_at:
           readOnly: true
         entry:
           type: string
-        creator:
-          type: integer
-          readOnly: true
-        modifier:
-          type: integer
-          readOnly: true
     WebLink:
       type: object
       properties:
-        url:
-          type: string
         link_type:
           default: 2
           writeOnly: true
+        url:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - url
+    PDFLink:
+      type: object
+      properties:
+        link_type:
+          default: 1
+        url:
+          type: string
         name:
           type: string
       required:
@@ -2676,6 +2802,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebLink'
+        photos:
+          type: array
+          writeOnly: true
+          items:
+            type: string
+        pdfs:
+          type: array
+          writeOnly: true
+          items:
+            $ref: '#/components/schemas/PDFLink'
       required:
       - element_id
       - id
@@ -2685,29 +2821,29 @@ components:
     SurveyAnnotation:
       type: object
       properties:
-        end_point: {}
-        category: {}
-        font_size:
-          type: string
-        stroke_color:
-          type: string
-        location: {}
-        coordinates: {}
-        fill: {}
         stroke_width:
           type: string
-        text:
+        size:
           type: string
+        font_size:
+          type: string
+        category: {}
         opacity:
           type: number
           minimum: 0
           maximum: 1
+        text:
+          type: string
+        start_point: {}
+        fill: {}
+        location: {}
+        end_point: {}
+        stroke_color:
+          type: string
         id:
           type: string
           readOnly: true
-        start_point: {}
-        size:
-          type: string
+        coordinates: {}
       required:
       - category
       - location
@@ -2716,10 +2852,10 @@ components:
     BoundaryPoint:
       type: object
       properties:
-        y:
+        x:
           type: number
           minimum: 0.0
-        x:
+        y:
           type: number
           minimum: 0.0
       required:
@@ -2728,6 +2864,8 @@ components:
     SurveyBoundary:
       type: object
       properties:
+        created_at:
+          readOnly: true
         modified_at:
           readOnly: true
         id:
@@ -2737,8 +2875,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BoundaryPoint'
-        created_at:
-          readOnly: true
       required:
       - id
       - points
@@ -2824,20 +2960,36 @@ components:
       - margin_range
       - title
       - unit
+    SystemTypeSchema:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ElementSchema'
+        element_color:
+          type: string
+        id:
+          type: integer
+          readOnly: true
+        abbreviation:
+          type: string
+        name:
+          type: string
     UserPreferencesSchema:
       type: object
       properties:
-        comment_notification_daily_batch:
+        comment_notification_enabled:
           type: boolean
-        auto_sync:
-          type: boolean
-        comment_notification_editor_only:
-          type: boolean
-        comment_notification_time:
-          type: string
         timezone:
           type: string
-        comment_notification_enabled:
+        comment_notification_time:
+          type: string
+        auto_sync:
+          type: boolean
+        comment_notification_daily_batch:
+          type: boolean
+        comment_notification_editor_only:
           type: boolean
         comment_notification_mentions_only:
           type: boolean
